@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'PT Sans';
+  color: var(--black);
+  background: var(--background-grey);
+  user-select: none;
+}
