@@ -65,6 +65,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <div>Yo! Test</div>
+    return <div>Yo! Test Vitalik</div>
   }
 }
