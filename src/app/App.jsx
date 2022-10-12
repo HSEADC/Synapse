@@ -64,7 +64,16 @@ export default class App extends React.Component {
     )
   }
 
+  createDesign = () => {
+    parent.postMessage({ pluginMessage: 'create-frame' })
+    // console.log("hi");
+  }
+
   render() {
-    return <div>Yo! Test Vitalik</div>
+    return (
+      <button id="create-design" onClick={this.createDesign()}>
+        Create Design
+      </button>
+    )
   }
 }
