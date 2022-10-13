@@ -33,22 +33,16 @@ figma.ui.onmessage = msg => {
       console.log('from controller', test)
       figma.ui.postMessage({ type: 'get-storage', data: test })
     })
+  } else if (msg.type === 'create-frame') {
+    const frame = figma.createFrame()
+    frame.x = 50
+    frame.y = 50
+
+    frame.resize(1080, 1080)
+
+    figma.viewport.scrollAndZoomIntoView([frame])
+    console.log('frame created')
   } else {
     console.log('unknown message')
   }
 }
-
-function createDesign() {
-  // const frame = figma.createFrame()
-  // frame.x = 50
-  // frame.y = 50
-  //
-  // frame.resize(1080, 1080)
-  //
-  // figma.viewport.scrollAndZoomIntoView([frame])
-  document
-    .getElementByID('create-design')
-    .postMessage({ pluginMessage: 'create-frame' })
-}
-
-// export { createDesign }

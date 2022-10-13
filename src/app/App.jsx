@@ -65,13 +65,20 @@ export default class App extends React.Component {
   }
 
   createDesign = () => {
-    parent.postMessage({ pluginMessage: 'create-frame' })
-    // console.log("hi");
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'create-frame'
+        }
+      },
+      '*'
+    )
+    console.log('hi')
   }
 
   render() {
     return (
-      <button id="create-design" onClick={this.createDesign()}>
+      <button id="create-design" onClick={this.createDesign}>
         Create Design
       </button>
     )
