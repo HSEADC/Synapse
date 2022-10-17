@@ -2,3 +2,21 @@
 @import 'basics.scss';
 @import 'fonts.scss';
 @import 'vars.scss';
+
+
+#create-design {
+  background-color: blue;
+  font-size: 50px;
+  color: white;
+  border-radius: 90px;
+  outline: none;
+  border: none;
+  padding: 16px 24px;
+  margin: 16px;
+  transition: 0.15s ease-out;
+  cursor: pointer;
+}
+
+#create-design:hover {
+  background-color: gray
+}

@@ -78,9 +78,12 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <button id="create-design" onClick={this.createDesign}>
-        Create Design
-      </button>
+      (<div>Синапс</div>),
+      (
+        <button id="create-design" onClick={this.createDesign}>
+          Create Design
+        </button>
+      )
     )
   }
 }
