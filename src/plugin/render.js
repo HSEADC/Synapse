@@ -42,4 +42,24 @@ function renderFigmaTemplate(imagesForExport) {
   figma.viewport.scrollAndZoomIntoView(mainFrame)
 }
 
-export { renderFigmaTemplate }
+function createDesignFrame() {
+  const frame = figma.createFrame()
+  frame.resize(1080, 1080)
+  frame.fills = [{ type: 'SOLID', color: { r: 0.06, g: 0.09, b: 0.11 } }]
+  frame.layoutGrids = [
+    { pattern: 'GRID', sectionSize: 27, color: { r: 1, g: 1, b: 1, a: 0.2 } },
+    {
+      pattern: 'COLUMNS',
+      alignment: 'STRETCH',
+      gutterSize: 27,
+      count: 2,
+      offset: 27,
+      color: { r: 1, g: 1, b: 1, a: 0.2 }
+    }
+  ]
+  figma.viewport.scrollAndZoomIntoView([frame])
+  console.log('frame created')
+  return frame
+}
+
+export { renderFigmaTemplate, createDesignFrame }

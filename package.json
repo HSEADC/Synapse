@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "prettierr": "^1.15.3-dev",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
@@ -28,7 +29,7 @@
     "html-webpack-plugin": "^3.2.0",
     "husky": "^3.0.2",
     "lint-staged": "^9.2.1",
-    "prettier": "^1.18.2",
+    "prettier": "1.19.1",
     "regenerator-runtime": "^0.13.7",
     "sass": "^1.26.10",
     "sass-loader": "^10.0.2",

@@ -1,4 +1,6 @@
 import { saveImageDataOrExportToFigma } from './images'
+import { createDesignFrame } from './render'
+import { helloWorld } from './design'
 
 figma.showUI(__html__)
 figma.ui.resize(400, 680)
@@ -34,38 +36,7 @@ figma.ui.onmessage = msg => {
       figma.ui.postMessage({ type: 'get-storage', data: test })
     })
   } else if (msg.type === 'create-frame') {
-    const frame = figma.createFrame()
-    frame.x = 50
-    frame.y = 50
-    frame.resize(1080, 1080)
-    frame.fills = [{ type: 'SOLID', color: { r: 0, g: 0, b: 1 } }]
-
-    async function helloWorld() {
-      const text = figma.createText()
-
-      // Move to (50, 50)
-      text.x = 10
-      text.y = -20
-
-      // Load the font in the text node before setting the characters
-      await figma.loadFontAsync(text.fontName)
-      text.characters = 'Hello world!'
-
-      // Set bigger font size and red color
-      text.fontSize = 220
-      text.letterSpacing = {
-        value: -7,
-        unit: 'PERCENT'
-      }
-      text.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }]
-
-      frame.appendChild(text)
-    }
-
-    helloWorld()
-
-    figma.viewport.scrollAndZoomIntoView([frame])
-    console.log('frame created')
+    helloWorld(createDesignFrame())
   } else {
     console.log('unknown message')
   }
