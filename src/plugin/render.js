@@ -1,5 +1,7 @@
 import { getNewFills } from './images'
 import { getStoreLanguage } from './store'
+import { generateRandom, convertHSLtoRGB } from './utilities'
+import { createBaseColor } from './color'
 
 function getImageBytesFromImagesForExportById(id) {
   const imagesForExport = getStoreImagesForExport()
@@ -14,38 +16,18 @@ function getImageBytesFromImagesForExportById(id) {
   return imageBytes
 }
 
-function renderMainFrame(background) {
-  //фрейм самого экспорта
-  let frame = figma.createFrame()
-  frame.x = figma.viewport.center.x
-  frame.y = figma.viewport.center.y
-  frame.paddingTop = 23
-  frame.itemSpacing = 23
-  frame.resize(768, 1659)
-  frame.layoutMode = 'VERTICAL'
-  frame.primaryAxisSizingMode = 'AUTO'
-  frame.counterAxisSizingMode = 'FIXED'
-  frame.counterAxisAlignItems = 'CENTER'
-  frame.fills = background
-
-  return frame
-}
-
 function renderFigmaTemplate(imagesForExport) {
-  const background = [
-    { type: 'SOLID', color: { r: 0.965, g: 0.956, b: 0.952 } }
-  ]
-
-  const mainFrame = renderMainFrame(background)
-
   figma.currentPage.selection = mainFrame
   figma.viewport.scrollAndZoomIntoView(mainFrame)
 }
 
 function createDesignFrame() {
   const frame = figma.createFrame()
+  const color = createBaseColor()
   frame.resize(1080, 1080)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.06, g: 0.09, b: 0.11 } }]
+  frame.fills = [
+    { type: 'SOLID', color: { r: color.r, g: color.g, b: color.b } }
+  ]
   frame.layoutGrids = [
     { pattern: 'GRID', sectionSize: 27, color: { r: 1, g: 1, b: 1, a: 0.2 } },
     {
