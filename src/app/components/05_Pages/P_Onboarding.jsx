@@ -120,7 +120,10 @@ export default class P_Onboarding extends React.PureComponent {
               text="<- Назад"
               handleClick={this.prevStep}
             />
-            <A_Button text="Создать свой стиль" handleClick={this.nextStep} />
+            <A_Button
+              text="Создать свой стиль"
+              handleClick={() => this.setState({ view: 'identity_creation' })}
+            />
           </div>
         </div>
       )
