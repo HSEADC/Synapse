@@ -8,19 +8,19 @@
     align-items: center;
     padding: 12px 16px;
     // margin: 0 16px;
-    color: --background;
-    background: --identity-black;
+    color: $background;
+    background: $identity-black;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 475;
     letter-spacing: -0.02em;
     cursor: pointer;
+    border-radius: 8px;
 
     &.secondary {
-        background: --background;
-        color: --identity-black;
+        background: $background;
+        color: $identity-black;
         border: 1.5px solid #131D27;
-        border-radius: 8px;
     }
 
     &.tertiary {
@@ -28,5 +28,6 @@
         text-decoration: underline;
         padding: 0;
         width: auto;
+        background: none;
     }
 }
