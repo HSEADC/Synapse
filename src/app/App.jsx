@@ -1,6 +1,9 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import { useState } from 'react'
 
+import { Templates } from './components/04_Superorganisms/Templates'
+import { Style } from './components/04_Superorganisms/Style'
 import { getRandom } from '../plugin/utilities'
 
 Array.prototype.remove = function() {
@@ -19,7 +22,25 @@ export default class App extends React.Component {
   constructor(params) {
     super(params)
 
-    this.state = {}
+    this.state = {
+      view: 'style'
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSave = this.handleSave.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
+  }
+
+  handleChange(e) {
+    this.setState({ inputText: e.target.value })
+  }
+
+  handleSave() {
+    this.setState({ text: this.state.inputText, mode: 'view' })
+  }
+
+  handleEdit() {
+    this.setState({ mode: 'edit' })
   }
 
   componentDidMount() {}
@@ -45,6 +66,12 @@ export default class App extends React.Component {
       },
       '*'
     )
+  }
+
+  openPage = id => {
+    this.setState({
+      page: 'index'
+    })
   }
 
   exportPageToFigma = () => {
@@ -73,17 +100,51 @@ export default class App extends React.Component {
       },
       '*'
     )
-    console.log('hi')
+  }
+
+  generateIdentity = () => {
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'generate-identity'
+        }
+      },
+      '*'
+    )
   }
 
   render() {
-    return (
-      (<div>Синапс</div>),
-      (
-        <button id="create-design" onClick={this.createDesign}>
-          Create Design
-        </button>
+    const { view } = this.state
+    if (view === 'login') {
+      return (
+        <div className="App">
+          <Login />
+        </div>
       )
-    )
+    } else if (view === 'style') {
+      return (
+        <div className="App">
+          <Style />
+        </div>
+      )
+    } else if (view === 'onboarding') {
+      return (
+        <div className="App">
+          <Onboarding />
+        </div>
+      )
+    } else if (view === 'identity_creation') {
+      return (
+        <div className="App">
+          <IdentityCreation />
+        </div>
+      )
+    } else {
+      return (
+        <div className="App">
+          <Templates />
+        </div>
+      )
+    }
   }
 }

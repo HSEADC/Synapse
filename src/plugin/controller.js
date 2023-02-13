@@ -37,6 +37,8 @@ figma.ui.onmessage = msg => {
     })
   } else if (msg.type === 'create-frame') {
     helloWorld(createDesignFrame())
+  } else if (msg.type === 'generate-identity') {
+    generateNewIdentity()
   } else {
     console.log('unknown message')
   }
