@@ -2,8 +2,9 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { useState } from 'react'
 
-import { Templates } from './components/04_Superorganisms/Templates'
-import { Style } from './components/04_Superorganisms/Style'
+import { Templates } from './components/05_Pages/P_Templates'
+import { Style } from './components/05_Pages/P_Style'
+import P_Onboarding from './components/05_Pages/P_Onboarding'
 import { getRandom } from '../plugin/utilities'
 
 Array.prototype.remove = function() {
@@ -23,7 +24,7 @@ export default class App extends React.Component {
     super(params)
 
     this.state = {
-      view: 'style'
+      view: 'onboarding'
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -68,9 +69,9 @@ export default class App extends React.Component {
     )
   }
 
-  openPage = id => {
+  openPage = () => {
     this.setState({
-      page: 'index'
+      view: 'templates'
     })
   }
 
@@ -128,11 +129,7 @@ export default class App extends React.Component {
         </div>
       )
     } else if (view === 'onboarding') {
-      return (
-        <div className="App">
-          <Onboarding />
-        </div>
-      )
+      return <P_Onboarding />
     } else if (view === 'identity_creation') {
       return (
         <div className="App">
@@ -148,3 +145,5 @@ export default class App extends React.Component {
     }
   }
 }
+
+// реакт контейнер содержит весь стейт почитать

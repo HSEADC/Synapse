@@ -1,11 +1,44 @@
+@use 'vars.scss';
+
 @import 'reset.scss';
 @import 'basics.scss';
 @import 'fonts.scss';
-@import 'vars.scss';
 
+@import '01_Atoms/A_Button.scss';
+@import '01_Atoms/A_Text.scss';
+
+@import '05_Pages/P_Onboarding.scss';
+
+* {
+  font-feature-settings: 'dlig', 'liga', 'calt', 'cv11' on;
+  font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
+}
+
+.bottomButtonVert {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 16px;
+}
+
+.bottomButtonHor {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0 16px 44px 16px;
+  gap: 8px;
+
+  :last-child {
+    flex-grow: 1;
+  }
+}
 
 #create-design {
-  background-color: red;
+  background-color: --identity-black;
   font-size: 50px;
   color: white;
   border-radius: 90px;
