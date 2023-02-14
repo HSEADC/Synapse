@@ -18,6 +18,8 @@ export default class P_Onboarding extends React.PureComponent {
       step: 1,
       view: 'onboarding'
     }
+
+    // this.handleClick = this.handleClick.bind(this);
   }
 
   nextStep = () => {
@@ -35,10 +37,7 @@ export default class P_Onboarding extends React.PureComponent {
   }
 
   skip = () => {
-    this.setState(prevState => {
-      const view = 'identity_creation'
-      return { ...prevState, view }
-    })
+    this.setState({ view: 'identity_creation' })
     console.log(this.state)
   }
 
@@ -112,7 +111,7 @@ export default class P_Onboarding extends React.PureComponent {
       return (
         <div className="P_Onboarding">
           <A_OnboardingImage image={onboardingImage4} />
-          <A_Spacer space={16} />
+          <A_Spacer size={16} />
           <A_Text text="Вы можете скачать сгенерированный брендбук и создавать дизайн не только в плагине. Отправьте брендбук своим дизайнерам и подрядчикам, чтобы сохранить постоянство фирменного стиля — в видео, презентациях, и где угодно." />
           <div className="bottomButtonHor">
             <A_Button
@@ -120,10 +119,7 @@ export default class P_Onboarding extends React.PureComponent {
               text="<- Назад"
               handleClick={this.prevStep}
             />
-            <A_Button
-              text="Создать свой стиль"
-              handleClick={() => this.setState({ view: 'identity_creation' })}
-            />
+            <A_Button text="Создать свой стиль" handleClick={this.skip} />
           </div>
         </div>
       )
