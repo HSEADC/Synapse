@@ -11,39 +11,16 @@ import onboardingImage3 from '../../assets/images/onboarding/A_Onboarding_Image_
 import onboardingImage4 from '../../assets/images/onboarding/A_Onboarding_Image_4.png'
 
 export default class P_Onboarding extends React.PureComponent {
-  constructor(params) {
-    super(params)
-
-    this.state = {
-      step: 1,
-      view: 'onboarding'
-    }
-
-    // this.handleClick = this.handleClick.bind(this);
-  }
-
-  nextStep = () => {
-    this.setState(prevState => {
-      const step = prevState.step + 1
-      return { ...prevState, step }
-    })
-  }
-
-  prevStep = () => {
-    this.setState(prevState => {
-      const step = prevState.step - 1
-      return { ...prevState, step }
-    })
-  }
-
-  skip = () => {
-    this.setState({ view: 'identity_creation' })
-    console.log(this.state)
+  constructor(props) {
+    super(props)
   }
 
   render() {
-    const { step } = this.state
-    if (step === 1) {
+    const { actions, onboardingStep } = this.props
+    const { prevStep, nextStep, skipOnboarding } = actions
+
+    console.log(onboardingStep)
+    if (onboardingStep === 1) {
       return (
         <div className="P_Onboarding">
           <A_OnboardingImage image={onboardingImage1} margin-bottom="16px" />
@@ -53,57 +30,37 @@ export default class P_Onboarding extends React.PureComponent {
             margin="16px-both"
           />
           <div className="bottomButtonVert">
-            <A_Button
-              type="secondary"
-              text="Далее ->"
-              handleClick={this.nextStep}
-            />
+            <A_Button type="secondary" text="Далее ->" handleClick={nextStep} />
             <A_Spacer size={12} />
             <A_Button
               type="tertiary"
               text="Пропустить"
-              handleClick={this.skip}
+              handleClick={skipOnboarding}
             />
           </div>
         </div>
       )
-    } else if (step === 2) {
+    } else if (onboardingStep === 2) {
       return (
         <div className="P_Onboarding">
           <A_OnboardingImage image={onboardingImage2} />
           <A_Spacer size={16} />
           <A_Text text="Ответьте на вопросы о ценностях и видении вашей организации, и алгоритм сгенерирует несколько вариантов фирменного стиля, которые лучше всего отражают ваш бренд. Вы сможете выбрать тот вариант, который нравится вам больше всего." />
           <div className="bottomButtonHor">
-            <A_Button
-              type="secondary"
-              text="<- Назад"
-              handleClick={this.prevStep}
-            />
-            <A_Button
-              type="secondary"
-              text="Далее ->"
-              handleClick={this.nextStep}
-            />
+            <A_Button type="secondary" text="<- Назад" handleClick={prevStep} />
+            <A_Button type="secondary" text="Далее ->" handleClick={nextStep} />
           </div>
         </div>
       )
-    } else if (step === 3) {
+    } else if (onboardingStep === 3) {
       return (
         <div className="P_Onboarding">
           <A_OnboardingImage image={onboardingImage3} />
           <A_Spacer size={16} />
           <A_Text text="Выбирайте из готовых шаблонов или создайте свой. Просто вставьте нужные текст и картинки, и Синапс создаст несколько вариантов дизайна. Вы можете редактировать их и сохранить понравившиеся." />
           <div className="bottomButtonHor">
-            <A_Button
-              type="secondary"
-              text="<- Назад"
-              handleClick={this.prevStep}
-            />
-            <A_Button
-              type="secondary"
-              text="Далее ->"
-              handleClick={this.nextStep}
-            />
+            <A_Button type="secondary" text="<- Назад" handleClick={prevStep} />
+            <A_Button type="secondary" text="Далее ->" handleClick={nextStep} />
           </div>
         </div>
       )
@@ -114,12 +71,8 @@ export default class P_Onboarding extends React.PureComponent {
           <A_Spacer size={16} />
           <A_Text text="Вы можете скачать сгенерированный брендбук и создавать дизайн не только в плагине. Отправьте брендбук своим дизайнерам и подрядчикам, чтобы сохранить постоянство фирменного стиля — в видео, презентациях, и где угодно." />
           <div className="bottomButtonHor">
-            <A_Button
-              type="secondary"
-              text="<- Назад"
-              handleClick={this.prevStep}
-            />
-            <A_Button text="Создать свой стиль" handleClick={this.skip} />
+            <A_Button type="secondary" text="<- Назад" handleClick={prevStep} />
+            <A_Button text="Создать свой стиль" handleClick={skipOnboarding} />
           </div>
         </div>
       )

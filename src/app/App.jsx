@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { Templates } from './components/05_Pages/P_Templates'
 import { Style } from './components/05_Pages/P_Style'
+import P_IdentityCreation from './components/05_Pages/P_Identity_Creation'
 import P_Onboarding from './components/05_Pages/P_Onboarding'
 import { getRandom } from '../plugin/utilities'
 
@@ -20,11 +21,12 @@ Array.prototype.remove = function() {
 }
 
 export default class App extends React.Component {
-  constructor(params) {
-    super(params)
+  constructor(props) {
+    super(props)
 
     this.state = {
-      view: 'onboarding'
+      view: 'onboarding',
+      onboardingStep: 1
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -114,8 +116,36 @@ export default class App extends React.Component {
     )
   }
 
+  nextStep = () => {
+    this.setState(prevState => {
+      const onboardingStep = prevState.onboardingStep + 1
+      return { ...prevState, onboardingStep }
+    })
+  }
+
+  prevStep = () => {
+    this.setState(prevState => {
+      const onboardingStep = prevState.onboardingStep - 1
+      return { ...prevState, onboardingStep }
+    })
+  }
+
+  skipOnboarding = () => {
+    this.setState({ view: 'identity_creation' })
+    console.log(this.state)
+  }
+
+  //RENDER/////////////////////////////////////////////////////////////////////////
+
   render() {
+    const actions = {
+      skipOnboarding: this.skipOnboarding,
+      nextStep: this.nextStep,
+      prevStep: this.prevStep
+    }
+
     const { view } = this.state
+    const { onboardingStep } = this.state
     if (view === 'login') {
       return (
         <div className="App">
@@ -129,13 +159,9 @@ export default class App extends React.Component {
         </div>
       )
     } else if (view === 'onboarding') {
-      return <P_Onboarding />
+      return <P_Onboarding onboardingStep={onboardingStep} actions={actions} />
     } else if (view === 'identity_creation') {
-      return (
-        <div className="App">
-          <IdentityCreation />
-        </div>
-      )
+      return <P_IdentityCreation />
     } else {
       return (
         <div className="App">
