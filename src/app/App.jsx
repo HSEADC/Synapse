@@ -26,7 +26,9 @@ export default class App extends React.Component {
 
     this.state = {
       view: 'identity_creation',
-      onboardingStep: 1
+      onboardingStep: 1,
+      identityCreationStep: 1,
+      charityTitle: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -35,7 +37,7 @@ export default class App extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ inputText: e.target.value })
+    this.setState({ value: e.target.value })
   }
 
   handleSave() {
@@ -138,13 +140,17 @@ export default class App extends React.Component {
 
   render() {
     const actions = {
+      handleChange: this.handleChange,
       skipOnboarding: this.skipOnboarding,
       nextStep: this.nextStep,
       prevStep: this.prevStep
     }
 
-    const { view } = this.state
-    const { onboardingStep } = this.state
+    const charityData = {
+      charityTitle: this.state.charityTitle
+    }
+
+    const { view, onboardingStep, identityCreationStep } = this.state
     if (view === 'login') {
       return (
         <div className="App">
@@ -160,7 +166,13 @@ export default class App extends React.Component {
     } else if (view === 'onboarding') {
       return <P_Onboarding onboardingStep={onboardingStep} actions={actions} />
     } else if (view === 'identity_creation') {
-      return <P_IdentityCreation />
+      return (
+        <P_IdentityCreation
+          identityCreationStep={identityCreationStep}
+          charityData={charityData}
+          actions={actions}
+        />
+      )
     } else {
       return (
         <div className="App">

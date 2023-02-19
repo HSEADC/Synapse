@@ -20,13 +20,8 @@ export default class S_Navbar extends React.PureComponent {
       handleClick
     } = this.props
 
-    const classes = classnames({
-      S_Navbar: true,
-      [`${type}`]: true
-    })
-
     return (
-      <div className={classes}>
+      <div className="S_Navbar">
         {back && <A_Button text="back" type="icon" icon="back" />}
         {text}
       </div>

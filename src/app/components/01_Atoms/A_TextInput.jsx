@@ -7,17 +7,23 @@ export default class A_TextInput extends React.PureComponent {
     super(props)
   }
 
-  render() {
-    const { type, placeholder, value } = this.props
+  inputChangedHandler = event => {
+    const updatedKeyword = event.target.value
+    // May be call for search result
+  }
 
-    const classes = classnames({
-      A_TextInput: true,
-      [`${type}`]: true
-    })
+  render() {
+    const { type, placeholder, value, handleChange } = this.props
 
     return (
       <div className="A_TextInput">
-        <input type="text" name="name" placeholder={placeholder} />
+        <input
+          type="text"
+          name="name"
+          placeholder={placeholder}
+          value={value}
+          onChange={handleChange}
+        />
       </div>
     )
   }
