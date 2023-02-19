@@ -25,7 +25,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'onboarding',
+      view: 'identity_creation',
       onboardingStep: 1
     }
 
@@ -132,7 +132,6 @@ export default class App extends React.Component {
 
   skipOnboarding = () => {
     this.setState({ view: 'identity_creation' })
-    console.log(this.state)
   }
 
   //RENDER/////////////////////////////////////////////////////////////////////////

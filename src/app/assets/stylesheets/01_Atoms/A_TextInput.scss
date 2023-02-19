@@ -1,0 +1,35 @@
+@input "../vars.scss";
+
+.A_TextInput input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px 16px;
+    width: 368px;
+    height: 40px;
+    border: 1px solid $dividers;
+    border-radius: 8px;
+    margin: 0 16px;
+    transition: $hover-transition;
+
+    /*Text */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    color: $identity-black;
+
+    &::placeholder {
+        color: $secondary-text;
+    }
+
+    &:hover {
+        border: 1px solid $secondary-text;
+    }
+
+    &:focus {
+        outline: 2px solid $link;
+    }
+}

@@ -1,0 +1,23 @@
+@import "../vars.scss";
+
+.ProgressBar {
+    background-color: red !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100px;
+    height: 100px !important;
+}
+
+.indexedStep {
+    width: 10px;
+    height: 10px;
+    font-size: 12px;
+    border-radius: 50%;
+    background-color: $dividers;
+  }
+  
+  .indexedStep.accomplished {
+    background-color: $identity-black;
+  }
