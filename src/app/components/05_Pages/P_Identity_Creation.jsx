@@ -1,4 +1,5 @@
 import React from 'react'
+import A_RadioButton from '../01_Atoms/A_RadioButton'
 import A_Spacer from '../01_Atoms/A_Spacer'
 import A_Text from '../01_Atoms/A_Text'
 import A_TextInput from '../01_Atoms/A_TextInput'
@@ -14,7 +15,9 @@ export default class P_Identity_Creation extends React.PureComponent {
     const { identityCreationStep, actions } = this.props
     const { charityData } = this.props
     const { charityTitle } = charityData
-    const { handleChange } = actions
+    const { handleChange, nextStepIdentity, prevStepIdentity } = actions
+
+    console.log('charity', charityTitle)
 
     if (identityCreationStep === 1) {
       return (
@@ -39,11 +42,39 @@ export default class P_Identity_Creation extends React.PureComponent {
             placeholder="Введите название"
             value={charityTitle}
             handleChange={handleChange}
+            primButtonHandleClick={nextStepIdentity}
+            param="charityTitle"
           />
-          <S_FixedActions primButtonText="Продолжить" />
+          <S_FixedActions
+            primButtonText="Продолжить"
+            primButtonHandleClick={nextStepIdentity}
+          />
         </div>
       )
-    } else {
+    } else if (identityCreationStep === 2) {
+      return (
+        <div className="P_IdentityCreation">
+          <S_Navbar
+            text="Настройка фирменного стиля"
+            back={false}
+            currentStep={2}
+            totalSteps={5}
+          />
+          <A_Spacer size={74} />
+          <div className="outlined_lead">
+            <A_Text text="Какими вопросами занимается ваша организация?" />
+            <A_RadioButton text="Здравоохранение" />
+            <A_RadioButton text="Социальные проблемы" />
+            <A_RadioButton text="Защита природы и животных" />
+            <A_RadioButton text="Культура и образование" />
+            <A_RadioButton text="Другое" />
+          </div>
+          <S_FixedActions
+            primButtonText="Продолжить"
+            primButtonHandleClick={nextStepIdentity}
+          />
+        </div>
+      )
     }
   }
 }

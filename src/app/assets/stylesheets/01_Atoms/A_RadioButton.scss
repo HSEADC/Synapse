@@ -1,0 +1,26 @@
+@import '../vars.scss';
+
+.A_RadioButton {
+    height: 28px;
+    border-radius: 14px;
+    background-color: $identity-additional-gray;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 16px 4px 4px;
+    gap: 8px;
+
+    .checkzone {
+        height: 20px;
+        width: 20px;
+        background-color: $background;
+        border-radius: 10px;
+    }
+}

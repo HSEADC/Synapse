@@ -6,6 +6,7 @@
 
 @import '01_Atoms/A_Onboarding_Image.scss';
 @import '01_Atoms/A_Button.scss';
+@import '01_Atoms/A_RadioButton.scss';
 @import '01_Atoms/A_Text.scss';
 @import '01_Atoms/A_TextInput.scss';
 
@@ -19,6 +20,22 @@
 * {
   font-feature-settings: 'dlig', 'liga', 'calt', 'cv11' on;
   font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
+}
+
+.outlined_lead {
+  margin: 0 16px;
+  border: 1px solid $dividers;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  gap: 16px;
+
+  .A_Text {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 }
 
 .bottomButtonVert {

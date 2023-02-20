@@ -25,19 +25,32 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'identity_creation',
+      view: 'onboarding',
       onboardingStep: 1,
       identityCreationStep: 1,
-      charityTitle: ''
+      charityTitle: '',
+      identityCreationScreens: {
+        title: {
+          inputvalue: '',
+          buttonactive: false
+        },
+        settings: {
+          input1value: '',
+          input2value: '',
+          input3value: '',
+          input4value: '',
+          buttonactive: false
+        }
+      }
     }
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSave = this.handleSave.bind(this)
-    this.handleEdit = this.handleEdit.bind(this)
+    // this.handleChange = this.handleChange.bind(this)
+    // this.handleSave = this.handleSave.bind(this)
+    // this.handleEdit = this.handleEdit.bind(this)
   }
 
-  handleChange(e) {
-    this.setState({ value: e.target.value })
+  handleChange = (param, value) => {
+    this.setState({ [`${param}`]: value })
   }
 
   handleSave() {
@@ -125,10 +138,25 @@ export default class App extends React.Component {
     })
   }
 
+  nextStepIdentity = () => {
+    console.log('next')
+    this.setState(prevState => {
+      const identityCreationStep = prevState.identityCreationStep + 1
+      return { ...prevState, identityCreationStep }
+    })
+  }
+
   prevStep = () => {
     this.setState(prevState => {
       const onboardingStep = prevState.onboardingStep - 1
       return { ...prevState, onboardingStep }
+    })
+  }
+
+  prevStepIdentity = () => {
+    this.setState(prevState => {
+      const identityCreationStep = prevState.identityCreationStep - 1
+      return { ...prevState, identityCreationStep }
     })
   }
 
@@ -143,7 +171,9 @@ export default class App extends React.Component {
       handleChange: this.handleChange,
       skipOnboarding: this.skipOnboarding,
       nextStep: this.nextStep,
-      prevStep: this.prevStep
+      prevStep: this.prevStep,
+      nextStepIdentity: this.nextStepIdentity,
+      prevStepIdentity: this.prevStepIdentity
     }
 
     const charityData = {
