@@ -48,7 +48,7 @@ export default class P_Identity_Creation extends React.PureComponent {
             placeholder="Введите название"
             handleChange={handleChange}
             primButtonHandleClick={nextStepIdentity}
-            param="identityCreationScreens.title.identityTitle"
+            param="identityCreationScreens.title.charityTitle"
           />
           <S_FixedActions
             primButtonText="Продолжить"
