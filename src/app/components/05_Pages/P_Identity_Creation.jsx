@@ -12,14 +12,20 @@ export default class P_Identity_Creation extends React.PureComponent {
   }
 
   render() {
-    const { identityCreationStep, actions } = this.props
-    const { charityData } = this.props
-    const { charityTitle } = charityData
+    const {
+      identityCreationStep,
+      actions,
+      identityCreationScreens
+    } = this.props
+    // const { charityData } = this.props
+    const { title } = identityCreationScreens
+    const { charityTitle } = title
     const { handleChange, nextStepIdentity, prevStepIdentity } = actions
 
     console.log('charity', charityTitle)
 
     if (identityCreationStep === 1) {
+      // handleChange
       return (
         <div className="P_IdentityCreation">
           <S_Navbar
@@ -40,10 +46,9 @@ export default class P_Identity_Creation extends React.PureComponent {
           <A_Spacer size={16} />
           <A_TextInput
             placeholder="Введите название"
-            value={charityTitle}
             handleChange={handleChange}
             primButtonHandleClick={nextStepIdentity}
-            param="charityTitle"
+            param="identityCreationScreens.title.identityTitle"
           />
           <S_FixedActions
             primButtonText="Продолжить"

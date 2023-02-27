@@ -31,7 +31,7 @@ export default class App extends React.Component {
       charityTitle: '',
       identityCreationScreens: {
         title: {
-          inputvalue: '',
+          charityTitle: '',
           buttonactive: false
         },
         settings: {
@@ -50,7 +50,9 @@ export default class App extends React.Component {
   }
 
   handleChange = (param, value) => {
+    const { identityCreationScreens } = this.props
     this.setState({ [`${param}`]: value })
+    console.log(identityCreationScreens)
   }
 
   handleSave() {
@@ -180,7 +182,12 @@ export default class App extends React.Component {
       charityTitle: this.state.charityTitle
     }
 
-    const { view, onboardingStep, identityCreationStep } = this.state
+    const {
+      view,
+      onboardingStep,
+      identityCreationStep,
+      identityCreationScreens
+    } = this.state
     if (view === 'login') {
       return (
         <div className="App">
@@ -199,6 +206,7 @@ export default class App extends React.Component {
       return (
         <P_IdentityCreation
           identityCreationStep={identityCreationStep}
+          identityCreationScreens={identityCreationScreens}
           charityData={charityData}
           actions={actions}
         />
