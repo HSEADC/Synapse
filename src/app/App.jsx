@@ -29,18 +29,7 @@ export default class App extends React.Component {
       onboardingStep: 1,
       identityCreationStep: 1,
       charityTitle: '',
-      identityCreationScreens: {
-        title: {
-          buttonactive: false
-        },
-        settings: {
-          input1value: '',
-          input2value: '',
-          input3value: '',
-          input4value: '',
-          buttonactive: false
-        }
-      }
+      charityCategory: ''
     }
 
     // this.handleChange = this.handleChange.bind(this)
@@ -50,7 +39,7 @@ export default class App extends React.Component {
 
   handleChange = (param, value) => {
     this.setState({ [`${param}`]: value })
-    console.log('charityTitle: ', this.state.charityTitle)
+    console.log(this.state.charityCategory)
   }
 
   handleSave() {
@@ -177,7 +166,8 @@ export default class App extends React.Component {
     }
 
     const charityData = {
-      charityTitle: this.state.charityTitle
+      charityTitle: this.state.charityTitle,
+      charityCategory: this.state.charityCategory
     }
 
     const {

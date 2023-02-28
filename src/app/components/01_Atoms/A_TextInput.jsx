@@ -7,20 +7,13 @@ export default class A_TextInput extends React.PureComponent {
     super(props)
   }
 
-  inputChangedHandler = event => {
-    const updatedKeyword = event.target.value
-    // May be call for search result
-  }
-
-  //написать локальную функцию хендлчендж и из нее передавать параметр и велью
-
   handleChange = e => {
     const { param, handleChange } = this.props
     handleChange(param, e.target.value)
   }
 
   render() {
-    const { type, placeholder, value } = this.props
+    const { placeholder, defaultValue } = this.props
 
     return (
       <div className="A_TextInput">
@@ -28,7 +21,7 @@ export default class A_TextInput extends React.PureComponent {
           type="text"
           name="name"
           placeholder={placeholder}
-          value={value}
+          defaultValue={defaultValue}
           onInput={this.handleChange}
         />
       </div>

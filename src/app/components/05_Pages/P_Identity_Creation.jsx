@@ -18,7 +18,7 @@ export default class P_Identity_Creation extends React.PureComponent {
       identityCreationScreens
     } = this.props
     const { charityData } = this.props
-    const { charityTitle } = charityData
+    const { charityTitle, charityCategory } = charityData
     const { handleChange, nextStepIdentity, prevStepIdentity } = actions
 
     if (identityCreationStep === 1) {
@@ -68,15 +68,44 @@ export default class P_Identity_Creation extends React.PureComponent {
           <A_Spacer size={74} />
           <div className="outlined_lead">
             <A_Text text="Какими вопросами занимается ваша организация?" />
-            <A_RadioButton text="Здравоохранение" />
-            <A_RadioButton text="Социальные проблемы" />
-            <A_RadioButton text="Защита природы и животных" />
-            <A_RadioButton text="Культура и образование" />
-            <A_RadioButton text="Другое" />
+            <A_RadioButton
+              text="Здравоохранение"
+              param="charityCategory"
+              handleChange={handleChange}
+              checked={charityCategory == 'Здравоохранение'}
+            />
+            <A_RadioButton
+              text="Социальные проблемы"
+              param="charityCategory"
+              handleChange={handleChange}
+              checked={charityCategory == 'Социальные проблемы'}
+            />
+            <A_RadioButton
+              text="Защита природы и животных"
+              param="charityCategory"
+              handleChange={handleChange}
+              checked={charityCategory == 'Защита природы и животных'}
+            />
+            <A_RadioButton
+              text="Культура и образование"
+              param="charityCategory"
+              handleChange={handleChange}
+              checked={charityCategory == 'Культура и образование'}
+            />
+            <A_RadioButton
+              text="Другое"
+              param="charityCategory"
+              handleChange={handleChange}
+              checked={charityCategory == 'Другое'}
+            />
           </div>
           <S_FixedActions
             primButtonText="Продолжить"
             primButtonHandleClick={nextStepIdentity}
+            primButtonDisable={true}
+            primButtonDisableParam={charityCategory}
+            secButtonText="Назад"
+            secButtonHandleClick={prevStepIdentity}
           />
         </div>
       )
