@@ -17,12 +17,9 @@ export default class P_Identity_Creation extends React.PureComponent {
       actions,
       identityCreationScreens
     } = this.props
-    // const { charityData } = this.props
-    const { title } = identityCreationScreens
-    const { charityTitle } = title
+    const { charityData } = this.props
+    const { charityTitle } = charityData
     const { handleChange, nextStepIdentity, prevStepIdentity } = actions
-
-    console.log('charity', charityTitle)
 
     if (identityCreationStep === 1) {
       // handleChange
@@ -47,12 +44,15 @@ export default class P_Identity_Creation extends React.PureComponent {
           <A_TextInput
             placeholder="Введите название"
             handleChange={handleChange}
+            defaultValue={charityTitle}
             primButtonHandleClick={nextStepIdentity}
-            param="identityCreationScreens.title.charityTitle"
+            param="charityTitle"
           />
           <S_FixedActions
             primButtonText="Продолжить"
             primButtonHandleClick={nextStepIdentity}
+            primButtonDisable={true}
+            primButtonDisableParam={charityTitle}
           />
         </div>
       )

@@ -30,4 +30,9 @@
         width: auto;
         background: none;
     }
+
+    &:disabled {
+        background-color: $dividers;
+        cursor: default;
+    }
 }

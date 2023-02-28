@@ -8,7 +8,7 @@ export default class A_Button extends React.PureComponent {
   }
 
   render() {
-    const { type, icon, text, handleClick } = this.props
+    const { type, icon, text, handleClick, disable, disableParam } = this.props
 
     const classes = classnames({
       A_Button: true,
@@ -16,10 +16,20 @@ export default class A_Button extends React.PureComponent {
       [`${icon}`]: true
     })
 
+    let disableSwitch = false
+
+    if (disable === true) {
+      disableSwitch = !disableParam
+    }
+
     return (
-      <div className={classes} onClick={handleClick}>
+      <button
+        className={classes}
+        onClick={handleClick}
+        disabled={disableSwitch}
+      >
         {text}
-      </div>
+      </button>
     )
   }
 }
