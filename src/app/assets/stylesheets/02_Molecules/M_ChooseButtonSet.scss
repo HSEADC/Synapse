@@ -1,0 +1,54 @@
+@import '../vars.scss';
+
+.M_ChooseButtonSet {
+    height: 36px;
+    border-radius: 18px;
+    background-color: $identity-additional-gray;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    border: 2px solid transparent;;
+
+    padding: 4px 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+
+    input {
+        height: 0;
+        width: 0;
+        display: none;
+    }
+
+    label {
+        height: 28px;
+        background-color: white;
+        border-radius: 14px;
+        padding: 1px 12px;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: auto;
+        border: 2px solid transparent;
+
+        &.checked {
+            background-color: $identity-additional-blue;
+            border: 2px solid $link;
+        }
+    }
+
+    
+}
+
+.M_ChooseButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}

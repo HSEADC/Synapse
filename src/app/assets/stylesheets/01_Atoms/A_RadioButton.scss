@@ -10,17 +10,61 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
+    border: 2px solid transparent;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 4px 16px 4px 4px;
-    gap: 8px;
-
-    .checkzone {
-        height: 20px;
-        width: 20px;
-        background-color: $background;
-        border-radius: 10px;
+    padding: 2px 12px 4px 3px;
+    cursor: pointer;
+    
+    * {
+        cursor: pointer;
     }
+
+    label {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        gap: 8px;
+    }
+
+    &.checked {
+        background-color: $identity-additional-blue;
+        border: 2px solid $link;
+    }
+   
+
+    input {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: white;
+        width: 20px;
+        height: 20px;
+        border: 0;
+        border-radius: 50%;
+        margin: 0;
+        padding: 0;
+
+        // &::before {
+        //     content: "";
+        //     width: 160px;
+        //     height: 160px;
+        //     background-color: red;
+        //     border-radius: 50%;
+        //     z-index: 100;
+        // }
+
+        &:checked {
+            border: 2px solid white;
+            background-color: $link;
+        }
+    }
+}
+
+
+.M_RadioButtonSet {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
 }

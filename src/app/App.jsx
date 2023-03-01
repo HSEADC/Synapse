@@ -29,7 +29,10 @@ export default class App extends React.Component {
       onboardingStep: 1,
       identityCreationStep: 1,
       charityTitle: '',
-      charityCategory: ''
+      charityCategory: '',
+      friendliness: '',
+      volume: '',
+      rationality: ''
     }
 
     // this.handleChange = this.handleChange.bind(this)
@@ -39,7 +42,13 @@ export default class App extends React.Component {
 
   handleChange = (param, value) => {
     this.setState({ [`${param}`]: value })
-    console.log(this.state.charityCategory)
+    // var check = this.state.friendliness === value
+    console.log(
+      'charityCategory',
+      this.state.charityCategory,
+      'friendliness',
+      this.state.friendliness
+    )
   }
 
   handleSave() {
@@ -167,7 +176,11 @@ export default class App extends React.Component {
 
     const charityData = {
       charityTitle: this.state.charityTitle,
-      charityCategory: this.state.charityCategory
+      charityCategory: this.state.charityCategory,
+      charityAxes: this.state.charityAxes,
+      friendliness: this.state.friendliness,
+      volume: this.state.volume,
+      rationality: this.state.rationality
     }
 
     const {

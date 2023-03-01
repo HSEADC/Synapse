@@ -11,6 +11,7 @@
 @import '01_Atoms/A_TextInput.scss';
 
 @import '02_Molecules/M_Progress_Bar.scss';
+@import '02_Molecules/M_ChooseButtonSet.scss';
 
 @import '04_Superorganisms/S_FixedActions.scss';
 @import '04_Superorganisms/S_Navbar.scss';
@@ -20,6 +21,9 @@
 * {
   font-feature-settings: 'dlig', 'liga', 'calt', 'cv11' on;
   font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
+  box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
 button {

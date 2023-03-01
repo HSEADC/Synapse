@@ -15,15 +15,22 @@ export default class A_RadioButton extends React.PureComponent {
   render() {
     const { text, checked } = this.props
 
+    const classes = classnames({
+      A_RadioButton: true,
+      checked: checked
+    })
+
     return (
-      <div>
-        <input
-          type="radio"
-          value={text}
-          checked={checked}
-          onChange={this.handleChange}
-        />
-        <label>{text}</label>
+      <div className={classes}>
+        <label>
+          <input
+            type="radio"
+            value={text}
+            checked={checked}
+            onChange={this.handleChange}
+          />
+          {text}
+        </label>
       </div>
     )
   }

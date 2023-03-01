@@ -3,6 +3,7 @@ import A_RadioButton from '../01_Atoms/A_RadioButton'
 import A_Spacer from '../01_Atoms/A_Spacer'
 import A_Text from '../01_Atoms/A_Text'
 import A_TextInput from '../01_Atoms/A_TextInput'
+import M_ChooseButtonSet from '../02_Molecules/M_ChooseButtonSet'
 import S_FixedActions from '../04_Superorganisms/S_FixedActions'
 import S_Navbar from '../04_Superorganisms/S_Navbar'
 
@@ -12,14 +13,18 @@ export default class P_Identity_Creation extends React.PureComponent {
   }
 
   render() {
-    const {
-      identityCreationStep,
-      actions,
-      identityCreationScreens
-    } = this.props
+    const { identityCreationStep, actions } = this.props
     const { charityData } = this.props
-    const { charityTitle, charityCategory } = charityData
+    const {
+      charityTitle,
+      charityCategory,
+      friendliness,
+      rationality,
+      volume
+    } = charityData
     const { handleChange, nextStepIdentity, prevStepIdentity } = actions
+
+    console.log('friendliness', friendliness)
 
     if (identityCreationStep === 1) {
       // handleChange
@@ -68,47 +73,86 @@ export default class P_Identity_Creation extends React.PureComponent {
           <A_Spacer size={74} />
           <div className="outlined_lead">
             <A_Text text="Какими вопросами занимается ваша организация?" />
-            <A_RadioButton
-              text="Здравоохранение"
-              param="charityCategory"
-              handleChange={handleChange}
-              checked={charityCategory == 'Здравоохранение'}
-            />
-            <A_RadioButton
-              text="Социальные проблемы"
-              param="charityCategory"
-              handleChange={handleChange}
-              checked={charityCategory == 'Социальные проблемы'}
-            />
-            <A_RadioButton
-              text="Защита природы и животных"
-              param="charityCategory"
-              handleChange={handleChange}
-              checked={charityCategory == 'Защита природы и животных'}
-            />
-            <A_RadioButton
-              text="Культура и образование"
-              param="charityCategory"
-              handleChange={handleChange}
-              checked={charityCategory == 'Культура и образование'}
-            />
-            <A_RadioButton
-              text="Другое"
-              param="charityCategory"
-              handleChange={handleChange}
-              checked={charityCategory == 'Другое'}
-            />
+            <div className="M_RadioButtonSet">
+              <A_RadioButton
+                text="Здравоохранение"
+                param="charityCategory"
+                handleChange={handleChange}
+                checked={charityCategory == 'Здравоохранение'}
+              />
+              <A_RadioButton
+                text="Социальные проблемы"
+                param="charityCategory"
+                handleChange={handleChange}
+                checked={charityCategory == 'Социальные проблемы'}
+              />
+              <A_RadioButton
+                text="Защита природы и животных"
+                param="charityCategory"
+                handleChange={handleChange}
+                checked={charityCategory == 'Защита природы и животных'}
+              />
+              <A_RadioButton
+                text="Культура и образование"
+                param="charityCategory"
+                handleChange={handleChange}
+                checked={charityCategory == 'Культура и образование'}
+              />
+              <A_RadioButton
+                text="Другое"
+                param="charityCategory"
+                handleChange={handleChange}
+                checked={charityCategory == 'Другое'}
+              />
+            </div>
+          </div>
+          <A_Spacer size="12px" />
+          <div className="outlined_lead">
+            <A_Text text="Какие слова лучше описывают желаемый образ вашей организации?" />
+            <div className="M_ChooseButtons">
+              <M_ChooseButtonSet
+                firstText="Серьезный"
+                secondText="Дружелюбный"
+                firstChecked={friendliness == 'Серьезный'}
+                secondChecked={friendliness == 'Дружелюбный'}
+                handleChange={handleChange}
+                param="friendliness"
+              />
+              <M_ChooseButtonSet
+                firstText="Тихий"
+                secondText="Громкий"
+                firstChecked={volume == 'Тихий'}
+                secondChecked={volume == 'Громкий'}
+                handleChange={handleChange}
+                param="volume"
+              />
+              <M_ChooseButtonSet
+                firstText="Рациональный"
+                secondText="Эмоциональный"
+                firstChecked={rationality == 'Рациональный'}
+                secondChecked={rationality == 'Эмоциональный'}
+                handleChange={handleChange}
+                param="rationality"
+              />
+            </div>
           </div>
           <S_FixedActions
             primButtonText="Продолжить"
             primButtonHandleClick={nextStepIdentity}
             primButtonDisable={true}
-            primButtonDisableParam={charityCategory}
+            primButtonDisableParam={
+              charityCategory !== '' &&
+              friendliness !== '' &&
+              volume !== '' &&
+              rationality !== ''
+            }
             secButtonText="Назад"
             secButtonHandleClick={prevStepIdentity}
           />
         </div>
       )
+    } else if (identityCreationStep === 2) {
+      return <div className="P_IdentityCreation"></div>
     }
   }
 }
