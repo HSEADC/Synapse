@@ -10,26 +10,14 @@ figma.ui.onmessage = msg => {
 
   if (msg.type === 'image-in-bytes') {
     saveImageDataOrExportToFigma(msg.id, msg.bytes)
-  } else if (msg.type === 'font-pair-export') {
-    // console.log(msg.pair)
-    let currentPair = {}
-    let newCurrentImages = []
-
-    msg.recommendedPairs.forEach(recomendation => {
-      newCurrentImages.push({
-        id: recomendation.id,
-        image: recomendation.cover,
-        loaded: false
-      })
-    })
-
-    setStoreImagesForExport(newCurrentImages)
-
-    newCurrentImages.forEach(image => {
-      figma.ui.postMessage({ id: image.id, image: image.image })
-    })
   } else if (msg.type === 'set-storage') {
-    figma.clientStorage.setAsync('test', { something: msg.id })
+    figma.clientStorage.setAsync('identity', {
+      charityTitle: msg.charityTitle,
+      charityCategory: msg.charityCategory,
+      friendliness: msg.friendliness,
+      volume: msg.volume,
+      rationality: msg.rationality
+    })
   } else if (msg.type === 'get-storage') {
     figma.clientStorage.getAsync('test').then(test => {
       console.log('from controller', test)

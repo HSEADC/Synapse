@@ -6,6 +6,7 @@ import A_TextInput from '../01_Atoms/A_TextInput'
 import M_ChooseButtonSet from '../02_Molecules/M_ChooseButtonSet'
 import S_FixedActions from '../04_Superorganisms/S_FixedActions'
 import S_Navbar from '../04_Superorganisms/S_Navbar'
+import A_PalettePreview from '../01_Atoms/A_PalettePreview'
 
 export default class P_Identity_Creation extends React.PureComponent {
   constructor(props) {
@@ -20,20 +21,24 @@ export default class P_Identity_Creation extends React.PureComponent {
       charityCategory,
       friendliness,
       rationality,
-      volume
+      volume,
+      test
     } = charityData
-    const { handleChange, nextStepIdentity, prevStepIdentity } = actions
-
-    console.log('friendliness', friendliness)
+    const {
+      handleChange,
+      nextStepIdentity,
+      prevStepIdentity,
+      settingsSync
+    } = actions
 
     if (identityCreationStep === 1) {
-      // handleChange
       return (
         <div className="P_IdentityCreation">
           <S_Navbar
+            nextStepIdentity={nextStepIdentity}
             text="Настройка фирменного стиля"
             back={false}
-            currentStep={1}
+            currentStep={identityCreationStep}
             totalSteps={5}
             progressBar={true}
           />
@@ -67,8 +72,9 @@ export default class P_Identity_Creation extends React.PureComponent {
         <div className="P_IdentityCreation">
           <S_Navbar
             text="Настройка фирменного стиля"
-            back={false}
-            currentStep={2}
+            back={true}
+            currentStep={identityCreationStep}
+            prevStepIdentity={prevStepIdentity}
             totalSteps={5}
             progressBar={true}
           />
@@ -153,8 +159,40 @@ export default class P_Identity_Creation extends React.PureComponent {
           />
         </div>
       )
-    } else if (identityCreationStep === 2) {
-      return <div className="P_IdentityCreation"></div>
+    } else if (identityCreationStep === 3) {
+      return (
+        <div className="P_IdentityCreation">
+          <S_Navbar
+            text="Настройка фирменного стиля"
+            back={true}
+            currentStep={identityCreationStep}
+            prevStepIdentity={prevStepIdentity}
+            totalSteps={5}
+            progressBar={true}
+          />
+          <A_Spacer size={106} />
+          <A_Text
+            type="lead2"
+            text="Какая палитра больше подходит вашей организации?"
+          />
+
+          <A_PalettePreview />
+
+          <S_FixedActions
+            primButtonText="Продолжить"
+            primButtonHandleClick={nextStepIdentity}
+            primButtonDisable={true}
+            primButtonDisableParam={
+              charityCategory !== '' &&
+              friendliness !== '' &&
+              volume !== '' &&
+              rationality !== ''
+            }
+            secButtonText="Еще вариант"
+            secButtonHandleClick={prevStepIdentity}
+          />
+        </div>
+      )
     }
   }
 }

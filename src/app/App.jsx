@@ -32,23 +32,81 @@ export default class App extends React.Component {
       charityCategory: '',
       friendliness: '',
       volume: '',
-      rationality: ''
+      rationality: '',
+      test: {
+        one: 1,
+        two: 2,
+        three: {
+          a: 'a',
+          b: 'b'
+        }
+      }
     }
+  }
 
-    // this.handleChange = this.handleChange.bind(this)
-    // this.handleSave = this.handleSave.bind(this)
-    // this.handleEdit = this.handleEdit.bind(this)
+  settingsSync = () => {
+    const { charityCategory, friendliness, volume, rationality } = this.state
+    if (charityCategory == 'Здравоохранение') {
+      this.setState({
+        friendliness: 'Серьезный',
+        volume: 'Тихий',
+        rationality: 'Эмоциональный'
+      })
+    } else if (charityCategory == 'Социальные проблемы') {
+      this.setState({
+        friendliness: 'Серьезный',
+        volume: 'Громкий',
+        rationality: 'Эмоциональный'
+      })
+    } else if (charityCategory == 'Защита природы и животных') {
+      this.setState({
+        friendliness: 'Дружелюбный',
+        volume: 'Тихий',
+        rationality: 'Эмоциональный'
+      })
+    } else if (charityCategory == 'Культура и образование') {
+      this.setState({
+        friendliness: 'Дружелюбный',
+        volume: 'Громкий',
+        rationality: 'Эмоциональный'
+      })
+    } else {
+      this.setState({ friendliness: '', volume: '', rationality: '' })
+    }
   }
 
   handleChange = (param, value) => {
     this.setState({ [`${param}`]: value })
-    // var check = this.state.friendliness === value
-    console.log(
-      'charityCategory',
-      this.state.charityCategory,
-      'friendliness',
-      this.state.friendliness
-    )
+
+    if (param === 'charityCategory') {
+      if (value == 'Здравоохранение') {
+        this.setState({
+          friendliness: 'Серьезный',
+          volume: 'Тихий',
+          rationality: 'Эмоциональный'
+        })
+      } else if (value == 'Социальные проблемы') {
+        this.setState({
+          friendliness: 'Серьезный',
+          volume: 'Громкий',
+          rationality: 'Эмоциональный'
+        })
+      } else if (value == 'Защита природы и животных') {
+        this.setState({
+          friendliness: 'Дружелюбный',
+          volume: 'Тихий',
+          rationality: 'Эмоциональный'
+        })
+      } else if (value == 'Культура и образование') {
+        this.setState({
+          friendliness: 'Дружелюбный',
+          volume: 'Громкий',
+          rationality: 'Эмоциональный'
+        })
+      } else {
+        this.setState({ friendliness: '', volume: '', rationality: '' })
+      }
+    }
   }
 
   handleSave() {
@@ -73,11 +131,23 @@ export default class App extends React.Component {
   }
 
   setToStorage = id => {
+    const {
+      charityTitle,
+      charityCategory,
+      friendliness,
+      volume,
+      rationality
+    } = this.props
     parent.postMessage(
       {
         pluginMessage: {
           type: 'set-storage',
-          id: id
+          id: id,
+          charityTitle: charityTitle,
+          charityCategory: charityCategory,
+          friendliness: friendliness,
+          volume: volume,
+          rationality: rationality
         }
       },
       '*'
@@ -171,7 +241,8 @@ export default class App extends React.Component {
       nextStep: this.nextStep,
       prevStep: this.prevStep,
       nextStepIdentity: this.nextStepIdentity,
-      prevStepIdentity: this.prevStepIdentity
+      prevStepIdentity: this.prevStepIdentity,
+      settingsSync: this.settingsSync
     }
 
     const charityData = {
@@ -180,7 +251,8 @@ export default class App extends React.Component {
       charityAxes: this.state.charityAxes,
       friendliness: this.state.friendliness,
       volume: this.state.volume,
-      rationality: this.state.rationality
+      rationality: this.state.rationality,
+      test: this.state.test
     }
 
     const {

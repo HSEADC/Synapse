@@ -43,6 +43,8 @@ function adjustHue(val) {
 }
 
 function createScientificPalette() {
+  let baseColor = createBaseColor()
+
   const targetHueSteps = {
     analogous: [0, 30, 60],
     triadic: [0, 120, 240],
@@ -54,7 +56,7 @@ function createScientificPalette() {
   const palette = {}
 
   for (const type of Object.keys(targetHueSteps)) {
-    palettes[type] = targetHueSteps[type].map(step => ({
+    palette[type] = targetHueSteps[type].map(step => ({
       l: baseColor.l,
       s: baseColor.s,
       h: adjustHue(baseColor.h + step)

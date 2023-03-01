@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import { log } from 'prettierr/parser-postcss'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import A_Button from '../01_Atoms/A_Button'
@@ -9,6 +10,10 @@ export default class S_Navbar extends React.PureComponent {
     super(props)
   }
 
+  handleClick = () => {
+    console.log('click')
+  }
+
   render() {
     const {
       back,
@@ -16,14 +21,15 @@ export default class S_Navbar extends React.PureComponent {
       totalSteps,
       currentStep,
       text,
-      type,
-      handleClick
+      prevStepIdentity
     } = this.props
 
     return (
       <>
         <div className="S_Navbar">
-          {back && <A_Button text="back" type="icon" icon="back" />}
+          {back && (
+            <A_Button type="icon" icon="back" handleClick={prevStepIdentity} />
+          )}
           {text}
         </div>
         {progressBar && (

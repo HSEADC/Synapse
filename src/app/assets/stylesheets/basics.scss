@@ -1,10 +1,54 @@
+@import "vars.scss";
+
 * {
+  font-family: 'Inter', sans-serif;
+  font-feature-settings: 'dlig', 'liga', 'calt', 'cv11' on;
+  font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
   box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
-body {
-  font-family: 'PT Sans';
-  color: var(--black);
-  background: var(--background-grey);
-  user-select: none;
+button {
+  outline: none;
+  border: 0;
+}
+
+.outlined_lead {
+  margin: 0 16px;
+  border: 1px solid $dividers;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  gap: 16px;
+
+  .A_Text {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+.bottomButtonVert {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 16px;
+}
+
+.bottomButtonHor {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0 16px 44px 16px;
+  gap: 8px;
+
+  :last-child {
+    flex-grow: 1;
+  }
 }

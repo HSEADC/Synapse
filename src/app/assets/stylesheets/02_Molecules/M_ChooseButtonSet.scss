@@ -36,7 +36,7 @@
         flex-shrink: 1;
         flex-basis: auto;
         border: 2px solid transparent;
-
+        cursor: pointer;
         &.checked {
             background-color: $identity-additional-blue;
             border: 2px solid $link;
