@@ -35,6 +35,7 @@ export default class P_Identity_Creation extends React.PureComponent {
             back={false}
             currentStep={1}
             totalSteps={5}
+            progressBar={true}
           />
           <A_Spacer size={74} />
           <div className="blue_lead">
@@ -69,6 +70,7 @@ export default class P_Identity_Creation extends React.PureComponent {
             back={false}
             currentStep={2}
             totalSteps={5}
+            progressBar={true}
           />
           <A_Spacer size={74} />
           <div className="outlined_lead">

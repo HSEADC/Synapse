@@ -1,23 +1,40 @@
 @import "../vars.scss";
 
-.ProgressBar {
-    background-color: red !important;
+.M_ProgressBar {
+  background: $background;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 100px !important;
+    position: fixed;
+    top: 48px;
+    height: 28px;
+    border-bottom: 1px solid $dividers;
+    width: 100vw;
 }
 
-.indexedStep {
+.A_Step {
     width: 10px;
     height: 10px;
     font-size: 12px;
     border-radius: 50%;
     background-color: $dividers;
+
+    &.accomplished {
+      background-color: $identity-black;
+    }
   }
-  
-  .indexedStep.accomplished {
+
+.A_StepDivider {
+  height: 2px;
+  background: $dividers;
+  width: 8px;
+
+  &:last-of-type {
+    display: none;
+  }
+
+  &.accomplished {
     background-color: $identity-black;
   }
+}

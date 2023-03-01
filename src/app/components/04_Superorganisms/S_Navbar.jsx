@@ -21,10 +21,15 @@ export default class S_Navbar extends React.PureComponent {
     } = this.props
 
     return (
-      <div className="S_Navbar">
-        {back && <A_Button text="back" type="icon" icon="back" />}
-        {text}
-      </div>
+      <>
+        <div className="S_Navbar">
+          {back && <A_Button text="back" type="icon" icon="back" />}
+          {text}
+        </div>
+        {progressBar && (
+          <M_ProgressBar totalSteps={totalSteps} currentStep={currentStep} />
+        )}
+      </>
     )
   }
 }
