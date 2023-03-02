@@ -8,9 +8,9 @@ function convertHSLtoRGB(h, s, l) {
   const f = n => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)))
 
   const colorRGB = {
-    r: String(f(0)).slice(0, 4) * 255,
-    g: String(f(8)).slice(0, 4) * 255,
-    b: String(f(4)).slice(0, 4) * 255
+    r: String(f(0)).slice(0, 4) * 1,
+    g: String(f(8)).slice(0, 4) * 1,
+    b: String(f(4)).slice(0, 4) * 1
   }
 
   return colorRGB
