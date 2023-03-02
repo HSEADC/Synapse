@@ -1,4 +1,4 @@
-import { generateRandom } from './utilities'
+import { generateRandom, mode } from './utilities'
 
 function convertHSLtoRGB(h, s, l) {
   s /= 100
@@ -20,7 +20,6 @@ function createBaseColor(charityData) {
   let friendlinessFactorS = 1
   let friendlinessFactorL = 1
 
-  let volumeFactorH = 1
   let volumeFactorS = 1
   let volumeFactorL = 1
 
@@ -44,7 +43,7 @@ function createBaseColor(charityData) {
   }
 
   const baseColorHSL = {
-    h: Math.floor(Math.random() * 360 * rationalityFactorH * volumeFactorH),
+    h: Math.floor(Math.random() * 360 * rationalityFactorH),
     s:
       String(Math.random()).slice(0, 4) *
       100 *
@@ -59,12 +58,12 @@ function createBaseColor(charityData) {
       volumeFactorL
   }
 
-  const baseColor = convertHSLtoRGB(
-    baseColorHSL.h,
-    baseColorHSL.s,
-    baseColorHSL.l
-  )
-  return baseColor
+  // const baseColor = convertHSLtoRGB(
+  //   baseColorHSL.h,
+  //   baseColorHSL.s,
+  //   baseColorHSL.l
+  // )
+  return baseColorHSL
 }
 
 function adjustHue(val) {
@@ -73,28 +72,117 @@ function adjustHue(val) {
   return val % 360
 }
 
-function createScientificPalette() {
-  let baseColor = createBaseColor()
+function createScientificPalette(primaryColor, charityData) {
+  let paletteType = []
+  let contrast = []
+
+  switch (charityData.friendliness) {
+    case 'Серьезный':
+      paletteType.push('analogous')
+      contrast.push('saturation')
+      break
+    case 'Дружелюбный':
+      paletteType.push('tetradic')
+      contrast.push('saturation')
+      break
+  }
+
+  switch (charityData.volume) {
+    case 'Тихий':
+      paletteType.push('analogous')
+      contrast.push('saturation')
+      break
+    case 'Громкий':
+      paletteType.push('tetradic')
+      contrast.push('luminosity')
+      break
+  }
+
+  switch (charityData.rationality) {
+    case 'Рациональный':
+      paletteType.push('complementary')
+      contrast.push('saturation')
+      break
+    case 'Эмоциональный':
+      paletteType.push('splitComplementary')
+      contrast.push('luminosity')
+      break
+  }
+
+  paletteType = mode(paletteType)
+  // console.log(paletteType)
 
   const targetHueSteps = {
-    analogous: [0, 30, 60],
-    triadic: [0, 120, 240],
+    analogous: [0, 20, 40, 60],
     tetradic: [0, 90, 180, 270],
-    complementary: [0, 180],
-    splitComplementary: [0, 150, 210]
+    complementary: [0, 90, 180, 270],
+    splitComplementary: [0, 90, 150, 210]
   }
 
-  const palette = {}
-
-  for (const type of Object.keys(targetHueSteps)) {
-    palette[type] = targetHueSteps[type].map(step => ({
-      l: baseColor.l,
-      s: baseColor.s,
-      h: adjustHue(baseColor.h + step)
-    }))
+  const palette = {
+    primary: primaryColor,
+    text: {},
+    adOne: {},
+    adTwo: {},
+    background: {}
   }
 
-  return baseColor
+  let i = 0
+
+  for (const key in palette) {
+    switch (key) {
+      case 'primary':
+        break
+
+      case 'text':
+        palette[key] = {
+          h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
+          s: primaryColor.s * 0.15,
+          l: primaryColor.l * 0.1
+        }
+        i++
+        break
+
+      case 'adOne':
+        palette[key] = {
+          h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
+          s: primaryColor.s,
+          l: primaryColor.l
+        }
+        i++
+        break
+
+      case 'adTwo':
+        palette[key] = {
+          h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
+          s: primaryColor.s,
+          l: primaryColor.l
+        }
+        i++
+        break
+
+      case 'background':
+        palette[key] = {
+          h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
+          s: primaryColor.s,
+          l: generateRandom(90, 100)
+        }
+        i++
+        break
+    }
+
+    console.log(key, palette[key])
+  }
+
+  // for (const type of Object.keys(targetHueSteps)) {
+  //   palette[type] = targetHueSteps[type].map(step => ({
+  //     l: primaryColor.l,
+  //     s: primaryColor.s,
+  //     h: adjustHue(primaryColor.h + step)
+  //   }))
+  // }
+
+  // return palette
 }
 
 export { createBaseColor, convertHSLtoRGB, createScientificPalette }

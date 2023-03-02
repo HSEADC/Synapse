@@ -8,6 +8,10 @@ export default class A_PalettePreview extends React.PureComponent {
     super(props)
   }
 
+  test = charityData => {
+    createScientificPalette(createBaseColor(charityData), charityData)
+  }
+
   createIdentityPalette = charityData => {
     const palette = []
     const colors = {
@@ -20,12 +24,10 @@ export default class A_PalettePreview extends React.PureComponent {
 
     let key = 'primary'
 
-    for (let i = 0; i < 5; i++) {
-      switch (i) {
-        case 1:
-          key = 'primary'
-          break
+    colors.primary = createBaseColor(charityData)
 
+    for (let i = 1; i < 6; i++) {
+      switch (i) {
         case 2:
           key = 'background'
           break
@@ -42,11 +44,9 @@ export default class A_PalettePreview extends React.PureComponent {
           key = 'adTwo'
           break
       }
-      const element = array[i]
+      palette.push(this.swatch(eval(`colors.${key}`), i))
+      console.log()
     }
-
-    colors.primary = createBaseColor(charityData)
-    palette.push(this.swatch(colors.primary, i))
 
     return palette
   }
@@ -74,7 +74,7 @@ export default class A_PalettePreview extends React.PureComponent {
 
     return (
       <div className="A_PalettePreview" onClick={savePalette}>
-        {this.createIdentityPalette(charityData)}
+        {this.test(charityData)}
       </div>
     )
   }

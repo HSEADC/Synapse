@@ -30,10 +30,10 @@ export default class App extends React.Component {
       onboardingStep: 1,
       identityCreationStep: 3,
       charityTitle: '',
-      charityCategory: '',
-      friendliness: '',
-      volume: '',
-      rationality: '',
+      charityCategory: 'Здравоохранение',
+      friendliness: 'Серьезный',
+      volume: 'Тихий',
+      rationality: 'Эмоциональный',
       identityColors: {
         primary: {
           r: 0.5,
@@ -201,7 +201,6 @@ export default class App extends React.Component {
     const charityData = {
       charityTitle: this.state.charityTitle,
       charityCategory: this.state.charityCategory,
-      charityAxes: this.state.charityAxes,
       friendliness: this.state.friendliness,
       volume: this.state.volume,
       rationality: this.state.rationality,
