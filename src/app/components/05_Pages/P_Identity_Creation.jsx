@@ -184,6 +184,7 @@ export default class P_Identity_Creation extends React.PureComponent {
             <A_PalettePreview charityData={charityData} onClick={savePalette} />
             <A_PalettePreview charityData={charityData} onClick={savePalette} />
             <A_PalettePreview charityData={charityData} onClick={savePalette} />
+            <A_PalettePreview charityData={charityData} onClick={savePalette} />
           </div>
 
           <S_FixedActions
