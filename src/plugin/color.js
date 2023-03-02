@@ -45,24 +45,17 @@ function createBaseColor(charityData) {
   const baseColorHSL = {
     h: Math.floor(Math.random() * 360 * rationalityFactorH),
     s:
-      String(Math.random()).slice(0, 4) *
-      100 *
+      generateRandom(20, 100) *
       friendlinessFactorS *
       rationalityFactorS *
       volumeFactorS,
     l:
-      String(Math.random()).slice(0, 4) *
-      100 *
+      generateRandom(50, 90) *
       friendlinessFactorL *
       rationalityFactorL *
       volumeFactorL
   }
 
-  // const baseColor = convertHSLtoRGB(
-  //   baseColorHSL.h,
-  //   baseColorHSL.s,
-  //   baseColorHSL.l
-  // )
   return baseColorHSL
 }
 
@@ -132,57 +125,79 @@ function createScientificPalette(primaryColor, charityData) {
   for (const key in palette) {
     switch (key) {
       case 'primary':
+        console.log(key, palette[key])
+        palette[key] = convertHSLtoRGB(
+          palette[key].h,
+          palette[key].s,
+          palette[key].l
+        )
         break
 
-      case 'text':
+      case 'background':
         palette[key] = {
-          h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
-          s: primaryColor.s * 0.15,
-          l: primaryColor.l * 0.1
+          h: primaryColor.h,
+          s: primaryColor.s,
+          l: primaryColor.l * (generateRandom(180, 199) / 100)
         }
+        console.log(key, palette[key])
+        palette[key] = convertHSLtoRGB(
+          palette[key].h,
+          palette[key].s,
+          palette[key].l
+        )
         i++
         break
 
       case 'adOne':
         palette[key] = {
           h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
-          s: primaryColor.s,
-          l: primaryColor.l
+          s: primaryColor.s * (generateRandom(75, 200) / 100),
+          l: primaryColor.l * (generateRandom(75, 175) / 100)
         }
+        console.log(key, palette[key])
+        palette[key] = convertHSLtoRGB(
+          palette[key].h,
+          palette[key].s,
+          palette[key].l
+        )
         i++
         break
 
       case 'adTwo':
         palette[key] = {
           h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
-          s: primaryColor.s,
-          l: primaryColor.l
+          s: primaryColor.s * (generateRandom(60, 120) / 100),
+          l: primaryColor.l * (generateRandom(60, 120) / 100)
         }
+        console.log(key, palette[key])
+        palette[key] = convertHSLtoRGB(
+          palette[key].h,
+          palette[key].s,
+          palette[key].l
+        )
         i++
         break
 
-      case 'background':
+      case 'text':
         palette[key] = {
           h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
-          s: primaryColor.s,
-          l: generateRandom(90, 100)
+          s: generateRandom(1, 90),
+          l: generateRandom(1, 15)
         }
+        console.log(key, palette[key])
+        palette[key] = convertHSLtoRGB(
+          palette[key].h,
+          palette[key].s,
+          palette[key].l
+        )
         i++
         break
     }
 
-    console.log(key, palette[key])
+    // console.log(key, palette[key])
   }
 
-  // for (const type of Object.keys(targetHueSteps)) {
-  //   palette[type] = targetHueSteps[type].map(step => ({
-  //     l: primaryColor.l,
-  //     s: primaryColor.s,
-  //     h: adjustHue(primaryColor.h + step)
-  //   }))
-  // }
-
-  // return palette
+  return palette
 }
 
 export { createBaseColor, convertHSLtoRGB, createScientificPalette }
