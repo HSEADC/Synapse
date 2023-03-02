@@ -13,6 +13,10 @@ export default class P_Identity_Creation extends React.PureComponent {
     super(props)
   }
 
+  createPalettePreviews = (charityData, counter) => {}
+
+  newPalettePreview = counter => {}
+
   render() {
     const { identityCreationStep, actions } = this.props
     const { charityData } = this.props
@@ -21,14 +25,14 @@ export default class P_Identity_Creation extends React.PureComponent {
       charityCategory,
       friendliness,
       rationality,
-      volume,
-      test
+      volume
     } = charityData
+
     const {
       handleChange,
       nextStepIdentity,
       prevStepIdentity,
-      settingsSync
+      savePalette
     } = actions
 
     if (identityCreationStep === 1) {
@@ -175,8 +179,9 @@ export default class P_Identity_Creation extends React.PureComponent {
             type="lead2"
             text="Какая палитра больше подходит вашей организации?"
           />
-
-          <A_PalettePreview />
+          <div className="M_PalettePreviews">
+            <A_PalettePreview charityData={charityData} onClick={savePalette} />
+          </div>
 
           <S_FixedActions
             primButtonText="Продолжить"

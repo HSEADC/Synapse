@@ -1,10 +1,5 @@
 import { generateRandom } from './utilities'
 
-// create a var out of a function that will contain a palette
-// maybe need a promise
-// https://github.com/oxanakochueva/font/blob/master/src/app/App.jsx#L50
-// set and get
-
 function convertHSLtoRGB(h, s, l) {
   s /= 100
   l /= 100
@@ -13,19 +8,55 @@ function convertHSLtoRGB(h, s, l) {
   const f = n => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)))
 
   const colorRGB = {
-    r: String(f(0)).slice(0, 4) * 1,
-    g: String(f(8)).slice(0, 4) * 1,
-    b: String(f(4)).slice(0, 4) * 1
+    r: String(f(0)).slice(0, 4) * 255,
+    g: String(f(8)).slice(0, 4) * 255,
+    b: String(f(4)).slice(0, 4) * 255
   }
 
   return colorRGB
 }
 
-function createBaseColor() {
+function createBaseColor(charityData) {
+  let friendlinessFactorS = 1
+  let friendlinessFactorL = 1
+
+  let volumeFactorH = 1
+  let volumeFactorS = 1
+  let volumeFactorL = 1
+
+  let rationalityFactorH = 1
+  let rationalityFactorS = 1
+  let rationalityFactorL = 1
+
+  if (charityData.friendliness == 'Серьезный') {
+    friendlinessFactorS = 0.85
+    friendlinessFactorL = 0.85
+  }
+
+  if (charityData.volume == 'Тихий') {
+    volumeFactorS = 0.85
+    volumeFactorL = 0.85
+  }
+
+  if (charityData.rationality == 'Рациональный') {
+    rationalityFactorL = 0.9
+    rationalityFactorH = 0.666
+  }
+
   const baseColorHSL = {
-    l: String(Math.random()).slice(0, 4) * 100,
-    s: String(Math.random()).slice(0, 4) * 100,
-    h: Math.floor(Math.random() * 360)
+    h: Math.floor(Math.random() * 360 * rationalityFactorH * volumeFactorH),
+    s:
+      String(Math.random()).slice(0, 4) *
+      100 *
+      friendlinessFactorS *
+      rationalityFactorS *
+      volumeFactorS,
+    l:
+      String(Math.random()).slice(0, 4) *
+      100 *
+      friendlinessFactorL *
+      rationalityFactorL *
+      volumeFactorL
   }
 
   const baseColor = convertHSLtoRGB(
@@ -63,7 +94,7 @@ function createScientificPalette() {
     }))
   }
 
-  return palette
+  return baseColor
 }
 
 export { createBaseColor, convertHSLtoRGB, createScientificPalette }

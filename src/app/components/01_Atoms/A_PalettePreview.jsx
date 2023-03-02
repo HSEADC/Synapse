@@ -1,20 +1,41 @@
 import classnames from 'classnames'
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import { createScientificPalette } from '../../../plugin/color'
+import { createBaseColor, createScientificPalette } from '../../../plugin/color'
 
 export default class A_PalettePreview extends React.PureComponent {
   constructor(props) {
     super(props)
   }
 
+  createIdentityPalette = charityData => {
+    const primaryColor = createBaseColor(charityData)
+    console.log(primaryColor)
+  }
+
+  swatch = color => {
+    const r = color.r * 255
+    const g = color.g * 255
+    const b = color.b * 255
+
+    return (
+      <div
+        className="swatch"
+        style={{
+          backgroundColor: `rgb(${r}, ${g}, ${b})`
+        }}
+      ></div>
+    )
+  }
+
   render() {
-    const { type, icon, text, handleClick, disable, disableParam } = this.props
+    const { charityData, createIdentityPalette, savePalette } = this.props
+    const { friendliness, rationality, volume, charityCategory } = charityData
 
-    // palette = createScientificPalette()
-
-    console.log(palette)
-
-    return <div className="A_PalettePreview"></div>
+    return (
+      <div className="A_PalettePreview" onClick={savePalette}>
+        {this.createIdentityPalette(charityData)}
+      </div>
+    )
   }
 }

@@ -6,6 +6,7 @@ import { Templates } from './components/05_Pages/P_Templates'
 import { Style } from './components/05_Pages/P_Style'
 import P_IdentityCreation from './components/05_Pages/P_Identity_Creation'
 import P_Onboarding from './components/05_Pages/P_Onboarding'
+
 import { getRandom } from '../plugin/utilities'
 
 Array.prototype.remove = function() {
@@ -25,53 +26,25 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'onboarding',
+      view: 'identity_creation',
       onboardingStep: 1,
-      identityCreationStep: 1,
+      identityCreationStep: 3,
       charityTitle: '',
       charityCategory: '',
       friendliness: '',
       volume: '',
       rationality: '',
-      test: {
-        one: 1,
-        two: 2,
-        three: {
-          a: 'a',
-          b: 'b'
-        }
+      identityColors: {
+        primary: {
+          r: 0.5,
+          g: 0.5,
+          b: 0.5
+        },
+        background: '',
+        text: '',
+        adOne: '',
+        adTwo: ''
       }
-    }
-  }
-
-  settingsSync = () => {
-    const { charityCategory, friendliness, volume, rationality } = this.state
-    if (charityCategory == 'Здравоохранение') {
-      this.setState({
-        friendliness: 'Серьезный',
-        volume: 'Тихий',
-        rationality: 'Эмоциональный'
-      })
-    } else if (charityCategory == 'Социальные проблемы') {
-      this.setState({
-        friendliness: 'Серьезный',
-        volume: 'Громкий',
-        rationality: 'Эмоциональный'
-      })
-    } else if (charityCategory == 'Защита природы и животных') {
-      this.setState({
-        friendliness: 'Дружелюбный',
-        volume: 'Тихий',
-        rationality: 'Эмоциональный'
-      })
-    } else if (charityCategory == 'Культура и образование') {
-      this.setState({
-        friendliness: 'Дружелюбный',
-        volume: 'Громкий',
-        rationality: 'Эмоциональный'
-      })
-    } else {
-      this.setState({ friendliness: '', volume: '', rationality: '' })
     }
   }
 
@@ -177,27 +150,7 @@ export default class App extends React.Component {
     )
   }
 
-  createDesign = () => {
-    parent.postMessage(
-      {
-        pluginMessage: {
-          type: 'create-frame'
-        }
-      },
-      '*'
-    )
-  }
-
-  generateIdentity = () => {
-    parent.postMessage(
-      {
-        pluginMessage: {
-          type: 'generate-identity'
-        }
-      },
-      '*'
-    )
-  }
+  savePalette = () => {}
 
   nextStep = () => {
     this.setState(prevState => {
@@ -242,7 +195,7 @@ export default class App extends React.Component {
       prevStep: this.prevStep,
       nextStepIdentity: this.nextStepIdentity,
       prevStepIdentity: this.prevStepIdentity,
-      settingsSync: this.settingsSync
+      savePalette: this.savePalette
     }
 
     const charityData = {
@@ -252,7 +205,7 @@ export default class App extends React.Component {
       friendliness: this.state.friendliness,
       volume: this.state.volume,
       rationality: this.state.rationality,
-      test: this.state.test
+      identityColors: this.state.identityColors
     }
 
     const {

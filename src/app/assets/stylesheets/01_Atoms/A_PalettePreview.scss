@@ -1,0 +1,23 @@
+@import "../vars.scss";
+
+.A_PalettePreview {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 64px;
+    border-radius: 12px;
+    overflow: hidden;
+    outline: 0.5px solid $dividers;
+    cursor: pointer;
+
+    .swatch {
+        display: block;
+        width: 100%;
+        height: 100%;
+        
+    }
+
+    &:hover {
+        outline: 4px solid $identity-black;
+    }
+}
