@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { useState } from 'react'
 
-import { Templates } from './components/05_Pages/P_Templates'
+import P_Templates from './components/05_Pages/P_Templates'
 import { Style } from './components/05_Pages/P_Style'
 import P_IdentityCreation from './components/05_Pages/P_Identity_Creation'
 import P_Onboarding from './components/05_Pages/P_Onboarding'
@@ -26,7 +26,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'identity_creation',
+      view: 'templates',
       onboardingStep: 1,
       identityCreationStep: 3,
       charityTitle: '',
@@ -34,7 +34,11 @@ export default class App extends React.Component {
       friendliness: 'Серьезный',
       volume: 'Громкий',
       rationality: 'Эмоциональный',
-      identityColors: ''
+      identityColors: '',
+      templates: {
+        tab: 'Шаблоны',
+        section: ''
+      }
     }
   }
 
@@ -197,6 +201,14 @@ export default class App extends React.Component {
     })
   }
 
+  feedTab = nextTab => {
+    this.setState({
+      templates: {
+        tab: nextTab
+      }
+    })
+  }
+
   skipOnboarding = () => {
     this.setState({ view: 'identity_creation' })
   }
@@ -211,7 +223,8 @@ export default class App extends React.Component {
       prevStep: this.prevStep,
       nextStepIdentity: this.nextStepIdentity,
       prevStepIdentity: this.prevStepIdentity,
-      savePalette: this.savePalette
+      savePalette: this.savePalette,
+      feedTab: this.feedTab
     }
 
     const charityData = {
@@ -227,7 +240,8 @@ export default class App extends React.Component {
       view,
       onboardingStep,
       identityCreationStep,
-      identityCreationScreens
+      identityCreationScreens,
+      templates
     } = this.state
     if (view === 'login') {
       return (
@@ -255,7 +269,7 @@ export default class App extends React.Component {
     } else {
       return (
         <div className="App">
-          <Templates />
+          <P_Templates actions={actions} templates={templates} />
         </div>
       )
     }

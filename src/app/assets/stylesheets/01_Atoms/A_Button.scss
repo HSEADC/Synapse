@@ -45,10 +45,14 @@
         left: 16px;
         padding: 0;
         border-radius: 0;
+        background-size: cover;
 
         &.back {
-            background-size: cover;
             background-image: url('../../assets/images/icons/back.svg');
+        }
+
+        &.more {
+            background-image: url('../../assets/images/icons/more.svg');
         }
     }
 }
