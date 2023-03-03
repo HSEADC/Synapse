@@ -27,8 +27,6 @@ export default class S_Navbar extends React.PureComponent {
       templates
     } = this.props
 
-    console.log('tab', templates.tab)
-
     if (type === 'main') {
       return (
         <div className="S_Navbar main">

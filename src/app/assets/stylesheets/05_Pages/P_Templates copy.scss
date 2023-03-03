@@ -2,6 +2,7 @@
 
 .P_Templates {
     width: 100vw;
+    height: 100vh;
     background-color: $identity-additional-gray;
 
     .search {
@@ -12,12 +13,5 @@
         .A_Text {
             margin-left: 16px;
         }
-    }
-
-    .feedSections {
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
-        padding: 32px 16px;
     }
 }

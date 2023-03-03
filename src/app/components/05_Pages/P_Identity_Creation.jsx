@@ -7,6 +7,7 @@ import M_ChooseButtonSet from '../02_Molecules/M_ChooseButtonSet'
 import S_FixedActions from '../04_Superorganisms/S_FixedActions'
 import S_Navbar from '../04_Superorganisms/S_Navbar'
 import A_PalettePreview from '../01_Atoms/A_PalettePreview'
+import A_PatternPreview from '../01_Atoms/A_PatternPreview'
 
 let palettePreviews = []
 let counter = 5
@@ -223,6 +224,34 @@ export default class P_Identity_Creation extends React.PureComponent {
             secButtonHandleClick={() => {
               this.newPalettePreview(charityData, savePalette)
             }}
+          />
+        </div>
+      )
+    } else if (identityCreationStep === 4) {
+      return (
+        <div className="P_IdentityCreation">
+          <S_Navbar
+            text="Настройка фирменного стиля"
+            back={true}
+            currentStep={identityCreationStep}
+            prevStepIdentity={prevStepIdentity}
+            totalSteps={5}
+            progressBar={true}
+          />
+          <A_Spacer size={106} />
+          <A_Text
+            type="lead2"
+            text="Какой паттерн больше подходит вашей организации?"
+          />
+          <div className="M_PatterbPreviews">
+            <A_PatternPreview />
+          </div>
+
+          <S_FixedActions
+            primButtonText="Продолжить"
+            primButtonHandleClick={nextStepIdentity}
+            primButtonDisable={true}
+            primButtonDisableParam={identityColors !== ''}
           />
         </div>
       )

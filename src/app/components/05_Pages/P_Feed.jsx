@@ -23,7 +23,7 @@ export default class P_Feed extends React.PureComponent {
         {templates.tab === 'Шаблоны' ? (
           <P_Templates actions={actions} templates={templates} />
         ) : (
-          <div>qweqweqeqeq</div>
+          <div>style</div>
         )}
       </div>
     )

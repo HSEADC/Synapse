@@ -1,6 +1,7 @@
 @import "../vars.scss";
 
 .A_Text {
+    color: $identity-black;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -17,6 +18,12 @@
 
     &.additional {
         color: $secondary-text;
+    }
+
+    &.lead {
+        font-size: 32px;
+        line-height: 32px;
+        letter-spacing: -0.04em;
     }
 }
 

@@ -1,0 +1,23 @@
+@import '../vars.scss';
+
+.M_FeedSection {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    cursor: pointer;
+
+    img {
+        transition: $hover-transition;
+    }
+
+    .A_Text.lead {
+        padding: 0 !important;
+    }
+
+    &:hover {
+        img {
+            transform: translateY(-4px);
+            filter: drop-shadow(0 4px 0 $identity-black);
+        }
+    }
+}

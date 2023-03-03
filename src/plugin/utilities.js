@@ -37,4 +37,12 @@ function mode(array) {
   return maxEl
 }
 
-export { getRandom, generateRandom, mode }
+function sample(array) {
+  return array[Math.floor(Math.random() * array.length)]
+}
+
+function getRandomArbitrary(min, max) {
+  return Math.floor(Math.random() * (max - min) + min)
+}
+
+export { getRandom, generateRandom, mode, sample, getRandomArbitrary }

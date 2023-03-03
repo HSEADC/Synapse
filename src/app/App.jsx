@@ -26,9 +26,9 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'templates',
+      view: 'feed',
       onboardingStep: 1,
-      identityCreationStep: 3,
+      identityCreationStep: 4,
       charityTitle: '',
       charityCategory: 'Здравоохранение',
       friendliness: 'Серьезный',
