@@ -17,14 +17,14 @@ function convertHSLtoRGB(h, s, l) {
 }
 
 function createBaseColor(charityData) {
-  let friendlinessFactorS = 1
+  let friendlinessFactorS = 1.3
   let friendlinessFactorL = 1
 
-  let volumeFactorS = 1
-  let volumeFactorL = 1
+  let volumeFactorS = 1.4
+  let volumeFactorL = 0.95
 
   let rationalityFactorH = 1
-  let rationalityFactorS = 1
+  let rationalityFactorS = 1.3
   let rationalityFactorL = 1
 
   if (charityData.friendliness == 'Серьезный') {
@@ -34,23 +34,25 @@ function createBaseColor(charityData) {
 
   if (charityData.volume == 'Тихий') {
     volumeFactorS = 0.85
-    volumeFactorL = 0.85
+    volumeFactorL = Math.random() < 0.5 ? 0.7 : 1.15
   }
 
   if (charityData.rationality == 'Рациональный') {
     rationalityFactorL = 0.9
     rationalityFactorH = 0.666
+  } else {
+    rationalityFactorL = Math.random() < 0.5 ? 0.75 : 1
   }
 
   const baseColorHSL = {
     h: generateRandom(1, 360) * rationalityFactorH,
     s:
-      generateRandom(20, 100) *
+      generateRandom(30, 100) *
       friendlinessFactorS *
       rationalityFactorS *
       volumeFactorS,
     l:
-      generateRandom(50, 90) *
+      generateRandom(70, 90) *
       friendlinessFactorL *
       rationalityFactorL *
       volumeFactorL
@@ -104,8 +106,6 @@ function createScientificPalette(primaryColor, charityData) {
 
   paletteType = mode(paletteType)
   contrast = mode(contrast)
-  // paletteType = 'tetradic'
-  contrast = 'saturation'
   console.log('paletteType', paletteType, 'contrast', contrast)
 
   const targetHueSteps = {
@@ -141,7 +141,7 @@ function createScientificPalette(primaryColor, charityData) {
             palette[key] = {
               h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
               s: primaryColor.s,
-              l: generateRandom(85, 95) + primaryColor.l * 0.2
+              l: generateRandom(83, 95) + primaryColor.l * 0.2
             }
             palette[key] = convertHSLtoRGB(
               palette[key].h,
@@ -155,7 +155,10 @@ function createScientificPalette(primaryColor, charityData) {
             palette[key] = {
               h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
               s: primaryColor.s,
-              l: generateRandom(70, 80) + primaryColor.l * 0.2
+              l:
+                primaryColor.l + generateRandom(15, 25) > 95
+                  ? 95
+                  : primaryColor.l + generateRandom(15, 25)
             }
             palette[key] = convertHSLtoRGB(
               palette[key].h,
@@ -169,7 +172,10 @@ function createScientificPalette(primaryColor, charityData) {
             palette[key] = {
               h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
               s: primaryColor.s,
-              l: primaryColor.l - generateRandom(10, 20)
+              l:
+                primaryColor.l - generateRandom(15, 25) < 20
+                  ? 20
+                  : primaryColor.l - generateRandom(15, 25)
             }
             palette[key] = convertHSLtoRGB(
               palette[key].h,
@@ -183,7 +189,7 @@ function createScientificPalette(primaryColor, charityData) {
             palette[key] = {
               h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
               s: generateRandom(1, 90),
-              l: generateRandom(1, 15)
+              l: generateRandom(1, 10)
             }
             palette[key] = convertHSLtoRGB(
               palette[key].h,
@@ -195,6 +201,74 @@ function createScientificPalette(primaryColor, charityData) {
         }
         break
       //saturation//////////////////////////////////////////////////////////////////
+      case 'hue':
+        switch (key) {
+          case 'primary':
+            palette[key] = convertHSLtoRGB(
+              palette[key].h,
+              palette[key].s,
+              palette[key].l
+            )
+            break
+
+          case 'background':
+            palette[key] = {
+              h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
+              s: primaryColor.s,
+              l: generateRandom(85, 90) + primaryColor.l * 0.2
+            }
+            palette[key] = convertHSLtoRGB(
+              palette[key].h,
+              palette[key].s,
+              palette[key].l
+            )
+            i++
+            break
+
+          case 'adOne':
+            palette[key] = {
+              h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
+              s: primaryColor.s - generateRandom(5, 10),
+              l: primaryColor.l + generateRandom(5, 15)
+            }
+            palette[key] = convertHSLtoRGB(
+              palette[key].h,
+              palette[key].s,
+              palette[key].l
+            )
+            i++
+            break
+
+          case 'adTwo':
+            palette[key] = {
+              h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
+              s: primaryColor.s,
+              l: primaryColor.l
+            }
+            palette[key] = convertHSLtoRGB(
+              palette[key].h,
+              palette[key].s - generateRandom(5, 10),
+              palette[key].l - generateRandom(5, 15)
+            )
+            i++
+            break
+
+          case 'text':
+            palette[key] = {
+              h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
+              s: generateRandom(1, 70),
+              l: generateRandom(1, 12)
+            }
+            palette[key] = convertHSLtoRGB(
+              palette[key].h,
+              palette[key].s,
+              palette[key].l
+            )
+            i++
+            break
+        }
+        break
+      //hue/////////////////////////////////////////////////////////////////////////////////////
       case 'saturation':
         switch (key) {
           case 'primary':
@@ -209,7 +283,7 @@ function createScientificPalette(primaryColor, charityData) {
             palette[key] = {
               h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
               s: primaryColor.s,
-              l: primaryColor.l * (generateRandom(190, 220) / 100)
+              l: generateRandom(85, 90) + primaryColor.l * 0.2
             }
             palette[key] = convertHSLtoRGB(
               palette[key].h,
@@ -222,8 +296,8 @@ function createScientificPalette(primaryColor, charityData) {
           case 'adOne':
             palette[key] = {
               h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
-              s: primaryColor.s * (generateRandom(75, 200) / 100),
-              l: primaryColor.l * (generateRandom(75, 175) / 100)
+              s: primaryColor.s - generateRandom(45, 85),
+              l: primaryColor.l + generateRandom(10, 20)
             }
             palette[key] = convertHSLtoRGB(
               palette[key].h,
@@ -236,8 +310,8 @@ function createScientificPalette(primaryColor, charityData) {
           case 'adTwo':
             palette[key] = {
               h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
-              s: primaryColor.s * (generateRandom(60, 120) / 100),
-              l: primaryColor.l * (generateRandom(60, 120) / 100)
+              s: primaryColor.s + generateRandom(15, 50),
+              l: primaryColor.l - generateRandom(15, 25)
             }
             palette[key] = convertHSLtoRGB(
               palette[key].h,
@@ -250,8 +324,8 @@ function createScientificPalette(primaryColor, charityData) {
           case 'text':
             palette[key] = {
               h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
-              s: generateRandom(1, 90),
-              l: generateRandom(1, 15)
+              s: generateRandom(1, 70),
+              l: generateRandom(1, 10)
             }
             palette[key] = convertHSLtoRGB(
               palette[key].h,
@@ -261,9 +335,6 @@ function createScientificPalette(primaryColor, charityData) {
             i++
             break
         }
-        break
-      //hue/////////////////////////////////////////////////////////////////////////////////////
-      case 'hue':
         break
     }
 

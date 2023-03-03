@@ -32,7 +32,7 @@ export default class App extends React.Component {
       charityTitle: '',
       charityCategory: 'Здравоохранение',
       friendliness: 'Серьезный',
-      volume: 'Тихий',
+      volume: 'Громкий',
       rationality: 'Эмоциональный',
       identityColors: {
         primary: {

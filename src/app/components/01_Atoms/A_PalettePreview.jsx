@@ -23,15 +23,15 @@ export default class A_PalettePreview extends React.PureComponent {
     for (let i = 1; i < 6; i++) {
       switch (i) {
         case 1:
-          key = 'primary'
-          break
-
-        case 2:
           key = 'background'
           break
 
-        case 3:
+        case 2:
           key = 'adOne'
+          break
+
+        case 3:
+          key = 'primary'
           break
 
         case 4:
