@@ -106,7 +106,6 @@ function createScientificPalette(primaryColor, charityData) {
 
   paletteType = mode(paletteType)
   contrast = mode(contrast)
-  console.log('paletteType', paletteType, 'contrast', contrast)
 
   const targetHueSteps = {
     analogous: [0, 0, 0, 0],
@@ -310,7 +309,7 @@ function createScientificPalette(primaryColor, charityData) {
           case 'adTwo':
             palette[key] = {
               h: adjustHue(primaryColor.h + targetHueSteps[paletteType][i]),
-              s: primaryColor.s + generateRandom(15, 50),
+              s: primaryColor.s - generateRandom(25, 50),
               l: primaryColor.l - generateRandom(15, 25)
             }
             palette[key] = convertHSLtoRGB(

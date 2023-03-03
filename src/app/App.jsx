@@ -34,17 +34,7 @@ export default class App extends React.Component {
       friendliness: 'Серьезный',
       volume: 'Громкий',
       rationality: 'Эмоциональный',
-      identityColors: {
-        primary: {
-          r: 0.5,
-          g: 0.5,
-          b: 0.5
-        },
-        background: '',
-        text: '',
-        adOne: '',
-        adTwo: ''
-      }
+      identityColors: ''
     }
   }
 
@@ -150,7 +140,33 @@ export default class App extends React.Component {
     )
   }
 
-  savePalette = () => {}
+  savePalette = palette => {
+    // let key = ''
+    // console.log(palette);
+    // for (let i = 1; i < 6; i++) {
+    //   switch (i) {
+    //     case 1:
+    //       key = 'background'
+    //       break
+    //     case 2:
+    //       key = 'adOne'
+    //       break
+    //     case 3:
+    //       key = 'primary'
+    //       break
+    //     case 4:
+    //       key = 'adTwo'
+    //       break
+    //     case 5:
+    //       key = 'text'
+    //       break
+    //   }
+    //   this.setState({ identityColors: {
+    //     text: palette.text
+    //   }})
+    //   // console.log(key, this.state.identityColors.text);
+    // }
+  }
 
   nextStep = () => {
     this.setState(prevState => {

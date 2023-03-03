@@ -8,24 +8,50 @@ import S_FixedActions from '../04_Superorganisms/S_FixedActions'
 import S_Navbar from '../04_Superorganisms/S_Navbar'
 import A_PalettePreview from '../01_Atoms/A_PalettePreview'
 
+let palettePreviews = []
+let counter = 5
+
 export default class P_Identity_Creation extends React.PureComponent {
   constructor(props) {
     super(props)
   }
 
-  createPalettePreviews = (charityData, counter) => {}
+  createPalettePreviews = (charityData, savePalette) => {
+    for (let i = 1; i <= counter; i++) {
+      palettePreviews.push(
+        <A_PalettePreview
+          key={i}
+          charityData={charityData}
+          savePalette={savePalette}
+        />
+      )
+    }
+    return palettePreviews
+  }
 
-  newPalettePreview = counter => {}
+  newPalettePreview = (charityData, savePalette) => {
+    console.log('click')
+    counter++
+    palettePreviews.push(
+      <A_PalettePreview
+        key={counter}
+        charityData={charityData}
+        savePalette={savePalette}
+      />
+    )
+    this.forceUpdate()
+  }
 
   render() {
-    const { identityCreationStep, actions } = this.props
+    const { identityCreationStep, actions, counter } = this.props
     const { charityData } = this.props
     const {
       charityTitle,
       charityCategory,
       friendliness,
       rationality,
-      volume
+      volume,
+      identityColors
     } = charityData
 
     const {
@@ -180,25 +206,23 @@ export default class P_Identity_Creation extends React.PureComponent {
             text="Какая палитра больше подходит вашей организации?"
           />
           <div className="M_PalettePreviews">
-            <A_PalettePreview charityData={charityData} onClick={savePalette} />
-            <A_PalettePreview charityData={charityData} onClick={savePalette} />
-            <A_PalettePreview charityData={charityData} onClick={savePalette} />
-            <A_PalettePreview charityData={charityData} onClick={savePalette} />
-            <A_PalettePreview charityData={charityData} onClick={savePalette} />
+            {
+              (palettePreviews = this.createPalettePreviews(
+                charityData,
+                savePalette
+              ))
+            }
           </div>
 
           <S_FixedActions
             primButtonText="Продолжить"
             primButtonHandleClick={nextStepIdentity}
             primButtonDisable={true}
-            primButtonDisableParam={
-              charityCategory !== '' &&
-              friendliness !== '' &&
-              volume !== '' &&
-              rationality !== ''
-            }
+            primButtonDisableParam={identityColors !== ''}
             secButtonText="Еще вариант"
-            secButtonHandleClick={prevStepIdentity}
+            secButtonHandleClick={() => {
+              this.newPalettePreview(charityData, savePalette)
+            }}
           />
         </div>
       )
