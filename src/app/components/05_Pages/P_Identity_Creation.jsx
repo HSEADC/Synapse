@@ -86,7 +86,7 @@ export default class P_Identity_Creation extends React.PureComponent {
             placeholder="Введите название"
             handleChange={handleChange}
             defaultValue={charityTitle}
-            primButtonHandleClick={nextStepIdentity}
+            // primButtonHandleClick={nextStepIdentity}
             param="charityTitle"
           />
           <S_FixedActions

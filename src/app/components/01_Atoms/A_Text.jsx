@@ -23,7 +23,6 @@ export default class A_Text extends React.PureComponent {
     return (
       <div
         className={classes}
-        style={{ fontFamily: fontFamily }}
         dangerouslySetInnerHTML={this.createMarkup(text)}
       />
     )

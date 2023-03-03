@@ -1,0 +1,17 @@
+@import "../vars.scss";
+
+.P_Templates {
+    width: 100vw;
+    height: 100vh;
+    background-color: $identity-additional-gray;
+
+    .search {
+        padding: 64px 0 16px 0;
+        background-color: $background;
+        border-radius: 0 0 20px 20px;
+
+        .A_Text {
+            margin-left: 16px;
+        }
+    }
+}

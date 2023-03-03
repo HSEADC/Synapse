@@ -1,0 +1,26 @@
+@import "../vars.scss";
+
+.A_DropdownButton {
+    height: 42px;
+    padding: 0 16px;
+    width: 368px;
+    margin: 0 16px;
+    background: $background;
+    border-radius: 8px;
+    border: 1px solid $dividers;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    color: $identity-black;
+    cursor: pointer;
+    margin-top: 8px;
+
+    .unfold {
+        width: 16px;
+        height: 16px;
+        background-image: url('../../assets/images/icons/unfold.svg')
+    }
+
+}

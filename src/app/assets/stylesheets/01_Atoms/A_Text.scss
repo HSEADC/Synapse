@@ -4,7 +4,7 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 20px;
     letter-spacing: -0.01em;
     padding: 0px 16px;
@@ -13,6 +13,10 @@
         font-size: 24px;
         line-height: 29px;
         letter-spacing: -0.03em;
+    }
+
+    &.additional {
+        color: $secondary-text;
     }
 }
 

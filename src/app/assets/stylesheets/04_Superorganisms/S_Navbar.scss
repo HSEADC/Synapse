@@ -6,6 +6,7 @@
     left: 0;
     background: $background;
     width: 400px;
+    color: $identity-black;
     height: 48px;
     padding: 16px;
     z-index: 100;
@@ -18,7 +19,7 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 20px;
 
     &.main {
@@ -54,14 +55,14 @@
             position: absolute;
             height: 2px;
             background-color: $link;
-            width: 76px;
+            width: 70px;
             left: 16px;
             bottom: 0;
             transition: all 0.1s ease-in-out;
 
             &.moved {
-                left: 106px;
-                width: 50px;
+                left: 102px;
+                width: 46px;
             }
         }
     }

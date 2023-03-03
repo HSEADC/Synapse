@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { useState } from 'react'
 
-import P_Templates from './components/05_Pages/P_Templates'
+import P_Feed from './components/05_Pages/P_Feed'
 import { Style } from './components/05_Pages/P_Style'
 import P_IdentityCreation from './components/05_Pages/P_Identity_Creation'
 import P_Onboarding from './components/05_Pages/P_Onboarding'
@@ -269,7 +269,7 @@ export default class App extends React.Component {
     } else {
       return (
         <div className="App">
-          <P_Templates actions={actions} templates={templates} />
+          <P_Feed actions={actions} templates={templates} />
         </div>
       )
     }
