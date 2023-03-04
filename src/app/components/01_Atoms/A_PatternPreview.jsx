@@ -8,18 +8,44 @@ export default class A_PatternPreview extends React.PureComponent {
     super(props)
   }
 
-  createIdentityPattern = charityData => {}
+  createIdentityPattern = charityData => {
+    const {
+      friendliness,
+      rationality,
+      volume,
+      charityCategory,
+      identityPattern,
+      identityColors
+    } = charityData
+
+    return <div>boooo</div>
+  }
 
   swatch = colors => {
     return <div></div>
   }
 
   render() {
-    const { charityData } = this.props
-    const { friendliness, rationality, volume, charityCategory } = charityData
+    const { charityData, savePattern } = this.props
+    const {
+      friendliness,
+      rationality,
+      volume,
+      charityCategory,
+      identityPattern,
+      identityColors
+    } = charityData
+    const pattern = this.createIdentityPattern(charityData)
 
-    const palette = this.createIdentityPattern(charityData)
-
-    return <div className="A_PatternPreview"></div>
+    return (
+      <div
+        className="A_PatternPreview"
+        onClick={() => {
+          savePattern(pattern)
+        }}
+      >
+        {pattern}
+      </div>
+    )
   }
 }

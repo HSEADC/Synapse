@@ -1,0 +1,17 @@
+@import "../vars.scss";
+
+.A_PatternPreview {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    outline: 0.5px solid $dividers;
+    cursor: pointer;
+
+
+    &:hover {
+        outline: 4px solid $identity-black;
+    }
+}

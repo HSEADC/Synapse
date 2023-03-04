@@ -26,15 +26,17 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'feed',
+      view: 'identity_creation',
       onboardingStep: 1,
-      identityCreationStep: 4,
+      identityCreationStep: 3,
       charityTitle: '',
       charityCategory: 'Здравоохранение',
       friendliness: 'Серьезный',
       volume: 'Громкий',
       rationality: 'Эмоциональный',
       identityColors: '',
+      identityFonts: '',
+      identityPattern: '',
       templates: {
         tab: 'Шаблоны',
         section: ''
@@ -97,24 +99,29 @@ export default class App extends React.Component {
     )
   }
 
-  setToStorage = id => {
+  setToStorage = () => {
     const {
       charityTitle,
       charityCategory,
       friendliness,
       volume,
-      rationality
+      rationality,
+      identityColors,
+      identityFonts,
+      identityPattern
     } = this.props
     parent.postMessage(
       {
         pluginMessage: {
           type: 'set-storage',
-          id: id,
           charityTitle: charityTitle,
           charityCategory: charityCategory,
           friendliness: friendliness,
           volume: volume,
-          rationality: rationality
+          rationality: rationality,
+          identityColors: identityColors,
+          identityFonts: identityFonts,
+          identityPattern: identityPattern
         }
       },
       '*'
@@ -172,6 +179,10 @@ export default class App extends React.Component {
     // }
   }
 
+  savePattern = pattern => {
+    this.setState({ identityPattern: pattern })
+  }
+
   nextStep = () => {
     this.setState(prevState => {
       const onboardingStep = prevState.onboardingStep + 1
@@ -224,7 +235,8 @@ export default class App extends React.Component {
       nextStepIdentity: this.nextStepIdentity,
       prevStepIdentity: this.prevStepIdentity,
       savePalette: this.savePalette,
-      feedTab: this.feedTab
+      feedTab: this.feedTab,
+      savePattern: this.savePattern
     }
 
     const charityData = {
@@ -233,7 +245,9 @@ export default class App extends React.Component {
       friendliness: this.state.friendliness,
       volume: this.state.volume,
       rationality: this.state.rationality,
-      identityColors: this.state.identityColors
+      identityColors: this.state.identityColors,
+      identityFonts: this.state.identityFonts,
+      identityPattern: this.identityPattern
     }
 
     const {
@@ -241,7 +255,8 @@ export default class App extends React.Component {
       onboardingStep,
       identityCreationStep,
       identityCreationScreens,
-      templates
+      templates,
+      fonts
     } = this.state
     if (view === 'login') {
       return (

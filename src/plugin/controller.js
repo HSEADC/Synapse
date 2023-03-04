@@ -6,8 +6,6 @@ figma.showUI(__html__)
 figma.ui.resize(400, 680)
 
 figma.ui.onmessage = msg => {
-  console.log('FIGMA JUST GOT A MESSAGE, YO', msg)
-
   if (msg.type === 'image-in-bytes') {
     saveImageDataOrExportToFigma(msg.id, msg.bytes)
   } else if (msg.type === 'set-storage') {
@@ -16,7 +14,10 @@ figma.ui.onmessage = msg => {
       charityCategory: msg.charityCategory,
       friendliness: msg.friendliness,
       volume: msg.volume,
-      rationality: msg.rationality
+      rationality: msg.rationality,
+      identityColors: msg.identityColors,
+      identityFonts: msg.identityFonts,
+      identityPattern: msg.identityPattern
     })
   } else if (msg.type === 'get-storage') {
     figma.clientStorage.getAsync('test').then(test => {
