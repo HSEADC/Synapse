@@ -10,29 +10,17 @@ export default class M_PalettePreviews extends React.PureComponent {
     super(props)
   }
 
-  createPalettePreviews = (charityData, savePalette) => {
-    for (let i = 0; i < 5; i++) {
-      palettePreviews.push(
-        <A_PalettePreview
-          key={i}
-          charityData={charityData}
-          savePalette={savePalette}
-        />
-      )
-    }
-    return palettePreviews
-  }
-
   render() {
-    const { charityData, savePalette } = this.props
+    const { identityColorsProgress, savePalette } = this.props
     return (
       <div className="M_PalettePreviews">
-        {
-          (palettePreviews = this.createPalettePreviews(
-            charityData,
-            savePalette
-          ))
-        }
+        {identityColorsProgress.map((colors, index) => (
+          <A_PalettePreview
+            key={index}
+            colors={colors}
+            savePalette={savePalette}
+          />
+        ))}
       </div>
     )
   }

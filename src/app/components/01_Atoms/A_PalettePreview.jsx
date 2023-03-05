@@ -54,9 +54,7 @@ export default class A_PalettePreview extends React.PureComponent {
         style={{
           backgroundColor: `rgb(${r}, ${g}, ${b})`
         }}
-      >
-        boo
-      </div>
+      ></div>
     )
   }
 

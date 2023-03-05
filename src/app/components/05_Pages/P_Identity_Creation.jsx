@@ -10,14 +10,11 @@ import A_PalettePreview from '../01_Atoms/A_PalettePreview'
 import A_PatternPreview from '../01_Atoms/A_PatternPreview'
 import A_FontPreview from '../01_Atoms/A_FontPreview'
 import { log } from 'prettierr/parser-postcss'
+import M_PalettePreviews from '../02_Molecules/M_PalettePreviews'
 
 export default class P_Identity_Creation extends React.PureComponent {
   constructor(props) {
     super(props)
-  }
-
-  renderPalettePreviews = (identityColorsProgress, savePalette) => {
-    identityColorsProgress.map(colors => <div>hii</div>)
   }
 
   newPalettePreview = (charityData, savePalette) => {}
@@ -191,8 +188,10 @@ export default class P_Identity_Creation extends React.PureComponent {
             text="Какая палитра больше подходит вашей организации?"
           />
           <div className="M_PalettePreviews">
-            {/* {identityColorsProgress && (<div>hiii</div>)} */}
-            {renderPalettePreviews(identityColorsProgress, savePalette)}
+            <M_PalettePreviews
+              identityColorsProgress={identityColorsProgress}
+              savePalette={savePalette}
+            />
           </div>
 
           <S_FixedActions
