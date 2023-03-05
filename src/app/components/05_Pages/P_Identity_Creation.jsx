@@ -9,43 +9,21 @@ import S_Navbar from '../04_Superorganisms/S_Navbar'
 import A_PalettePreview from '../01_Atoms/A_PalettePreview'
 import A_PatternPreview from '../01_Atoms/A_PatternPreview'
 import A_FontPreview from '../01_Atoms/A_FontPreview'
-
-let palettePreviews = []
-let counter = 5
+import { log } from 'prettierr/parser-postcss'
 
 export default class P_Identity_Creation extends React.PureComponent {
   constructor(props) {
     super(props)
   }
 
-  createPalettePreviews = (charityData, savePalette) => {
-    for (let i = 1; i <= counter; i++) {
-      palettePreviews.push(
-        <A_PalettePreview
-          key={i}
-          charityData={charityData}
-          savePalette={savePalette}
-        />
-      )
-    }
-    return palettePreviews
+  renderPalettePreviews = (identityColorsProgress, savePalette) => {
+    identityColorsProgress.map(colors => <div>hii</div>)
   }
 
-  newPalettePreview = (charityData, savePalette) => {
-    console.log('click')
-    counter++
-    palettePreviews.push(
-      <A_PalettePreview
-        key={counter}
-        charityData={charityData}
-        savePalette={savePalette}
-      />
-    )
-    this.forceUpdate()
-  }
+  newPalettePreview = (charityData, savePalette) => {}
 
   render() {
-    const { identityCreationStep, actions } = this.props
+    const { identityCreationStep, actions, identityColorsProgress } = this.props
     const { charityData } = this.props
     const {
       charityTitle,
@@ -63,7 +41,9 @@ export default class P_Identity_Creation extends React.PureComponent {
       nextStepIdentity,
       prevStepIdentity,
       savePalette,
-      savePattern
+      savePattern,
+      startPalettePreviews,
+      jointFunction
     } = actions
 
     if (identityCreationStep === 1) {
@@ -181,7 +161,7 @@ export default class P_Identity_Creation extends React.PureComponent {
           </div>
           <S_FixedActions
             primButtonText="Продолжить"
-            primButtonHandleClick={nextStepIdentity}
+            primButtonHandleClick={() => startPalettePreviews(charityData)}
             primButtonDisable={true}
             primButtonDisableParam={
               charityCategory !== '' &&
@@ -211,12 +191,8 @@ export default class P_Identity_Creation extends React.PureComponent {
             text="Какая палитра больше подходит вашей организации?"
           />
           <div className="M_PalettePreviews">
-            {
-              (palettePreviews = this.createPalettePreviews(
-                charityData,
-                savePalette
-              ))
-            }
+            {/* {identityColorsProgress && (<div>hiii</div>)} */}
+            {renderPalettePreviews(identityColorsProgress, savePalette)}
           </div>
 
           <S_FixedActions

@@ -8,6 +8,7 @@ import P_IdentityCreation from './components/05_Pages/P_Identity_Creation'
 import P_Onboarding from './components/05_Pages/P_Onboarding'
 
 import { getRandom } from '../plugin/utilities'
+import { createBaseColor, createScientificPalette } from '../plugin/color'
 
 Array.prototype.remove = function() {
   // prettier-ignore
@@ -28,12 +29,13 @@ export default class App extends React.Component {
     this.state = {
       view: 'identity_creation',
       onboardingStep: 1,
-      identityCreationStep: 3,
+      identityCreationStep: 2,
       charityTitle: '',
       charityCategory: 'Здравоохранение',
       friendliness: 'Серьезный',
       volume: 'Громкий',
       rationality: 'Эмоциональный',
+      identityColorsProgress: '',
       identityColors: '',
       identityFonts: '',
       identityPattern: '',
@@ -151,6 +153,48 @@ export default class App extends React.Component {
     )
   }
 
+  jointFunction = () => {
+    const charityData = {
+      charityTitle: this.state.charityTitle,
+      charityCategory: this.state.charityCategory,
+      friendliness: this.state.friendliness,
+      volume: this.state.volume,
+      rationality: this.state.rationality,
+      identityColors: this.state.identityColors,
+      identityFonts: this.state.identityFonts,
+      identityPattern: this.identityPattern
+    }
+    this.startPalettePreviews(charityData)
+    this.nextStepIdentity()
+    console.log(this.state.identityColorsProgress)
+  }
+
+  startPalettePreviews = charityData => {
+    if (this.state.identityColorsProgress[0]) {
+      console.log('dafug', this.state.identityColorsProgress)
+    } else {
+      for (let i = 0; i < 5; i++) {
+        const primary = createBaseColor(charityData)
+        const palette = createScientificPalette(primary, charityData)
+        const paletteOption = {
+          primary: palette.primary,
+          text: palette.text,
+          adOne: palette.adOne,
+          adTwo: palette.adTwo,
+          background: palette.background
+        }
+        this.setState(prevState => ({
+          identityColorsProgress: [
+            ...prevState.identityColorsProgress,
+            paletteOption
+          ]
+        }))
+      }
+    }
+    console.log('startPalettePreviews', this.state.identityColorsProgress)
+    this.nextStepIdentity()
+  }
+
   savePalette = palette => {
     // let key = ''
     // console.log(palette);
@@ -191,7 +235,6 @@ export default class App extends React.Component {
   }
 
   nextStepIdentity = () => {
-    console.log('next')
     this.setState(prevState => {
       const identityCreationStep = prevState.identityCreationStep + 1
       return { ...prevState, identityCreationStep }
@@ -236,7 +279,9 @@ export default class App extends React.Component {
       prevStepIdentity: this.prevStepIdentity,
       savePalette: this.savePalette,
       feedTab: this.feedTab,
-      savePattern: this.savePattern
+      savePattern: this.savePattern,
+      startPalettePreviews: this.startPalettePreviews,
+      jointFunction: this.jointFunction
     }
 
     const charityData = {
@@ -256,7 +301,8 @@ export default class App extends React.Component {
       identityCreationStep,
       identityCreationScreens,
       templates,
-      fonts
+      fonts,
+      identityColorsProgress
     } = this.state
     if (view === 'login') {
       return (
@@ -279,6 +325,7 @@ export default class App extends React.Component {
           identityCreationScreens={identityCreationScreens}
           charityData={charityData}
           actions={actions}
+          identityColorsProgress={identityColorsProgress}
         />
       )
     } else {

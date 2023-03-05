@@ -7,14 +7,13 @@ export default class A_PalettePreview extends React.PureComponent {
   constructor(props) {
     super(props)
   }
+  // добавлять цвета в стейт и для каждого цвета генерить превью
+  // почитать про persistent storage
 
-  createIdentityPalette = charityData => {
+  renderIdentityPalette = colors => {
     const palettePreview = []
 
     let key = 'primary'
-
-    const primaryColor = createBaseColor(charityData)
-    const palette = createScientificPalette(primaryColor, charityData)
 
     for (let i = 1; i < 6; i++) {
       switch (i) {
@@ -38,7 +37,7 @@ export default class A_PalettePreview extends React.PureComponent {
           key = 'text'
           break
       }
-      palettePreview.push(this.swatch(eval(`palette.${key}`), i))
+      palettePreview.push(this.swatch(eval(`colors.${key}`), i))
     }
     return palettePreview
   }
@@ -55,23 +54,23 @@ export default class A_PalettePreview extends React.PureComponent {
         style={{
           backgroundColor: `rgb(${r}, ${g}, ${b})`
         }}
-      ></div>
+      >
+        boo
+      </div>
     )
   }
 
   render() {
-    const { charityData, savePalette } = this.props
-
-    const palette = this.createIdentityPalette(charityData)
+    const { colors, savePalette } = this.props
 
     return (
       <div
         className="A_PalettePreview"
         onClick={() => {
-          savePalette(palette)
+          savePalette(colors)
         }}
       >
-        {palette}
+        {this.renderIdentityPalette(colors)}
       </div>
     )
   }
