@@ -196,31 +196,7 @@ export default class App extends React.Component {
   }
 
   savePalette = palette => {
-    // let key = ''
-    // console.log(palette);
-    // for (let i = 1; i < 6; i++) {
-    //   switch (i) {
-    //     case 1:
-    //       key = 'background'
-    //       break
-    //     case 2:
-    //       key = 'adOne'
-    //       break
-    //     case 3:
-    //       key = 'primary'
-    //       break
-    //     case 4:
-    //       key = 'adTwo'
-    //       break
-    //     case 5:
-    //       key = 'text'
-    //       break
-    //   }
-    //   this.setState({ identityColors: {
-    //     text: palette.text
-    //   }})
-    //   // console.log(key, this.state.identityColors.text);
-    // }
+    this.setState({ identityColors: palette })
   }
 
   savePattern = pattern => {

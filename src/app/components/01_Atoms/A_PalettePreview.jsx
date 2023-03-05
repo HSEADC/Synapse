@@ -59,11 +59,16 @@ export default class A_PalettePreview extends React.PureComponent {
   }
 
   render() {
-    const { colors, savePalette } = this.props
+    const { colors, savePalette, checked } = this.props
+
+    const classes = classnames({
+      A_PalettePreview: true,
+      checked: checked
+    })
 
     return (
       <div
-        className="A_PalettePreview"
+        className={classes}
         onClick={() => {
           savePalette(colors)
         }}

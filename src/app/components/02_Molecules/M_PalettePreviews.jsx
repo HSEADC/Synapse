@@ -11,7 +11,7 @@ export default class M_PalettePreviews extends React.PureComponent {
   }
 
   render() {
-    const { identityColorsProgress, savePalette } = this.props
+    const { identityColorsProgress, identityColors, savePalette } = this.props
     return (
       <div className="M_PalettePreviews">
         {identityColorsProgress.map((colors, index) => (
@@ -19,6 +19,7 @@ export default class M_PalettePreviews extends React.PureComponent {
             key={index}
             colors={colors}
             savePalette={savePalette}
+            checked={identityColors === colors}
           />
         ))}
       </div>

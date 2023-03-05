@@ -190,6 +190,7 @@ export default class P_Identity_Creation extends React.PureComponent {
           <div className="M_PalettePreviews">
             <M_PalettePreviews
               identityColorsProgress={identityColorsProgress}
+              identityColors={identityColors}
               savePalette={savePalette}
             />
           </div>

@@ -9,6 +9,9 @@
     overflow: hidden;
     outline: 0.5px solid $dividers;
     cursor: pointer;
+    transition: $hover-transition;
+
+    
 
     .swatch {
         display: block;
@@ -18,6 +21,10 @@
     }
 
     &:hover {
-        outline: 4px solid $identity-black;
+        outline: 1px solid $secondary-text;
+    }
+
+    &.checked {
+        outline:$hover-outline !important;
     }
 }

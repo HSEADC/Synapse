@@ -37,6 +37,7 @@
         flex-basis: auto;
         border: 2px solid transparent;
         cursor: pointer;
+        transition: $hover-transition;
         &.checked {
             background-color: $identity-additional-blue;
             border: 2px solid $link;
