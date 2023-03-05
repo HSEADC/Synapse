@@ -17,10 +17,13 @@ export default class P_Identity_Creation extends React.PureComponent {
     super(props)
   }
 
-  newPalettePreview = (charityData, savePalette) => {}
-
   render() {
-    const { identityCreationStep, actions, identityColorsProgress } = this.props
+    const {
+      identityCreationStep,
+      actions,
+      identityColorsProgress,
+      identityPatternParamsProgress
+    } = this.props
     const { charityData } = this.props
     const {
       charityTitle,
@@ -30,7 +33,7 @@ export default class P_Identity_Creation extends React.PureComponent {
       volume,
       identityColors,
       identityFonts,
-      identityPattern
+      identityPatternParams
     } = charityData
 
     const {
@@ -40,7 +43,8 @@ export default class P_Identity_Creation extends React.PureComponent {
       savePalette,
       savePattern,
       startPalettePreviews,
-      jointFunction
+      startPatternPreviews,
+      newPalettePreview
     } = actions
 
     if (identityCreationStep === 1) {
@@ -187,23 +191,19 @@ export default class P_Identity_Creation extends React.PureComponent {
             type="lead2"
             text="Какая палитра больше подходит вашей организации?"
           />
-          <div className="M_PalettePreviews">
-            <M_PalettePreviews
-              identityColorsProgress={identityColorsProgress}
-              identityColors={identityColors}
-              savePalette={savePalette}
-            />
-          </div>
+          <M_PalettePreviews
+            identityColorsProgress={identityColorsProgress}
+            identityColors={identityColors}
+            savePalette={savePalette}
+          />
 
           <S_FixedActions
             primButtonText="Продолжить"
-            primButtonHandleClick={nextStepIdentity}
+            primButtonHandleClick={() => startPatternPreviews()}
             primButtonDisable={true}
             primButtonDisableParam={identityColors !== ''}
             secButtonText="Еще вариант"
-            secButtonHandleClick={() => {
-              this.newPalettePreview(charityData, savePalette)
-            }}
+            secButtonHandleClick={newPalettePreview}
           />
         </div>
       )
@@ -226,11 +226,15 @@ export default class P_Identity_Creation extends React.PureComponent {
           <A_Spacer size={8} />
           <div className="M_PatternPreviews">
             <A_PatternPreview
+              identityPatternParams={identityPatternParamsProgress[0]}
               charityData={charityData}
+              index={1}
               savePattern={savePattern}
             />
             <A_PatternPreview
+              identityPatternParams={identityPatternParamsProgress[1]}
               charityData={charityData}
+              index={2}
               savePattern={savePattern}
             />
           </div>
@@ -239,7 +243,7 @@ export default class P_Identity_Creation extends React.PureComponent {
             primButtonText="Продолжить"
             primButtonHandleClick={nextStepIdentity}
             primButtonDisable={true}
-            primButtonDisableParam={identityPattern}
+            primButtonDisableParam={identityPatternParams}
           />
         </div>
       )

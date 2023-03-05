@@ -1,50 +1,26 @@
 import classnames from 'classnames'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createBaseColor, createScientificPalette } from '../../../plugin/color'
+import { renderPattern } from '../../../plugin/pattern'
 
 export default class A_PatternPreview extends React.PureComponent {
   constructor(props) {
     super(props)
   }
 
-  createIdentityPattern = charityData => {
-    const {
-      friendliness,
-      rationality,
-      volume,
-      charityCategory,
-      identityPattern,
-      identityColors
-    } = charityData
-
-    return <div>boooo</div>
-  }
-
-  swatch = colors => {
-    return <div></div>
-  }
-
   render() {
-    const { charityData, savePattern } = this.props
-    const {
-      friendliness,
-      rationality,
-      volume,
-      charityCategory,
-      identityPattern,
-      identityColors
-    } = charityData
-    const pattern = this.createIdentityPattern(charityData)
+    const { identityPatternParams, savePattern, index } = this.props
+    // console.log('identityPatternParams', identityPatternParams);
 
     return (
       <div
         className="A_PatternPreview"
+        id={`container${index}`}
         onClick={() => {
-          savePattern(pattern)
+          savePattern(identityPatternParams)
         }}
       >
-        {pattern}
+        {renderPattern(identityPatternParams, index)}
       </div>
     )
   }

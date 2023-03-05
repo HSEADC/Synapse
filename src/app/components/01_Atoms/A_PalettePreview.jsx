@@ -1,14 +1,11 @@
 import classnames from 'classnames'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createBaseColor, createScientificPalette } from '../../../plugin/color'
 
 export default class A_PalettePreview extends React.PureComponent {
   constructor(props) {
     super(props)
   }
-  // добавлять цвета в стейт и для каждого цвета генерить превью
-  // почитать про persistent storage
 
   renderIdentityPalette = colors => {
     const palettePreview = []

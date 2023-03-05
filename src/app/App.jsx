@@ -29,7 +29,7 @@ export default class App extends React.Component {
     this.state = {
       view: 'identity_creation',
       onboardingStep: 1,
-      identityCreationStep: 2,
+      identityCreationStep: 4,
       charityTitle: '',
       charityCategory: 'Здравоохранение',
       friendliness: 'Серьезный',
@@ -38,7 +38,31 @@ export default class App extends React.Component {
       identityColorsProgress: '',
       identityColors: '',
       identityFonts: '',
-      identityPattern: '',
+      identityPatternParamsProgress: [
+        {
+          w: 10,
+          h: 10,
+          colors: {
+            adOne: { r: 0.86, g: 0.87, b: 0.83 },
+            adTwo: { r: 0.66, g: 0.76, b: 0.28 },
+            background: { r: 1, g: 1, b: 1.03 },
+            primary: { r: 0.83, g: 0.93, b: 0.43 },
+            text: { r: 0.07, g: 0.07, b: 0.06 }
+          }
+        },
+        {
+          w: 20,
+          h: 20,
+          colors: {
+            adOne: { r: 0.86, g: 0.87, b: 0.83 },
+            adTwo: { r: 0.66, g: 0.76, b: 0.28 },
+            background: { r: 1, g: 1, b: 1.03 },
+            primary: { r: 0.83, g: 0.93, b: 0.43 },
+            text: { r: 0.07, g: 0.07, b: 0.06 }
+          }
+        }
+      ],
+      identityPatternParams: '',
       templates: {
         tab: 'Шаблоны',
         section: ''
@@ -110,7 +134,7 @@ export default class App extends React.Component {
       rationality,
       identityColors,
       identityFonts,
-      identityPattern
+      identityPatternParams
     } = this.props
     parent.postMessage(
       {
@@ -123,7 +147,7 @@ export default class App extends React.Component {
           rationality: rationality,
           identityColors: identityColors,
           identityFonts: identityFonts,
-          identityPattern: identityPattern
+          identityPatternParams: identityPatternParams
         }
       },
       '*'
@@ -153,21 +177,7 @@ export default class App extends React.Component {
     )
   }
 
-  jointFunction = () => {
-    const charityData = {
-      charityTitle: this.state.charityTitle,
-      charityCategory: this.state.charityCategory,
-      friendliness: this.state.friendliness,
-      volume: this.state.volume,
-      rationality: this.state.rationality,
-      identityColors: this.state.identityColors,
-      identityFonts: this.state.identityFonts,
-      identityPattern: this.identityPattern
-    }
-    this.startPalettePreviews(charityData)
-    this.nextStepIdentity()
-    console.log(this.state.identityColorsProgress)
-  }
+  //palette////////////////////////////////////////////////////////////////////////////////////////////////////
 
   startPalettePreviews = charityData => {
     if (this.state.identityColorsProgress[0]) {
@@ -195,12 +205,62 @@ export default class App extends React.Component {
     this.nextStepIdentity()
   }
 
+  newPalettePreview = () => {
+    const charityData = {
+      charityTitle: this.state.charityTitle,
+      charityCategory: this.state.charityCategory,
+      friendliness: this.state.friendliness,
+      volume: this.state.volume,
+      rationality: this.state.rationality,
+      identityColors: this.state.identityColors,
+      identityFonts: this.state.identityFonts
+    }
+    const primary = createBaseColor(charityData)
+    const palette = createScientificPalette(primary, charityData)
+    const paletteOption = {
+      primary: palette.primary,
+      text: palette.text,
+      adOne: palette.adOne,
+      adTwo: palette.adTwo,
+      background: palette.background
+    }
+    this.setState(prevState => ({
+      identityColorsProgress: [
+        ...prevState.identityColorsProgress,
+        paletteOption
+      ]
+    }))
+    console.log(paletteOption)
+  }
+
   savePalette = palette => {
     this.setState({ identityColors: palette })
   }
 
+  //pattern////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  startPatternPreviews = () => {
+    if (this.state.identityPatternParamsProgress[0]) {
+    } else {
+      for (let i = 0; i < 2; i++) {
+        const patternOption = generatePatternParams(this.state.identityColors)
+        this.setState(prevState => ({
+          identityPatternParamsProgress: [
+            ...prevState.identityPatternParamsProgress,
+            patternOption
+          ]
+        }))
+      }
+    }
+    console.log(
+      'startPatternPreviews',
+      this.state.identityPatternParamsProgress
+    )
+    this.nextStepIdentity()
+  }
+
   savePattern = pattern => {
-    this.setState({ identityPattern: pattern })
+    this.setState({ identityPatternParams: pattern })
   }
 
   nextStep = () => {
@@ -257,7 +317,8 @@ export default class App extends React.Component {
       feedTab: this.feedTab,
       savePattern: this.savePattern,
       startPalettePreviews: this.startPalettePreviews,
-      jointFunction: this.jointFunction
+      startPatternPreviews: this.startPatternPreviews,
+      newPalettePreview: this.newPalettePreview
     }
 
     const charityData = {
@@ -268,7 +329,7 @@ export default class App extends React.Component {
       rationality: this.state.rationality,
       identityColors: this.state.identityColors,
       identityFonts: this.state.identityFonts,
-      identityPattern: this.identityPattern
+      identityPatternParams: this.state.identityPatternParams
     }
 
     const {
@@ -278,7 +339,8 @@ export default class App extends React.Component {
       identityCreationScreens,
       templates,
       fonts,
-      identityColorsProgress
+      identityColorsProgress,
+      identityPatternParamsProgress
     } = this.state
     if (view === 'login') {
       return (
@@ -302,6 +364,7 @@ export default class App extends React.Component {
           charityData={charityData}
           actions={actions}
           identityColorsProgress={identityColorsProgress}
+          identityPatternParamsProgress={identityPatternParamsProgress}
         />
       )
     } else {

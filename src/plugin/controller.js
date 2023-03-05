@@ -17,7 +17,7 @@ figma.ui.onmessage = msg => {
       rationality: msg.rationality,
       identityColors: msg.identityColors,
       identityFonts: msg.identityFonts,
-      identityPattern: msg.identityPattern
+      identityPatternParams: msg.identityPatternParams
     })
   } else if (msg.type === 'get-storage') {
     figma.clientStorage.getAsync('test').then(test => {
