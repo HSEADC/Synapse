@@ -40,7 +40,7 @@ function addRectangle(patternParams, container, canvasSize, key) {
   let w = patternParams.w
   let h = patternParams.h
   let colors = patternParams.colors
-  // console.log('w', patternParams.w, 'h',patternParams.h, 'colors', patternParams.colors);
+  console.log('container', container)
 
   x = getRandomArbitrary(0, canvasSize.width - w)
   y = getRandomArbitrary(0, canvasSize.height - h)
@@ -72,30 +72,43 @@ function addRectangle(patternParams, container, canvasSize, key) {
       .primary.g * 255}, ${colors.primary.b * 255})`
   }
 
-  container.appendChild(rectangle)
+  console.log('container', container)
+  console.log('rectangle', rectangle)
 
-  return <div>ummmm</div>
+  container.appendChild(rectangle)
 }
 
-function generatePatternParams(charityData) {}
+function generatePatternParams(charityData) {
+  let size = getRandomArbitrary(10, 60)
+  let patternParamsProgress = {
+    w: size,
+    h: size,
+    colorSwitch: 3,
+    quantity: getRandomArbitrary(50, 100),
+    colors: charityData.identityColors
+  }
+
+  return patternParamsProgress
+}
 
 function renderPattern(patternParams, index) {
-  document.addEventListener('DOMContentLoaded', () => {
-    let colors = patternParams.colors
-    const container = document.getElementById(`container${index}`)
-    const canvasSize = {
-      width: container.offsetWidth,
-      height: container.offsetHeight
-    }
-    container.style.backgroundColor = `rgb(${colors.background.r *
-      255}, ${colors.background.g * 255}, ${colors.background.b * 255})`
-    console.log(container)
-    // container.className = "ooooooogaaaa";
-    for (let i = 0; i < patternParams.quantity; i++) {
-      let key = i
-      addRectangle(patternParams, container, canvasSize, key)
-    }
-  })
+  // console.log('patternParams', patternParams);
+  console.log('hi')
+  let colors = patternParams.colors
+  const container = document.getElementById(`container${index}`)
+  const canvasSize = {
+    width: container.offsetWidth,
+    height: container.offsetHeight
+  }
+  console.log(container)
+  container.style.backgroundColor = `rgb(${colors.background.r * 255}, ${colors
+    .background.g * 255}, ${colors.background.b * 255})`
+  console.log(container)
+  // container.className = "ooooooogaaaa";
+  for (let i = 0; i < patternParams.quantity; i++) {
+    let key = i
+    addRectangle(patternParams, container, canvasSize, key)
+  }
 }
 
-export { renderPattern }
+export { renderPattern, generatePatternParams, addRectangle }

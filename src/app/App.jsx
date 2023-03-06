@@ -9,6 +9,7 @@ import P_Onboarding from './components/05_Pages/P_Onboarding'
 
 import { getRandom } from '../plugin/utilities'
 import { createBaseColor, createScientificPalette } from '../plugin/color'
+import { generatePatternParams } from '../plugin/pattern'
 
 Array.prototype.remove = function() {
   // prettier-ignore
@@ -29,7 +30,7 @@ export default class App extends React.Component {
     this.state = {
       view: 'identity_creation',
       onboardingStep: 1,
-      identityCreationStep: 4,
+      identityCreationStep: 2,
       charityTitle: '',
       charityCategory: 'Здравоохранение',
       friendliness: 'Серьезный',
@@ -38,34 +39,7 @@ export default class App extends React.Component {
       identityColorsProgress: '',
       identityColors: '',
       identityFonts: '',
-      identityPatternParamsProgress: [
-        {
-          w: 10,
-          h: 10,
-          quantity: 100,
-          colorSwitch: '',
-          colors: {
-            adOne: { r: 0.86, g: 0.87, b: 0.83 },
-            adTwo: { r: 0.66, g: 0.76, b: 0.28 },
-            background: { r: 1, g: 1, b: 1.03 },
-            primary: { r: 0.83, g: 0.93, b: 0.43 },
-            text: { r: 0.07, g: 0.07, b: 0.06 }
-          }
-        },
-        {
-          w: 20,
-          h: 20,
-          quantity: 100,
-          colorSwitch: 2,
-          colors: {
-            adOne: { r: 0.86, g: 0.87, b: 0.83 },
-            adTwo: { r: 0.66, g: 0.76, b: 0.28 },
-            background: { r: 1, g: 1, b: 1.03 },
-            primary: { r: 0.83, g: 0.93, b: 0.43 },
-            text: { r: 0.07, g: 0.07, b: 0.06 }
-          }
-        }
-      ],
+      identityPatternParamsProgress: '',
       identityPatternParams: '',
       templates: {
         tab: 'Шаблоны',
@@ -201,7 +175,7 @@ export default class App extends React.Component {
         ]
       }))
     }
-    console.log('startPalettePreviews', this.state.identityColorsProgress)
+
     this.nextStepIdentity()
   }
 
@@ -240,10 +214,19 @@ export default class App extends React.Component {
   //pattern////////////////////////////////////////////////////////////////////////////////////////////////////
 
   startPatternPreviews = () => {
+    const charityData = {
+      charityTitle: this.state.charityTitle,
+      charityCategory: this.state.charityCategory,
+      friendliness: this.state.friendliness,
+      volume: this.state.volume,
+      rationality: this.state.rationality,
+      identityColors: this.state.identityColors,
+      identityFonts: this.state.identityFonts
+    }
     if (this.state.identityPatternParamsProgress[0]) {
     } else {
       for (let i = 0; i < 2; i++) {
-        const patternOption = generatePatternParams(this.state.identityColors)
+        const patternOption = generatePatternParams(charityData)
         this.setState(prevState => ({
           identityPatternParamsProgress: [
             ...prevState.identityPatternParamsProgress,
@@ -252,10 +235,6 @@ export default class App extends React.Component {
         }))
       }
     }
-    console.log(
-      'startPatternPreviews',
-      this.state.identityPatternParamsProgress
-    )
     this.nextStepIdentity()
   }
 
