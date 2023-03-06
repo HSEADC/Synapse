@@ -226,14 +226,20 @@ export default class P_Identity_Creation extends React.PureComponent {
           <A_Spacer size={8} />
           <div className="M_PatternPreviews">
             <A_PatternPreview
-              identityPatternParams={identityPatternParamsProgress[0]}
+              identityPatternParamsProgress={identityPatternParamsProgress[0]}
+              checked={
+                identityPatternParams == identityPatternParamsProgress[0]
+              }
               charityData={charityData}
               index={1}
               savePattern={savePattern}
             />
             <A_PatternPreview
-              identityPatternParams={identityPatternParamsProgress[1]}
+              identityPatternParamsProgress={identityPatternParamsProgress[1]}
               charityData={charityData}
+              checked={
+                identityPatternParams == identityPatternParamsProgress[1]
+              }
               index={2}
               savePattern={savePattern}
             />

@@ -13,6 +13,14 @@
 
 
     &:hover {
-        outline: 4px solid $identity-black;
+        outline: 1px solid $secondary-text;
     }
+
+    &.checked {
+        outline:$hover-outline !important;
+    }
+}
+
+.circle {
+    border-radius: 90px;
 }

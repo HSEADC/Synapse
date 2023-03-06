@@ -29,7 +29,7 @@ export default class App extends React.Component {
     this.state = {
       view: 'identity_creation',
       onboardingStep: 1,
-      identityCreationStep: 2,
+      identityCreationStep: 4,
       charityTitle: '',
       charityCategory: 'Здравоохранение',
       friendliness: 'Серьезный',
@@ -42,6 +42,8 @@ export default class App extends React.Component {
         {
           w: 10,
           h: 10,
+          quantity: 100,
+          colorSwitch: '',
           colors: {
             adOne: { r: 0.86, g: 0.87, b: 0.83 },
             adTwo: { r: 0.66, g: 0.76, b: 0.28 },
@@ -53,6 +55,8 @@ export default class App extends React.Component {
         {
           w: 20,
           h: 20,
+          quantity: 100,
+          colorSwitch: 2,
           colors: {
             adOne: { r: 0.86, g: 0.87, b: 0.83 },
             adTwo: { r: 0.66, g: 0.76, b: 0.28 },

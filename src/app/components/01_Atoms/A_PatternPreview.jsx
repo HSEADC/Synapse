@@ -9,18 +9,28 @@ export default class A_PatternPreview extends React.PureComponent {
   }
 
   render() {
-    const { identityPatternParams, savePattern, index } = this.props
+    const {
+      identityPatternParamsProgress,
+      savePattern,
+      index,
+      checked
+    } = this.props
     // console.log('identityPatternParams', identityPatternParams);
+
+    const classes = classnames({
+      A_PatternPreview: true,
+      checked: checked
+    })
 
     return (
       <div
-        className="A_PatternPreview"
+        className={classes}
         id={`container${index}`}
         onClick={() => {
-          savePattern(identityPatternParams)
+          savePattern(identityPatternParamsProgress)
         }}
       >
-        {renderPattern(identityPatternParams, index)}
+        {renderPattern(identityPatternParamsProgress, index)}
       </div>
     )
   }
