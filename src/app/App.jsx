@@ -10,6 +10,7 @@ import P_Onboarding from './components/05_Pages/P_Onboarding'
 import { getRandom } from '../plugin/utilities'
 import { createBaseColor, createScientificPalette } from '../plugin/color'
 import { generatePatternParams } from '../plugin/pattern'
+import { pickIdentityFont } from '../plugin/text'
 
 Array.prototype.remove = function() {
   // prettier-ignore
@@ -38,6 +39,7 @@ export default class App extends React.Component {
       rationality: 'Эмоциональный',
       identityColorsProgress: '',
       identityColors: '',
+      identityFontsProgress: '',
       identityFonts: '',
       identityPatternParamsProgress: '',
       identityPatternParams: '',
@@ -204,7 +206,6 @@ export default class App extends React.Component {
         paletteOption
       ]
     }))
-    console.log(paletteOption)
   }
 
   savePalette = palette => {
@@ -240,6 +241,50 @@ export default class App extends React.Component {
 
   savePattern = pattern => {
     this.setState({ identityPatternParams: pattern })
+  }
+
+  //font////////////////////////////////////////////////////////////////////////////////////////////////////
+  startFontsPreviews = () => {
+    let check = ['', '']
+    const charityData = {
+      charityTitle: this.state.charityTitle,
+      charityCategory: this.state.charityCategory,
+      friendliness: this.state.friendliness,
+      volume: this.state.volume,
+      rationality: this.state.rationality,
+      identityColors: this.state.identityColors,
+      identityFonts: this.state.identityFonts
+    }
+    if (this.state.identityFontsProgress[0]) {
+    } else {
+      for (let i = 0; i < 2; i++) {
+        const fontOption = pickIdentityFont(charityData)
+        check[i] = fontOption
+        this.setState(prevState => ({
+          identityFontsProgress: [
+            ...prevState.identityFontsProgress,
+            fontOption
+          ]
+        }))
+      }
+    }
+
+    console.log('check', check[0], check[1])
+
+    while (check[0] == check[1]) {
+      const fontOption = pickIdentityFont(charityData)
+      let identityFontsProgress = [...this.state.identityFontsProgress]
+      let identityFont = { ...identityFontsProgress[1] }
+      identityFont = fontOption
+      identityFontsProgress[1] = identityFont
+
+      this.setState({ identityFontsProgress })
+    }
+    this.nextStepIdentity()
+  }
+
+  saveFont = font => {
+    this.setState({ identityFonts: font })
   }
 
   nextStep = () => {
@@ -297,7 +342,9 @@ export default class App extends React.Component {
       savePattern: this.savePattern,
       startPalettePreviews: this.startPalettePreviews,
       startPatternPreviews: this.startPatternPreviews,
-      newPalettePreview: this.newPalettePreview
+      startFontsPreviews: this.startFontsPreviews,
+      newPalettePreview: this.newPalettePreview,
+      saveFont: this.saveFont
     }
 
     const charityData = {
@@ -319,7 +366,8 @@ export default class App extends React.Component {
       templates,
       fonts,
       identityColorsProgress,
-      identityPatternParamsProgress
+      identityPatternParamsProgress,
+      identityFontsProgress
     } = this.state
     if (view === 'login') {
       return (
@@ -344,6 +392,7 @@ export default class App extends React.Component {
           actions={actions}
           identityColorsProgress={identityColorsProgress}
           identityPatternParamsProgress={identityPatternParamsProgress}
+          identityFontsProgress={identityFontsProgress}
         />
       )
     } else {

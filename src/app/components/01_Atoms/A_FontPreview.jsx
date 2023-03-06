@@ -9,12 +9,12 @@ export default class A_FontPreview extends React.PureComponent {
   }
 
   render() {
-    const { charityData, fontFamily } = this.props
+    const { identityFontsProgress } = this.props
 
     return (
       <div
         className="A_FontPreview"
-        style={{ fontFamily: pickIdentityFont(charityData) }}
+        style={{ fontFamily: identityFontsProgress }}
       >
         Ally помогает НКО
         <br />

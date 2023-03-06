@@ -40,7 +40,6 @@ function addRectangle(patternParams, container, canvasSize, key) {
   let w = patternParams.w
   let h = patternParams.h
   let colors = patternParams.colors
-  console.log('container', container)
 
   x = getRandomArbitrary(0, canvasSize.width - w)
   y = getRandomArbitrary(0, canvasSize.height - h)
@@ -72,9 +71,6 @@ function addRectangle(patternParams, container, canvasSize, key) {
       .primary.g * 255}, ${colors.primary.b * 255})`
   }
 
-  console.log('container', container)
-  console.log('rectangle', rectangle)
-
   container.appendChild(rectangle)
 }
 
@@ -92,19 +88,14 @@ function generatePatternParams(charityData) {
 }
 
 function renderPattern(patternParams, index) {
-  // console.log('patternParams', patternParams);
-  console.log('hi')
   let colors = patternParams.colors
   const container = document.getElementById(`container${index}`)
   const canvasSize = {
     width: container.offsetWidth,
     height: container.offsetHeight
   }
-  console.log(container)
   container.style.backgroundColor = `rgb(${colors.background.r * 255}, ${colors
     .background.g * 255}, ${colors.background.b * 255})`
-  console.log(container)
-  // container.className = "ooooooogaaaa";
   for (let i = 0; i < patternParams.quantity; i++) {
     let key = i
     addRectangle(patternParams, container, canvasSize, key)

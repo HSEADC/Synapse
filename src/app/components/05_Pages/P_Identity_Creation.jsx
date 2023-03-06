@@ -22,7 +22,8 @@ export default class P_Identity_Creation extends React.PureComponent {
       identityCreationStep,
       actions,
       identityColorsProgress,
-      identityPatternParamsProgress
+      identityPatternParamsProgress,
+      identityFontsProgress
     } = this.props
     const { charityData } = this.props
     const {
@@ -44,7 +45,9 @@ export default class P_Identity_Creation extends React.PureComponent {
       savePattern,
       startPalettePreviews,
       startPatternPreviews,
-      newPalettePreview
+      startFontsPreviews,
+      newPalettePreview,
+      saveFont
     } = actions
 
     if (identityCreationStep === 1) {
@@ -230,13 +233,11 @@ export default class P_Identity_Creation extends React.PureComponent {
               checked={
                 identityPatternParams == identityPatternParamsProgress[0]
               }
-              charityData={charityData}
               index={1}
               savePattern={savePattern}
             />
             <A_PatternPreview
               identityPatternParamsProgress={identityPatternParamsProgress[1]}
-              charityData={charityData}
               checked={
                 identityPatternParams == identityPatternParamsProgress[1]
               }
@@ -247,7 +248,7 @@ export default class P_Identity_Creation extends React.PureComponent {
 
           <S_FixedActions
             primButtonText="Продолжить"
-            primButtonHandleClick={nextStepIdentity}
+            primButtonHandleClick={() => startFontsPreviews()}
             primButtonDisable={true}
             primButtonDisableParam={identityPatternParams}
           />
@@ -271,8 +272,14 @@ export default class P_Identity_Creation extends React.PureComponent {
           />
           <A_Spacer size={8} />
           <div className="M_FontPreviews">
-            <A_FontPreview charityData={charityData} fontFamily="Arial" />
-            <A_FontPreview charityData={charityData} fontFamily="Manrope" />
+            <A_FontPreview
+              identityFontsProgress={identityFontsProgress[0]}
+              saveFont={saveFont}
+            />
+            <A_FontPreview
+              identityFontsProgress={identityFontsProgress[1]}
+              saveFont={saveFont}
+            />
           </div>
 
           <S_FixedActions

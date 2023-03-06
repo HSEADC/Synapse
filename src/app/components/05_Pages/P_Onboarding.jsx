@@ -18,8 +18,6 @@ export default class P_Onboarding extends React.PureComponent {
   render() {
     const { actions, onboardingStep } = this.props
     const { prevStep, nextStep, skipOnboarding } = actions
-
-    console.log(onboardingStep)
     if (onboardingStep === 1) {
       return (
         <div className="P_Onboarding">
