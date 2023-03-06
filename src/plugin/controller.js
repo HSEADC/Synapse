@@ -25,9 +25,8 @@ figma.ui.onmessage = msg => {
       figma.ui.postMessage({ type: 'get-storage', data: test })
     })
   } else if (msg.type === 'create-frame') {
-    helloWorld(createDesignFrame())
-  } else if (msg.type === 'generate-identity') {
-    generateNewIdentity()
+    helloWorld(msg.template, msg.charityData)
+    // console.log('createeee');
   } else {
     console.log('unknown message')
   }

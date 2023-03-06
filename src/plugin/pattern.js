@@ -41,8 +41,8 @@ function addRectangle(patternParams, container, canvasSize, key) {
   let h = patternParams.h
   let colors = patternParams.colors
 
-  x = getRandomArbitrary(0, canvasSize.width - w)
-  y = getRandomArbitrary(0, canvasSize.height - h)
+  x = getRandomArbitrary(0 - w, canvasSize.width + w)
+  y = getRandomArbitrary(0 - h, canvasSize.height + h)
 
   const rectangle = document.createElement('div')
   rectangle.classList.add('circle')

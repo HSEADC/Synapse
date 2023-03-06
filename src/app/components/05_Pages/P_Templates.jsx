@@ -13,8 +13,8 @@ export default class P_Templates extends React.PureComponent {
   }
 
   render() {
-    const { actions, templates } = this.props
-    const { feedTab, handleChange } = actions
+    const { actions, templates, charityData } = this.props
+    const { feedTab, handleChange, createDesign } = actions
 
     return (
       <div className="P_Templates">
@@ -30,7 +30,12 @@ export default class P_Templates extends React.PureComponent {
           <A_DropdownButton text="Категория" />
         </div>
         <div className="feedSections">
-          <M_FeedSection text="Квадратный пост" src="square" />
+          <M_FeedSection
+            text="Квадратный пост"
+            src="square"
+            charityData={charityData}
+            createDesign={createDesign}
+          />
           <M_FeedSection text="История" src="story" />
           <M_FeedSection text="Круглый аватар" src="avatar" />
           <M_FeedSection text="Бланк А4" src="blank" />

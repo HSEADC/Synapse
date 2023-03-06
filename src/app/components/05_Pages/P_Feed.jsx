@@ -13,7 +13,7 @@ export default class P_Feed extends React.PureComponent {
   }
 
   render() {
-    const { actions, templates } = this.props
+    const { actions, templates, charityData } = this.props
     const { feedTab, handleChange } = actions
 
     return (
@@ -21,7 +21,11 @@ export default class P_Feed extends React.PureComponent {
         <S_Navbar type="main" feedTab={feedTab} templates={templates} />
 
         {templates.tab === 'Шаблоны' ? (
-          <P_Templates actions={actions} templates={templates} />
+          <P_Templates
+            actions={actions}
+            templates={templates}
+            charityData={charityData}
+          />
         ) : (
           <div>style</div>
         )}

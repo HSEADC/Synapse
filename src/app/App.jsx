@@ -29,14 +29,14 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'identity_creation',
+      view: 'onboarding',
       onboardingStep: 1,
-      identityCreationStep: 2,
+      identityCreationStep: 1,
       charityTitle: '',
-      charityCategory: 'Здравоохранение',
-      friendliness: 'Серьезный',
-      volume: 'Громкий',
-      rationality: 'Эмоциональный',
+      charityCategory: '',
+      friendliness: '',
+      volume: '',
+      rationality: '',
       identityColorsProgress: '',
       identityColors: '',
       identityFontsProgress: '',
@@ -128,6 +128,19 @@ export default class App extends React.Component {
           identityColors: identityColors,
           identityFonts: identityFonts,
           identityPatternParams: identityPatternParams
+        }
+      },
+      '*'
+    )
+  }
+
+  createDesign = (template, charityData) => {
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'create-frame',
+          template: template,
+          charityData: charityData
         }
       },
       '*'
@@ -351,7 +364,8 @@ export default class App extends React.Component {
       startFontsPreviews: this.startFontsPreviews,
       newPalettePreview: this.newPalettePreview,
       saveFont: this.saveFont,
-      saveIdentity: this.saveIdentity
+      saveIdentity: this.saveIdentity,
+      createDesign: this.createDesign
     }
 
     const charityData = {
@@ -405,7 +419,11 @@ export default class App extends React.Component {
     } else if (view === 'feed') {
       return (
         <div className="App">
-          <P_Feed actions={actions} templates={templates} />
+          <P_Feed
+            actions={actions}
+            templates={templates}
+            charityData={charityData}
+          />
         </div>
       )
     }
