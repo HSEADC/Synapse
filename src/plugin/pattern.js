@@ -55,7 +55,7 @@ function addRectangle(patternParams, container) {
   const rectangle = document.createElement('div')
   rectangle.style.width = w + 'px'
   rectangle.style.height = h + 'px'
-
+  rectangle.style.position = 'absolute'
   rectangle.style.top = y + 'px'
   rectangle.style.left = x + 'px'
 

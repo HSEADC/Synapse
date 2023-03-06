@@ -29,7 +29,7 @@ export default class App extends React.Component {
     this.state = {
       view: 'identity_creation',
       onboardingStep: 1,
-      identityCreationStep: 4,
+      identityCreationStep: 2,
       charityTitle: '',
       charityCategory: 'Здравоохранение',
       friendliness: 'Серьезный',
@@ -180,26 +180,22 @@ export default class App extends React.Component {
   //palette////////////////////////////////////////////////////////////////////////////////////////////////////
 
   startPalettePreviews = charityData => {
-    if (this.state.identityColorsProgress[0]) {
-      console.log('dafug', this.state.identityColorsProgress)
-    } else {
-      for (let i = 0; i < 5; i++) {
-        const primary = createBaseColor(charityData)
-        const palette = createScientificPalette(primary, charityData)
-        const paletteOption = {
-          primary: palette.primary,
-          text: palette.text,
-          adOne: palette.adOne,
-          adTwo: palette.adTwo,
-          background: palette.background
-        }
-        this.setState(prevState => ({
-          identityColorsProgress: [
-            ...prevState.identityColorsProgress,
-            paletteOption
-          ]
-        }))
+    for (let i = 0; i < 5; i++) {
+      const primary = createBaseColor(charityData)
+      const palette = createScientificPalette(primary, charityData)
+      const paletteOption = {
+        primary: palette.primary,
+        text: palette.text,
+        adOne: palette.adOne,
+        adTwo: palette.adTwo,
+        background: palette.background
       }
+      this.setState(prevState => ({
+        identityColorsProgress: [
+          ...prevState.identityColorsProgress,
+          paletteOption
+        ]
+      }))
     }
     console.log('startPalettePreviews', this.state.identityColorsProgress)
     this.nextStepIdentity()
