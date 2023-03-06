@@ -277,6 +277,7 @@ export default class App extends React.Component {
       let identityFont = { ...identityFontsProgress[1] }
       identityFont = fontOption
       identityFontsProgress[1] = identityFont
+      check[1] = identityFont
 
       this.setState({ identityFontsProgress })
     }
@@ -327,6 +328,11 @@ export default class App extends React.Component {
     this.setState({ view: 'identity_creation' })
   }
 
+  saveIdentity = () => {
+    this.setToStorage()
+    this.setState({ view: 'feed' })
+  }
+
   //RENDER/////////////////////////////////////////////////////////////////////////
 
   render() {
@@ -344,7 +350,8 @@ export default class App extends React.Component {
       startPatternPreviews: this.startPatternPreviews,
       startFontsPreviews: this.startFontsPreviews,
       newPalettePreview: this.newPalettePreview,
-      saveFont: this.saveFont
+      saveFont: this.saveFont,
+      saveIdentity: this.saveIdentity
     }
 
     const charityData = {
@@ -395,7 +402,7 @@ export default class App extends React.Component {
           identityFontsProgress={identityFontsProgress}
         />
       )
-    } else {
+    } else if (view === 'feed') {
       return (
         <div className="App">
           <P_Feed actions={actions} templates={templates} />

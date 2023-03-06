@@ -9,12 +9,18 @@ export default class A_FontPreview extends React.PureComponent {
   }
 
   render() {
-    const { identityFontsProgress } = this.props
+    const { identityFontsProgress, saveFont, checked } = this.props
+
+    const classes = classnames({
+      A_FontPreview: true,
+      checked: checked
+    })
 
     return (
       <div
-        className="A_FontPreview"
+        className={classes}
         style={{ fontFamily: identityFontsProgress }}
+        onClick={() => saveFont(identityFontsProgress)}
       >
         Ally помогает НКО
         <br />

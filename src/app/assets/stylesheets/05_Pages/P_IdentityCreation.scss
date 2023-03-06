@@ -31,7 +31,11 @@
         cursor: pointer;
 
         &:hover {
-            outline: $hover-outline;
+            outline: 1px solid $secondary-text;
+        }
+    
+        &.checked {
+            outline:$hover-outline !important;
         }
     }
 }

@@ -47,7 +47,8 @@ export default class P_Identity_Creation extends React.PureComponent {
       startPatternPreviews,
       startFontsPreviews,
       newPalettePreview,
-      saveFont
+      saveFont,
+      saveIdentity
     } = actions
 
     if (identityCreationStep === 1) {
@@ -275,10 +276,12 @@ export default class P_Identity_Creation extends React.PureComponent {
             <A_FontPreview
               identityFontsProgress={identityFontsProgress[0]}
               saveFont={saveFont}
+              checked={identityFonts == identityFontsProgress[0]}
             />
             <A_FontPreview
               identityFontsProgress={identityFontsProgress[1]}
               saveFont={saveFont}
+              checked={identityFonts == identityFontsProgress[1]}
             />
           </div>
 
@@ -287,6 +290,26 @@ export default class P_Identity_Creation extends React.PureComponent {
             primButtonHandleClick={nextStepIdentity}
             primButtonDisable={true}
             primButtonDisableParam={identityFonts !== ''}
+          />
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <S_Navbar
+            text="Фирменный стиль готов"
+            back={true}
+            prevStepIdentity={prevStepIdentity}
+          />
+          <A_Spacer size={106} />
+          <A_Text
+            type="lead2"
+            text="Ваш фирменный стиль готов. Теперь вы можете создавать изображения по шаблонам."
+          />
+
+          <S_FixedActions
+            primButtonText="Сохранить стиль"
+            primButtonHandleClick={saveIdentity}
           />
         </div>
       )
