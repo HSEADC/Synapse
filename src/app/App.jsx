@@ -189,11 +189,27 @@ export default class App extends React.Component {
           paletteOption
         ]
       }))
+      this.setState({
+        identityColorsCheck: {
+          category: this.state.charityCategory,
+          volume: this.state.volume,
+          friendliness: this.state.friendliness,
+          rationality: this.state.rationality
+        }
+      })
     }
   }
 
   startPalettePreviews = charityData => {
-    if (!this.state.identityColorsProgress) {
+    console.log('original', this.state.charityCategory)
+    console.log('new', this.state.identityColorsCheck.category)
+    if (
+      this.state.charityCategory !== this.state.identityColorsCheck.category ||
+      this.state.friendliness !== this.state.identityColorsCheck.friendliness ||
+      this.state.volume !== this.state.identityColorsCheck.volume ||
+      this.state.rationality !== this.state.identityColorsCheck.rationality
+    ) {
+      this.setState({ identityColorsProgress: '' })
       this.createPalettes(charityData)
     }
     this.nextStepIdentity()
