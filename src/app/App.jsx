@@ -234,12 +234,22 @@ export default class App extends React.Component {
       adTwo: palette.adTwo,
       background: palette.background
     }
+
     this.setState(prevState => ({
       identityColorsProgress: [
         ...prevState.identityColorsProgress,
         paletteOption
       ]
     }))
+    this.goToBottom()
+  }
+
+  goToBottom = () => {
+    console.log(document.documentElement.scrollHeight)
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth'
+    })
   }
 
   savePalette = palette => {

@@ -200,6 +200,7 @@ export default class P_Identity_Creation extends React.PureComponent {
             identityColors={identityColors}
             savePalette={savePalette}
           />
+          <A_Spacer size={80} />
 
           <S_FixedActions
             primButtonText="Продолжить"
@@ -207,7 +208,7 @@ export default class P_Identity_Creation extends React.PureComponent {
             primButtonDisable={true}
             primButtonDisableParam={identityColors !== ''}
             secButtonText="Еще вариант"
-            secButtonHandleClick={newPalettePreview}
+            secButtonHandleClick={() => newPalettePreview()}
           />
         </div>
       )
