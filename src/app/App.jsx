@@ -29,7 +29,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'onboarding',
+      view: 'identity_creation',
       onboardingStep: 1,
       identityCreationStep: 1,
       charityTitle: '',
@@ -38,6 +38,7 @@ export default class App extends React.Component {
       volume: '',
       rationality: '',
       identityColorsProgress: '',
+      identityColorsCheck: '',
       identityColors: '',
       identityFontsProgress: '',
       identityFonts: '',
@@ -171,8 +172,7 @@ export default class App extends React.Component {
   }
 
   //palette////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  startPalettePreviews = charityData => {
+  createPalettes = charityData => {
     for (let i = 0; i < 5; i++) {
       const primary = createBaseColor(charityData)
       const palette = createScientificPalette(primary, charityData)
@@ -190,7 +190,12 @@ export default class App extends React.Component {
         ]
       }))
     }
+  }
 
+  startPalettePreviews = charityData => {
+    if (!this.state.identityColorsProgress) {
+      this.createPalettes(charityData)
+    }
     this.nextStepIdentity()
   }
 

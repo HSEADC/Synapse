@@ -23,10 +23,18 @@ export default class P_Onboarding extends React.PureComponent {
         <div className="P_Onboarding">
           <A_OnboardingImage image={onboardingImage1} margin-bottom="16px" />
           <A_Spacer size={16} />
-          <A_Text
-            text="Ally — это бесплатный сервис, который заменяет дизайнера в НКО. С помощью Ally вы можете легко создать логотип и фирменный стиль, генерировать картинки для соцсетей, визитки, и многое другое. Узнать больше"
-            margin="16px-both"
-          />
+          <div className="A_Text">
+            Ally — это бесплатный сервис, который заменяет дизайнера в НКО. С
+            помощью Ally вы можете легко создать логотип и фирменный стиль,
+            генерировать картинки для соцсетей, визитки, и&nbps;многое другое.{' '}
+            <a
+              className="hyperlink"
+              href="http://allydesign.org/"
+              target="_blank"
+            >
+              Узнать больше
+            </a>
+          </div>
           <div className="bottomButtonVert">
             <A_Button type="secondary" text="Далее ->" handleClick={nextStep} />
             <A_Spacer size={12} />

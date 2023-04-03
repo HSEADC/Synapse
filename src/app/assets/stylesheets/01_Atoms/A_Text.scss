@@ -27,6 +27,11 @@
     }
 }
 
+.hyperlink {
+    color: $link;
+    text-underline-offset: 3px;
+}
+
 .blue_lead {
     padding-top: 26px;
     background-color: $identity-additional-blue;
