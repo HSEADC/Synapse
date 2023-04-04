@@ -12,7 +12,7 @@ export default class M_FeedSection extends React.PureComponent {
     const { text, src, chooseSection } = this.props
 
     return (
-      <div className="M_FeedSection" onClick={() => chooseSection(text)}>
+      <div className="M_FeedSection" onClick={() => chooseSection(src, text)}>
         <A_Text text={text} type="lead" />
         <img src={require(`../../assets/images/feed/${src}.svg`)} />
       </div>

@@ -369,12 +369,26 @@ export default class App extends React.Component {
     })
   }
 
-  chooseSection = section => {
+  backToTemplates = () => {
     this.setState({
       templates: {
         tab: 'Шаблоны',
-        section: section
+        section: ''
       }
+    })
+  }
+
+  chooseSection = (section, sectionTitle) => {
+    this.setState({
+      templates: {
+        tab: 'Шаблоны',
+        section: section,
+        sectionTitle: sectionTitle
+      }
+    })
+
+    window.scrollTo({
+      top: 0
     })
   }
 
@@ -407,7 +421,8 @@ export default class App extends React.Component {
       newPalettePreview: this.newPalettePreview,
       saveFont: this.saveFont,
       saveIdentity: this.saveIdentity,
-      createDesign: this.createDesign
+      createDesign: this.createDesign,
+      backToTemplates: this.backToTemplates
     }
 
     const charityData = {

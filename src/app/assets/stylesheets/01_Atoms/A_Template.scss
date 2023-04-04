@@ -4,12 +4,28 @@
     background: $background;
     border: 1px solid #DADDE1;
     border-radius: 8px;
-    height: 176px;
-        width: 176px;
-        display: block;
+    display: block;
 
-    & .square {
+    &.square {
         height: 176px;
         width: 176px;
+    }
+
+    &.avatar {
+        height: 176px;
+        width: 176px;
+        border-radius: 50%;
+    }
+
+    &.story {
+        height: 320px;
+        width: 176px;
+    }
+
+    &.facebookCover {
+        width: 368px;
+        height: 176px;
+        grid-column-start: 1;
+        grid-column-end: 2;
     }
 }
