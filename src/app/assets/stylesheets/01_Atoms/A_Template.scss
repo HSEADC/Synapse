@@ -1,0 +1,15 @@
+@import '../vars.scss';
+
+.A_Template {
+    background: $background;
+    border: 1px solid #DADDE1;
+    border-radius: 8px;
+    height: 176px;
+        width: 176px;
+        display: block;
+
+    & .square {
+        height: 176px;
+        width: 176px;
+    }
+}

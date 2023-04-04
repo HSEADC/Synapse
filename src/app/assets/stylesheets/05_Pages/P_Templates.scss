@@ -20,4 +20,21 @@
         gap: 32px;
         padding: 32px 16px;
     }
+
+    .sectionNav {
+        background: $background;
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        padding: 88px 0 16px 0;
+        gap: 12px;
+    }
+
+    .templatesWrapper {
+        padding: 16px;
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+    }
 }

@@ -29,7 +29,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'identity_creation',
+      view: 'feed',
       onboardingStep: 1,
       identityCreationStep: 1,
       charityTitle: '',
@@ -363,7 +363,17 @@ export default class App extends React.Component {
   feedTab = nextTab => {
     this.setState({
       templates: {
-        tab: nextTab
+        tab: nextTab,
+        section: this.state.templates.section
+      }
+    })
+  }
+
+  chooseSection = section => {
+    this.setState({
+      templates: {
+        tab: 'Шаблоны',
+        section: section
       }
     })
   }
@@ -389,6 +399,7 @@ export default class App extends React.Component {
       prevStepIdentity: this.prevStepIdentity,
       savePalette: this.savePalette,
       feedTab: this.feedTab,
+      chooseSection: this.chooseSection,
       savePattern: this.savePattern,
       startPalettePreviews: this.startPalettePreviews,
       startPatternPreviews: this.startPatternPreviews,

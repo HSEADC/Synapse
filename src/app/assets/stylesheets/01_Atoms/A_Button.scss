@@ -51,6 +51,13 @@
             background-image: url('../../assets/images/icons/back.svg');
         }
 
+        &.backBig {
+            background-image: url('../../assets/images/icons/backBig.svg');
+            height: 24px;
+            width: 24px;
+            position: relative;
+        }
+
         &.more {
             background-image: url('../../assets/images/icons/more.svg');
         }
