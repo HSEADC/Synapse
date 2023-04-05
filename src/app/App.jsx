@@ -364,7 +364,10 @@ export default class App extends React.Component {
     this.setState({
       templates: {
         tab: nextTab,
-        section: this.state.templates.section
+        section: this.state.templates.section,
+        sectionTitle: this.state.templates.sectionTitle,
+        templateID: this.state.templates.templateID,
+        templateTitle: this.state.templates.templateTitle
       }
     })
   }
@@ -374,6 +377,18 @@ export default class App extends React.Component {
       templates: {
         tab: 'Шаблоны',
         section: ''
+      }
+    })
+  }
+
+  backToSection = () => {
+    this.setState({
+      templates: {
+        tab: 'Шаблоны',
+        section: this.state.templates.section,
+        sectionTitle: this.state.templates.sectionTitle,
+        templateID: undefined,
+        templateTitle: undefined
       }
     })
   }
@@ -389,6 +404,18 @@ export default class App extends React.Component {
 
     window.scrollTo({
       top: 0
+    })
+  }
+
+  openTemplate = (templateID, templateTitle) => {
+    this.setState({
+      templates: {
+        tab: 'Шаблоны',
+        section: this.state.templates.section,
+        sectionTitle: this.state.templates.sectionTitle,
+        templateID: templateID,
+        templateTitle: templateTitle
+      }
     })
   }
 
@@ -422,7 +449,9 @@ export default class App extends React.Component {
       saveFont: this.saveFont,
       saveIdentity: this.saveIdentity,
       createDesign: this.createDesign,
-      backToTemplates: this.backToTemplates
+      backToTemplates: this.backToTemplates,
+      openTemplate: this.openTemplate,
+      backToSection: this.backToSection
     }
 
     const charityData = {

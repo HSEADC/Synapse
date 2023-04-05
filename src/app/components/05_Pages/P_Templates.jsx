@@ -15,7 +15,13 @@ export default class P_Templates extends React.PureComponent {
 
   render() {
     const { actions, templates, charityData } = this.props
-    const { feedTab, handleChange, chooseSection, backToTemplates } = actions
+    const {
+      feedTab,
+      handleChange,
+      chooseSection,
+      backToTemplates,
+      backToSection
+    } = actions
 
     if (templates.section === '') {
       return (
@@ -91,7 +97,7 @@ export default class P_Templates extends React.PureComponent {
           <A_FooterLogo />
         </div>
       )
-    } else {
+    } else if (!templates.templateID && templates.section) {
       return (
         <div className="P_Templates">
           <div className="sectionNav">
@@ -103,12 +109,41 @@ export default class P_Templates extends React.PureComponent {
             <A_Text text={templates.sectionTitle} type="lead" />
           </div>
           <div className="templatesWrapper">
-            <A_Template type={templates.section} />
-            <A_Template type={templates.section} />
-            <A_Template type={templates.section} />
-            <A_Template type={templates.section} />
+            <A_Template
+              type={templates.section}
+              actions={actions}
+              templateID={1}
+              templateTitle="Bokkk"
+            />
+            <A_Template
+              type={templates.section}
+              actions={actions}
+              templateID={1}
+              templateTitle="Bokkk"
+            />
+            <A_Template
+              type={templates.section}
+              actions={actions}
+              templateID={1}
+              templateTitle="Bokkk"
+            />
+            <A_Template
+              type={templates.section}
+              actions={actions}
+              templateID={1}
+              templateTitle="Bokkk"
+            />
           </div>
           <A_FooterLogo />
+        </div>
+      )
+    } else {
+      return (
+        <div className="P_Templates">
+          <div className="sectionNav">
+            <A_Button type="icon" icon="backBig" handleClick={backToSection} />
+            <A_Text text={templates.templateTitle} type="lead" />
+          </div>
         </div>
       )
     }

@@ -8,13 +8,21 @@ export default class A_Template extends React.PureComponent {
   }
 
   render() {
-    const { type, charityData, handleClick } = this.props
+    const { type, charityData, actions, templateID, templateTitle } = this.props
+    const { openTemplate } = actions
 
     const classes = classnames({
       A_Template: true,
       [`${type}`]: true
     })
 
-    return <div className={classes}></div>
+    return (
+      <div
+        className={classes}
+        onClick={() => {
+          openTemplate(templateID, templateTitle)
+        }}
+      ></div>
+    )
   }
 }

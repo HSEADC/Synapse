@@ -201,7 +201,7 @@ export default class P_Identity_Creation extends React.PureComponent {
             savePalette={savePalette}
           />
 
-          {progressBar && <A_Spacer size={80} />}
+          <A_Spacer size={80} />
 
           <S_FixedActions
             primButtonText="Продолжить"
