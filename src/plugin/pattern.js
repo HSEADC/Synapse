@@ -1,56 +1,46 @@
 import { getRandomArbitrary, sample } from './utilities'
+import { generateGridModule } from './grid'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createElement } from 'react'
 
-function dot(size, color) {}
+// function createCircle(frame) {
+//   const circleElement = document.createElement('div')
+//   circleElement.classList.add('circle')
 
-function createCircle(frame) {
-  const circleElement = document.createElement('div')
-  circleElement.classList.add('circle')
+//   const left =
+//     Math.floor(Math.random() * (frame.clientWidth / gridModule)) * gridModule
+//   const top =
+//     Math.floor(Math.random() * (frame.clientHeight / gridModule)) * gridModule
 
-  const left =
-    Math.floor(Math.random() * (frame.clientWidth / gridModule)) * gridModule
-  const top =
-    Math.floor(Math.random() * (frame.clientHeight / gridModule)) * gridModule
+//   circleElement.style.top = [top, 'px'].join('')
+//   circleElement.style.left = [left, 'px'].join('')
+//   circleElement.style.width = [gridModule, 'px'].join('')
+//   circleElement.style.height = [gridModule, 'px'].join('')
+//   circleElement.style.backgroundColor = sample(colors)
 
-  circleElement.style.top = [top, 'px'].join('')
-  circleElement.style.left = [left, 'px'].join('')
-  circleElement.style.width = [gridModule, 'px'].join('')
-  circleElement.style.height = [gridModule, 'px'].join('')
-  circleElement.style.backgroundColor = sample(colors)
+//   frame.appendChild(circleElement)
+// }
 
-  frame.appendChild(circleElement)
-}
-
-function generateCirclesPattern(frame, charityData) {
-  const identityColors = charityData.identityColors
-  frame.style.backgroundColor = `rgb(${identityColors.background.r}, ${identityColors.background.g}, ${identityColors.background.b})`
-}
-
-let w = 0
-let h = 0
-
-let x = 0
-let y = 0
-
-let container
-
-function addRectangle(patternParams, container, canvasSize, key) {
-  let w = patternParams.w
-  let h = patternParams.h
+function addCircle(
+  patternParams,
+  circleSize,
+  gridModuleSize,
+  column,
+  row,
+  container,
+  canvasSize,
+  key
+) {
   let colors = patternParams.colors
 
-  x = getRandomArbitrary(0 - w, canvasSize.width + w)
-  y = getRandomArbitrary(0 - h, canvasSize.height + h)
-
-  const rectangle = document.createElement('div')
-  rectangle.classList.add('circle')
-  rectangle.style.width = w + 'px'
-  rectangle.style.height = h + 'px'
-  rectangle.style.position = 'absolute'
-  rectangle.style.top = y + 'px'
-  rectangle.style.left = x + 'px'
+  const circle = document.createElement('div')
+  circle.classList.add('circle')
+  circle.innerHTML = key
+  circle.style.width = circleSize
+  circle.style.height = circleSize
+  circle.style.top = gridModuleSize * row + 'px'
+  circle.style.left = gridModuleSize * column + 'px'
 
   if (patternParams.colorSwitch) {
     if (key % patternParams.colorSwitch == 0) {
@@ -61,28 +51,36 @@ function addRectangle(patternParams, container, canvasSize, key) {
       let textColor = `rgb(${colors.text.r * 255}, ${colors.text.g *
         255}, ${colors.text.b * 255})`
       let colorOptions = [adOneColor, adTwoColor, textColor]
-      rectangle.style.backgroundColor = sample(colorOptions)
+      circle.style.backgroundColor = sample(colorOptions)
     } else {
-      rectangle.style.backgroundColor = `rgb(${colors.primary.r * 255}, ${colors
+      circle.style.backgroundColor = `rgb(${colors.primary.r * 255}, ${colors
         .primary.g * 255}, ${colors.primary.b * 255})`
     }
   } else {
-    rectangle.style.backgroundColor = `rgb(${colors.primary.r * 255}, ${colors
+    circle.style.backgroundColor = `rgb(${colors.primary.r * 255}, ${colors
       .primary.g * 255}, ${colors.primary.b * 255})`
   }
 
-  container.appendChild(rectangle)
+  container.appendChild(circle)
 }
 
 function generatePatternParams(charityData) {
-  let size = getRandomArbitrary(10, 60)
+  let gridModule = generateGridModule(
+    charityData.friendliness,
+    charityData.volume
+  )
+
   let patternParamsProgress = {
-    w: size,
-    h: size,
+    gridModule: gridModule,
+    size: getRandomArbitrary(50, 120),
+    sizeSwitch: 3,
+    positionSwitch: getRandomArbitrary(0, 100),
     colorSwitch: 3,
     quantity: getRandomArbitrary(50, 100),
     colors: charityData.identityColors
   }
+
+  console.log('size', patternParamsProgress.size)
 
   return patternParamsProgress
 }
@@ -90,16 +88,62 @@ function generatePatternParams(charityData) {
 function renderPattern(patternParams, index) {
   let colors = patternParams.colors
   const container = document.getElementById(`container${index}`)
+
   const canvasSize = {
     width: container.offsetWidth,
     height: container.offsetHeight
   }
+
+  let circleSize
+  let gridModuleSize
+
+  if (canvasSize.width > canvasSize.height) {
+    gridModuleSize = canvasSize.width / patternParams.gridModule
+  } else {
+    gridModuleSize = canvasSize.height / patternParams.gridModule
+  }
+
+  circleSize = (gridModuleSize * patternParams.size) / 100 + 'px'
+
   container.style.backgroundColor = `rgb(${colors.background.r * 255}, ${colors
     .background.g * 255}, ${colors.background.b * 255})`
-  for (let i = 0; i < patternParams.quantity; i++) {
-    let key = i
-    addRectangle(patternParams, container, canvasSize, key)
+
+  let column
+  let row = 1
+  let color = { r: 0, g: 0, b: 0 }
+
+  for (
+    let i = 1;
+    i < (patternParams.gridModule - 1) * (patternParams.gridModule - 1);
+    i++
+  ) {
+    column = i - patternParams.gridModule * (row - 1)
+
+    console.log(
+      'column',
+      column,
+      'row',
+      row,
+      'gridModule',
+      patternParams.gridModule
+    )
+    addCircle(
+      patternParams,
+      circleSize,
+      gridModuleSize,
+      column,
+      row,
+      container,
+      canvasSize,
+      i
+    )
+
+    if (column % patternParams.gridModule === 0) {
+      row++
+      color = { r: 0.2, g: 0.2, b: 0.2 }
+      console.log('boom')
+    }
   }
 }
 
-export { renderPattern, generatePatternParams, addRectangle }
+export { renderPattern, generatePatternParams, addCircle }

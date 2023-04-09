@@ -29,7 +29,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'feed',
+      view: 'identity_creation',
       onboardingStep: 1,
       identityCreationStep: 1,
       charityTitle: '',
@@ -201,8 +201,6 @@ export default class App extends React.Component {
   }
 
   startPalettePreviews = charityData => {
-    console.log('original', this.state.charityCategory)
-    console.log('new', this.state.identityColorsCheck.category)
     if (
       this.state.charityCategory !== this.state.identityColorsCheck.category ||
       this.state.friendliness !== this.state.identityColorsCheck.friendliness ||
@@ -260,7 +258,6 @@ export default class App extends React.Component {
 
   startPatternPreviews = () => {
     const charityData = {
-      charityTitle: this.state.charityTitle,
       charityCategory: this.state.charityCategory,
       friendliness: this.state.friendliness,
       volume: this.state.volume,

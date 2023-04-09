@@ -16,17 +16,21 @@ export default class A_FontPreview extends React.PureComponent {
       checked: checked
     })
 
+    console.log(identityFontsProgress)
     return (
       <div
         className={classes}
         style={{ fontFamily: identityFontsProgress }}
         onClick={() => saveFont(identityFontsProgress)}
       >
-        Ally помогает НКО
-        <br />
-        сэкономить на дизайне
-        <br />
-        1234567890 рублей!
+        <p>{identityFontsProgress}</p>
+        <p>
+          Ally помогает НКО
+          <br />
+          сэкономить на дизайне
+          <br />
+          1234567890 рублей!
+        </p>
       </div>
     )
   }

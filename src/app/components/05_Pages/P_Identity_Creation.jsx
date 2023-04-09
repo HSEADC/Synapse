@@ -12,12 +12,24 @@ import A_FontPreview from '../01_Atoms/A_FontPreview'
 import { log } from 'prettierr/parser-postcss'
 import M_PalettePreviews from '../02_Molecules/M_PalettePreviews'
 
+import { fontList } from '../../../libraries/fonts'
+
 export default class P_Identity_Creation extends React.PureComponent {
   constructor(props) {
     super(props)
   }
 
   render() {
+    const fontsList = []
+
+    Object.keys(fontList).forEach(function(key) {
+      fontsList.push(
+        fontList[key].map(font => (
+          <A_FontPreview identityFontsProgress={font} />
+        ))
+      )
+    })
+
     const {
       identityCreationStep,
       actions,
@@ -285,6 +297,7 @@ export default class P_Identity_Creation extends React.PureComponent {
               saveFont={saveFont}
               checked={identityFonts == identityFontsProgress[1]}
             />
+            {/* {fontsList} */}
           </div>
 
           <S_FixedActions

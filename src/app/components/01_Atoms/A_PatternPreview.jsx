@@ -22,7 +22,6 @@ export default class A_PatternPreview extends React.PureComponent {
       index,
       checked
     } = this.props
-    // console.log('identityPatternParams', identityPatternParams);
 
     const classes = classnames({
       A_PatternPreview: true,
