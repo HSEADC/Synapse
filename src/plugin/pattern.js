@@ -36,11 +36,13 @@ function addCircle(
 
   const circle = document.createElement('div')
   circle.classList.add('circle')
+  circle.style.width = circleSize + 'px'
+  circle.style.height = circleSize + 'px'
   circle.innerHTML = key
-  circle.style.width = circleSize
-  circle.style.height = circleSize
   circle.style.top = gridModuleSize * row + 'px'
   circle.style.left = gridModuleSize * column + 'px'
+  circle.style.transform = `translate(${(gridModuleSize - circleSize) /
+    2}px, ${(gridModuleSize - circleSize) / 2}px)`
 
   if (patternParams.colorSwitch) {
     if (key % patternParams.colorSwitch == 0) {
@@ -103,30 +105,32 @@ function renderPattern(patternParams, index) {
     gridModuleSize = canvasSize.height / patternParams.gridModule
   }
 
-  circleSize = (gridModuleSize * patternParams.size) / 100 + 'px'
+  circleSize = (gridModuleSize * patternParams.size) / 100
 
   container.style.backgroundColor = `rgb(${colors.background.r * 255}, ${colors
     .background.g * 255}, ${colors.background.b * 255})`
 
   let column
-  let row = 1
-  let color = { r: 0, g: 0, b: 0 }
+  let row = 0
 
   for (
-    let i = 1;
+    let i = 0;
     i < (patternParams.gridModule - 1) * (patternParams.gridModule - 1);
     i++
   ) {
-    column = i - patternParams.gridModule * (row - 1)
+    column = i - patternParams.gridModule * row
 
     console.log(
+      'patternParams.gridModule',
+      patternParams.gridModule,
+      'i',
+      i,
       'column',
-      column,
+      i - patternParams.gridModule * row,
       'row',
-      row,
-      'gridModule',
-      patternParams.gridModule
+      row
     )
+
     addCircle(
       patternParams,
       circleSize,
@@ -138,10 +142,8 @@ function renderPattern(patternParams, index) {
       i
     )
 
-    if (column % patternParams.gridModule === 0) {
+    if ((i + 1) % patternParams.gridModule === 0) {
       row++
-      color = { r: 0.2, g: 0.2, b: 0.2 }
-      console.log('boom')
     }
   }
 }
