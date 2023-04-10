@@ -1,4 +1,4 @@
-import { getRandomArbitrary, sample } from './utilities'
+import { getRandomArbitrary, sample, weightedRandom } from './utilities'
 import { generateGridModule } from './grid'
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -38,30 +38,26 @@ function addCircle(
   circle.classList.add('circle')
   circle.style.width = circleSize + 'px'
   circle.style.height = circleSize + 'px'
-  circle.innerHTML = key
   circle.style.top = gridModuleSize * row + 'px'
   circle.style.left = gridModuleSize * column + 'px'
-  circle.style.transform = `translate(${(gridModuleSize - circleSize) /
-    2}px, ${(gridModuleSize - circleSize) / 2}px)`
+  circle.style.transform = `translate(calc(${(gridModuleSize - circleSize) /
+    2}px + ${(patternParams.positionSwitch / 100) *
+    getRandomArbitrary(-100, 100)}%), calc(${(gridModuleSize - circleSize) /
+    2}px + ${(patternParams.positionSwitch / 100) *
+    getRandomArbitrary(-100, 100)}%))`
 
-  if (patternParams.colorSwitch) {
-    if (key % patternParams.colorSwitch == 0) {
-      let adOneColor = `rgb(${colors.adOne.r * 255}, ${colors.adOne.g *
-        255}, ${colors.adOne.b * 255})`
-      let adTwoColor = `rgb(${colors.adTwo.r * 255}, ${colors.adTwo.g *
-        255}, ${colors.adTwo.b * 255})`
-      let textColor = `rgb(${colors.text.r * 255}, ${colors.text.g *
-        255}, ${colors.text.b * 255})`
-      let colorOptions = [adOneColor, adTwoColor, textColor]
-      circle.style.backgroundColor = sample(colorOptions)
-    } else {
-      circle.style.backgroundColor = `rgb(${colors.primary.r * 255}, ${colors
-        .primary.g * 255}, ${colors.primary.b * 255})`
-    }
-  } else {
-    circle.style.backgroundColor = `rgb(${colors.primary.r * 255}, ${colors
-      .primary.g * 255}, ${colors.primary.b * 255})`
-  }
+  let circleColor = weightedRandom(
+    [colors.primary, colors.adOne, colors.adTwo],
+    [
+      patternParams.colorSwitch.primary,
+      patternParams.colorSwitch.adOne,
+      patternParams.colorSwitch.adTwo
+    ]
+  ).item
+  circle.style.backgroundColor = `rgb(${circleColor.r * 255}, ${circleColor.g *
+    255}, ${circleColor.b * 255})`
+  // console.log('colors', colors.primary, colors.adOne, colors.adTwo, 'switch', patternParams.colorSwitch.adOne, patternParams.colorSwitch.adTwo, 'circleColor', circleColor);
+  // console.log(`rgb(${circleColor.r * 255}, ${circleColor.g * 255}, ${circleColor.b * 255})`);
 
   container.appendChild(circle)
 }
@@ -72,17 +68,24 @@ function generatePatternParams(charityData) {
     charityData.volume
   )
 
+  let positionSwitch = 0
+  let sizeSwitch = 0
+  let colorSwitch = {
+    primary: 100,
+    adOne: getRandomArbitrary(0, 100),
+    adTwo: getRandomArbitrary(0, 100)
+  }
+  let size = 100
+
   let patternParamsProgress = {
     gridModule: gridModule,
-    size: getRandomArbitrary(50, 120),
-    sizeSwitch: 3,
-    positionSwitch: getRandomArbitrary(0, 100),
-    colorSwitch: 3,
+    size: size,
+    sizeSwitch: sizeSwitch,
+    positionSwitch: positionSwitch,
+    colorSwitch: colorSwitch,
     quantity: getRandomArbitrary(50, 100),
     colors: charityData.identityColors
   }
-
-  console.log('size', patternParamsProgress.size)
 
   return patternParamsProgress
 }
@@ -105,8 +108,6 @@ function renderPattern(patternParams, index) {
     gridModuleSize = canvasSize.height / patternParams.gridModule
   }
 
-  circleSize = (gridModuleSize * patternParams.size) / 100
-
   container.style.backgroundColor = `rgb(${colors.background.r * 255}, ${colors
     .background.g * 255}, ${colors.background.b * 255})`
 
@@ -118,18 +119,15 @@ function renderPattern(patternParams, index) {
     i < (patternParams.gridModule - 1) * (patternParams.gridModule - 1);
     i++
   ) {
-    column = i - patternParams.gridModule * row
+    circleSize = weightedRandom(
+      [
+        (gridModuleSize * patternParams.size) / 100,
+        (gridModuleSize * getRandomArbitrary(50, 120)) / 100
+      ],
+      [100, patternParams.sizeSwitch]
+    ).item
 
-    console.log(
-      'patternParams.gridModule',
-      patternParams.gridModule,
-      'i',
-      i,
-      'column',
-      i - patternParams.gridModule * row,
-      'row',
-      row
-    )
+    column = i - patternParams.gridModule * row
 
     addCircle(
       patternParams,
