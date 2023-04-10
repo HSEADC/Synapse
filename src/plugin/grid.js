@@ -5,7 +5,7 @@ let vertical = true
 let volumeFactor = 0
 let friendlinessFactor = 0
 
-const modules = [52, 48, 44, 36, 32, 28, 24, 20, 16, 14, 12, 10, 9, 8, 7, 6]
+const modules = [44, 36, 32, 28, 24, 20, 16, 12, 10, 6]
 const weightedModules = []
 
 function generateGridModule(friendliness, volume) {
@@ -19,31 +19,31 @@ function generateGridModule(friendliness, volume) {
 
   switch (combinedFactors) {
     case -2:
-      for (let i = 0; i <= 3; i++) {
+      for (let i = 0; i <= 1; i++) {
         weightedModules.push(modules[i])
       }
       break
 
     case -1:
-      for (let i = 4; i <= 7; i++) {
+      for (let i = 2; i <= 3; i++) {
         weightedModules.push(modules[i])
       }
       break
 
     case 0:
-      for (let i = 7; i <= 9; i++) {
+      for (let i = 4; i <= 5; i++) {
         weightedModules.push(modules[i])
       }
       break
 
     case 1:
-      for (let i = 9; i <= 12; i++) {
+      for (let i = 6; i <= 7; i++) {
         weightedModules.push(modules[i])
       }
       break
 
     case 2:
-      for (let i = 13; i <= 15; i++) {
+      for (let i = 8; i <= 9; i++) {
         weightedModules.push(modules[i])
       }
       break

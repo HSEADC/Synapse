@@ -68,14 +68,41 @@ function generatePatternParams(charityData) {
     charityData.volume
   )
 
-  let positionSwitch = 0
-  let sizeSwitch = 0
+  let friendlinessFactor = 1
+  let volumeFactor = 1
+  let rationalityFactor = 1
+
+  if (charityData.friendliness === 'Серьезный') {
+    friendlinessFactor = 0
+  }
+
+  if (charityData.volume === 'Тихий') {
+    volumeFactor = 0
+  }
+
+  if (charityData.rationality === 'Рациональный') {
+    rationalityFactor = 0
+  }
+
+  let combinedFactors = rationalityFactor + volumeFactor + friendlinessFactor
+
+  let positionSwitch =
+    getRandomArbitrary(0, 15) * combinedFactors * rationalityFactor
+  let sizeSwitch =
+    getRandomArbitrary(0, 20) * combinedFactors * rationalityFactor
   let colorSwitch = {
     primary: 100,
-    adOne: getRandomArbitrary(0, 100),
-    adTwo: getRandomArbitrary(0, 100)
+    adOne: getRandomArbitrary(0, 20) * combinedFactors * rationalityFactor,
+    adTwo:
+      getRandomArbitrary(0, 20) *
+      combinedFactors *
+      friendlinessFactor *
+      rationalityFactor
   }
-  let size = 100
+  let size =
+    100 -
+    (10 - friendlinessFactor * getRandomArbitrary(10, 30)) -
+    (10 - volumeFactor * getRandomArbitrary(10, 30))
 
   let patternParamsProgress = {
     gridModule: gridModule,
@@ -86,6 +113,8 @@ function generatePatternParams(charityData) {
     quantity: getRandomArbitrary(50, 100),
     colors: charityData.identityColors
   }
+
+  console.log('patternParamsProgress', patternParamsProgress, 'size', size)
 
   return patternParamsProgress
 }
