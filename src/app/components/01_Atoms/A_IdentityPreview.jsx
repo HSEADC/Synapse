@@ -16,14 +16,7 @@ export default class A_IdentityPreview extends React.PureComponent {
     })
     return (
       <div className={classes}>
-        <p>{identityFontsProgress}</p>
-        <p>
-          Ally помогает НКО
-          <br />
-          сэкономить на дизайне
-          <br />
-          1234567890 рублей!
-        </p>
+        <p></p>
       </div>
     )
   }

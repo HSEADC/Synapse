@@ -2,7 +2,7 @@ const fontList = {
   emotionalSeriousQuiet: ['Lora', 'Arial Narrow', 'Ramona'],
   emotionalSeriousLoud: ['Alegreya', 'Soyuz Grotesk'],
   emotionalFriendlyQuiet: ['Old Standart', 'Forum', 'St.Sign-Normal'],
-  emotionalFriendlyLoud: ['Le Murmure', 'Unlimited Pie', 'Plup'],
+  emotionalFriendlyLoud: ['Le Murmure', 'UnlimitedXPie', 'Plup'],
   rationalSeriousQuiet: ['Inter', 'Arial', 'Times New Roman'],
   rationalSeriousLoud: ['Truin', 'Neutral Face', 'Kharkiv Tone'],
   rationalFriendlyQuiet: [

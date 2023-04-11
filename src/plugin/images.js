@@ -18,8 +18,6 @@ function saveImageDataOrExportToFigma(id, bytes) {
     status.push(image.loaded)
   })
 
-  console.log('status', status, status.includes(false), !status.includes(false))
-
   if (!status.includes(false)) {
     renderFigmaTemplate(imagesForExport)
   }
@@ -41,9 +39,7 @@ function getNewPaint(paint, imageBytes) {
   newPaint.blendMode = 'NORMAL'
   newPaint.type = 'IMAGE'
 
-  console.log('before')
   newPaint.imageHash = figma.createImage(imageBytes).hash
-  console.log('after')
 
   newPaint.filters = {
     contrast: 0,

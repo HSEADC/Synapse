@@ -114,8 +114,6 @@ function generatePatternParams(charityData) {
     colors: charityData.identityColors
   }
 
-  console.log('patternParamsProgress', patternParamsProgress, 'size', size)
-
   return patternParamsProgress
 }
 

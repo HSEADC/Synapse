@@ -10,7 +10,6 @@ export default class M_ChooseButtonSet extends React.PureComponent {
   handleChange = e => {
     const { param, handleChange, firstChecked } = this.props
     handleChange(param, e.target.value)
-    // console.log('firstChecked', firstChecked, e.target, e.target.value);
   }
 
   render() {

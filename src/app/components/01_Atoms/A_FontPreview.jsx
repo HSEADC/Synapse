@@ -16,7 +16,6 @@ export default class A_FontPreview extends React.PureComponent {
       checked: checked
     })
 
-    console.log(identityFontsProgress)
     return (
       <div
         className={classes}

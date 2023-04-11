@@ -1,4 +1,5 @@
 // @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+//убрать проблемы
 @font-face {
     font-family: 'Alegreya';
     src: '../fonts/alegreya/alegreya.ttf';
@@ -89,10 +90,10 @@
     src: '../fonts/truin/truin.ttf';
 }
 
-// @font-face {
-//     font-family: 'Unlimited Pie';
-//     src: local('Unlimited Pie'), url('../fonts/unlimited pie/up.otf') format("opentype");
-// }
+@font-face {
+    font-family: 'UnlimitedXPie';
+    src: url('../fonts/unlimited-pie/up.otf') format("opentype");
+}
 
 
 

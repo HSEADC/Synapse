@@ -107,28 +107,20 @@ export default class App extends React.Component {
   }
 
   setToStorage = () => {
-    const {
-      charityTitle,
-      charityCategory,
-      friendliness,
-      volume,
-      rationality,
-      identityColors,
-      identityFonts,
-      identityPatternParams
-    } = this.props
+    console.log('SET TO STORAGE')
+
     parent.postMessage(
       {
         pluginMessage: {
           type: 'set-storage',
-          charityTitle: charityTitle,
-          charityCategory: charityCategory,
-          friendliness: friendliness,
-          volume: volume,
-          rationality: rationality,
-          identityColors: identityColors,
-          identityFonts: identityFonts,
-          identityPatternParams: identityPatternParams
+          charityTitle: this.state.charityTitle,
+          charityCategory: this.state.charityCategory,
+          friendliness: this.state.friendliness,
+          volume: this.state.volume,
+          rationality: this.state.rationality,
+          identityColors: this.state.identityColors,
+          identityFonts: this.state.identityFonts,
+          identityPatternParams: this.state.identityPatternParams
         }
       },
       '*'
@@ -243,7 +235,6 @@ export default class App extends React.Component {
   }
 
   goToBottom = () => {
-    console.log(document.documentElement.scrollHeight)
     window.scrollTo({
       top: document.documentElement.scrollHeight,
       behavior: 'smooth'
@@ -309,8 +300,6 @@ export default class App extends React.Component {
         }))
       }
     }
-
-    console.log('check', check[0], check[1])
 
     while (check[0] == check[1]) {
       const fontOption = pickIdentityFont(charityData)

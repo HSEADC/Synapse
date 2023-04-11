@@ -9,9 +9,7 @@ export default class S_Navbar extends React.PureComponent {
     super(props)
   }
 
-  handleClick = () => {
-    console.log('click')
-  }
+  handleClick = () => {}
 
   render() {
     const {

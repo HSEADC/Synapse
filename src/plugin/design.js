@@ -10,7 +10,6 @@ async function helloWorld(template, charityData) {
 
   const text = figma.createText()
   const { identityColors } = charityData
-  console.log('identityColors', identityColors)
 
   text.x = 10
   text.y = -20

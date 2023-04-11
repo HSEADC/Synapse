@@ -336,8 +336,6 @@ function createScientificPalette(primaryColor, charityData) {
         }
         break
     }
-
-    // console.log(key, palette[key])
   }
 
   return palette

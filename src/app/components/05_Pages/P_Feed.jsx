@@ -6,6 +6,7 @@ import A_TextInput from '../01_Atoms/A_TextInput'
 import A_DropdownButton from '../01_Atoms/A_Dropdownbutton'
 import S_Navbar from '../04_Superorganisms/S_Navbar'
 import P_Templates from './P_Templates'
+import P_Style from './P_Style'
 
 export default class P_Feed extends React.PureComponent {
   constructor(props) {
@@ -27,7 +28,7 @@ export default class P_Feed extends React.PureComponent {
             charityData={charityData}
           />
         ) : (
-          <div>style</div>
+          <P_Style charityData={charityData} />
         )}
       </div>
     )
