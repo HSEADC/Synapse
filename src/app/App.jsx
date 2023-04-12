@@ -32,11 +32,11 @@ export default class App extends React.Component {
       view: 'identity_creation',
       onboardingStep: 1,
       identityCreationStep: 1,
-      charityTitle: 'а',
-      charityCategory: 'Культура и образование',
-      friendliness: 'Дружелюбный',
-      volume: 'Громкий',
-      rationality: 'Эмоциональный',
+      charityTitle: '',
+      charityCategory: '',
+      friendliness: '',
+      volume: '',
+      rationality: '',
       identityColorsProgress: '',
       identityColorsCheck: '',
       identityColors: '',
@@ -93,7 +93,9 @@ export default class App extends React.Component {
     this.setState({ mode: 'edit' })
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.getFromStorage()
+  }
 
   getFromStorage = () => {
     parent.postMessage(

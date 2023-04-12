@@ -2,11 +2,6 @@ import { saveImageDataOrExportToFigma } from './images'
 import { createDesignFrame } from './render'
 import { helloWorld } from './design'
 
-figma.clientStorage.getAsync('test').then(charityData => {
-  console.log('from controller', charityData)
-  figma.ui.postMessage({ type: 'get-storage', data: charityData })
-})
-
 figma.showUI(__html__)
 figma.ui.resize(400, 680)
 

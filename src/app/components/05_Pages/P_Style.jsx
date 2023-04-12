@@ -16,7 +16,9 @@ export default class P_Style extends React.PureComponent {
     return (
       <div className="P_Feed">
         <A_Spacer size={64} />
+
         <A_Text text="Скачать брендбук" type="lead" />
+
         <A_Spacer size={24} />
         <A_Text text="Вы можете скачать материалы фирменного стиля (логотип, шрифты, палитру, паттерн и брендбук&nbsp;с правилами) и использовать их для создания дизайна вне плагина. " />
         <A_Spacer size={12} />
