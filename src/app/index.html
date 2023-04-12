@@ -29,24 +29,17 @@
   }
 
   window.onmessage = async event => {
-    const bytes = event.data.pluginMessage.image
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-    const imageData = await decode(canvas, ctx, bytes)
-    const newBytes = await encode(canvas, ctx, imageData)
+    if (event.data.pluginMessage.type === 'get-storage') {
+      let charityData
 
-    window.parent.postMessage(
-      {
-        pluginMessage: {
-          type: 'image-in-bytes',
-          id: event.data.pluginMessage.id,
-          bytes: newBytes
-        }
-      },
-      '*'
-    )
+
+      charityData = JSON.stringify(event.data.pluginMessage.charityData)
+
+      const reactWrapper = document.getElementById('react-page')
+      reactWrapper.setAttribute('charityData', charityData)
+    }
   }
 </script>
 
-<div id="react-page">
+<div id="react-page" charityData="">
 </div>

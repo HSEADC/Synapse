@@ -95,6 +95,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.getFromStorage()
+    this.setCharityData()
   }
 
   getFromStorage = () => {
@@ -108,9 +109,30 @@ export default class App extends React.Component {
     )
   }
 
-  setToStorage = () => {
-    console.log('SET TO STORAGE')
+  setCharityData = () => {
+    let charityDataFromHTML = this.getCharityDataFromHTML()
+    if (charityDataFromHTML === '') {
+      setTimeout(this.setCharityData, 100)
+    } else {
+      let charityData = JSON.parse(charityDataFromHTML)
+      this.setState({
+        charityTitle: charityData.charityTitle,
+        charityCategory: charityData.charityCategory,
+        friendliness: charityData.friendliness,
+        volume: charityData.volume,
+        rationality: charityData.rationality,
+        identityColors: charityData.identityColors,
+        identityFonts: charityData.identityFonts,
+        identityPatternParams: charityData.identityPatternParams
+      })
+    }
+  }
 
+  getCharityDataFromHTML = () => {
+    return document.getElementById('react-page').getAttribute('charityData')
+  }
+
+  setToStorage = () => {
     parent.postMessage(
       {
         pluginMessage: {

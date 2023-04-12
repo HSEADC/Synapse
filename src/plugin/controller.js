@@ -5,7 +5,7 @@ import { helloWorld } from './design'
 figma.showUI(__html__)
 figma.ui.resize(400, 680)
 
-figma.ui.onmessage = msg => {
+figma.ui.onmessage = async msg => {
   if (msg.type === 'image-in-bytes') {
     saveImageDataOrExportToFigma(msg.id, msg.bytes)
   } else if (msg.type === 'set-storage') {
@@ -20,10 +20,9 @@ figma.ui.onmessage = msg => {
       identityPatternParams: msg.identityPatternParams
     })
   } else if (msg.type === 'get-storage') {
-    figma.clientStorage.getAsync('test').then(charityData => {
-      console.log('from controller', charityData)
-      figma.ui.postMessage({ type: 'get-storage', data: charityData })
-    })
+    const charityData = await figma.clientStorage.getAsync('charityData')
+    figma.ui.postMessage({ type: 'get-storage', charityData: charityData })
+    // console.log('from controller', charityData)
   } else if (msg.type === 'create-frame') {
     helloWorld(msg.template, msg.charityData)
     // console.log('createeee');
