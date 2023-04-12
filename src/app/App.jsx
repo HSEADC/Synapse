@@ -98,6 +98,41 @@ export default class App extends React.Component {
     this.setCharityData()
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const charityData = {
+      charityTitle: this.state.charityTitle,
+      charityCategory: this.state.charityCategory,
+      friendliness: this.state.friendliness,
+      volume: this.state.volume,
+      rationality: this.state.rationality,
+      identityColors: this.state.identityColors,
+      identityFonts: this.state.identityFonts
+    }
+
+    if (
+      prevState.charityCategory != this.state.charityCategory ||
+      prevState.friendliness !== this.state.friendliness ||
+      prevState.volume !== this.state.volume ||
+      prevState.rationality !== this.state.rationality
+    ) {
+      this.setState({
+        identityColorsProgress: '',
+        identityFontsProgress: ''
+      })
+      console.log('upd color???')
+      this.createPalettes(charityData)
+      this.createFontOptions(charityData)
+    }
+
+    if (prevState.identityColors != this.state.identityColors) {
+      this.setState({
+        identityPatternParamsProgress: ''
+      })
+      console.log('upd palette???')
+      this.createPatternParams(charityData)
+    }
+  }
+
   getFromStorage = () => {
     parent.postMessage(
       {
@@ -123,7 +158,10 @@ export default class App extends React.Component {
         rationality: charityData.rationality,
         identityColors: charityData.identityColors,
         identityFonts: charityData.identityFonts,
-        identityPatternParams: charityData.identityPatternParams
+        identityPatternParams: charityData.identityPatternParams,
+        identityColorsProgress: charityData.identityColorsProgress,
+        identityFontsProgress: charityData.identityFontsProgress,
+        identityPatternParamsProgress: charityData.identityPatternParamsProgress
       })
     }
   }
@@ -143,8 +181,12 @@ export default class App extends React.Component {
           volume: this.state.volume,
           rationality: this.state.rationality,
           identityColors: this.state.identityColors,
+          identityColorsProgress: this.state.identityColorsProgress,
           identityFonts: this.state.identityFonts,
-          identityPatternParams: this.state.identityPatternParams
+          identityFontsProgress: this.state.identityFontsProgress,
+          identityPatternParams: this.state.identityPatternParams,
+          identityPatternParamsProgress: this.state
+            .identityPatternParamsProgress
         }
       },
       '*'
@@ -189,6 +231,7 @@ export default class App extends React.Component {
 
   //palette////////////////////////////////////////////////////////////////////////////////////////////////////
   createPalettes = charityData => {
+    console.log('createpalette')
     for (let i = 0; i < 5; i++) {
       const primary = createBaseColor(charityData)
       const palette = createScientificPalette(primary, charityData)
@@ -217,13 +260,7 @@ export default class App extends React.Component {
   }
 
   startPalettePreviews = charityData => {
-    if (
-      this.state.charityCategory !== this.state.identityColorsCheck.category ||
-      this.state.friendliness !== this.state.identityColorsCheck.friendliness ||
-      this.state.volume !== this.state.identityColorsCheck.volume ||
-      this.state.rationality !== this.state.identityColorsCheck.rationality
-    ) {
-      this.setState({ identityColorsProgress: '' })
+    if (!this.state.identityColorsProgress) {
       this.createPalettes(charityData)
     }
     this.nextStepIdentity()
@@ -271,15 +308,7 @@ export default class App extends React.Component {
 
   //pattern////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  startPatternPreviews = () => {
-    const charityData = {
-      charityCategory: this.state.charityCategory,
-      friendliness: this.state.friendliness,
-      volume: this.state.volume,
-      rationality: this.state.rationality,
-      identityColors: this.state.identityColors,
-      identityFonts: this.state.identityFonts
-    }
+  createPatternParams = charityData => {
     if (this.state.identityPatternParamsProgress[0]) {
     } else {
       for (let i = 0; i < 2; i++) {
@@ -292,6 +321,21 @@ export default class App extends React.Component {
         }))
       }
     }
+  }
+
+  startPatternPreviews = () => {
+    const charityData = {
+      charityCategory: this.state.charityCategory,
+      friendliness: this.state.friendliness,
+      volume: this.state.volume,
+      rationality: this.state.rationality,
+      identityColors: this.state.identityColors,
+      identityFonts: this.state.identityFonts
+    }
+    if (!this.state.identityPatternParamsProgress) {
+      this.createPatternParams(charityData)
+    }
+
     this.nextStepIdentity()
   }
 
@@ -300,17 +344,9 @@ export default class App extends React.Component {
   }
 
   //font////////////////////////////////////////////////////////////////////////////////////////////////////
-  startFontsPreviews = () => {
+  createFontOptions = charityData => {
     let check = ['', '']
-    const charityData = {
-      charityTitle: this.state.charityTitle,
-      charityCategory: this.state.charityCategory,
-      friendliness: this.state.friendliness,
-      volume: this.state.volume,
-      rationality: this.state.rationality,
-      identityColors: this.state.identityColors,
-      identityFonts: this.state.identityFonts
-    }
+
     if (this.state.identityFontsProgress[0]) {
     } else {
       for (let i = 0; i < 2; i++) {
@@ -335,6 +371,22 @@ export default class App extends React.Component {
 
       this.setState({ identityFontsProgress })
     }
+  }
+
+  startFontsPreviews = () => {
+    const charityData = {
+      charityTitle: this.state.charityTitle,
+      charityCategory: this.state.charityCategory,
+      friendliness: this.state.friendliness,
+      volume: this.state.volume,
+      rationality: this.state.rationality,
+      identityColors: this.state.identityColors,
+      identityFonts: this.state.identityFonts
+    }
+    if (!this.state.identityFontsProgress) {
+      this.createFontOptions(charityData)
+    }
+
     this.nextStepIdentity()
   }
 

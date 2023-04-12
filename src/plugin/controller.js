@@ -17,8 +17,13 @@ figma.ui.onmessage = async msg => {
       rationality: msg.rationality,
       identityColors: msg.identityColors,
       identityFonts: msg.identityFonts,
-      identityPatternParams: msg.identityPatternParams
+      identityPatternParams: msg.identityPatternParams,
+      identityColorsProgress: msg.identityColorsProgress,
+      identityFontsProgress: msg.identityFontsProgress,
+      identityPatternParamsProgress: msg.identityPatternParamsProgress
     })
+
+    console.log('msg.identityColorsProgress', msg.identityColorsProgress)
   } else if (msg.type === 'get-storage') {
     const charityData = await figma.clientStorage.getAsync('charityData')
     figma.ui.postMessage({ type: 'get-storage', charityData: charityData })
