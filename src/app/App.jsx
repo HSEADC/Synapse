@@ -109,27 +109,27 @@ export default class App extends React.Component {
       identityFonts: this.state.identityFonts
     }
 
-    if (
-      prevState.charityCategory != this.state.charityCategory ||
-      prevState.friendliness !== this.state.friendliness ||
-      prevState.volume !== this.state.volume ||
-      prevState.rationality !== this.state.rationality
-    ) {
-      this.setState({
-        identityColorsProgress: '',
-        identityFontsProgress: ''
-      })
-      console.log('upd color???')
-      this.createPalettes(charityData)
-      this.createFontOptions(charityData)
-    }
+    if (prevState.charityCategory) {
+      if (
+        prevState.charityCategory != this.state.charityCategory ||
+        prevState.friendliness !== this.state.friendliness ||
+        prevState.volume !== this.state.volume ||
+        prevState.rationality !== this.state.rationality
+      ) {
+        this.setState({
+          identityColorsProgress: '',
+          identityFontsProgress: ''
+        })
+        this.createPalettes(charityData)
+        this.createFontOptions(charityData)
+      }
 
-    if (prevState.identityColors != this.state.identityColors) {
-      this.setState({
-        identityPatternParamsProgress: ''
-      })
-      console.log('upd palette???')
-      this.createPatternParams(charityData)
+      if (prevState.identityColors != this.state.identityColors) {
+        this.setState({
+          identityPatternParamsProgress: ''
+        })
+        this.createPatternParams(charityData)
+      }
     }
   }
 

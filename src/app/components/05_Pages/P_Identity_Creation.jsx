@@ -11,6 +11,7 @@ import A_PatternPreview from '../01_Atoms/A_PatternPreview'
 import A_FontPreview from '../01_Atoms/A_FontPreview'
 import { log } from 'prettierr/parser-postcss'
 import M_PalettePreviews from '../02_Molecules/M_PalettePreviews'
+import { compareObjects } from '../../../plugin/utilities'
 
 import { fontList } from '../../../libraries/fonts'
 
@@ -245,17 +246,19 @@ export default class P_Identity_Creation extends React.PureComponent {
           <div className="M_PatternPreviews">
             <A_PatternPreview
               identityPatternParamsProgress={identityPatternParamsProgress[0]}
-              checked={
-                identityPatternParams == identityPatternParamsProgress[0]
-              }
+              checked={compareObjects(
+                identityPatternParams,
+                identityPatternParamsProgress[0]
+              )}
               index={1}
               savePattern={savePattern}
             />
             <A_PatternPreview
               identityPatternParamsProgress={identityPatternParamsProgress[1]}
-              checked={
-                identityPatternParams == identityPatternParamsProgress[1]
-              }
+              checked={compareObjects(
+                identityPatternParams,
+                identityPatternParamsProgress[1]
+              )}
               index={2}
               savePattern={savePattern}
             />
