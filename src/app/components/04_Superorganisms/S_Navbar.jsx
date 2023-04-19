@@ -3,13 +3,37 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import A_Button from '../01_Atoms/A_Button'
 import M_ProgressBar from '../02_Molecules/M_Progress_Bar'
+import M_MenuPopup from '../02_Molecules/M_MenuPopup'
 
 export default class S_Navbar extends React.PureComponent {
   constructor(props) {
     super(props)
+
+    this.wrapperRef = React.createRef()
+    this.handleClickOutside = this.handleClickOutside.bind(this)
+
+    this.state = {
+      menuPopupCheck: false
+    }
   }
 
-  handleClick = () => {}
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside)
+  }
+
+  checkThis() {
+    this.setState({ menuPopupCheck: !this.state.menuPopupCheck })
+  }
+
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+      this.checkThis()
+    }
+  }
 
   render() {
     const {
@@ -46,7 +70,14 @@ export default class S_Navbar extends React.PureComponent {
               Стиль
             </p>
           </div>
-          <A_Button type="icon" icon="more" />
+          <A_Button
+            type="icon"
+            icon="more"
+            handleClick={() => {
+              this.checkThis()
+            }}
+          />
+          {this.state.menuPopupCheck && <M_MenuPopup ref={this.wrapperRef} />}
           <div
             className={`indicator ${
               templates.tab === 'Шаблоны' ? '' : 'moved'

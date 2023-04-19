@@ -21,6 +21,7 @@
     font-weight: 400;
     font-size: 15px;
     line-height: 20px;
+    
 
     &.main {
         display: flex;
@@ -51,9 +52,13 @@
             left: 0;
         }
 
+        // .more:hover {
+        //     background-color: $link;
+        // }
+
         .indicator {
             position: absolute;
-            height: 2px;
+            height: 2.5px;
             background-color: $link;
             width: 70px;
             left: 16px;

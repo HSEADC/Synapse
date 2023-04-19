@@ -33,6 +33,26 @@
     text-underline-offset: 3px;
 }
 
+.footnote_link {
+    color: $identity-black;
+    text-decoration: none;
+    transition: $hover-transition;
+
+    &:hover {
+        color: $link;
+    }
+}
+
+.caption_link {
+    color: $secondary-text;
+    text-decoration: none;
+    transition: $hover-transition;
+
+    &:hover {
+        color: $link;
+    }
+}
+
 .blue_lead {
     padding-top: 26px;
     background-color: $identity-additional-blue;

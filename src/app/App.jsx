@@ -29,7 +29,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'identity_creation',
+      view: 'feed',
       onboardingStep: 1,
       identityCreationStep: 1,
       charityTitle: '',
@@ -44,6 +44,7 @@ export default class App extends React.Component {
       identityFonts: '',
       identityPatternParamsProgress: '',
       identityPatternParams: '',
+      menuPopup: false,
       templates: {
         tab: 'Шаблоны',
         section: ''
@@ -536,7 +537,8 @@ export default class App extends React.Component {
       fonts,
       identityColorsProgress,
       identityPatternParamsProgress,
-      identityFontsProgress
+      identityFontsProgress,
+      menuPopup
     } = this.state
     if (view === 'login') {
       return (
