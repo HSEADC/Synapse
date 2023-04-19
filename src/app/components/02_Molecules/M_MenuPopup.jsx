@@ -2,15 +2,31 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import A_Spacer from '../01_Atoms/A_Spacer'
 import A_Divider from '../01_Atoms/A_Divider'
+import onClickOutside from 'react-onclickoutside'
+import A_Button from '../01_Atoms/A_Button'
 
-export default class M_MenuPopup extends React.PureComponent {
+class M_MenuPopup extends React.PureComponent {
   constructor(props) {
     super(props)
   }
 
+  handleClickOutside = () => {
+    const { checkThis } = this.props
+    checkThis()
+  }
+
   render() {
+    const { menuPopupCheck, checkThis } = this.props
+
     return (
       <div className="M_MenuPopup">
+        <A_Button
+          type="icon"
+          icon="more"
+          handleClick={() => {
+            checkThis()
+          }}
+        />
         <A_Divider />
         <div>
           <a
@@ -52,3 +68,5 @@ export default class M_MenuPopup extends React.PureComponent {
     )
   }
 }
+
+export default onClickOutside(M_MenuPopup)
