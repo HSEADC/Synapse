@@ -11,7 +11,7 @@ import A_PatternPreview from '../01_Atoms/A_PatternPreview'
 import A_FontPreview from '../01_Atoms/A_FontPreview'
 import { log } from 'prettierr/parser-postcss'
 import M_PalettePreviews from '../02_Molecules/M_PalettePreviews'
-import { compareObjects } from '../../../plugin/utilities'
+import { compareObjects, doesFontExist } from '../../../plugin/utilities'
 
 import { fontList } from '../../../libraries/fonts'
 
@@ -61,7 +61,8 @@ export default class P_Identity_Creation extends React.PureComponent {
       startFontsPreviews,
       newPalettePreview,
       saveFont,
-      saveIdentity
+      saveIdentity,
+      downloadFont
     } = actions
 
     if (identityCreationStep === 1) {
@@ -307,7 +308,15 @@ export default class P_Identity_Creation extends React.PureComponent {
             primButtonText="Продолжить"
             primButtonHandleClick={nextStepIdentity}
             primButtonDisable={true}
-            primButtonDisableParam={identityFonts !== ''}
+            primButtonDisableParam={
+              identityFonts && doesFontExist(identityFonts)
+            }
+            secButtonText="Скачать шрифт"
+            secButtonHandleClick={() => {
+              downloadFont(identityFonts)
+            }}
+            secButtonDisable={true}
+            secButtonDisableParam={identityFonts !== ''}
           />
         </div>
       )

@@ -104,6 +104,20 @@ export default class S_Navbar extends React.PureComponent {
               />
             )}
             {text}
+            <A_Button
+              type="icon"
+              icon="more"
+              handleClick={() => {
+                this.checkThis()
+              }}
+            />
+            {this.state.menuPopupCheck && (
+              <M_MenuPopup
+                menuPopupCheck={this.state.menuPopupCheck}
+                checkThis={this.checkThis}
+                ref={this.wrapperRef}
+              />
+            )}
           </div>
           {progressBar && (
             <M_ProgressBar totalSteps={totalSteps} currentStep={currentStep} />

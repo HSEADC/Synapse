@@ -21,7 +21,14 @@
     &.secondary {
         background-color: $background;
         color: $identity-black;
-        border: 1.5px solid #131D27;
+        border: 1.5px solid $identity-black;
+
+        &:disabled {
+            background-color: $background !important;
+            border: 1.5px solid $dividers !important;
+            color: $dividers !important;
+            cursor: default !important;
+        }
     }
 
     &.tertiary {

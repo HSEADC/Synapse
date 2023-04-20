@@ -29,7 +29,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'feed',
+      view: 'identity_creation',
       onboardingStep: 1,
       identityCreationStep: 1,
       charityTitle: '',
@@ -395,6 +395,96 @@ export default class App extends React.Component {
     this.setState({ identityFonts: font })
   }
 
+  downloadFont = font => {
+    var link
+    switch (font) {
+      case 'Alegreya':
+        link = 'https://fonts.google.com/download?family=Alegreya'
+        break
+
+      case 'Arial Narrow':
+        link = 'http://allydesign.org/fonts/arial-narrow/arial-narrow.ttf'
+        break
+
+      case 'Arial':
+        link = 'http://allydesign.org/fonts/arial/arial.ttf'
+        break
+
+      case 'Felidae':
+        link = 'http://allydesign.org/fonts/felidae/felidae.ttf'
+        break
+
+      case 'Forum':
+        link = 'https://fonts.google.com/download?family=Forum'
+        break
+
+      case 'Kharkiv Tone':
+        link = 'http://allydesign.org/fonts/kharkiv/kharkiv.ttf'
+        break
+
+      case 'Le Murmure':
+        link = 'http://allydesign.org/fonts/le-murmure/le-murmure.otf'
+        break
+
+      case 'Lora':
+        link = 'https://fonts.google.com/download?family=Lora'
+        break
+
+      case 'Miedinger':
+        link = 'http://allydesign.org/fonts/miedinger/miedinger.otf'
+        break
+
+      case 'Manrope':
+        link = 'https://fonts.google.com/download?family=Manrope'
+        break
+
+      case 'Neutral Face':
+        link = 'http://allydesign.org/fonts/neutral-face/neutral-face.otf'
+        break
+
+      case 'Old Standard':
+        link = 'https://fonts.google.com/download?family=Old Standard TT'
+        break
+
+      case 'Playfair':
+        link = 'https://fonts.google.com/download?family=Playfair Display'
+        break
+
+      case 'Plup':
+        link = 'http://allydesign.org/fonts/plup/plup.ttf'
+        break
+
+      case 'Ramona':
+        link = 'http://allydesign.org/fonts/ramona/ramona.zip'
+        break
+
+      case 'Soyuz Grotesk':
+        link = 'http://allydesign.org/fonts/soyuz/soyuz-grotesk.OTF'
+        break
+
+      case 'St.Sign':
+        link = 'http://allydesign.org/fonts/st.sing/st.sing.ttf'
+        break
+
+      case 'St.Sign Condensed':
+        link = 'http://allydesign.org/fonts/st.sing/st.sing-condensed.ttf'
+        break
+
+      case 'Times New Roman':
+        link = 'http://allydesign.org/fonts/times-new-roman/times-new-roman.zip'
+        break
+
+      case 'Truin':
+        link = 'http://allydesign.org/fonts/truin/truin.ttf'
+        break
+
+      case 'Unlimited Pie':
+        link = 'http://allydesign.org/fonts/unlimited-pie/unlimited-pie.otf'
+        break
+    }
+    window.open(link, '_blank')
+  }
+
   nextStep = () => {
     this.setState(prevState => {
       const onboardingStep = prevState.onboardingStep + 1
@@ -514,7 +604,8 @@ export default class App extends React.Component {
       createDesign: this.createDesign,
       backToTemplates: this.backToTemplates,
       openTemplate: this.openTemplate,
-      backToSection: this.backToSection
+      backToSection: this.backToSection,
+      downloadFont: this.downloadFont
     }
 
     const charityData = {
