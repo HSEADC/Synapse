@@ -9,6 +9,7 @@ import A_FooterLogo from '../01_Atoms/A_FooterLogo'
 import A_Template from '../01_Atoms/A_Template'
 import A_Error from '../01_Atoms/A_Error'
 import { templatesList } from '../../../libraries/templates'
+import { doesFontExist } from '../../../plugin/utilities'
 
 export default class P_Templates extends React.PureComponent {
   constructor(props) {
@@ -101,20 +102,23 @@ export default class P_Templates extends React.PureComponent {
             <A_DropdownButton text="Категория" />
           </div>
           <div className="feedSections">
-            <A_Error
-              text={[
-                'Похоже, у вас не установлен фирменный шрифт. Не волнуйстесь, все хорошо. ',
-                <a
-                  className="hyperlink"
-                  onClick={() => {
-                    downloadFont(charityData.identityFonts)
-                  }}
-                >
-                  Установите
-                </a>,
-                ' его и перезапустите Figma.'
-              ]}
-            />
+            {!doesFontExist(charityData.identityFonts) && (
+              <A_Error
+                text={[
+                  'Похоже, у вас не установлен фирменный шрифт. Не волнуйстесь, все хорошо. ',
+                  <a
+                    className="hyperlink"
+                    onClick={() => {
+                      downloadFont(charityData.identityFonts)
+                    }}
+                  >
+                    Установите
+                  </a>,
+                  ' его и перезапустите Figma.'
+                ]}
+              />
+            )}
+
             <M_FeedSection
               text="Квадратный пост"
               src="square"
