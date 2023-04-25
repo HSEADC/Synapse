@@ -7,10 +7,72 @@ import A_DropdownButton from '../01_Atoms/A_Dropdownbutton'
 import M_FeedSection from '../02_Molecules/M_FeedSection'
 import A_FooterLogo from '../01_Atoms/A_FooterLogo'
 import A_Template from '../01_Atoms/A_Template'
+import A_Error from '../01_Atoms/A_Error'
+import { templatesList } from '../../../libraries/templates'
 
 export default class P_Templates extends React.PureComponent {
   constructor(props) {
     super(props)
+  }
+
+  renderTemplates(section) {
+    const { actions, charityData } = this.props
+
+    switch (section) {
+      case 'square':
+        section = 'A'
+        break
+
+      case 'story':
+        section = 'B'
+        break
+
+      case 'avatar':
+        section = 'C'
+        break
+
+      case 'squareAvatar':
+        section = 'D'
+        break
+
+      case 'highlights':
+        section = 'E'
+        break
+
+      case 'twitterCover':
+        section = 'F'
+        break
+
+      case 'vkCover':
+        section = 'G'
+        break
+
+      case 'facebookCover':
+        section = 'H'
+        break
+
+      case 'businessCard':
+        section = 'I'
+        break
+
+      case 'blank':
+        section = 'J'
+        break
+    }
+
+    let templatesListForSection = templatesList[section]
+    let templatesToRender = []
+    Object.keys(templatesListForSection).forEach(function(key, index) {
+      templatesToRender.push(
+        <A_Template
+          templateID={key}
+          key={key}
+          actions={actions}
+          charityData={charityData}
+        />
+      )
+    })
+    return templatesToRender
   }
 
   render() {
@@ -20,7 +82,8 @@ export default class P_Templates extends React.PureComponent {
       handleChange,
       chooseSection,
       backToTemplates,
-      backToSection
+      backToSection,
+      downloadFont
     } = actions
 
     if (templates.section === '') {
@@ -38,6 +101,20 @@ export default class P_Templates extends React.PureComponent {
             <A_DropdownButton text="Категория" />
           </div>
           <div className="feedSections">
+            <A_Error
+              text={[
+                'Похоже, у вас не установлен фирменный шрифт. Не волнуйстесь, все хорошо. ',
+                <a
+                  className="hyperlink"
+                  onClick={() => {
+                    downloadFont(charityData.identityFonts)
+                  }}
+                >
+                  Установите
+                </a>,
+                ' его и перезапустите Figma.'
+              ]}
+            />
             <M_FeedSection
               text="Квадратный пост"
               src="square"
@@ -55,12 +132,12 @@ export default class P_Templates extends React.PureComponent {
             />
             <M_FeedSection
               text="Квадратный аватар"
-              src="avatar"
+              src="squareAvatar"
               chooseSection={chooseSection}
             />
             <M_FeedSection
               text="Обложка хайлайтс"
-              src="avatar"
+              src="highlights"
               chooseSection={chooseSection}
             />
             <M_FeedSection
@@ -70,17 +147,17 @@ export default class P_Templates extends React.PureComponent {
             />
             <M_FeedSection
               text="Шапка Twitter"
-              src="facebookCover"
+              src="twitterCover"
               chooseSection={chooseSection}
             />
             <M_FeedSection
               text="Шапка VK"
-              src="facebookCover"
+              src="vkCover"
               chooseSection={chooseSection}
             />
             <M_FeedSection
               text="Визитка"
-              src="facebookCover"
+              src="businessCard"
               chooseSection={chooseSection}
             />
             <M_FeedSection
@@ -109,30 +186,7 @@ export default class P_Templates extends React.PureComponent {
             <A_Text text={templates.sectionTitle} type="lead" />
           </div>
           <div className="templatesWrapper">
-            <A_Template
-              type={templates.section}
-              actions={actions}
-              templateID={1}
-              templateTitle="Bokkk"
-            />
-            <A_Template
-              type={templates.section}
-              actions={actions}
-              templateID={1}
-              templateTitle="Bokkk"
-            />
-            <A_Template
-              type={templates.section}
-              actions={actions}
-              templateID={1}
-              templateTitle="Bokkk"
-            />
-            <A_Template
-              type={templates.section}
-              actions={actions}
-              templateID={1}
-              templateTitle="Bokkk"
-            />
+            {this.renderTemplates(templates.section)}
           </div>
           <A_FooterLogo />
         </div>

@@ -29,7 +29,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'identity_creation',
+      view: 'feed',
       onboardingStep: 1,
       identityCreationStep: 1,
       charityTitle: '',

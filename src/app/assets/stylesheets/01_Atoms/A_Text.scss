@@ -31,6 +31,7 @@
 .hyperlink {
     color: $link;
     text-underline-offset: 3px;
+    transition: $hover-transition;
 }
 
 .footnote_link {

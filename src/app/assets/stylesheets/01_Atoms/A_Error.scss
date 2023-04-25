@@ -1,0 +1,28 @@
+@import '../vars.scss';
+
+.A_Error {
+    border: 2px solid $danger;
+    background: $background;
+    border-radius: 8px;
+    color: $danger;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 475;
+    letter-spacing: -0.025em;
+    font-size: 15px;
+    line-height: 20px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: flex-start;
+
+    a {
+        color: $danger;
+        text-decoration: underline;
+
+        &:hover {
+            filter: $link-hover-filter;
+        }
+    }
+}

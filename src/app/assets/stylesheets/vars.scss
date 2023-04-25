@@ -1,5 +1,6 @@
 $secondary-text: #95989F;
 $link: #0074C7;
+$danger: #E9421D;
 
 $icons: #5C6C72;
 $dividers: #DBDDE0;
@@ -11,7 +12,8 @@ $background: #FFFFFF;
 $identity-black: #131D27;
 $identity-additional-blue: #D8EEFF;
 $identity-additional-gray: #EAECEF;
-;
 
 $hover-transition: all 0.1s ease-in;
 $hover-outline: 4px solid $identity-black;
+
+$link-hover-filter: opacity(0.7);

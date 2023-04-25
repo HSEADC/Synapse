@@ -5,27 +5,63 @@
     border: 1px solid #DADDE1;
     border-radius: 8px;
     display: block;
+    overflow: hidden;
 
-    &.square {
+
+    //квадрат, квадратный аватар 
+    &.A, &.D {
         height: 176px;
         width: 176px;
     }
 
-    &.avatar {
+    //история
+    &.B {
+        height: 320px;
+        width: 176px;
+    }
+
+    //круглый аватар, хайлайтс
+    &.C, &.E {
         height: 176px;
         width: 176px;
         border-radius: 50%;
     }
 
-    &.story {
-        height: 320px;
-        width: 176px;
-    }
-
-    &.facebookCover {
+    //Тви обложка
+    &.F {
         width: 368px;
         height: 176px;
         grid-column-start: 1;
         grid-column-end: 2;
+    }
+
+    //VK обложка
+    &.G {
+        width: 368px;
+        height: 176px;
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+
+    //ФБ обложка
+    &.H {
+        width: 368px;
+        height: 176px;
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+
+    //визитка
+    &.I {
+        width: 368px;
+        height: 176px;
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+
+    //A4
+    &.J {
+        height: 320px;
+        width: 176px;
     }
 }
