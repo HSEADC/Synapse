@@ -537,6 +537,7 @@ export default class App extends React.Component {
 
   backToSection = () => {
     this.setState({
+      view: 'feed',
       templates: {
         tab: 'Шаблоны',
         section: this.state.templates.section,

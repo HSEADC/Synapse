@@ -23,6 +23,34 @@
         filter: opacity(0.90);
     }
 
+    &.toolbar {
+        height: 44px;
+        width: 44px;
+        border-radius: 8px;
+        background-color: $background;
+
+        &.add {
+            background-color: transparent;
+            background-image: url('../../assets/images/icons/add.svg');
+        }
+
+        &.image {
+            background-image: url('../../assets/images/icons/image.svg');
+        }
+
+        &.text {
+            background-image: url('../../assets/images/icons/text.svg');
+        }
+
+        &.logo {
+            background-image: url('../../assets/images/icons/logo.svg');
+        }
+
+        &.pattern {
+            background-image: url('../../assets/images/icons/pattern.svg');
+        }
+    }
+
     &.secondary {
         background-color: $background;
         color: $identity-black;

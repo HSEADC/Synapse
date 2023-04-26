@@ -30,7 +30,9 @@ export default class S_Navbar extends React.PureComponent {
       prevStepIdentity,
       type,
       feedTab,
-      templates
+      templates,
+      backToSection,
+      backToFeed
     } = this.props
 
     if (type === 'main') {
@@ -85,6 +87,9 @@ export default class S_Navbar extends React.PureComponent {
                 icon="back"
                 handleClick={prevStepIdentity}
               />
+            )}
+            {backToFeed && (
+              <A_Button type="icon" icon="back" handleClick={backToSection} />
             )}
             {text}
             <A_Button
