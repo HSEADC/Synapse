@@ -1,6 +1,6 @@
 const A = {
   A1: {
-    title: 'Обложка мероприятия с фото',
+    title: 'Обложка события',
     height: 1080,
     width: 1080
   },
@@ -24,13 +24,13 @@ const A = {
 const B = {
   B1: {
     title: 'Обложка мероприятия с фото',
-    height: 1980,
+    height: 1920,
     width: 1080
   },
   B2: {
     title: 'Карточка с текстом',
-    height: 1080,
-    width: 1980
+    height: 1920,
+    width: 1080
   }
 }
 

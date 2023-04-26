@@ -9,26 +9,34 @@ export default class A_Template extends React.PureComponent {
   }
 
   render() {
-    const { charityData, actions, templateID } = this.props
+    const { charityData, actions, templateID, fullsize } = this.props
     const { openTemplate } = actions
     const format = Array.from(templateID)[0]
     const template = templatesList[format][templateID]
 
     const classes = classnames({
       A_Template: true,
-      [`${format}`]: true
+      [`${format}`]: true,
+      fullsize: fullsize
     })
 
-    return (
-      <div
-        // style={{height: template.height + 'px', width: template.width + 'px'}}
-        className={classes}
-        onClick={() => {
-          openTemplate(templateID)
-        }}
-      >
-        {templateID}
-      </div>
-    )
+    if (fullsize) {
+      return (
+        <div className="template_wrapper">
+          <div className={classes}>{templateID}</div>
+        </div>
+      )
+    } else {
+      return (
+        <div
+          className={classes}
+          onClick={() => {
+            openTemplate(templateID, template.title)
+          }}
+        >
+          {templateID}
+        </div>
+      )
+    }
   }
 }

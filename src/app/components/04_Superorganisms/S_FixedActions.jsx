@@ -18,16 +18,17 @@ export default class S_FixedActions extends React.PureComponent {
       primButtonDisableParam,
       primButtonDisable,
       secButtonDisableParam,
-      secButtonDisable
+      secButtonDisable,
+      noBorder
     } = this.props
 
     const classes = classnames({
-      A_TextInput: true,
-      [`${type}`]: true
+      S_FixedActions: true,
+      noBorder: noBorder
     })
 
     return (
-      <div className="S_FixedActions">
+      <div className={classes}>
         {secButtonText && (
           <A_Button
             text={secButtonText}

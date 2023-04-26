@@ -2,10 +2,16 @@
 
 .A_Template {
     background: $background;
-    border: 1px solid #DADDE1;
+    outline: 1px solid $dividers;
     border-radius: 8px;
     display: block;
     overflow: hidden;
+    cursor: pointer;
+    transition: $hover-transition;
+
+    &:hover {
+        outline: 1px solid $secondary-text;
+    }
 
 
     //квадрат, квадратный аватар 
@@ -30,7 +36,7 @@
     //Тви обложка
     &.F {
         width: 368px;
-        height: 176px;
+        height: 122.67px;
         grid-column-start: 1;
         grid-column-end: 2;
     }
@@ -38,7 +44,7 @@
     //VK обложка
     &.G {
         width: 368px;
-        height: 176px;
+        height: 122.67px;
         grid-column-start: 1;
         grid-column-end: 2;
     }
@@ -46,7 +52,7 @@
     //ФБ обложка
     &.H {
         width: 368px;
-        height: 176px;
+        height: 140px;
         grid-column-start: 1;
         grid-column-end: 2;
     }
@@ -54,14 +60,54 @@
     //визитка
     &.I {
         width: 368px;
-        height: 176px;
+        height: 204.44px;
         grid-column-start: 1;
         grid-column-end: 2;
     }
 
     //A4
     &.J {
-        height: 320px;
         width: 176px;
+        height: 249px;
     }
+
+      &.fullsize {
+
+        cursor: default;
+        transition: none;
+
+        &:hover {
+            outline: 1px solid $dividers;
+        }
+
+        &.A, &.D {
+            height: 368px;
+            width: 368px;
+        }
+
+        &.B {
+            height: 368px;
+            width: 207px;
+        }
+
+        &.C, &.E {
+            height: 368px;
+            width: 368px;
+        }
+
+        &.J {
+            width: 265.7px;
+            height: 368px;
+        }
+      }
+}
+
+.template_wrapper {
+    background-color: $identity-additional-gray;
+    height: 100vw;
+    width: 100vw;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

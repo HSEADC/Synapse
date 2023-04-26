@@ -10,6 +10,8 @@ import A_Template from '../01_Atoms/A_Template'
 import A_Error from '../01_Atoms/A_Error'
 import { templatesList } from '../../../libraries/templates'
 import { doesFontExist } from '../../../plugin/utilities'
+import S_FixedActions from '../04_Superorganisms/S_FixedActions'
+import M_TemplateInfo from '../02_Molecules/M_TemplateInfo'
 
 export default class P_Templates extends React.PureComponent {
   constructor(props) {
@@ -202,6 +204,26 @@ export default class P_Templates extends React.PureComponent {
             <A_Button type="icon" icon="backBig" handleClick={backToSection} />
             <A_Text text={templates.templateTitle} type="lead" />
           </div>
+          <A_Template
+            templateID={templates.templateID}
+            actions={actions}
+            charityData={charityData}
+            fullsize={true}
+          />
+          <M_TemplateInfo
+            sizes={[
+              templatesList[Array.from(templates.templateID)[0]][
+                templates.templateID
+              ].height,
+              templatesList[Array.from(templates.templateID)[0]][
+                templates.templateID
+              ].width
+            ]}
+          />
+          <S_FixedActions
+            primButtonText="Использовать шаблон"
+            noBorder={true}
+          />
         </div>
       )
     }
