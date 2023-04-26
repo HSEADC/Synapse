@@ -9,32 +9,15 @@ export default class S_Navbar extends React.PureComponent {
   constructor(props) {
     super(props)
 
-    // this.wrapperRef = React.createRef()
-    // this.handleClickOutside = this.handleClickOutside.bind(this)
-
     this.state = {
       menuPopupCheck: false
     }
   }
 
-  // componentDidMount() {
-  //   document.addEventListener('mousedown', this.handleClickOutside)
-  // }
-
-  // componentWillUnmount() {
-  //   document.removeEventListener('mousedown', this.handleClickOutside)
-  // }
-
   checkThis = () => {
     this.setState({ menuPopupCheck: !this.state.menuPopupCheck })
     console.log(this.state.menuPopupCheck)
   }
-
-  // handleClickOutside(event) {
-  //   if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
-  //     this.checkThis()
-  //   }
-  // }
 
   render() {
     const {
@@ -115,7 +98,6 @@ export default class S_Navbar extends React.PureComponent {
               <M_MenuPopup
                 menuPopupCheck={this.state.menuPopupCheck}
                 checkThis={this.checkThis}
-                ref={this.wrapperRef}
               />
             )}
           </div>

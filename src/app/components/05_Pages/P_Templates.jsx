@@ -86,7 +86,8 @@ export default class P_Templates extends React.PureComponent {
       chooseSection,
       backToTemplates,
       backToSection,
-      downloadFont
+      downloadFont,
+      useTemplate
     } = actions
 
     if (templates.section === '') {
@@ -222,6 +223,7 @@ export default class P_Templates extends React.PureComponent {
           />
           <S_FixedActions
             primButtonText="Использовать шаблон"
+            primButtonHandleClick={useTemplate}
             noBorder={true}
           />
         </div>

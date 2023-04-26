@@ -17,11 +17,21 @@
     cursor: pointer;
     border-radius: 8px;
     font-size: 15px;
+    transition: $hover-transition;
+
+    &:hover {
+        filter: opacity(0.90);
+    }
 
     &.secondary {
         background-color: $background;
         color: $identity-black;
         border: 1.5px solid $identity-black;
+        transition: $hover-transition;
+
+        &:hover {
+            filter: opacity(0.70);
+        }
 
         &:disabled {
             background-color: $background !important;

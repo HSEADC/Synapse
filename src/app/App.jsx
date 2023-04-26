@@ -6,6 +6,7 @@ import P_Feed from './components/05_Pages/P_Feed'
 import { Style } from './components/05_Pages/P_Style'
 import P_IdentityCreation from './components/05_Pages/P_Identity_Creation'
 import P_Onboarding from './components/05_Pages/P_Onboarding'
+import P_DesignCreation from './components/05_Pages/P_DesignCreation'
 
 import { getRandom } from '../plugin/utilities'
 import { createBaseColor, createScientificPalette } from '../plugin/color'
@@ -581,6 +582,13 @@ export default class App extends React.Component {
     this.setState({ view: 'feed' })
   }
 
+  useTemplate = () => {
+    console.log('createee')
+    this.setState({
+      view: 'design_creation'
+    })
+  }
+
   //RENDER/////////////////////////////////////////////////////////////////////////
 
   render() {
@@ -605,7 +613,8 @@ export default class App extends React.Component {
       backToTemplates: this.backToTemplates,
       openTemplate: this.openTemplate,
       backToSection: this.backToSection,
-      downloadFont: this.downloadFont
+      downloadFont: this.downloadFont,
+      useTemplate: this.useTemplate
     }
 
     const charityData = {
@@ -628,8 +637,7 @@ export default class App extends React.Component {
       fonts,
       identityColorsProgress,
       identityPatternParamsProgress,
-      identityFontsProgress,
-      menuPopup
+      identityFontsProgress
     } = this.state
     if (view === 'login') {
       return (
@@ -655,6 +663,14 @@ export default class App extends React.Component {
           identityColorsProgress={identityColorsProgress}
           identityPatternParamsProgress={identityPatternParamsProgress}
           identityFontsProgress={identityFontsProgress}
+        />
+      )
+    } else if (view === 'design_creation') {
+      return (
+        <P_DesignCreation
+          actions={actions}
+          charityData={charityData}
+          templates={templates}
         />
       )
     } else if (view === 'feed') {
