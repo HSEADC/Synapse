@@ -56,8 +56,6 @@ function addCircle(
   ).item
   circle.style.backgroundColor = `rgb(${circleColor.r * 255}, ${circleColor.g *
     255}, ${circleColor.b * 255})`
-  // console.log('colors', colors.primary, colors.adOne, colors.adTwo, 'switch', patternParams.colorSwitch.adOne, patternParams.colorSwitch.adTwo, 'circleColor', circleColor);
-  // console.log(`rgb(${circleColor.r * 255}, ${circleColor.g * 255}, ${circleColor.b * 255})`);
 
   container.appendChild(circle)
 }

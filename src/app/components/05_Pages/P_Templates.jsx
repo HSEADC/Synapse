@@ -6,7 +6,7 @@ import A_TextInput from '../01_Atoms/A_TextInput'
 import A_DropdownButton from '../01_Atoms/A_Dropdownbutton'
 import M_FeedSection from '../02_Molecules/M_FeedSection'
 import A_FooterLogo from '../01_Atoms/A_FooterLogo'
-import A_Template from '../01_Atoms/A_Template'
+import O_Template from '../03_Organisms/O_Template'
 import A_Error from '../01_Atoms/A_Error'
 import { templatesList } from '../../../libraries/templates'
 import { doesFontExist } from '../../../plugin/utilities'
@@ -67,7 +67,7 @@ export default class P_Templates extends React.PureComponent {
     let templatesToRender = []
     Object.keys(templatesListForSection).forEach(function(key, index) {
       templatesToRender.push(
-        <A_Template
+        <O_Template
           templateID={key}
           key={key}
           actions={actions}
@@ -205,7 +205,7 @@ export default class P_Templates extends React.PureComponent {
             <A_Button type="icon" icon="backBig" handleClick={backToSection} />
             <A_Text text={templates.templateTitle} type="lead" />
           </div>
-          <A_Template
+          <O_Template
             templateID={templates.templateID}
             actions={actions}
             charityData={charityData}

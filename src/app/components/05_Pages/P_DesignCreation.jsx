@@ -6,7 +6,7 @@ import A_TextInput from '../01_Atoms/A_TextInput'
 import A_DropdownButton from '../01_Atoms/A_Dropdownbutton'
 import M_FeedSection from '../02_Molecules/M_FeedSection'
 import A_FooterLogo from '../01_Atoms/A_FooterLogo'
-import A_Template from '../01_Atoms/A_Template'
+import O_Template from '../03_Organisms/O_Template'
 import S_Navbar from '../04_Superorganisms/S_Navbar'
 import M_Toolbar from '../02_Molecules/M_Toolbar'
 import S_FixedActions from '../04_Superorganisms/S_FixedActions'
@@ -30,7 +30,7 @@ export default class P_DesignCreation extends React.PureComponent {
         <div className="sectionNav">
           <M_Toolbar />
         </div>
-        <A_Template
+        <O_Template
           templateID={templates.templateID}
           actions={actions}
           fullsize={true}

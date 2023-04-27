@@ -2,22 +2,91 @@ const A = {
   A1: {
     title: 'Обложка события',
     height: 1080,
-    width: 1080
+    width: 1080,
+    background: 'primary',
+    elements: {
+      e1: {
+        type: 'img',
+        x: 0.1,
+        y: 0.1,
+        height: 0.4,
+        width: 0.8
+      },
+      e2: {
+        type: 'text',
+        text: 'hiii',
+        x: 0.1,
+        y: 0.6,
+        height: 0.4,
+        width: 0.8
+      }
+    }
   },
   A2: {
     title: 'Карточка с текстом',
     height: 1080,
-    width: 1080
+    width: 1080,
+    elements: {
+      e1: {
+        type: 'img',
+        x: 0.1,
+        y: 0.1,
+        height: 0.4,
+        width: 0.8
+      },
+      e2: {
+        type: 'text',
+        text: 'hiii',
+        x: 0.5,
+        y: 0.5,
+        height: 0.4,
+        width: 0.8
+      }
+    }
   },
   A3: {
     title: 'Обложка мероприятия с фото',
     height: 1080,
-    width: 1080
+    width: 1080,
+    elements: {
+      e1: {
+        type: 'img',
+        x: 0.1,
+        y: 0.1,
+        height: 0.4,
+        width: 0.8
+      },
+      e2: {
+        type: 'text',
+        text: 'hiii',
+        x: 0.5,
+        y: 0.5,
+        height: 0.4,
+        width: 0.8
+      }
+    }
   },
   A4: {
     title: 'Карточка с текстом',
     height: 1080,
-    width: 1080
+    width: 1080,
+    elements: {
+      e1: {
+        type: 'img',
+        x: 0.1,
+        y: 0.1,
+        height: 0.4,
+        width: 0.8
+      },
+      e2: {
+        type: 'text',
+        text: 'hiii',
+        x: 0.5,
+        y: 0.5,
+        height: 0.4,
+        width: 0.8
+      }
+    }
   }
 }
 

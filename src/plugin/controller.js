@@ -25,10 +25,8 @@ figma.ui.onmessage = async msg => {
   } else if (msg.type === 'get-storage') {
     const charityData = await figma.clientStorage.getAsync('charityData')
     figma.ui.postMessage({ type: 'get-storage', charityData: charityData })
-    // console.log('from controller', charityData)
   } else if (msg.type === 'create-frame') {
     helloWorld(msg.template, msg.charityData)
-    // console.log('createeee');
   } else {
     console.log('unknown message')
   }

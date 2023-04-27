@@ -182,7 +182,6 @@ export default class App extends React.Component {
       identityFontsProgress: charityData.identityFontsProgress,
       identityPatternParamsProgress: charityData.identityPatternParamsProgress
     })
-    console.log(this.state)
   }
 
   getCharityDataFromHTML = () => {
@@ -250,7 +249,6 @@ export default class App extends React.Component {
 
   //palette////////////////////////////////////////////////////////////////////////////////////////////////////
   createPalettes = charityData => {
-    console.log('createpalette')
     for (let i = 0; i < 5; i++) {
       const primary = createBaseColor(charityData)
       const palette = createScientificPalette(primary, charityData)
@@ -602,7 +600,6 @@ export default class App extends React.Component {
   }
 
   useTemplate = () => {
-    console.log('createee')
     this.setState({
       view: 'design_creation'
     })

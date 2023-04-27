@@ -1,6 +1,6 @@
 @import '../vars.scss';
 
-.A_Template {
+.O_Template {
     background: $background;
     outline: 1px solid $dividers;
     border-radius: 8px;
@@ -8,6 +8,7 @@
     overflow: hidden;
     cursor: pointer;
     transition: $hover-transition;
+    position: relative;
 
     &:hover {
         outline: 1px solid $secondary-text;

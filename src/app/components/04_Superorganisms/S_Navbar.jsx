@@ -16,7 +16,6 @@ export default class S_Navbar extends React.PureComponent {
 
   checkThis = () => {
     this.setState({ menuPopupCheck: !this.state.menuPopupCheck })
-    console.log(this.state.menuPopupCheck)
   }
 
   render() {
