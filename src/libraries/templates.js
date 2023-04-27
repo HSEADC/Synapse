@@ -1,3 +1,7 @@
+let borderRadiuses = {
+  small: '5%/10%'
+}
+
 const A = {
   A1: {
     title: 'Обложка события',
@@ -10,7 +14,8 @@ const A = {
         x: 0.1,
         y: 0.1,
         height: 0.4,
-        width: 0.8
+        width: 0.8,
+        borderRadius: borderRadiuses.small
       },
       e2: {
         type: 'text',
@@ -26,6 +31,7 @@ const A = {
     title: 'Карточка с текстом',
     height: 1080,
     width: 1080,
+    background: 'background',
     elements: {
       e1: {
         type: 'img',
@@ -48,6 +54,7 @@ const A = {
     title: 'Обложка мероприятия с фото',
     height: 1080,
     width: 1080,
+    background: 'background',
     elements: {
       e1: {
         type: 'img',
@@ -70,6 +77,7 @@ const A = {
     title: 'Карточка с текстом',
     height: 1080,
     width: 1080,
+    background: 'background',
     elements: {
       e1: {
         type: 'img',

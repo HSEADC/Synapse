@@ -7,7 +7,17 @@ export default class A_EditorElement extends React.PureComponent {
   }
 
   render() {
-    const { type, x, y, height, width, text, color, charityData } = this.props
+    const {
+      type,
+      x,
+      y,
+      height,
+      width,
+      text,
+      color,
+      charityData,
+      borderRadius
+    } = this.props
 
     const classes = classnames({
       A_EditorElement: true,
@@ -51,7 +61,8 @@ export default class A_EditorElement extends React.PureComponent {
         top: y * 100 + '%',
         height: height * 100 + '%',
         width: width * 100 + '%',
-        backgroundColor: 'red'
+        backgroundColor: 'red',
+        borderRadius: borderRadius
       }
     }
 

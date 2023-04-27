@@ -18,7 +18,7 @@ export default class O_Template extends React.PureComponent {
     console.log(template)
     let elements = []
     Object.keys(template.elements).forEach(element => {
-      console.log('element', template.elements[element])
+      // console.log('element', template.elements[element])
       elements.push(
         <A_EditorElement
           {...template.elements[element]}
@@ -34,6 +34,7 @@ export default class O_Template extends React.PureComponent {
     const { openTemplate } = actions
     const format = Array.from(templateID)[0]
     const template = templatesList[format][templateID]
+    const colors = charityData.identityColors
 
     const classes = classnames({
       O_Template: true,
@@ -41,12 +42,51 @@ export default class O_Template extends React.PureComponent {
       fullsize: fullsize
     })
 
-    console.log('template.elements', template.elements)
+    let background
+    switch (template.background) {
+      case 'primary':
+        background = colors.primary
+        console.log('primary')
+        break
+
+      case 'background':
+        background = colors.background
+        break
+
+      case 'adOne':
+        background = colors.adOne
+        break
+
+      case 'adTwo':
+        background = colors.adTwo
+        break
+
+      case 'text':
+        background = colors.text
+        break
+    }
+
+    console.log(
+      'template',
+      template,
+      'template.background',
+      template.background,
+      'colors',
+      colors,
+      'background',
+      background
+    )
 
     if (fullsize) {
       return (
         <div className="template_wrapper">
-          <div className={classes}>
+          <div
+            className={classes}
+            style={{
+              backgroundColor: `rgba(${background.r * 255}, ${background.g *
+                255}, ${background.b * 255}, 1)`
+            }}
+          >
             {this.renderElements(template, charityData)}
           </div>
         </div>
@@ -57,6 +97,10 @@ export default class O_Template extends React.PureComponent {
           className={classes}
           onClick={() => {
             openTemplate(templateID, template.title)
+          }}
+          style={{
+            backgroundColor: `rgba(${background.r * 255}, ${background.g *
+              255}, ${background.b * 255}, 1)`
           }}
         >
           {this.renderElements(template, charityData)}
