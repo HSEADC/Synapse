@@ -29,7 +29,7 @@ export default class P_Onboarding extends React.PureComponent {
             генерировать картинки для соцсетей, визитки, и&nbps;многое другое.{' '}
             <a
               className="hyperlink"
-              href="http://allydesign.org/"
+              href="https://allydesign.org/"
               target="_blank"
             >
               Узнать больше

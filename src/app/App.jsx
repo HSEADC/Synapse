@@ -96,7 +96,6 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getFromStorage()
     this.setCharityData()
   }
 
@@ -146,26 +145,44 @@ export default class App extends React.Component {
     )
   }
 
+  // setCharityData = () => {
+  //   let charityDataFromHTML = this.getCharityDataFromHTML()
+  //   if (charityDataFromHTML === '') {
+  //     setTimeout(this.setCharityData, 100)
+  //   } else {
+  //     let charityData = JSON.parse(charityDataFromHTML)
+  //     this.setState({
+  //       charityTitle: charityData.charityTitle,
+  //       charityCategory: charityData.charityCategory,
+  //       friendliness: charityData.friendliness,
+  //       volume: charityData.volume,
+  //       rationality: charityData.rationality,
+  //       identityColors: charityData.identityColors,
+  //       identityFonts: charityData.identityFonts,
+  //       identityPatternParams: charityData.identityPatternParams,
+  //       identityColorsProgress: charityData.identityColorsProgress,
+  //       identityFontsProgress: charityData.identityFontsProgress,
+  //       identityPatternParamsProgress: charityData.identityPatternParamsProgress
+  //     })
+  //   }
+  // }
+
   setCharityData = () => {
-    let charityDataFromHTML = this.getCharityDataFromHTML()
-    if (charityDataFromHTML === '') {
-      setTimeout(this.setCharityData, 100)
-    } else {
-      let charityData = JSON.parse(charityDataFromHTML)
-      this.setState({
-        charityTitle: charityData.charityTitle,
-        charityCategory: charityData.charityCategory,
-        friendliness: charityData.friendliness,
-        volume: charityData.volume,
-        rationality: charityData.rationality,
-        identityColors: charityData.identityColors,
-        identityFonts: charityData.identityFonts,
-        identityPatternParams: charityData.identityPatternParams,
-        identityColorsProgress: charityData.identityColorsProgress,
-        identityFontsProgress: charityData.identityFontsProgress,
-        identityPatternParamsProgress: charityData.identityPatternParamsProgress
-      })
-    }
+    let charityData = JSON.parse(this.props.charityData)
+    this.setState({
+      charityTitle: charityData.charityTitle,
+      charityCategory: charityData.charityCategory,
+      friendliness: charityData.friendliness,
+      volume: charityData.volume,
+      rationality: charityData.rationality,
+      identityColors: charityData.identityColors,
+      identityFonts: charityData.identityFonts,
+      identityPatternParams: charityData.identityPatternParams,
+      identityColorsProgress: charityData.identityColorsProgress,
+      identityFontsProgress: charityData.identityFontsProgress,
+      identityPatternParamsProgress: charityData.identityPatternParamsProgress
+    })
+    console.log(this.state)
   }
 
   getCharityDataFromHTML = () => {
@@ -404,15 +421,15 @@ export default class App extends React.Component {
         break
 
       case 'Arial Narrow':
-        link = 'http://allydesign.org/fonts/arial-narrow/arial-narrow.ttf'
+        link = 'https://allydesign.org/fonts/arial-narrow/arial-narrow.ttf'
         break
 
       case 'Arial':
-        link = 'http://allydesign.org/fonts/arial/arial.ttf'
+        link = 'https://allydesign.org/fonts/arial/arial.ttf'
         break
 
       case 'Felidae':
-        link = 'http://allydesign.org/fonts/felidae/felidae.ttf'
+        link = 'https://allydesign.org/fonts/felidae/felidae.ttf'
         break
 
       case 'Forum':
@@ -420,11 +437,11 @@ export default class App extends React.Component {
         break
 
       case 'Kharkiv Tone':
-        link = 'http://allydesign.org/fonts/kharkiv/kharkiv.ttf'
+        link = 'https://allydesign.org/fonts/kharkiv/kharkiv.ttf'
         break
 
       case 'Le Murmure':
-        link = 'http://allydesign.org/fonts/le-murmure/le-murmure.otf'
+        link = 'https://allydesign.org/fonts/le-murmure/le-murmure.otf'
         break
 
       case 'Lora':
@@ -432,7 +449,7 @@ export default class App extends React.Component {
         break
 
       case 'Miedinger':
-        link = 'http://allydesign.org/fonts/miedinger/miedinger.otf'
+        link = 'https://allydesign.org/fonts/miedinger/miedinger.otf'
         break
 
       case 'Manrope':
@@ -440,7 +457,7 @@ export default class App extends React.Component {
         break
 
       case 'Neutral Face':
-        link = 'http://allydesign.org/fonts/neutral-face/neutral-face.otf'
+        link = 'https://allydesign.org/fonts/neutral-face/neutral-face.otf'
         break
 
       case 'Old Standard':
@@ -452,35 +469,36 @@ export default class App extends React.Component {
         break
 
       case 'Plup':
-        link = 'http://allydesign.org/fonts/plup/plup.ttf'
+        link = 'https://allydesign.org/fonts/plup/plup.ttf'
         break
 
       case 'Ramona':
-        link = 'http://allydesign.org/fonts/ramona/ramona.zip'
+        link = 'https://allydesign.org/fonts/ramona/ramona.zip'
         break
 
       case 'Soyuz Grotesk':
-        link = 'http://allydesign.org/fonts/soyuz/soyuz-grotesk.OTF'
+        link = 'https://allydesign.org/fonts/soyuz/soyuz-grotesk.OTF'
         break
 
       case 'St.Sign':
-        link = 'http://allydesign.org/fonts/st.sing/st.sing.ttf'
+        link = 'https://allydesign.org/fonts/st.sing/st.sing.ttf'
         break
 
       case 'St.Sign Condensed':
-        link = 'http://allydesign.org/fonts/st.sing/st.sing-condensed.ttf'
+        link = 'https://allydesign.org/fonts/st.sing/st.sing-condensed.ttf'
         break
 
       case 'Times New Roman':
-        link = 'http://allydesign.org/fonts/times-new-roman/times-new-roman.zip'
+        link =
+          'https://allydesign.org/fonts/times-new-roman/times-new-roman.zip'
         break
 
       case 'Truin':
-        link = 'http://allydesign.org/fonts/truin/truin.ttf'
+        link = 'https://allydesign.org/fonts/truin/truin.ttf'
         break
 
       case 'Unlimited Pie':
-        link = 'http://allydesign.org/fonts/unlimited-pie/unlimited-pie.otf'
+        link = 'https://allydesign.org/fonts/unlimited-pie/unlimited-pie.otf'
         break
     }
     window.open(link, '_blank')

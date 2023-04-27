@@ -28,17 +28,19 @@
     return imageData
   }
 
-  window.onmessage = async event => {
-    if (event.data.pluginMessage.type === 'get-storage') {
-      let charityData
+  // window.onmessage = async event => {
+  //   if (event.data.pluginMessage.type === 'get-storage') {
+  //     let charityData
 
 
-      charityData = JSON.stringify(event.data.pluginMessage.charityData)
+  //     charityData = JSON.stringify(event.data.pluginMessage.charityData)
 
-      const reactWrapper = document.getElementById('react-page')
-      reactWrapper.setAttribute('charityData', charityData)
-    }
-  }
+  //     const reactWrapper = document.getElementById('react-page')
+  //     reactWrapper.setAttribute('charityData', charityData)
+
+  //     //move to index.jsx render react here
+  //   }
+  // }
 </script>
 
 <div id="react-page" charityData="">
