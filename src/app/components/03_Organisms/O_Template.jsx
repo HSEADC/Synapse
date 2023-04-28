@@ -15,7 +15,7 @@ export default class O_Template extends React.PureComponent {
   }
 
   renderElements(template, charityData) {
-    console.log(template)
+    // console.log(template)
     let elements = []
     Object.keys(template.elements).forEach(element => {
       // console.log('element', template.elements[element])
@@ -46,7 +46,6 @@ export default class O_Template extends React.PureComponent {
     switch (template.background) {
       case 'primary':
         background = colors.primary
-        console.log('primary')
         break
 
       case 'background':
@@ -65,17 +64,6 @@ export default class O_Template extends React.PureComponent {
         background = colors.text
         break
     }
-
-    console.log(
-      'template',
-      template,
-      'template.background',
-      template.background,
-      'colors',
-      colors,
-      'background',
-      background
-    )
 
     if (fullsize) {
       return (

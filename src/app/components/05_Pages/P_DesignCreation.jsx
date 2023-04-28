@@ -34,6 +34,7 @@ export default class P_DesignCreation extends React.PureComponent {
           templateID={templates.templateID}
           actions={actions}
           fullsize={true}
+          charityData={charityData}
         />
         <S_FixedActions primButtonText="Создать" noBorder={true} />
       </div>

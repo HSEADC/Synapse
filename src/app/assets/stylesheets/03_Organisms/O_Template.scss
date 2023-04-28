@@ -9,6 +9,7 @@
     cursor: pointer;
     transition: $hover-transition;
     position: relative;
+    container-type: inline-size;
 
     &:hover {
         outline: 1px solid $secondary-text;
@@ -76,6 +77,7 @@
 
         cursor: default;
         transition: none;
+
 
         &:hover {
             outline: 1px solid $dividers;

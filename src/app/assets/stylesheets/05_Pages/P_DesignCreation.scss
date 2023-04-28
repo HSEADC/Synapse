@@ -9,4 +9,12 @@
         padding: 64px 0 16px 0;
         gap: 12px;
     }
+
+    .A_EditorElement {
+        cursor: pointer;
+
+        &:hover {
+            outline: 3px solid $link;
+        }
+    }
 }

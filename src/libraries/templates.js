@@ -2,6 +2,11 @@ let borderRadiuses = {
   small: '5%/10%'
 }
 
+let fontSizes = {
+  body: '5cqw',
+  headline: '10cqw'
+}
+
 const A = {
   A1: {
     title: 'Обложка события',
@@ -19,11 +24,33 @@ const A = {
       },
       e2: {
         type: 'text',
-        text: 'hiii',
+        text: 'Cбор теплых вещей для бездомных',
+        size: fontSizes.headline,
         x: 0.1,
-        y: 0.6,
+        y: 0.55,
         height: 0.4,
-        width: 0.8
+        width: '80%',
+        color: 'background'
+      },
+      e3: {
+        type: 'text',
+        text: '10.05 12:00–16:00',
+        size: fontSizes.body,
+        x: 0.1,
+        y: 0.85,
+        height: 0.4,
+        width: 'auto',
+        color: 'background'
+      },
+      e4: {
+        type: 'text',
+        text: 'Новая Голландия',
+        size: fontSizes.body,
+        x: 0.5,
+        y: 0.85,
+        height: 0.4,
+        width: 'auto',
+        color: 'background'
       }
     }
   },
@@ -38,15 +65,17 @@ const A = {
         x: 0.1,
         y: 0.1,
         height: 0.4,
-        width: 0.8
+        width: 'auto'
       },
       e2: {
         type: 'text',
         text: 'hiii',
+        size: '5rem',
         x: 0.5,
         y: 0.5,
         height: 0.4,
-        width: 0.8
+        width: 'auto',
+        color: 'primary'
       }
     }
   },
@@ -66,10 +95,12 @@ const A = {
       e2: {
         type: 'text',
         text: 'hiii',
+        size: '5rem',
         x: 0.5,
         y: 0.5,
         height: 0.4,
-        width: 0.8
+        width: 'auto',
+        color: 'primary'
       }
     }
   },
@@ -84,15 +115,17 @@ const A = {
         x: 0.1,
         y: 0.1,
         height: 0.4,
-        width: 0.8
+        width: 'auto'
       },
       e2: {
         type: 'text',
         text: 'hiii',
+        size: '5rem',
         x: 0.5,
         y: 0.5,
         height: 0.4,
-        width: 0.8
+        width: 'auto',
+        color: 'primary'
       }
     }
   }

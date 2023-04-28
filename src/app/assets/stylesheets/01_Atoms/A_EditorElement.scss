@@ -1,0 +1,7 @@
+@import '../vars.scss';
+
+.A_EditorElement {
+    &.img {
+        object-fit: cover;
+    }
+}
