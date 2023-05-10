@@ -10,6 +10,7 @@ import O_Template from '../03_Organisms/O_Template'
 import S_Navbar from '../04_Superorganisms/S_Navbar'
 import M_Toolbar from '../02_Molecules/M_Toolbar'
 import S_FixedActions from '../04_Superorganisms/S_FixedActions'
+import { templatesList } from '../../../libraries/templates'
 
 export default class P_DesignCreation extends React.PureComponent {
   constructor(props) {
@@ -18,7 +19,9 @@ export default class P_DesignCreation extends React.PureComponent {
 
   render() {
     const { actions, charityData, templates } = this.props
-    const { handleChange, chooseSection, backToSection } = actions
+    const { handleChange, chooseSection, backToSection, createDesign } = actions
+    const format = Array.from(templates.templateID)[0]
+    const template = templatesList[format][templates.templateID]
 
     return (
       <div className="P_DesignCreation">
@@ -36,7 +39,11 @@ export default class P_DesignCreation extends React.PureComponent {
           fullsize={true}
           charityData={charityData}
         />
-        <S_FixedActions primButtonText="Создать" noBorder={true} />
+        <S_FixedActions
+          primButtonText="Создать"
+          primButtonHandleClick={() => createDesign(template, charityData)}
+          noBorder={true}
+        />
       </div>
     )
   }

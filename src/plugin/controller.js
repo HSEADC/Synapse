@@ -1,5 +1,5 @@
 import { saveImageDataOrExportToFigma } from './images'
-import { createDesignFrame } from './render'
+import { renderFigmaFrame } from './render'
 import { helloWorld } from './design'
 
 figma.showUI(__html__)
@@ -26,7 +26,7 @@ figma.ui.onmessage = async msg => {
     const charityData = await figma.clientStorage.getAsync('charityData')
     figma.ui.postMessage({ type: 'get-storage', charityData: charityData })
   } else if (msg.type === 'create-frame') {
-    helloWorld(msg.template, msg.charityData)
+    renderFigmaFrame(msg.template, msg.charityData)
   } else {
     console.log('unknown message')
   }

@@ -13,7 +13,7 @@ async function helloWorld(template, charityData) {
 
   text.x = 10
   text.y = -20
-  await figma.loadFontAsync(text.fontName)
+  // await figma.loadFontAsync(text.fontName)
   text.characters = 'Hello world!'
   text.fontSize = 220
   text.letterSpacing = {

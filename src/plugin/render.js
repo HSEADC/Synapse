@@ -21,6 +21,26 @@ function renderFigmaTemplate(imagesForExport) {
   figma.viewport.scrollAndZoomIntoView(mainFrame)
 }
 
+function renderFigmaFrame(template, charityData) {
+  console.log('render figma frame')
+  const frame = figma.createFrame()
+  frame.resize(template.height, template.height)
+
+  const colors = charityData.identityColors
+  frame.fills = [
+    {
+      type: 'SOLID',
+      color: {
+        r: colors[template.background].r,
+        g: colors[template.background].g,
+        b: colors[template.background].b
+      }
+    }
+  ]
+  // figma.viewport.scrollAndZoomIntoView([frame])
+  // console.log('frame created')
+}
+
 function createDesignFrame() {
   const frame = figma.createFrame()
   const color = createBaseColor()
@@ -44,4 +64,4 @@ function createDesignFrame() {
   return frame
 }
 
-export { renderFigmaTemplate, createDesignFrame }
+export { renderFigmaTemplate, createDesignFrame, renderFigmaFrame }
