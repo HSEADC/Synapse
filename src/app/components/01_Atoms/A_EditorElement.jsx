@@ -21,8 +21,6 @@ export default class A_EditorElement extends React.PureComponent {
       borderRadius
     } = this.props
 
-    console.log('props', this.props)
-
     const classes = classnames({
       A_EditorElement: true,
       [`${type}`]: true
