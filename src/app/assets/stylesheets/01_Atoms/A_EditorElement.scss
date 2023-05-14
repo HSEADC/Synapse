@@ -4,4 +4,8 @@
     &.img {
         object-fit: cover;
     }
+
+    &.pattern {
+        overflow: hidden;
+    }
 }

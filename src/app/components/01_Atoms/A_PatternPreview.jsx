@@ -10,9 +10,11 @@ export default class A_PatternPreview extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { identityPatternParamsProgress, index } = this.props
+    const { identityPatternParamsProgress } = this.props
+    var component = this,
+      node = ReactDOM.findDOMNode(component)
 
-    renderPattern(identityPatternParamsProgress, index)
+    renderPattern(identityPatternParamsProgress, node)
   }
 
   render() {

@@ -4,24 +4,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createElement } from 'react'
 
-// function createCircle(frame) {
-//   const circleElement = document.createElement('div')
-//   circleElement.classList.add('circle')
-
-//   const left =
-//     Math.floor(Math.random() * (frame.clientWidth / gridModule)) * gridModule
-//   const top =
-//     Math.floor(Math.random() * (frame.clientHeight / gridModule)) * gridModule
-
-//   circleElement.style.top = [top, 'px'].join('')
-//   circleElement.style.left = [left, 'px'].join('')
-//   circleElement.style.width = [gridModule, 'px'].join('')
-//   circleElement.style.height = [gridModule, 'px'].join('')
-//   circleElement.style.backgroundColor = sample(colors)
-
-//   frame.appendChild(circleElement)
-// }
-
 function addCircle(
   patternParams,
   circleSize,
@@ -115,14 +97,15 @@ function generatePatternParams(charityData) {
   return patternParamsProgress
 }
 
-function renderPattern(patternParams, index) {
+function renderPattern(patternParams, container) {
   let colors = patternParams.colors
-  const container = document.getElementById(`container${index}`)
+  // const container = document.getElementById(`container${index}`)
 
   const canvasSize = {
     width: container.offsetWidth,
     height: container.offsetHeight
   }
+  console.log('canvasSize.heigh', canvasSize.height)
 
   let circleSize
   let gridModuleSize

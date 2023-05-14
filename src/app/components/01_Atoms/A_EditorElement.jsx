@@ -1,10 +1,23 @@
 import classnames from 'classnames'
 import React from 'react'
+import ReactDOM from 'react-dom'
 import placeholder1 from '../../assets/images/placeholders/1.jpg'
+import { renderPattern } from '../../../plugin/pattern'
 
 export default class A_EditorElement extends React.PureComponent {
   constructor(props) {
     super(props)
+  }
+
+  componentDidMount() {
+    const { charityData, type } = this.props
+
+    if (type === 'pattern') {
+      const { identityPatternParams } = charityData
+      var component = this,
+        node = ReactDOM.findDOMNode(component)
+      renderPattern(identityPatternParams, node)
+    }
   }
 
   render() {
@@ -93,7 +106,14 @@ export default class A_EditorElement extends React.PureComponent {
         break
 
       case 'pattern':
-        return <div className={classes}>pattern</div>
+        styleDeclaration = {
+          position: 'absolute',
+          left: x * 100 + '%',
+          top: y * 100 + '%',
+          height: height * 100 + '%',
+          width: width * 100 + '%'
+        }
+        return <div className={classes} style={styleDeclaration}></div>
         break
     }
   }

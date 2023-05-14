@@ -80,27 +80,28 @@ const A = {
     }
   },
   A3: {
-    title: 'Обложка мероприятия с фото',
+    title: 'Текст с паттерном',
     height: 1080,
     width: 1080,
     background: 'background',
     elements: {
       e1: {
-        type: 'img',
-        x: 0.1,
-        y: 0.1,
-        height: 0.4,
-        width: 0.8
+        type: 'pattern',
+        x: 0,
+        y: 0,
+        height: 0.2,
+        width: 1
       },
       e2: {
         type: 'text',
-        text: 'hiii',
-        size: '5rem',
-        x: 0.5,
-        y: 0.5,
+        text:
+          'В российском обществе есть запрос на укрепление взаимодействия НКО с государственными структурами для решения ​​проблем здравоохранения, образования и социальной сферы',
+        size: '0.3rem',
+        x: 0.1,
+        y: 0.3,
         height: 0.4,
         width: 'auto',
-        color: 'primary'
+        color: 'text'
       }
     }
   },
