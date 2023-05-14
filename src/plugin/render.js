@@ -37,10 +37,8 @@ function renderFigmaFrame(template, charityData) {
   Object.values(template.elements).map(element => {
     switch (element.type) {
       case 'text':
-        console.log('charityData.identityFonts', charityData.identityFonts)
         ;(async () => {
           const text = figma.createText()
-          console.log('create text')
 
           text.x = element.x * template.width
           text.y = element.y * template.height
@@ -83,34 +81,42 @@ function renderFigmaFrame(template, charityData) {
         break
 
       case 'img':
-        // placeholder1.getBytesAsync().then(bytes => {
-        //   const image = figma.createImage(bytes)
-        //   console.log('bytes', bytes);
+        console.log('img')
+        ;(async () => {
+          placeholder1.getBytesAsync().then(bytes => {
+            const image = figma.createImage(bytes)
+            console.log('bytes', bytes)
 
-        //   const imageNode = figma.createRectangle()
+            const imageNode = figma.createRectangle()
 
-        //   imageNode.x = element.x * template.width
-        //   imageNode.y = element.y * template.height
-        //   imageNode.resize(element.width * template.width, element.height * template.width)
+            imageNode.x = element.x * template.width
+            imageNode.y = element.y * template.height
+            imageNode.resize(
+              element.width * template.width,
+              element.height * template.width
+            )
 
-        //   let cornerRadius
-        //   switch (element.borderRadius) {
-        //     case '5%/10%':
-        //       cornerRadius = 32
-        //       break;
+            let cornerRadius
+            switch (element.borderRadius) {
+              case '5%/10%':
+                cornerRadius = 32
+                break
 
-        //     default:
-        //       break;
-        //   }
-        //   imageNode.cornerRadius = cornerRadius
-        //   imageNode.fills = [{
-        //       imageHash: image.hash,
-        //       scaleMode: "FILL",
-        //       scalingFactor: 1,
-        //       type: "IMAGE",
-        //     }];
-        //     frame.appendChild(imageNode);
-        //   });
+              default:
+                break
+            }
+            imageNode.cornerRadius = cornerRadius
+            imageNode.fills = [
+              {
+                imageHash: image.hash,
+                scaleMode: 'FILL',
+                scalingFactor: 1,
+                type: 'IMAGE'
+              }
+            ]
+            frame.appendChild(imageNode)
+          })
+        })()
 
         break
 
