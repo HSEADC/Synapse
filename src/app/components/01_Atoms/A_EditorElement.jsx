@@ -58,7 +58,7 @@ export default class A_EditorElement extends React.PureComponent {
           left: x * 100 + '%',
           top: y * 100 + '%',
           // height: height * 100 + '%',
-          width: width,
+          width: width * 100 + '%',
           color: `rgba(${textColor.r * 255}, ${textColor.g *
             255}, ${textColor.b * 255}, 1)`,
           fontSize: size,

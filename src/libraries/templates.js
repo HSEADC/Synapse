@@ -29,7 +29,7 @@ const A = {
         x: 0.1,
         y: 0.55,
         height: 0.4,
-        width: '80%',
+        width: 0.8,
         color: 'background'
       },
       e3: {

@@ -2,18 +2,12 @@ import { getNewFills } from './images'
 import { getStoreLanguage } from './store'
 import { generateRandom, convertHSLtoRGB } from './utilities'
 import { createBaseColor } from './color'
+import placeholder1 from '../app/assets/images/placeholders/1.jpg'
 
-function getImageBytesFromImagesForExportById(id) {
-  const imagesForExport = getStoreImagesForExport()
-  let imageBytes
-
-  imagesForExport.forEach((image, i) => {
-    if (image.id === id) {
-      imageBytes = image.image
-    }
-  })
-
-  return imageBytes
+async function getImageBytes(image) {
+  const bytes = await image.getBytesAsync()
+  console.log('bytes', bytes)
+  return bytes
 }
 
 function renderFigmaTemplate(imagesForExport) {
@@ -73,22 +67,51 @@ function renderFigmaFrame(template, charityData) {
               }
             }
           ]
-
+          text.lineHeight = {
+            value: 100,
+            unit: 'PERCENT'
+          }
+          if (element.width !== 'auto') {
+            text.resize(
+              element.width * template.width,
+              element.height * template.width
+            )
+            text.textAutoResize = 'HEIGHT'
+          }
           frame.appendChild(text)
         })()
         break
 
       case 'img':
-        const image = figma.createRectangle()
+        // placeholder1.getBytesAsync().then(bytes => {
+        //   const image = figma.createImage(bytes)
+        //   console.log('bytes', bytes);
 
-        image.x = 50
-        image.y = 50
+        //   const imageNode = figma.createRectangle()
 
-        image.resize(200, 100)
+        //   imageNode.x = element.x * template.width
+        //   imageNode.y = element.y * template.height
+        //   imageNode.resize(element.width * template.width, element.height * template.width)
 
-        image.fills = [{ type: 'SOLID', color: { r: 1, g: 0, b: 0 } }]
+        //   let cornerRadius
+        //   switch (element.borderRadius) {
+        //     case '5%/10%':
+        //       cornerRadius = 32
+        //       break;
 
-        frame.appendChild(image)
+        //     default:
+        //       break;
+        //   }
+        //   imageNode.cornerRadius = cornerRadius
+        //   imageNode.fills = [{
+        //       imageHash: image.hash,
+        //       scaleMode: "FILL",
+        //       scalingFactor: 1,
+        //       type: "IMAGE",
+        //     }];
+        //     frame.appendChild(imageNode);
+        //   });
+
         break
 
       default:
