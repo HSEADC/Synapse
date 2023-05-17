@@ -31,7 +31,8 @@ export default class A_EditorElement extends React.PureComponent {
       size,
       color,
       charityData,
-      borderRadius
+      borderRadius,
+      background
     } = this.props
 
     const classes = classnames({
@@ -106,12 +107,55 @@ export default class A_EditorElement extends React.PureComponent {
         break
 
       case 'pattern':
+        let patternBackground
+        switch (background) {
+          case 'primary':
+            patternBackground = charityData.identityColors.primary
+            patternBackground = `rgba(${patternBackground.r *
+              255}, ${patternBackground.g * 255}, ${patternBackground.b *
+              255}, 1)`
+            break
+
+          case 'background':
+            patternBackground = charityData.identityColors.background
+            patternBackground = `rgba(${patternBackground.r *
+              255}, ${patternBackground.g * 255}, ${patternBackground.b *
+              255}, 1)`
+            break
+
+          case 'adOne':
+            patternBackground = charityData.identityColors.adOne
+            patternBackground = `rgba(${patternBackground.r *
+              255}, ${patternBackground.g * 255}, ${patternBackground.b *
+              255}, 1)`
+            break
+
+          case 'adTwo':
+            patternBackground = charityData.identityColors.adTwo
+            patternBackground = `rgba(${patternBackground.r *
+              255}, ${patternBackground.g * 255}, ${patternBackground.b *
+              255}, 1)`
+            break
+
+          case 'text':
+            patternBackground = charityData.identityColors.text
+            patternBackground = `rgba(${patternBackground.r *
+              255}, ${patternBackground.g * 255}, ${patternBackground.b *
+              255}, 1)`
+            break
+
+          case 'none':
+            patternBackground = 'none'
+            break
+        }
+
         styleDeclaration = {
           position: 'absolute',
           left: x * 100 + '%',
           top: y * 100 + '%',
           height: height * 100 + '%',
-          width: width * 100 + '%'
+          width: width * 100 + '%',
+          background: 'red !important'
         }
         return <div className={classes} style={styleDeclaration}></div>
         break

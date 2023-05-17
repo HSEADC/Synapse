@@ -1,5 +1,5 @@
 import { getStoreImagesForExport } from './store'
-import { renderFigmaTemplate } from './render'
+import { renderFigmaFrame } from './render'
 
 function saveImageDataOrExportToFigma(id, bytes) {
   let imagesForExport = getStoreImagesForExport()
@@ -19,7 +19,7 @@ function saveImageDataOrExportToFigma(id, bytes) {
   })
 
   if (!status.includes(false)) {
-    renderFigmaTemplate(imagesForExport)
+    renderFigmaFrame(imagesForExport)
   }
 }
 

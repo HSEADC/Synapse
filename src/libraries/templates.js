@@ -1,3 +1,5 @@
+import placeholder1 from '../app/assets/images/placeholders/1.jpg'
+
 let borderRadiuses = {
   small: '5%/10%'
 }
@@ -10,20 +12,24 @@ let fontSizes = {
 const A = {
   A1: {
     title: 'Обложка события',
+    id: 'A1',
     height: 1080,
     width: 1080,
     background: 'primary',
     elements: {
       e1: {
         type: 'img',
+        id: 'e1',
         x: 0.1,
         y: 0.1,
         height: 0.4,
         width: 0.8,
-        borderRadius: borderRadiuses.small
+        borderRadius: borderRadiuses.small,
+        cover: placeholder1
       },
       e2: {
         type: 'text',
+        id: 'e2',
         text: 'Cбор теплых вещей для бездомных',
         size: fontSizes.headline,
         x: 0.1,
@@ -34,6 +40,7 @@ const A = {
       },
       e3: {
         type: 'text',
+        id: 'e3',
         text: '10.05 12:00–16:00',
         size: fontSizes.body,
         x: 0.1,
@@ -44,6 +51,7 @@ const A = {
       },
       e4: {
         type: 'text',
+        id: 'e4',
         text: 'Новая Голландия',
         size: fontSizes.body,
         x: 0.5,
@@ -56,6 +64,7 @@ const A = {
   },
   A2: {
     title: 'Карточка с текстом',
+    id: 'A2',
     height: 1080,
     width: 1080,
     background: 'background',
@@ -81,12 +90,14 @@ const A = {
   },
   A3: {
     title: 'Текст с паттерном',
+    id: 'A3',
     height: 1080,
     width: 1080,
     background: 'background',
     elements: {
       e1: {
         type: 'pattern',
+        background: 'primary',
         x: 0,
         y: 0,
         height: 0.2,
@@ -107,6 +118,7 @@ const A = {
   },
   A4: {
     title: 'Карточка с текстом',
+    id: 'A4',
     height: 1080,
     width: 1080,
     background: 'background',

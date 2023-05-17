@@ -3,19 +3,42 @@ import { getStoreLanguage } from './store'
 import { generateRandom, convertHSLtoRGB } from './utilities'
 import { createBaseColor } from './color'
 import placeholder1 from '../app/assets/images/placeholders/1.jpg'
+import {
+  getCharityData,
+  getCurrentTemplate,
+  getStoreImagesForExport
+} from './store'
 
-async function getImageBytes(image) {
-  const bytes = await image.getBytesAsync()
-  console.log('bytes', bytes)
-  return bytes
+function getImageBytesFromImagesForExportById(id) {
+  const imagesForExport = getStoreImagesForExport()
+  let imageBytes
+
+  imagesForExport.forEach((image, i) => {
+    if (image.id === id) {
+      imageBytes = image.image
+    }
+  })
+
+  return imageBytes
 }
 
-function renderFigmaTemplate(imagesForExport) {
-  figma.currentPage.selection = mainFrame
-  figma.viewport.scrollAndZoomIntoView(mainFrame)
+function renderImage(element, rectangle) {
+  console.log('before get template')
+  let template = getCurrentTemplate()
+  console.log('template', template)
+  let imageID = [template.id, element.id].join()
+  console.log('imageID to render', imageID)
+  const imageBytes = getImageBytesFromImagesForExportById(imageID)
+  console.log('bytes', imageBytes)
+  rectangle.fills = getNewFills(rectangle, imageBytes)
+
+  return rectangle
 }
 
-function renderFigmaFrame(template, charityData) {
+function renderFigmaFrame(imagesForExport) {
+  const charityData = getCharityData()
+  const template = getCurrentTemplate()
+
   const frame = figma.createFrame()
   frame.resize(template.height, template.width)
   frame.x = figma.viewport.center.x + template.width
@@ -81,42 +104,30 @@ function renderFigmaFrame(template, charityData) {
         break
 
       case 'img':
-        console.log('img')
-        ;(async () => {
-          placeholder1.getBytesAsync().then(bytes => {
-            const image = figma.createImage(bytes)
-            console.log('bytes', bytes)
+        const imageNode = figma.createRectangle()
 
-            const imageNode = figma.createRectangle()
+        imageNode.x = element.x * template.width
+        imageNode.y = element.y * template.height
+        imageNode.resize(
+          element.width * template.width,
+          element.height * template.width
+        )
 
-            imageNode.x = element.x * template.width
-            imageNode.y = element.y * template.height
-            imageNode.resize(
-              element.width * template.width,
-              element.height * template.width
-            )
+        console.log('before renderImage')
+        renderImage(element, imageNode)
+        console.log('after renderImage')
 
-            let cornerRadius
-            switch (element.borderRadius) {
-              case '5%/10%':
-                cornerRadius = 32
-                break
+        // let cornerRadius
+        // switch (element.borderRadius) {
+        //   case '5%/10%':
+        //     cornerRadius = 32
+        //     break
 
-              default:
-                break
-            }
-            imageNode.cornerRadius = cornerRadius
-            imageNode.fills = [
-              {
-                imageHash: image.hash,
-                scaleMode: 'FILL',
-                scalingFactor: 1,
-                type: 'IMAGE'
-              }
-            ]
-            frame.appendChild(imageNode)
-          })
-        })()
+        //   default:
+        //     break
+        // }
+        // imageNode.cornerRadius = cornerRadius
+        frame.appendChild(imageNode)
 
         break
 
@@ -149,4 +160,4 @@ function createDesignFrame() {
   return frame
 }
 
-export { renderFigmaTemplate, createDesignFrame, renderFigmaFrame }
+export { createDesignFrame, renderFigmaFrame }

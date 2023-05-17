@@ -1,5 +1,7 @@
 let language = 'latin'
 let imagesForExport = []
+let currentTemplate
+let charityData
 
 function getStoreLanguage() {
   return language
@@ -7,6 +9,22 @@ function getStoreLanguage() {
 
 function setStoreLanguage(newLanguage) {
   language = newLanguage
+}
+
+function getCurrentTemplate() {
+  return currentTemplate
+}
+
+function setCurrentTemplate(newCurrentTemplate) {
+  currentTemplate = newCurrentTemplate
+}
+
+function setCharityData(newCharityData) {
+  charityData = newCharityData
+}
+
+function getCharityData() {
+  return charityData
 }
 
 function getStoreImagesForExport() {
@@ -21,5 +39,9 @@ export {
   getStoreImagesForExport,
   setStoreImagesForExport,
   getStoreLanguage,
-  setStoreLanguage
+  setStoreLanguage,
+  getCurrentTemplate,
+  setCurrentTemplate,
+  setCharityData,
+  getCharityData
 }

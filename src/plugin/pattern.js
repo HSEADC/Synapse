@@ -105,7 +105,6 @@ function renderPattern(patternParams, container) {
     width: container.offsetWidth,
     height: container.offsetHeight
   }
-  console.log('canvasSize.heigh', canvasSize.height)
 
   let circleSize
   let gridModuleSize
