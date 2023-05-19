@@ -89,7 +89,7 @@ function renderFigmaFrame(imagesForExport) {
             }
           ]
           text.lineHeight = {
-            value: 100,
+            value: element.lineHeight.slice(0, -1) * 1,
             unit: 'PERCENT'
           }
           if (element.width !== 'auto') {
