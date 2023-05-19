@@ -12,6 +12,7 @@ figma.ui.resize(400, 680)
 
 figma.ui.onmessage = async msg => {
   if (msg.type === 'image-in-bytes') {
+    // console.log('image-in-bytes', msg.id, msg.bytes);
     saveImageDataOrExportToFigma(msg.id, msg.bytes)
   } else if (msg.type === 'set-storage') {
     figma.clientStorage.setAsync('charityData', {
@@ -31,27 +32,44 @@ figma.ui.onmessage = async msg => {
     const charityData = await figma.clientStorage.getAsync('charityData')
     figma.ui.postMessage({ type: 'get-storage', charityData: charityData })
   } else if (msg.type === 'create-frame') {
-    let newCurrentImages = []
+    let noImageCheck = true
 
-    Object.keys(msg.template.elements).forEach(element => {
-      if (msg.template.elements[element].type === 'img') {
-        console.log('imageID', [msg.template.id, element].join())
-        newCurrentImages.push({
-          id: [msg.template.id, element].join(),
-          image: msg.template.elements[element].cover,
-          loaded: false
-        })
+    Object.values(msg.template.elements).forEach(element => {
+      if (element.type === 'img') {
+        noImageCheck = false
       }
     })
 
-    setCharityData(msg.charityData)
-    setCurrentTemplate(msg.template)
-    setStoreImagesForExport(newCurrentImages)
+    if (noImageCheck) {
+      setCharityData(msg.charityData)
+      setCurrentTemplate(msg.template)
+      renderFigmaFrame(msg.template, msg.charityData)
+    } else {
+      let newCurrentImages = []
 
-    newCurrentImages.forEach(image => {
-      figma.ui.postMessage({ type: 'image', id: image.id, image: image.image })
-    })
-    // renderFigmaFrame(msg.template, msg.charityData)
+      Object.keys(msg.template.elements).forEach(element => {
+        if (msg.template.elements[element].type === 'img') {
+          // console.log('imageID', [msg.template.id, element].join())
+          newCurrentImages.push({
+            id: [msg.template.id, element].join(),
+            image: msg.template.elements[element].cover,
+            loaded: false
+          })
+        }
+      })
+
+      setCharityData(msg.charityData)
+      setCurrentTemplate(msg.template)
+      setStoreImagesForExport(newCurrentImages)
+
+      newCurrentImages.forEach(image => {
+        figma.ui.postMessage({
+          type: 'image',
+          id: image.id,
+          image: image.image
+        })
+      })
+    }
   } else {
     console.log('unknown message')
   }

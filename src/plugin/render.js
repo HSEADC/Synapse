@@ -23,13 +23,13 @@ function getImageBytesFromImagesForExportById(id) {
 }
 
 function renderImage(element, rectangle) {
-  console.log('before get template')
+  // console.log('before get template')
   let template = getCurrentTemplate()
-  console.log('template', template)
+  // console.log('template', template)
   let imageID = [template.id, element.id].join()
-  console.log('imageID to render', imageID)
+  // console.log('imageID to render', imageID)
   const imageBytes = getImageBytesFromImagesForExportById(imageID)
-  console.log('bytes', imageBytes)
+  // console.log('bytes', imageBytes)
   rectangle.fills = getNewFills(rectangle, imageBytes)
 
   return rectangle
@@ -108,6 +108,7 @@ function renderFigmaFrame(imagesForExport) {
 
         imageNode.x = element.x * template.width
         imageNode.y = element.y * template.height
+        console.log('imageNode', element.width, template.width)
         imageNode.resize(
           element.width * template.width,
           element.height * template.width
@@ -117,16 +118,16 @@ function renderFigmaFrame(imagesForExport) {
         renderImage(element, imageNode)
         console.log('after renderImage')
 
-        // let cornerRadius
-        // switch (element.borderRadius) {
-        //   case '5%/10%':
-        //     cornerRadius = 32
-        //     break
+        let cornerRadius = 0
+        switch (element.borderRadius) {
+          case '3cqw':
+            cornerRadius = 32
+            break
 
-        //   default:
-        //     break
-        // }
-        // imageNode.cornerRadius = cornerRadius
+          default:
+            break
+        }
+        imageNode.cornerRadius = cornerRadius
         frame.appendChild(imageNode)
 
         break

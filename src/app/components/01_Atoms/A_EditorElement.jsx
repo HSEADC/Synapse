@@ -26,6 +26,7 @@ export default class A_EditorElement extends React.PureComponent {
       x,
       y,
       height,
+      lineHeight,
       width,
       text,
       size,
@@ -76,7 +77,8 @@ export default class A_EditorElement extends React.PureComponent {
           color: `rgba(${textColor.r * 255}, ${textColor.g *
             255}, ${textColor.b * 255}, 1)`,
           fontSize: size,
-          fontFamily: charityData.identityFonts
+          fontFamily: charityData.identityFonts,
+          lineHeight: lineHeight
         }
 
         return (

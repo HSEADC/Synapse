@@ -3,6 +3,7 @@ import { renderFigmaFrame } from './render'
 
 function saveImageDataOrExportToFigma(id, bytes) {
   let imagesForExport = getStoreImagesForExport()
+  console.log('imagesForExport', imagesForExport)
   let status = []
 
   imagesForExport.map(image => {
@@ -18,7 +19,10 @@ function saveImageDataOrExportToFigma(id, bytes) {
     status.push(image.loaded)
   })
 
+  console.log('status', status)
+
   if (!status.includes(false)) {
+    console.log('imagesForExport', imagesForExport)
     renderFigmaFrame(imagesForExport)
   }
 }

@@ -64,13 +64,16 @@ window.onmessage = async event => {
       document.getElementById('react-page')
     )
   } else if (event.data.pluginMessage.type === 'image') {
+    console.log('receive message')
     const bytes = event.data.pluginMessage.image
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
     const imageData = await decode(canvas, ctx, bytes)
     const newBytes = await encode(canvas, ctx, imageData)
+    // console.log('imageData', imageData);
+    // console.log('newBytes', newBytes);
 
-    window.parent.postMessage(
+    parent.postMessage(
       {
         pluginMessage: {
           type: 'image-in-bytes',
