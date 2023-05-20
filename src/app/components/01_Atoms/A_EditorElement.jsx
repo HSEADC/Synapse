@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import placeholder1 from '../../assets/images/placeholders/1.jpg'
-import { renderPattern } from '../../../plugin/pattern'
+import { findOrRenderPattern } from '../../../plugin/pattern'
 import { setPatternRenders, getPatternRenders } from '../../../plugin/store'
 
 export default class A_EditorElement extends React.PureComponent {
@@ -17,7 +17,7 @@ export default class A_EditorElement extends React.PureComponent {
       const { identityPatternParams } = charityData
       var component = this,
         node = ReactDOM.findDOMNode(component)
-      renderPattern(identityPatternParams, node, template, element)
+      findOrRenderPattern(identityPatternParams, node, template, element)
     }
   }
 

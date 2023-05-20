@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import { log } from 'prettierr/parser-postcss'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { renderPattern } from '../../../plugin/pattern'
+import { findOrRenderPattern } from '../../../plugin/pattern'
 
 export default class A_PatternPreview extends React.PureComponent {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class A_PatternPreview extends React.PureComponent {
     var component = this,
       node = ReactDOM.findDOMNode(component)
 
-    renderPattern(identityPatternParamsProgress, node)
+    findOrRenderPattern(identityPatternParamsProgress, node)
   }
 
   render() {

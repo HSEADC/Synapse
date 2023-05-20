@@ -12,7 +12,6 @@ figma.ui.resize(400, 680)
 
 figma.ui.onmessage = async msg => {
   if (msg.type === 'image-in-bytes') {
-    // console.log('image-in-bytes', msg.id, msg.bytes);
     saveImageDataOrExportToFigma(msg.id, msg.bytes)
   } else if (msg.type === 'set-storage') {
     figma.clientStorage.setAsync('charityData', {
@@ -49,7 +48,6 @@ figma.ui.onmessage = async msg => {
 
       Object.keys(msg.template.elements).forEach(element => {
         if (msg.template.elements[element].type === 'img') {
-          // console.log('imageID', [msg.template.id, element].join())
           newCurrentImages.push({
             id: [msg.template.id, element].join(),
             image: msg.template.elements[element].cover,

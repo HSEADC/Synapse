@@ -16,8 +16,12 @@ function getPatternRenders(key) {
   return patternRenders[key]
 }
 
-function setPatternRenders(newPatternRender) {
-  patternRenders = { ...patternRenders, newPatternRender }
+function setPatternRenders(newPatternRender, patternID) {
+  patternRenders = {
+    ...patternRenders,
+    [`${patternID}`]: newPatternRender
+  }
+  console.log('patternRenders', patternRenders)
 }
 
 function getCurrentTemplate() {

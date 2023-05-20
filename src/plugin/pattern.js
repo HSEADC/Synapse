@@ -107,73 +107,82 @@ function generatePatternParams(charityData) {
 }
 
 function renderPattern(patternParams, container, template, element) {
+  let circlesStore = []
+  let colors = patternParams.colors
+  // const container = document.getElementById(`container${index}`)
+
+  const canvasSize = {
+    width: container.offsetWidth,
+    height: container.offsetHeight
+  }
+
+  let circleSize
+  let gridModuleSize
+
+  if (canvasSize.width > canvasSize.height) {
+    gridModuleSize = canvasSize.width / patternParams.gridModule
+  } else {
+    gridModuleSize = canvasSize.height / patternParams.gridModule
+  }
+
+  container.style.backgroundColor = `rgb(${colors.background.r * 255}, ${colors
+    .background.g * 255}, ${colors.background.b * 255})`
+
+  let column
+  let row = 0
+
+  for (
+    let i = 0;
+    i < (patternParams.gridModule - 1) * (patternParams.gridModule - 1);
+    i++
+  ) {
+    circleSize = weightedRandom(
+      [
+        (gridModuleSize * patternParams.size) / 100,
+        (gridModuleSize * getRandomArbitrary(50, 120)) / 100
+      ],
+      [100, patternParams.sizeSwitch]
+    ).item
+
+    column = i - patternParams.gridModule * row
+
+    addCircle(
+      patternParams,
+      circleSize,
+      gridModuleSize,
+      column,
+      row,
+      container,
+      canvasSize,
+      i,
+      circlesStore
+    )
+
+    if ((i + 1) % patternParams.gridModule === 0) {
+      row++
+    }
+  }
+  let patternID = template.id + element
+
+  window[patternID] = {
+    circles: circlesStore
+  }
+
+  setPatternRenders(eval(patternID), patternID)
+}
+
+function findOrRenderPattern(patternParams, container, template, element) {
   if (template && element) {
-    let patternID = `${template.id}${element.id}`
+    let patternID = `${template.id}${element}`
     if (getPatternRenders(patternID)) {
+      console.log(`pattern ${patternID} found`, getPatternRenders(patternID))
+    } else {
+      console.log(`pattern ${patternID} not found`)
+      renderPattern(patternParams, container, template, element)
     }
   } else {
-    let circlesStore = []
-    let colors = patternParams.colors
-    // const container = document.getElementById(`container${index}`)
-
-    const canvasSize = {
-      width: container.offsetWidth,
-      height: container.offsetHeight
-    }
-
-    let circleSize
-    let gridModuleSize
-
-    if (canvasSize.width > canvasSize.height) {
-      gridModuleSize = canvasSize.width / patternParams.gridModule
-    } else {
-      gridModuleSize = canvasSize.height / patternParams.gridModule
-    }
-
-    container.style.backgroundColor = `rgb(${colors.background.r *
-      255}, ${colors.background.g * 255}, ${colors.background.b * 255})`
-
-    let column
-    let row = 0
-
-    for (
-      let i = 0;
-      i < (patternParams.gridModule - 1) * (patternParams.gridModule - 1);
-      i++
-    ) {
-      circleSize = weightedRandom(
-        [
-          (gridModuleSize * patternParams.size) / 100,
-          (gridModuleSize * getRandomArbitrary(50, 120)) / 100
-        ],
-        [100, patternParams.sizeSwitch]
-      ).item
-
-      column = i - patternParams.gridModule * row
-
-      addCircle(
-        patternParams,
-        circleSize,
-        gridModuleSize,
-        column,
-        row,
-        container,
-        canvasSize,
-        i,
-        circlesStore
-      )
-
-      if ((i + 1) % patternParams.gridModule === 0) {
-        row++
-      }
-
-      eval(
-        'const ' + template.id + element.id + ` = {circles: ${circlesStore}}`
-      )
-
-      console.log(eval(template.id + element.id))
-    }
+    renderPattern(patternParams, container, template, element)
   }
 }
 
-export { renderPattern, generatePatternParams, addCircle }
+export { findOrRenderPattern, generatePatternParams, addCircle }

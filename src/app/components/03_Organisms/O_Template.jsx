@@ -15,10 +15,8 @@ export default class O_Template extends React.PureComponent {
   }
 
   renderElements(template, charityData) {
-    // console.log(template)
     let elements = []
     Object.keys(template.elements).forEach(element => {
-      // console.log('element', template.elements[element])
       elements.push(
         <A_EditorElement
           {...template.elements[element]}

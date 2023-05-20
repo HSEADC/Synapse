@@ -23,13 +23,9 @@ function getImageBytesFromImagesForExportById(id) {
 }
 
 function renderImage(element, rectangle) {
-  // console.log('before get template')
   let template = getCurrentTemplate()
-  // console.log('template', template)
   let imageID = [template.id, element.id].join()
-  // console.log('imageID to render', imageID)
   const imageBytes = getImageBytesFromImagesForExportById(imageID)
-  // console.log('bytes', imageBytes)
   rectangle.fills = getNewFills(rectangle, imageBytes)
 
   return rectangle
@@ -108,15 +104,12 @@ function renderFigmaFrame(imagesForExport) {
 
         imageNode.x = element.x * template.width
         imageNode.y = element.y * template.height
-        console.log('imageNode', element.width, template.width)
         imageNode.resize(
           element.width * template.width,
           element.height * template.width
         )
 
-        console.log('before renderImage')
         renderImage(element, imageNode)
-        console.log('after renderImage')
 
         let cornerRadius = 0
         switch (element.borderRadius) {
@@ -135,7 +128,6 @@ function renderFigmaFrame(imagesForExport) {
       default:
         break
     }
-    // console.log("key", key);
   })
 }
 
