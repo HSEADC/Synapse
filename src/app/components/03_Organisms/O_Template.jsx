@@ -23,6 +23,8 @@ export default class O_Template extends React.PureComponent {
         <A_EditorElement
           {...template.elements[element]}
           charityData={charityData}
+          template={template}
+          element={element}
         />
       )
     })

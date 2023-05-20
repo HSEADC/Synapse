@@ -28,7 +28,7 @@ export default class P_Feed extends React.PureComponent {
             charityData={charityData}
           />
         ) : (
-          <P_Style charityData={charityData} />
+          <P_Style charityData={charityData} actions={actions} />
         )}
       </div>
     )

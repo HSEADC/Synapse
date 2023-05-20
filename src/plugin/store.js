@@ -2,6 +2,7 @@ let language = 'latin'
 let imagesForExport = []
 let currentTemplate
 let charityData
+let patternRenders = {}
 
 function getStoreLanguage() {
   return language
@@ -9,6 +10,14 @@ function getStoreLanguage() {
 
 function setStoreLanguage(newLanguage) {
   language = newLanguage
+}
+
+function getPatternRenders(key) {
+  return patternRenders[key]
+}
+
+function setPatternRenders(newPatternRender) {
+  patternRenders = { ...patternRenders, newPatternRender }
 }
 
 function getCurrentTemplate() {
@@ -43,5 +52,7 @@ export {
   getCurrentTemplate,
   setCurrentTemplate,
   setCharityData,
-  getCharityData
+  getCharityData,
+  getPatternRenders,
+  setPatternRenders
 }

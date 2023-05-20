@@ -661,12 +661,6 @@ export default class App extends React.Component {
           <Login />
         </div>
       )
-    } else if (view === 'style') {
-      return (
-        <div className="App">
-          <Style />
-        </div>
-      )
     } else if (view === 'onboarding') {
       return <P_Onboarding onboardingStep={onboardingStep} actions={actions} />
     } else if (view === 'identity_creation') {

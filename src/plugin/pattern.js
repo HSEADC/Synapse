@@ -3,6 +3,7 @@ import { generateGridModule } from './grid'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createElement } from 'react'
+import { getPatternRenders, setPatternRenders } from './store'
 
 function addCircle(
   patternParams,
@@ -12,7 +13,8 @@ function addCircle(
   row,
   container,
   canvasSize,
-  key
+  key,
+  circlesStore
 ) {
   let colors = patternParams.colors
 
@@ -39,6 +41,13 @@ function addCircle(
   circle.style.backgroundColor = `rgb(${circleColor.r * 255}, ${circleColor.g *
     255}, ${circleColor.b * 255})`
 
+  let circleToSave = {
+    key: key,
+    circleSize: circleSize,
+    circleColor: circleColor
+  }
+
+  circlesStore.push(circleToSave)
   container.appendChild(circle)
 }
 
@@ -97,58 +106,72 @@ function generatePatternParams(charityData) {
   return patternParamsProgress
 }
 
-function renderPattern(patternParams, container) {
-  let colors = patternParams.colors
-  // const container = document.getElementById(`container${index}`)
-
-  const canvasSize = {
-    width: container.offsetWidth,
-    height: container.offsetHeight
-  }
-
-  let circleSize
-  let gridModuleSize
-
-  if (canvasSize.width > canvasSize.height) {
-    gridModuleSize = canvasSize.width / patternParams.gridModule
+function renderPattern(patternParams, container, template, element) {
+  if (template && element) {
+    let patternID = `${template.id}${element.id}`
+    if (getPatternRenders(patternID)) {
+    }
   } else {
-    gridModuleSize = canvasSize.height / patternParams.gridModule
-  }
+    let circlesStore = []
+    let colors = patternParams.colors
+    // const container = document.getElementById(`container${index}`)
 
-  container.style.backgroundColor = `rgb(${colors.background.r * 255}, ${colors
-    .background.g * 255}, ${colors.background.b * 255})`
+    const canvasSize = {
+      width: container.offsetWidth,
+      height: container.offsetHeight
+    }
 
-  let column
-  let row = 0
+    let circleSize
+    let gridModuleSize
 
-  for (
-    let i = 0;
-    i < (patternParams.gridModule - 1) * (patternParams.gridModule - 1);
-    i++
-  ) {
-    circleSize = weightedRandom(
-      [
-        (gridModuleSize * patternParams.size) / 100,
-        (gridModuleSize * getRandomArbitrary(50, 120)) / 100
-      ],
-      [100, patternParams.sizeSwitch]
-    ).item
+    if (canvasSize.width > canvasSize.height) {
+      gridModuleSize = canvasSize.width / patternParams.gridModule
+    } else {
+      gridModuleSize = canvasSize.height / patternParams.gridModule
+    }
 
-    column = i - patternParams.gridModule * row
+    container.style.backgroundColor = `rgb(${colors.background.r *
+      255}, ${colors.background.g * 255}, ${colors.background.b * 255})`
 
-    addCircle(
-      patternParams,
-      circleSize,
-      gridModuleSize,
-      column,
-      row,
-      container,
-      canvasSize,
-      i
-    )
+    let column
+    let row = 0
 
-    if ((i + 1) % patternParams.gridModule === 0) {
-      row++
+    for (
+      let i = 0;
+      i < (patternParams.gridModule - 1) * (patternParams.gridModule - 1);
+      i++
+    ) {
+      circleSize = weightedRandom(
+        [
+          (gridModuleSize * patternParams.size) / 100,
+          (gridModuleSize * getRandomArbitrary(50, 120)) / 100
+        ],
+        [100, patternParams.sizeSwitch]
+      ).item
+
+      column = i - patternParams.gridModule * row
+
+      addCircle(
+        patternParams,
+        circleSize,
+        gridModuleSize,
+        column,
+        row,
+        container,
+        canvasSize,
+        i,
+        circlesStore
+      )
+
+      if ((i + 1) % patternParams.gridModule === 0) {
+        row++
+      }
+
+      eval(
+        'const ' + template.id + element.id + ` = {circles: ${circlesStore}}`
+      )
+
+      console.log(eval(template.id + element.id))
     }
   }
 }

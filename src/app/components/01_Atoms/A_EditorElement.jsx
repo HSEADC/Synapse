@@ -3,6 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import placeholder1 from '../../assets/images/placeholders/1.jpg'
 import { renderPattern } from '../../../plugin/pattern'
+import { setPatternRenders, getPatternRenders } from '../../../plugin/store'
 
 export default class A_EditorElement extends React.PureComponent {
   constructor(props) {
@@ -10,13 +11,13 @@ export default class A_EditorElement extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { charityData, type } = this.props
+    const { charityData, type, template, element } = this.props
 
     if (type === 'pattern') {
       const { identityPatternParams } = charityData
       var component = this,
         node = ReactDOM.findDOMNode(component)
-      renderPattern(identityPatternParams, node)
+      renderPattern(identityPatternParams, node, template, element)
     }
   }
 

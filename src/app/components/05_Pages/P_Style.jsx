@@ -11,7 +11,8 @@ export default class P_Style extends React.PureComponent {
   }
 
   render() {
-    const { charityData } = this.props
+    const { charityData, actions } = this.props
+    const { skipOnboarding } = actions
 
     return (
       <div className="P_Feed">
@@ -30,7 +31,11 @@ export default class P_Style extends React.PureComponent {
         <A_Spacer size={64} />
         <A_Text text="Изменение стиля" type="lead" />
         <A_Spacer size={24} />
-        <A_Button type="secondary padding-both" text="Изменить стиль" />
+        <A_Button
+          type="secondary padding-both"
+          text="Изменить стиль"
+          handleClick={skipOnboarding}
+        />
         <A_Spacer size={12} />
         <A_Button type="secondary padding-both" text="Импортировать стиль" />
         <A_FooterLogo />
