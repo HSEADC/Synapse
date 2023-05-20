@@ -15,12 +15,14 @@ function addCircle(
   transformY,
   circleColor
 ) {
+  console.log('transformX', transformX, 'transformY', transformY)
   const circle = document.createElement('div')
   circle.classList.add('circle')
-  circle.style.width = circleSize + 'px'
-  circle.style.height = circleSize + 'px'
-  circle.style.top = gridModuleSize * row + 'px'
-  circle.style.left = gridModuleSize * column + 'px'
+  circle.style.width = gridModuleSize * circleSize + 'px'
+  circle.style.height = gridModuleSize * circleSize + 'px'
+  circle.style.top = gridModuleSize * row + transformY * gridModuleSize + 'px'
+  circle.style.left =
+    gridModuleSize * column + transformX * gridModuleSize + 'px'
   circle.style.transform = `translate(${transformX}, ${transformY})`
 
   circle.style.backgroundColor = `rgb(${circleColor.r * 255}, ${circleColor.g *
@@ -86,14 +88,11 @@ function generatePatternParams(charityData) {
 
 function renderPattern(patternParams, container, patternID) {
   if (patternID && getPatternRenders(patternID)) {
-    console.log('pattern found')
-
     const canvasSize = {
       width: container.offsetWidth,
       height: container.offsetHeight
     }
 
-    let circleSize
     let gridModuleSize
 
     if (canvasSize.width > canvasSize.height) {
@@ -104,10 +103,9 @@ function renderPattern(patternParams, container, patternID) {
 
     Object.values(getPatternRenders(patternID)).forEach(circles => {
       circles.map(circle => {
-        console.log('add', circle, 'with color', circle.circleColor)
         addCircle(
           circle.circleSize,
-          circle.gridModuleSize,
+          gridModuleSize,
           circle.column,
           circle.row,
           container,
@@ -147,10 +145,7 @@ function renderPattern(patternParams, container, patternID) {
       i++
     ) {
       circleSize = weightedRandom(
-        [
-          (gridModuleSize * patternParams.size) / 100,
-          (gridModuleSize * getRandomArbitrary(50, 120)) / 100
-        ],
+        [patternParams.size / 100, getRandomArbitrary(50, 120) / 100],
         [100, patternParams.sizeSwitch]
       ).item
 
@@ -165,12 +160,12 @@ function renderPattern(patternParams, container, patternID) {
         ]
       ).item
 
-      let transformX = `calc(${(gridModuleSize - circleSize) /
-        2}px + ${(patternParams.positionSwitch / 100) *
-        getRandomArbitrary(-100, 100)}%)`
-      let transformY = `calc(${(gridModuleSize - circleSize) /
-        2}px + ${(patternParams.positionSwitch / 100) *
-        getRandomArbitrary(-100, 100)}%)`
+      let transformX =
+        ((patternParams.positionSwitch / 100) * getRandomArbitrary(-100, 100)) /
+        100
+      let transformY =
+        ((patternParams.positionSwitch / 100) * getRandomArbitrary(-100, 100)) /
+        100
 
       column = i - patternParams.gridModule * row
 
@@ -191,7 +186,6 @@ function renderPattern(patternParams, container, patternID) {
         circleColor: circleColor,
         transformX: transformX,
         transformY: transformY,
-        gridModuleSize: gridModuleSize,
         column: column,
         row: row
       }
@@ -217,10 +211,8 @@ function findOrRenderPattern(patternParams, container, template, element) {
   if (template && element) {
     let patternID = `${template.id}${element}`
     if (getPatternRenders(patternID)) {
-      console.log(`pattern ${patternID} found`, getPatternRenders(patternID))
       renderPattern(patternParams, container, patternID)
     } else {
-      console.log(`pattern ${patternID} not found`)
       renderPattern(patternParams, container, patternID)
     }
   } else {
