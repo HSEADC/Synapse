@@ -1,3 +1,4 @@
+import { generateGridModule } from './grid'
 import { generateRandom, mode } from './utilities'
 
 function convertHSLtoRGB(h, s, l) {
@@ -7,10 +8,31 @@ function convertHSLtoRGB(h, s, l) {
   const a = s * Math.min(l, 1 - l)
   const f = n => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)))
 
+  let r = String(f(0)).slice(0, 4) * 1
+  if (r > 1) {
+    r = 1
+  } else if (r < 0) {
+    r = 0
+  }
+
+  let g = String(f(8)).slice(0, 4) * 1
+  if (g > 1) {
+    g = 1
+  } else if (g < 0) {
+    g = 0
+  }
+
+  let b = String(f(4)).slice(0, 4) * 1
+  if (b > 1) {
+    b = 1
+  } else if (b < 0) {
+    b = 0
+  }
+
   const colorRGB = {
-    r: String(f(0)).slice(0, 4) * 1,
-    g: String(f(8)).slice(0, 4) * 1,
-    b: String(f(4)).slice(0, 4) * 1
+    r: r,
+    g: g,
+    b: b
   }
 
   return colorRGB

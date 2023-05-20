@@ -13,20 +13,19 @@ function addCircle(
   container,
   transformX,
   transformY,
-  circleColor
+  color
 ) {
-  console.log('transformX', transformX, 'transformY', transformY)
   const circle = document.createElement('div')
   circle.classList.add('circle')
   circle.style.width = gridModuleSize * circleSize + 'px'
   circle.style.height = gridModuleSize * circleSize + 'px'
-  circle.style.top = gridModuleSize * row + transformY * gridModuleSize + 'px'
-  circle.style.left =
-    gridModuleSize * column + transformX * gridModuleSize + 'px'
+  circle.style.top = gridModuleSize * (row + transformY) + 'px'
+
+  circle.style.left = gridModuleSize * (column + transformX) + 'px'
   circle.style.transform = `translate(${transformX}, ${transformY})`
 
-  circle.style.backgroundColor = `rgb(${circleColor.r * 255}, ${circleColor.g *
-    255}, ${circleColor.b * 255})`
+  circle.style.backgroundColor = `rgb(${color.r * 255}, ${color.g *
+    255}, ${color.b * 255})`
 
   container.appendChild(circle)
 }
@@ -101,19 +100,17 @@ function renderPattern(patternParams, container, patternID) {
       gridModuleSize = canvasSize.height / patternParams.gridModule
     }
 
-    Object.values(getPatternRenders(patternID)).forEach(circles => {
-      circles.map(circle => {
-        addCircle(
-          circle.circleSize,
-          gridModuleSize,
-          circle.column,
-          circle.row,
-          container,
-          circle.transformX,
-          circle.transformY,
-          circle.circleColor
-        )
-      })
+    Object.values(getPatternRenders(patternID)).map(circle => {
+      addCircle(
+        circle.circleSize,
+        gridModuleSize,
+        circle.column,
+        circle.row,
+        container,
+        circle.transformX,
+        circle.transformY,
+        circle.color
+      )
     })
   } else {
     let circlesStore = []
@@ -151,7 +148,7 @@ function renderPattern(patternParams, container, patternID) {
 
       let colors = patternParams.colors
 
-      let circleColor = weightedRandom(
+      let color = weightedRandom(
         [colors.primary, colors.adOne, colors.adTwo],
         [
           patternParams.colorSwitch.primary,
@@ -177,13 +174,13 @@ function renderPattern(patternParams, container, patternID) {
         container,
         transformX,
         transformY,
-        circleColor
+        color
       )
 
       let circleToSave = {
         key: i,
         circleSize: circleSize,
-        circleColor: circleColor,
+        color: color,
         transformX: transformX,
         transformY: transformY,
         column: column,
@@ -198,9 +195,7 @@ function renderPattern(patternParams, container, patternID) {
     }
 
     if (patternID) {
-      window[patternID] = {
-        circles: circlesStore
-      }
+      window[patternID] = circlesStore
 
       setPatternRenders(eval(patternID), patternID)
     }

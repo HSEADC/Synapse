@@ -6,7 +6,8 @@ import placeholder1 from '../app/assets/images/placeholders/1.jpg'
 import {
   getCharityData,
   getCurrentTemplate,
-  getStoreImagesForExport
+  getStoreImagesForExport,
+  getPatternRenders
 } from './store'
 
 function getImageBytesFromImagesForExportById(id) {
@@ -41,6 +42,22 @@ function renderFigmaFrame(imagesForExport) {
   frame.y = figma.viewport.center.y
 
   const colors = charityData.identityColors
+  console.log(
+    'before fill',
+    template.background,
+    colors,
+    colors[template.background].r
+  )
+  // frame.fills = [
+  //   {
+  //     type: 'SOLID',
+  //     color: {
+  //       r: colors[template.background].r,
+  //       g: colors[template.background].g,
+  //       b: colors[template.background].b
+  //     }
+  //   }
+  // ]
   frame.fills = [
     {
       type: 'SOLID',
@@ -51,9 +68,16 @@ function renderFigmaFrame(imagesForExport) {
       }
     }
   ]
+  console.log('after fill')
   figma.viewport.scrollAndZoomIntoView([frame])
 
+  console.log(
+    'Object.values(template.elements)',
+    Object.values(template.elements)
+  )
+
   Object.values(template.elements).map(element => {
+    console.log('text')
     switch (element.type) {
       case 'text':
         ;(async () => {
@@ -125,6 +149,54 @@ function renderFigmaFrame(imagesForExport) {
 
         break
 
+      case 'pattern':
+        console.log('pattern!!!!', template, element)
+        // const patternID = template.id + element.id
+        // const patternToRender = getPatternRenders(patternID)
+        // console.log(patternID, patternToRender);
+        // const patternFrame = figma.createFrame()
+
+        // let gridModuleSize
+
+        // if (template.width > template.height) {
+        //   gridModuleSize = template.width / charityData.patternParams.gridModule
+        // } else {
+        //   gridModuleSize = template.height / charityData.patternParams.gridModule
+        // }
+
+        // patternFrame.x = element.x * template.width
+        // patternFrame.y = element.y * template.height
+        // patternFrame.resize(
+        //   element.width * template.width,
+        //   element.height * template.width
+        // )
+        // // patternToRender.map(circle => {
+        // //   const circleNode = figma.createEllipse()
+
+        // //   circleNode.x = gridModuleSize * (circle.column + circle.transformX)
+        // //   circleNode.y = gridModuleSize * (circle.row + circle.transformY)
+
+        // //   circleNode.resize(
+        // //     gridModuleSize * circleSize,
+        // //     gridModuleSize * circleSize
+        // //   )
+
+        // //   circleNode.fills = [
+        // //     {
+        // //       type: 'SOLID',
+        // //       color: {
+        // //         r: circle.color.r,
+        // //         g: circle.color.g,
+        // //         b: circle.color.b
+        // //       }
+        // //     }
+        // //   ]
+
+        // //   patternFrame.appendChild(circleNode)
+        // // })
+
+        // frame.appendChild(patternFrame)
+        break
       default:
         break
     }
