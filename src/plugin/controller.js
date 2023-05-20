@@ -32,7 +32,6 @@ figma.ui.onmessage = async msg => {
     figma.ui.postMessage({ type: 'get-storage', charityData: charityData })
   } else if (msg.type === 'create-frame') {
     let noImageCheck = true
-    console.log('create-frame')
 
     Object.values(msg.template.elements).forEach(element => {
       if (element.type === 'img') {
@@ -41,7 +40,6 @@ figma.ui.onmessage = async msg => {
     })
 
     if (noImageCheck) {
-      console.log('no image found')
       setCharityData(msg.charityData)
       setCurrentTemplate(msg.template)
       renderFigmaFrame(msg.template, msg.charityData)

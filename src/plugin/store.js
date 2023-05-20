@@ -13,6 +13,8 @@ function setStoreLanguage(newLanguage) {
 }
 
 function getPatternRenders(key) {
+  // console.log('get pattern', key, patternRenders[key]);
+  console.log('patternRenders', patternRenders)
   return patternRenders[key]
 }
 
@@ -21,6 +23,7 @@ function setPatternRenders(newPatternRender, patternID) {
     ...patternRenders,
     [`${patternID}`]: newPatternRender
   }
+  // console.log('template added to rendered', patternRenders);
 }
 
 function getCurrentTemplate() {
