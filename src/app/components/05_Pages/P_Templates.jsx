@@ -19,7 +19,7 @@ export default class P_Templates extends React.PureComponent {
   }
 
   renderTemplates(section) {
-    const { actions, charityData } = this.props
+    const { actions, charityData, editorState } = this.props
 
     switch (section) {
       case 'square':
@@ -72,6 +72,7 @@ export default class P_Templates extends React.PureComponent {
           key={key}
           actions={actions}
           charityData={charityData}
+          editorState={editorState}
         />
       )
     })
@@ -79,7 +80,7 @@ export default class P_Templates extends React.PureComponent {
   }
 
   render() {
-    const { actions, templates, charityData } = this.props
+    const { actions, templates, charityData, editorState } = this.props
     const {
       feedTab,
       handleChange,
@@ -210,6 +211,7 @@ export default class P_Templates extends React.PureComponent {
             actions={actions}
             charityData={charityData}
             fullsize={true}
+            editorState={editorState}
           />
           <M_TemplateInfo
             sizes={[

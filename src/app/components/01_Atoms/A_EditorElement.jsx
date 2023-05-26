@@ -14,12 +14,6 @@ export default class A_EditorElement extends React.PureComponent {
     const { charityData, type, template, element } = this.props
 
     if (type === 'pattern') {
-      console.log(
-        'element',
-        element,
-        'background]',
-        template.elements[element].background
-      )
       const { identityPatternParams } = charityData
       var component = this,
         node = ReactDOM.findDOMNode(component)
@@ -47,12 +41,18 @@ export default class A_EditorElement extends React.PureComponent {
       color,
       charityData,
       borderRadius,
-      background
+      background,
+      editorState,
+      element,
+      setActiveElement
     } = this.props
+
+    const { activeElement } = editorState
 
     const classes = classnames({
       A_EditorElement: true,
-      [`${type}`]: true
+      [`${type}`]: true,
+      active: activeElement === element
     })
 
     let styleDeclaration
@@ -96,7 +96,13 @@ export default class A_EditorElement extends React.PureComponent {
         }
 
         return (
-          <p className={classes} style={styleDeclaration}>
+          <p
+            className={classes}
+            style={styleDeclaration}
+            onClick={() => {
+              setActiveElement(element)
+            }}
+          >
             {text}
           </p>
         )
@@ -118,6 +124,9 @@ export default class A_EditorElement extends React.PureComponent {
             className={classes}
             style={styleDeclaration}
             src={placeholder1}
+            onClick={() => {
+              setActiveElement(element)
+            }}
           />
         )
         break
@@ -172,7 +181,15 @@ export default class A_EditorElement extends React.PureComponent {
           height: height * 100 + '%',
           width: width * 100 + '%'
         }
-        return <div className={classes} style={styleDeclaration}></div>
+        return (
+          <div
+            className={classes}
+            style={styleDeclaration}
+            onClick={() => {
+              setActiveElement(element)
+            }}
+          ></div>
+        )
         break
     }
   }

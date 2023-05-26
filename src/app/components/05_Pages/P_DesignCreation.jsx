@@ -19,7 +19,7 @@ export default class P_DesignCreation extends React.PureComponent {
   }
 
   render() {
-    const { actions, charityData, templates } = this.props
+    const { actions, charityData, templates, editorState } = this.props
     const { handleChange, chooseSection, backToSection, createDesign } = actions
     const format = Array.from(templates.templateID)[0]
     const template = templatesList[format][templates.templateID]
@@ -40,6 +40,7 @@ export default class P_DesignCreation extends React.PureComponent {
           actions={actions}
           fullsize={true}
           charityData={charityData}
+          editorState={editorState}
         />
         <S_FixedActions
           primButtonText="Создать"

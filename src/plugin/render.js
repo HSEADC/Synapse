@@ -163,8 +163,6 @@ function renderFigmaFrame(imagesForExport) {
         patternToRender.map(circle => {
           const circleNode = figma.createEllipse()
 
-          console.log(gridModuleSize)
-
           circleNode.x = gridModuleSize * (circle.column + circle.transformX)
           circleNode.y = gridModuleSize * (circle.row + circle.transformY)
 

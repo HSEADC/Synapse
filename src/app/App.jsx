@@ -49,7 +49,8 @@ export default class App extends React.Component {
       templates: {
         tab: 'Шаблоны',
         section: ''
-      }
+      },
+      activeElement: ''
     }
   }
 
@@ -145,28 +146,6 @@ export default class App extends React.Component {
     )
   }
 
-  // setCharityData = () => {
-  //   let charityDataFromHTML = this.getCharityDataFromHTML()
-  //   if (charityDataFromHTML === '') {
-  //     setTimeout(this.setCharityData, 100)
-  //   } else {
-  //     let charityData = JSON.parse(charityDataFromHTML)
-  //     this.setState({
-  //       charityTitle: charityData.charityTitle,
-  //       charityCategory: charityData.charityCategory,
-  //       friendliness: charityData.friendliness,
-  //       volume: charityData.volume,
-  //       rationality: charityData.rationality,
-  //       identityColors: charityData.identityColors,
-  //       identityFonts: charityData.identityFonts,
-  //       identityPatternParams: charityData.identityPatternParams,
-  //       identityColorsProgress: charityData.identityColorsProgress,
-  //       identityFontsProgress: charityData.identityFontsProgress,
-  //       identityPatternParamsProgress: charityData.identityPatternParamsProgress
-  //     })
-  //   }
-  // }
-
   setCharityData = () => {
     let charityData = JSON.parse(this.props.charityData)
     this.setState({
@@ -209,6 +188,13 @@ export default class App extends React.Component {
       },
       '*'
     )
+  }
+
+  useToolbar = (template, element) => {}
+
+  setActiveElement = element => {
+    console.log('setttt')
+    this.setState({ activeElement: element })
   }
 
   createDesign = (template, charityData, patternRenders) => {
@@ -631,7 +617,8 @@ export default class App extends React.Component {
       openTemplate: this.openTemplate,
       backToSection: this.backToSection,
       downloadFont: this.downloadFont,
-      useTemplate: this.useTemplate
+      useTemplate: this.useTemplate,
+      setActiveElement: this.setActiveElement
     }
 
     const charityData = {
@@ -643,6 +630,10 @@ export default class App extends React.Component {
       identityColors: this.state.identityColors,
       identityFonts: this.state.identityFonts,
       identityPatternParams: this.state.identityPatternParams
+    }
+
+    const editorState = {
+      activeElement: this.state.activeElement
     }
 
     const {
@@ -682,6 +673,7 @@ export default class App extends React.Component {
           actions={actions}
           charityData={charityData}
           templates={templates}
+          editorState={editorState}
         />
       )
     } else if (view === 'feed') {
@@ -691,6 +683,7 @@ export default class App extends React.Component {
             actions={actions}
             templates={templates}
             charityData={charityData}
+            editorState={editorState}
           />
         </div>
       )
