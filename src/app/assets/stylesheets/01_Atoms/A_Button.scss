@@ -21,7 +21,7 @@
     height: 40px;
 
     &:hover {
-        filter: opacity(0.90);
+        filter: opacity(0.85);
     }
 
     &.toolbar {
@@ -33,6 +33,7 @@
         &.add {
             background-color: transparent;
             background-image: url('../../assets/images/icons/add.svg');
+            cursor: default;
         }
 
         &.image {

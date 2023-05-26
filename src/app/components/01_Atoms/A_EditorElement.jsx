@@ -14,9 +14,22 @@ export default class A_EditorElement extends React.PureComponent {
     const { charityData, type, template, element } = this.props
 
     if (type === 'pattern') {
+      console.log(
+        'element',
+        element,
+        'background]',
+        template.elements[element].background
+      )
       const { identityPatternParams } = charityData
       var component = this,
         node = ReactDOM.findDOMNode(component)
+      node.style.backgroundColor = `rgb(${charityData.identityColors[
+        template.elements[element].background
+      ].r * 255}, ${charityData.identityColors[
+        template.elements[element].background
+      ].g * 255}, ${charityData.identityColors[
+        template.elements[element].background
+      ].b * 255})`
       findOrRenderPattern(identityPatternParams, node, template, element)
     }
   }
@@ -157,8 +170,7 @@ export default class A_EditorElement extends React.PureComponent {
           left: x * 100 + '%',
           top: y * 100 + '%',
           height: height * 100 + '%',
-          width: width * 100 + '%',
-          background: patternBackground
+          width: width * 100 + '%'
         }
         return <div className={classes} style={styleDeclaration}></div>
         break

@@ -110,7 +110,7 @@ const A = {
       e1: {
         type: 'pattern',
         id: 'e1',
-        background: 'primary',
+        background: 'background',
         x: 0,
         y: 0,
         height: 0.2,

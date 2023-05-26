@@ -130,9 +130,6 @@ function renderPattern(patternParams, container, patternID) {
       gridModuleSize = canvasSize.height / patternParams.gridModule
     }
 
-    container.style.backgroundColor = `rgb(${colors.background.r *
-      255}, ${colors.background.g * 255}, ${colors.background.b * 255})`
-
     let column
     let row = 0
 
