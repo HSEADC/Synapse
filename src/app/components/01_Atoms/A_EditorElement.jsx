@@ -158,7 +158,7 @@ export default class A_EditorElement extends React.PureComponent {
           top: y * 100 + '%',
           height: height * 100 + '%',
           width: width * 100 + '%',
-          background: 'red !important'
+          background: patternBackground
         }
         return <div className={classes} style={styleDeclaration}></div>
         break

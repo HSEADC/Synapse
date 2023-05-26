@@ -12,9 +12,18 @@ function setStoreLanguage(newLanguage) {
   language = newLanguage
 }
 
+function getAllPatternRenders() {
+  return patternRenders
+}
+
+function setAllPatternRenders(newPatternRenders) {
+  patternRenders = newPatternRenders
+  // console.log('patternRenders', patternRenders);
+}
+
 function getPatternRenders(key) {
   // console.log('get pattern', key, patternRenders[key]);
-  console.log('patternRenders', patternRenders)
+  // console.log('patternRenders', patternRenders)
   return patternRenders[key]
 }
 
@@ -23,7 +32,6 @@ function setPatternRenders(newPatternRender, patternID) {
     ...patternRenders,
     [`${patternID}`]: newPatternRender
   }
-  // console.log('template added to rendered', patternRenders);
 }
 
 function getCurrentTemplate() {
@@ -60,5 +68,7 @@ export {
   setCharityData,
   getCharityData,
   getPatternRenders,
-  setPatternRenders
+  setPatternRenders,
+  getAllPatternRenders,
+  setAllPatternRenders
 }

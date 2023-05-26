@@ -35,8 +35,6 @@ function renderImage(element, rectangle) {
 function renderFigmaFrame(imagesForExport) {
   const charityData = getCharityData()
   const template = getCurrentTemplate()
-  const patternToRender = getPatternRenders('A3e1')
-  console.log(patternID, patternToRender)
 
   const frame = figma.createFrame()
   frame.resize(template.height, template.width)
@@ -130,18 +128,18 @@ function renderFigmaFrame(imagesForExport) {
         break
 
       case 'pattern':
-        // const patternID = template.id + element.id
-        // const patternToRender = getPatternRenders(patternID)
-        // console.log(patternID, patternToRender);
+        const patternID = template.id + element.id
+        const patternToRender = getPatternRenders(patternID)
         const patternFrame = figma.createFrame()
 
         let gridModuleSize
 
         if (template.width > template.height) {
-          gridModuleSize = template.width / charityData.patternParams.gridModule
+          gridModuleSize =
+            template.width / charityData.identityPatternParams.gridModule
         } else {
           gridModuleSize =
-            template.height / charityData.patternParams.gridModule
+            template.height / charityData.identityPatternParams.gridModule
         }
 
         patternFrame.x = element.x * template.width
@@ -150,15 +148,29 @@ function renderFigmaFrame(imagesForExport) {
           element.width * template.width,
           element.height * template.width
         )
+
+        patternFrame.fills = [
+          {
+            type: 'SOLID',
+            color: {
+              r: charityData.identityColors[element.background].r,
+              g: charityData.identityColors[element.background].g,
+              b: charityData.identityColors[element.background].b
+            }
+          }
+        ]
+
         patternToRender.map(circle => {
           const circleNode = figma.createEllipse()
+
+          console.log(gridModuleSize)
 
           circleNode.x = gridModuleSize * (circle.column + circle.transformX)
           circleNode.y = gridModuleSize * (circle.row + circle.transformY)
 
           circleNode.resize(
-            gridModuleSize * circleSize,
-            gridModuleSize * circleSize
+            gridModuleSize * circle.size,
+            gridModuleSize * circle.size
           )
 
           circleNode.fills = [

@@ -6,7 +6,7 @@ import { createElement } from 'react'
 import { getPatternRenders, setPatternRenders } from './store'
 
 function addCircle(
-  circleSize,
+  size,
   gridModuleSize,
   column,
   row,
@@ -17,8 +17,8 @@ function addCircle(
 ) {
   const circle = document.createElement('div')
   circle.classList.add('circle')
-  circle.style.width = gridModuleSize * circleSize + 'px'
-  circle.style.height = gridModuleSize * circleSize + 'px'
+  circle.style.width = gridModuleSize * size + 'px'
+  circle.style.height = gridModuleSize * size + 'px'
   circle.style.top = gridModuleSize * (row + transformY) + 'px'
 
   circle.style.left = gridModuleSize * (column + transformX) + 'px'
@@ -102,7 +102,7 @@ function renderPattern(patternParams, container, patternID) {
 
     Object.values(getPatternRenders(patternID)).map(circle => {
       addCircle(
-        circle.circleSize,
+        circle.size,
         gridModuleSize,
         circle.column,
         circle.row,
@@ -121,7 +121,7 @@ function renderPattern(patternParams, container, patternID) {
       height: container.offsetHeight
     }
 
-    let circleSize
+    let size
     let gridModuleSize
 
     if (canvasSize.width > canvasSize.height) {
@@ -141,7 +141,7 @@ function renderPattern(patternParams, container, patternID) {
       i < (patternParams.gridModule - 1) * (patternParams.gridModule - 1);
       i++
     ) {
-      circleSize = weightedRandom(
+      size = weightedRandom(
         [patternParams.size / 100, getRandomArbitrary(50, 120) / 100],
         [100, patternParams.sizeSwitch]
       ).item
@@ -167,7 +167,7 @@ function renderPattern(patternParams, container, patternID) {
       column = i - patternParams.gridModule * row
 
       addCircle(
-        circleSize,
+        size,
         gridModuleSize,
         column,
         row,
@@ -179,7 +179,7 @@ function renderPattern(patternParams, container, patternID) {
 
       let circleToSave = {
         key: i,
-        circleSize: circleSize,
+        size: size,
         color: color,
         transformX: transformX,
         transformY: transformY,

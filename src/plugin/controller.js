@@ -4,7 +4,8 @@ import { helloWorld } from './design'
 import {
   setStoreImagesForExport,
   setCharityData,
-  setCurrentTemplate
+  setCurrentTemplate,
+  setAllPatternRenders
 } from './store'
 
 figma.showUI(__html__)
@@ -42,6 +43,7 @@ figma.ui.onmessage = async msg => {
     if (noImageCheck) {
       setCharityData(msg.charityData)
       setCurrentTemplate(msg.template)
+      setAllPatternRenders(msg.patternRenders)
       renderFigmaFrame(msg.template, msg.charityData)
     } else {
       let newCurrentImages = []
@@ -58,6 +60,7 @@ figma.ui.onmessage = async msg => {
 
       setCharityData(msg.charityData)
       setCurrentTemplate(msg.template)
+      setAllPatternRenders(msg.patternRenders)
       setStoreImagesForExport(newCurrentImages)
 
       newCurrentImages.forEach(image => {

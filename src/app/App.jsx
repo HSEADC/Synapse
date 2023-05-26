@@ -211,13 +211,14 @@ export default class App extends React.Component {
     )
   }
 
-  createDesign = (template, charityData) => {
+  createDesign = (template, charityData, patternRenders) => {
     parent.postMessage(
       {
         pluginMessage: {
           type: 'create-frame',
           template: template,
-          charityData: charityData
+          charityData: charityData,
+          patternRenders: patternRenders
         }
       },
       '*'
