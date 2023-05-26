@@ -3,17 +3,18 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import placeholder1 from '../../assets/images/placeholders/1.jpg'
 import { findOrRenderPattern } from '../../../plugin/pattern'
-import { setPatternRenders, getPatternRenders } from '../../../plugin/store'
-import onClickOutside from 'react-onclickoutside'
 
-class A_EditorElement extends React.PureComponent {
+export default class A_EditorElement extends React.PureComponent {
   constructor(props) {
     super(props)
   }
 
-  handleClickOutside = () => {
+  handleChildClick = function(element, e) {
     const { setActiveElement } = this.props
-    setActiveElement('')
+    setActiveElement(element)
+    if (e && e.stopPropagation) {
+      e.stopPropagation()
+    }
   }
 
   componentDidMount() {
@@ -57,7 +58,6 @@ class A_EditorElement extends React.PureComponent {
 
     if (editorState) {
       activeElement = editorState.activeElement
-      console.log('editorState exists', activeElement)
     }
 
     const classes = classnames({
@@ -110,8 +110,8 @@ class A_EditorElement extends React.PureComponent {
           <p
             className={classes}
             style={styleDeclaration}
-            onClick={() => {
-              setActiveElement(element)
+            onClick={e => {
+              this.handleChildClick(element, e)
             }}
           >
             {text}
@@ -135,8 +135,8 @@ class A_EditorElement extends React.PureComponent {
             className={classes}
             style={styleDeclaration}
             src={placeholder1}
-            onClick={() => {
-              setActiveElement(element)
+            onClick={e => {
+              this.handleChildClick(element, e)
             }}
           />
         )
@@ -196,8 +196,8 @@ class A_EditorElement extends React.PureComponent {
           <div
             className={classes}
             style={styleDeclaration}
-            onClick={() => {
-              setActiveElement(element)
+            onClick={e => {
+              this.handleChildClick(element, e)
             }}
           ></div>
         )
@@ -205,5 +205,3 @@ class A_EditorElement extends React.PureComponent {
     }
   }
 }
-
-export default onClickOutside(A_EditorElement)

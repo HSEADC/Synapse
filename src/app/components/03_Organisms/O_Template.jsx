@@ -46,7 +46,8 @@ export default class O_Template extends React.PureComponent {
       actions,
       templateID,
       fullsize,
-      editorState
+      editorState,
+      setActiveElement
     } = this.props
 
     if (editorState) {
@@ -89,7 +90,12 @@ export default class O_Template extends React.PureComponent {
 
     if (fullsize) {
       return (
-        <div className="template_wrapper">
+        <div
+          className="template_wrapper"
+          onClick={() => {
+            setActiveElement('')
+          }}
+        >
           <div
             className={classes}
             style={{
