@@ -13,15 +13,27 @@ export default class M_Toolbar extends React.PureComponent {
     super(props)
   }
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   // console.log('prevProps, prevState', prevProps, prevState);
+  //   const { editorState } = this.props
+  //   const { activeElement } = editorState
+  //   if ( prevProps.editorState.activeElement !== activeElement) {
+  //     this.forceUpdate()
+  //     // console.log('force!!!!!');
+  //   }
+  // }
+
   render() {
     const { editorState, template, actions } = this.props
     const { activeElement } = editorState
     const { handleChange } = actions
 
+    // console.log('editorState in toolbar', editorState);
+
     let type
 
     if (activeElement !== '') {
-      type = template.elements[activeElement].type
+      type = template.elements[editorState.activeElement].type
     }
 
     switch (type) {

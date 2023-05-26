@@ -50,12 +50,13 @@ export default class App extends React.Component {
         tab: 'Шаблоны',
         section: ''
       }
-      // activeElement: ''
     }
   }
 
   handleChange = (param, value) => {
     this.setState({ [`${param}`]: value })
+
+    console.log(param, 'changed to ', value)
 
     if (param === 'charityCategory') {
       if (value == 'Здравоохранение') {
@@ -618,7 +619,6 @@ export default class App extends React.Component {
       backToSection: this.backToSection,
       downloadFont: this.downloadFont,
       useTemplate: this.useTemplate
-      // setActiveElement: this.setActiveElement
     }
 
     const charityData = {
@@ -631,10 +631,6 @@ export default class App extends React.Component {
       identityFonts: this.state.identityFonts,
       identityPatternParams: this.state.identityPatternParams
     }
-
-    // const editorState = {
-    //   activeElement: this.state.activeElement
-    // }
 
     const {
       view,

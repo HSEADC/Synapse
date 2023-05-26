@@ -11,13 +11,19 @@ export default class P_DesignCreation extends React.PureComponent {
     super(props)
 
     this.state = {
-      activeElement: ''
+      activeElement: '',
+      template: ''
     }
   }
 
   setActiveElement = element => {
     this.setState({ activeElement: element })
-    console.log('setActiveElement', this.state.activeElement)
+    // console.log('setActiveElement', this.state.activeElement)
+    this.forceUpdate()
+  }
+
+  copyTemplate = template => {
+    this.setState({ template: template })
   }
 
   render() {
@@ -27,8 +33,11 @@ export default class P_DesignCreation extends React.PureComponent {
     const template = templatesList[format][templates.templateID]
     const patternRenders = getAllPatternRenders()
 
+    this.copyTemplate(template)
+
     const editorState = {
-      activeElement: this.state.activeElement
+      activeElement: this.state.activeElement,
+      templateCopy: this.state.template
     }
 
     return (

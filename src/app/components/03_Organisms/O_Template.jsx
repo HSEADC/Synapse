@@ -15,14 +15,8 @@ export default class O_Template extends React.PureComponent {
     const template = templatesList[format][templateID]
   }
 
-  setActiveElementFun() {
-    console.log('seeeeee')
-    setActiveElement(element)
-  }
-
   renderElements(template, charityData) {
     const { editorState, actions, setActiveElement } = this.props
-    // const { setActiveElement } = actions
     let elements = []
     Object.keys(template.elements).forEach(element => {
       elements.push(
@@ -33,7 +27,6 @@ export default class O_Template extends React.PureComponent {
           element={element}
           editorState={editorState}
           setActiveElement={setActiveElement}
-          // onClick={()=>{console.log('boba')}}
         />
       )
     })
@@ -50,14 +43,15 @@ export default class O_Template extends React.PureComponent {
       setActiveElement
     } = this.props
 
-    if (editorState) {
-      const { activeElement } = editorState
-    }
-
     const { openTemplate } = actions
     const format = Array.from(templateID)[0]
     const template = templatesList[format][templateID]
     const colors = charityData.identityColors
+
+    if (editorState) {
+      const { activeElement, templateCopy } = editorState
+      template = templateCopy
+    }
 
     const classes = classnames({
       O_Template: true,

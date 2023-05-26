@@ -15,4 +15,13 @@
         flex-direction: row;
         gap: 4px;
     }
+
+    .A_TextInput {
+        input {
+            margin: 0;
+            width: 264px;
+            height: 44px;
+            border: 1px solid transparent;
+        }
+    }
 }
