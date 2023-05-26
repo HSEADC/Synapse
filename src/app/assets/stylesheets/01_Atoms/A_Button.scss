@@ -29,6 +29,9 @@
         width: 44px;
         border-radius: 8px;
         background-color: $background;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: none;
 
         &.add {
             background-color: transparent;
@@ -38,6 +41,10 @@
 
         &.image {
             background-image: url('../../assets/images/icons/image.svg');
+        }
+
+        &.delete {
+            background-image: url('../../assets/images/icons/trashBin.svg');
         }
 
         &.text {

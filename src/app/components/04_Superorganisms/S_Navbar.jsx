@@ -66,7 +66,7 @@ export default class S_Navbar extends React.PureComponent {
             <M_MenuPopup
               menuPopupCheck={this.state.menuPopupCheck}
               checkThis={this.checkThis}
-              ref={this.wrapperRef}
+              // ref={this.wrapperRef}
             />
           )}
           <div

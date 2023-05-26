@@ -23,9 +23,8 @@ export default class P_DesignCreation extends React.PureComponent {
   }
 
   setActiveElement = element => {
-    console.log('setttt')
     this.setState({ activeElement: element })
-    console.log(this.state)
+    console.log('setActiveElement', this.state.activeElement)
   }
 
   render() {
@@ -47,7 +46,7 @@ export default class P_DesignCreation extends React.PureComponent {
           backToSection={backToSection}
         />
         <div className="sectionNav">
-          <M_Toolbar />
+          <M_Toolbar editorState={editorState} template={template} />
         </div>
         <O_Template
           templateID={templates.templateID}

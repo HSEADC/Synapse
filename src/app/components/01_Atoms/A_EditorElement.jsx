@@ -4,10 +4,16 @@ import ReactDOM from 'react-dom'
 import placeholder1 from '../../assets/images/placeholders/1.jpg'
 import { findOrRenderPattern } from '../../../plugin/pattern'
 import { setPatternRenders, getPatternRenders } from '../../../plugin/store'
+import onClickOutside from 'react-onclickoutside'
 
-export default class A_EditorElement extends React.PureComponent {
+class A_EditorElement extends React.PureComponent {
   constructor(props) {
     super(props)
+  }
+
+  handleClickOutside = () => {
+    const { setActiveElement } = this.props
+    setActiveElement('')
   }
 
   componentDidMount() {
@@ -199,3 +205,5 @@ export default class A_EditorElement extends React.PureComponent {
     }
   }
 }
+
+export default onClickOutside(A_EditorElement)
