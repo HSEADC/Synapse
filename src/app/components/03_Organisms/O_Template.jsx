@@ -21,8 +21,8 @@ export default class O_Template extends React.PureComponent {
   }
 
   renderElements(template, charityData) {
-    const { editorState, actions } = this.props
-    const { setActiveElement } = actions
+    const { editorState, actions, setActiveElement } = this.props
+    // const { setActiveElement } = actions
     let elements = []
     Object.keys(template.elements).forEach(element => {
       elements.push(
@@ -48,7 +48,11 @@ export default class O_Template extends React.PureComponent {
       fullsize,
       editorState
     } = this.props
-    const { activeElement } = editorState
+
+    if (editorState) {
+      const { activeElement } = editorState
+    }
+
     const { openTemplate } = actions
     const format = Array.from(templateID)[0]
     const template = templatesList[format][templateID]

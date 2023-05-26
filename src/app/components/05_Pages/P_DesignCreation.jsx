@@ -16,14 +16,28 @@ import { getAllPatternRenders } from '../../../plugin/store'
 export default class P_DesignCreation extends React.PureComponent {
   constructor(props) {
     super(props)
+
+    this.state = {
+      activeElement: ''
+    }
+  }
+
+  setActiveElement = element => {
+    console.log('setttt')
+    this.setState({ activeElement: element })
+    console.log(this.state)
   }
 
   render() {
-    const { actions, charityData, templates, editorState } = this.props
+    const { actions, charityData, templates } = this.props
     const { handleChange, chooseSection, backToSection, createDesign } = actions
     const format = Array.from(templates.templateID)[0]
     const template = templatesList[format][templates.templateID]
     const patternRenders = getAllPatternRenders()
+
+    const editorState = {
+      activeElement: this.state.activeElement
+    }
 
     return (
       <div className="P_DesignCreation">
@@ -41,6 +55,7 @@ export default class P_DesignCreation extends React.PureComponent {
           fullsize={true}
           charityData={charityData}
           editorState={editorState}
+          setActiveElement={this.setActiveElement}
         />
         <S_FixedActions
           primButtonText="Создать"

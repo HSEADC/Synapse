@@ -49,8 +49,8 @@ export default class App extends React.Component {
       templates: {
         tab: 'Шаблоны',
         section: ''
-      },
-      activeElement: ''
+      }
+      // activeElement: ''
     }
   }
 
@@ -192,10 +192,10 @@ export default class App extends React.Component {
 
   useToolbar = (template, element) => {}
 
-  setActiveElement = element => {
-    console.log('setttt')
-    this.setState({ activeElement: element })
-  }
+  // setActiveElement = element => {
+  //   console.log('setttt')
+  //   this.setState({ activeElement: element })
+  // }
 
   createDesign = (template, charityData, patternRenders) => {
     parent.postMessage(
@@ -617,8 +617,8 @@ export default class App extends React.Component {
       openTemplate: this.openTemplate,
       backToSection: this.backToSection,
       downloadFont: this.downloadFont,
-      useTemplate: this.useTemplate,
-      setActiveElement: this.setActiveElement
+      useTemplate: this.useTemplate
+      // setActiveElement: this.setActiveElement
     }
 
     const charityData = {
@@ -632,9 +632,9 @@ export default class App extends React.Component {
       identityPatternParams: this.state.identityPatternParams
     }
 
-    const editorState = {
-      activeElement: this.state.activeElement
-    }
+    // const editorState = {
+    //   activeElement: this.state.activeElement
+    // }
 
     const {
       view,
@@ -673,7 +673,7 @@ export default class App extends React.Component {
           actions={actions}
           charityData={charityData}
           templates={templates}
-          editorState={editorState}
+          // editorState={editorState}
         />
       )
     } else if (view === 'feed') {
@@ -683,7 +683,7 @@ export default class App extends React.Component {
             actions={actions}
             templates={templates}
             charityData={charityData}
-            editorState={editorState}
+            // editorState={editorState}
           />
         </div>
       )

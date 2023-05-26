@@ -47,12 +47,17 @@ export default class A_EditorElement extends React.PureComponent {
       setActiveElement
     } = this.props
 
-    const { activeElement } = editorState
+    let activeElement
+
+    if (editorState) {
+      activeElement = editorState.activeElement
+      console.log('editorState exists', activeElement)
+    }
 
     const classes = classnames({
       A_EditorElement: true,
       [`${type}`]: true,
-      active: activeElement === element
+      active: editorState && activeElement === element
     })
 
     let styleDeclaration
