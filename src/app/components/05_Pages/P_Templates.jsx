@@ -98,7 +98,7 @@ export default class P_Templates extends React.PureComponent {
             <A_TextInput
               placeholder="Найти..."
               handleChange={handleChange}
-              defaultValue=""
+              value=""
               param="search"
             />
             <A_Spacer size={24} />

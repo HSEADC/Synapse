@@ -12,18 +12,28 @@ export default class P_DesignCreation extends React.PureComponent {
 
     this.state = {
       activeElement: '',
-      template: ''
+      templateCopy: ''
     }
   }
 
   setActiveElement = element => {
     this.setState({ activeElement: element })
     // console.log('setActiveElement', this.state.activeElement)
-    this.forceUpdate()
+    // this.forceUpdate()
   }
 
   copyTemplate = template => {
-    this.setState({ template: template })
+    this.setState({ templateCopy: template })
+    console.log('set copy', this.state.templateCopy)
+  }
+
+  updateTemplate = (element, param, value) => {
+    let updatedTemplate = { ...this.state.templateCopy }
+    updatedTemplate.elements[element][param] = value
+    this.setState({
+      templateCopy: updatedTemplate
+    })
+    console.log('new state', this.state)
   }
 
   render() {
@@ -33,11 +43,17 @@ export default class P_DesignCreation extends React.PureComponent {
     const template = templatesList[format][templates.templateID]
     const patternRenders = getAllPatternRenders()
 
-    this.copyTemplate(template)
+    if (
+      this.state.templateCopy === '' ||
+      this.state.templateCopy === undefined ||
+      !this.state.templateCopy
+    ) {
+      this.copyTemplate(template)
+    }
 
     const editorState = {
       activeElement: this.state.activeElement,
-      templateCopy: this.state.template
+      templateCopy: this.state.templateCopy
     }
 
     return (
@@ -52,6 +68,7 @@ export default class P_DesignCreation extends React.PureComponent {
             editorState={editorState}
             template={template}
             actions={actions}
+            updateTemplate={this.updateTemplate}
           />
         </div>
         <O_Template
@@ -61,7 +78,6 @@ export default class P_DesignCreation extends React.PureComponent {
           charityData={charityData}
           editorState={editorState}
           setActiveElement={this.setActiveElement}
-          // onClick={() => {this.setActiveElement('')}}
         />
         <S_FixedActions
           primButtonText="Создать"

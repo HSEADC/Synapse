@@ -24,11 +24,11 @@ export default class M_Toolbar extends React.PureComponent {
   // }
 
   render() {
-    const { editorState, template, actions } = this.props
+    const { editorState, template, actions, updateTemplate } = this.props
     const { activeElement } = editorState
     const { handleChange } = actions
 
-    // console.log('editorState in toolbar', editorState);
+    console.log('activeElement', activeElement)
 
     let type
 
@@ -56,8 +56,10 @@ export default class M_Toolbar extends React.PureComponent {
               <A_TextInput
                 placeholder="Введите текст"
                 handleChange={handleChange}
-                defaultValue={template.elements[activeElement].text}
-                param="charityTitle"
+                value={template.elements[activeElement].text}
+                param="text"
+                updateTemplate={updateTemplate}
+                elementToChange={activeElement}
               />
               <A_Button type="toolbar" icon="delete" />
             </div>

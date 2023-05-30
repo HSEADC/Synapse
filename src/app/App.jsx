@@ -56,8 +56,6 @@ export default class App extends React.Component {
   handleChange = (param, value) => {
     this.setState({ [`${param}`]: value })
 
-    console.log(param, 'changed to ', value)
-
     if (param === 'charityCategory') {
       if (value == 'Здравоохранение') {
         this.setState({

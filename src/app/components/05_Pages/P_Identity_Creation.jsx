@@ -89,7 +89,7 @@ export default class P_Identity_Creation extends React.PureComponent {
           <A_TextInput
             placeholder="Введите название"
             handleChange={handleChange}
-            defaultValue={charityTitle}
+            value={charityTitle}
             // primButtonHandleClick={nextStepIdentity}
             param="charityTitle"
           />

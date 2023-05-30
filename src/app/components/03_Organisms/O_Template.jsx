@@ -45,12 +45,23 @@ export default class O_Template extends React.PureComponent {
 
     const { openTemplate } = actions
     const format = Array.from(templateID)[0]
-    const template = templatesList[format][templateID]
+    let template = templatesList[format][templateID]
     const colors = charityData.identityColors
 
-    if (editorState) {
+    if (
+      editorState &&
+      editorState !== '' &&
+      editorState !== undefined &&
+      editorState !== null
+    ) {
       const { activeElement, templateCopy } = editorState
-      template = templateCopy
+      if (
+        editorState.templateCopy &&
+        editorState.templateCopy !== '' &&
+        editorState.templateCopy !== undefined
+      ) {
+        template = templateCopy
+      }
     }
 
     const classes = classnames({

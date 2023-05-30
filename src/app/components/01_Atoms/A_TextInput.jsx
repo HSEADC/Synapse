@@ -12,8 +12,13 @@ export default class A_TextInput extends React.PureComponent {
     handleChange(param, e.target.value)
   }
 
+  updateTemplate = e => {
+    const { elementToChange, param, updateTemplate } = this.props
+    updateTemplate(elementToChange, param, e.target.value)
+  }
+
   render() {
-    const { placeholder, defaultValue } = this.props
+    const { placeholder, value, updateTemplate } = this.props
 
     return (
       <div className="A_TextInput">
@@ -21,8 +26,8 @@ export default class A_TextInput extends React.PureComponent {
           type="text"
           name="name"
           placeholder={placeholder}
-          defaultValue={defaultValue}
-          onInput={this.handleChange}
+          value={value}
+          onInput={updateTemplate ? this.updateTemplate : this.handleChange}
         />
       </div>
     )
