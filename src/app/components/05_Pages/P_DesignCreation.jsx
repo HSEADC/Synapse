@@ -36,6 +36,16 @@ export default class P_DesignCreation extends React.PureComponent {
     console.log('new state', this.state)
   }
 
+  removeElement = element => {
+    console.log('removeee')
+    let updatedTemplate = { ...this.state.templateCopy }
+    delete updatedTemplate.elements[element]
+    this.setState({
+      templateCopy: updatedTemplate,
+      activeElement: undefined
+    })
+  }
+
   render() {
     const { actions, charityData, templates } = this.props
     const { handleChange, chooseSection, backToSection, createDesign } = actions
@@ -69,6 +79,7 @@ export default class P_DesignCreation extends React.PureComponent {
             template={template}
             actions={actions}
             updateTemplate={this.updateTemplate}
+            removeElement={this.removeElement}
           />
         </div>
         <O_Template

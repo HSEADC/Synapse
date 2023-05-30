@@ -61,15 +61,19 @@ function renderFigmaFrame(imagesForExport) {
         ;(async () => {
           const text = figma.createText()
 
+          console.log('font', charityData.identityFonts)
+
           text.x = element.x * template.width
           text.y = element.y * template.height
 
           await figma.loadFontAsync({
-            family: charityData.identityFonts,
+            // family: charityData.identityFonts,
+            family: 'Inter',
             style: 'Regular'
           })
           text.fontName = {
-            family: charityData.identityFonts,
+            // family: charityData.identityFonts,
+            family: 'Inter',
             style: 'Regular'
           }
           text.characters = element.text

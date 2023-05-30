@@ -23,8 +23,21 @@ export default class M_Toolbar extends React.PureComponent {
   //   }
   // }
 
+  removeElement = () => {
+    console.log('removeeeee')
+    const { editorState, removeElement } = this.props
+    const { activeElement } = editorState
+    removeElement(activeElement)
+  }
+
   render() {
-    const { editorState, template, actions, updateTemplate } = this.props
+    const {
+      editorState,
+      template,
+      actions,
+      updateTemplate,
+      removeElement
+    } = this.props
     const { activeElement } = editorState
     const { handleChange } = actions
 
@@ -32,7 +45,11 @@ export default class M_Toolbar extends React.PureComponent {
 
     let type
 
-    if (activeElement !== '') {
+    if (
+      activeElement !== '' &&
+      activeElement !== null &&
+      activeElement !== undefined
+    ) {
       type = template.elements[editorState.activeElement].type
     }
 
@@ -42,7 +59,11 @@ export default class M_Toolbar extends React.PureComponent {
           <div className="M_Toolbar">
             <A_Icon icon={image} />
             <div>
-              <A_Button type="toolbar" icon="delete" />
+              <A_Button
+                type="toolbar"
+                icon="delete"
+                handleClick={this.removeElement}
+              />
             </div>
           </div>
         )
@@ -61,7 +82,11 @@ export default class M_Toolbar extends React.PureComponent {
                 updateTemplate={updateTemplate}
                 elementToChange={activeElement}
               />
-              <A_Button type="toolbar" icon="delete" />
+              <A_Button
+                type="toolbar"
+                icon="delete"
+                handleClick={this.removeElement}
+              />
             </div>
           </div>
         )
