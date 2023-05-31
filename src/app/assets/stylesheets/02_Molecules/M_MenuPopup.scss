@@ -13,7 +13,7 @@
     box-shadow: 0px 6px 20px rgba(19, 29, 39, 0.1);
     border: 0.5px solid $dividers;
     
-    button.more {
+    .more {
         position: fixed;
         top: -5px;
         right: 3px !important;
@@ -36,5 +36,25 @@
         &:last-of-type {
             color: $secondary-text;
         }
+    }
+}
+
+.upload_image {
+    position: fixed;
+    bottom: 0;
+    right: auto !important;
+    top: auto !important;
+    border-radius: 16px;
+    background: $background;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    height: 50vh;
+
+    button {
+        width: 100%;
     }
 }

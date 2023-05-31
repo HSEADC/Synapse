@@ -5,7 +5,8 @@ import {
   setStoreImagesForExport,
   setCharityData,
   setCurrentTemplate,
-  setAllPatternRenders
+  setAllPatternRenders,
+  getSelectedImage
 } from './store'
 
 figma.showUI(__html__)
@@ -71,6 +72,10 @@ figma.ui.onmessage = async msg => {
         })
       })
     }
+  } else if (msg.type === 'upload-image') {
+    figma.on('selectionchange', () => {
+      figma.currentPage.selection.fills[0]
+    })
   } else {
     console.log('unknown message')
   }

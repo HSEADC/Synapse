@@ -24,4 +24,14 @@
             border: 1px solid transparent;
         }
     }
+
+    &.active {
+        justify-content: flex-start;
+        div:last-of-type {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+        }
+    }
 }

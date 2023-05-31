@@ -36,7 +36,8 @@ export default class M_Toolbar extends React.PureComponent {
       template,
       actions,
       updateTemplate,
-      removeElement
+      removeElement,
+      uploadImage
     } = this.props
     const { activeElement } = editorState
     const { handleChange } = actions
@@ -56,9 +57,15 @@ export default class M_Toolbar extends React.PureComponent {
     switch (type) {
       case 'img':
         return (
-          <div className="M_Toolbar">
+          <div className="M_Toolbar active">
             <A_Icon icon={image} />
             <div>
+              <A_Button
+                type="toolbar"
+                text="Загрузить изображение"
+                handleClick={uploadImage}
+              />
+
               <A_Button
                 type="toolbar"
                 icon="delete"
@@ -71,7 +78,7 @@ export default class M_Toolbar extends React.PureComponent {
 
       case 'text':
         return (
-          <div className="M_Toolbar">
+          <div className="M_Toolbar active">
             <A_Icon icon={text} />
             <div>
               <A_TextInput
@@ -94,7 +101,7 @@ export default class M_Toolbar extends React.PureComponent {
 
       case 'pattern':
         return (
-          <div className="M_Toolbar">
+          <div className="M_Toolbar active">
             <A_Icon icon={pattern} />
             <div>
               <A_Button type="toolbar" icon="delete" />

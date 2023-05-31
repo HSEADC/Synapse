@@ -5,6 +5,7 @@ import M_Toolbar from '../02_Molecules/M_Toolbar'
 import S_FixedActions from '../04_Superorganisms/S_FixedActions'
 import { templatesList } from '../../../libraries/templates'
 import { getAllPatternRenders } from '../../../plugin/store'
+import M_MenuPopup from '../02_Molecules/M_MenuPopup'
 
 export default class P_DesignCreation extends React.PureComponent {
   constructor(props) {
@@ -12,7 +13,8 @@ export default class P_DesignCreation extends React.PureComponent {
 
     this.state = {
       activeElement: '',
-      templateCopy: ''
+      templateCopy: '',
+      uploadImage: false
     }
   }
 
@@ -44,6 +46,25 @@ export default class P_DesignCreation extends React.PureComponent {
       templateCopy: updatedTemplate,
       activeElement: undefined
     })
+  }
+
+  uploadImage = () => {
+    console.log('upload')
+
+    this.setState(prevState => ({
+      uploadImage: !prevState.uploadImage
+    }))
+
+    if (this.state.uploadImage === true) {
+      parent.postMessage(
+        {
+          pluginMessage: {
+            type: 'upload-image'
+          }
+        },
+        '*'
+      )
+    }
   }
 
   render() {
@@ -80,6 +101,7 @@ export default class P_DesignCreation extends React.PureComponent {
             actions={actions}
             updateTemplate={this.updateTemplate}
             removeElement={this.removeElement}
+            uploadImage={this.uploadImage}
           />
         </div>
         <O_Template
@@ -97,6 +119,9 @@ export default class P_DesignCreation extends React.PureComponent {
           }
           noBorder={true}
         />
+        {this.state.uploadImage && (
+          <M_MenuPopup uploadImage={this.uploadImage} />
+        )}
       </div>
     )
   }

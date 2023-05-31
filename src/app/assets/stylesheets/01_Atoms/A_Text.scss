@@ -26,6 +26,26 @@
         letter-spacing: -0.04em;
         width: 100%;
     }
+
+    &.footnote {
+        color: $secondary-text;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 20px;
+        letter-spacing: -0.01em;
+    }
+
+    &.bigger_body {
+        color: $identity-black;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 450;
+        font-size: 20px;
+        line-height: 24px;
+        letter-spacing: -0.02em;
+    }
 }
 
 .hyperlink {

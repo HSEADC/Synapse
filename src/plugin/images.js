@@ -1,6 +1,14 @@
 import { getStoreImagesForExport } from './store'
 import { renderFigmaFrame } from './render'
 
+async function getSelectedImage(paint) {
+  if (paint.type === 'IMAGE') {
+    const image = figma.getImageByHash(paint.imageHash)
+
+    const bytes = await image.getBytesAsync()
+  }
+}
+
 function saveImageDataOrExportToFigma(id, bytes) {
   let imagesForExport = getStoreImagesForExport()
   let status = []
@@ -65,4 +73,4 @@ function getNewPaint(paint, imageBytes) {
   return newPaint
 }
 
-export { saveImageDataOrExportToFigma, getNewFills }
+export { saveImageDataOrExportToFigma, getNewFills, getSelectedImage }
