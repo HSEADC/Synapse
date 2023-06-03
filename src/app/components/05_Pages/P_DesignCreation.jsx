@@ -6,6 +6,7 @@ import S_FixedActions from '../04_Superorganisms/S_FixedActions'
 import { templatesList } from '../../../libraries/templates'
 import { getAllPatternRenders } from '../../../plugin/store'
 import M_MenuPopup from '../02_Molecules/M_MenuPopup'
+import { compareObjects } from '../../../plugin/utilities'
 
 export default class P_DesignCreation extends React.PureComponent {
   constructor(props) {
@@ -22,14 +23,18 @@ export default class P_DesignCreation extends React.PureComponent {
     this.setState({ activeElement: element })
   }
 
-  copyTemplate = template => {
-    this.setState({ templateCopy: template })
+  copyTemplate = originalTemplate => {
+    const copy = JSON.parse(JSON.stringify(originalTemplate))
+    this.setState({ templateCopy: { ...copy, copied: true } })
   }
 
   updateTemplate = (element, param, value) => {
+    // const { templates } = this.props
+    // const format = Array.from(templates.templateID)[0]
+    // const originalTemplate = templatesList[format][templates.templateID]
+
     let updatedTemplate = { ...this.state.templateCopy }
     updatedTemplate.elements[element][param] = value
-    console.log('upd', updatedTemplate.elements[element][param])
     this.setState({
       templateCopy: updatedTemplate
     })
@@ -85,7 +90,7 @@ export default class P_DesignCreation extends React.PureComponent {
     const { actions, charityData, templates } = this.props
     const { handleChange, chooseSection, backToSection, createDesign } = actions
     const format = Array.from(templates.templateID)[0]
-    const template = templatesList[format][templates.templateID]
+    const originalTemplate = templatesList[format][templates.templateID]
     const patternRenders = getAllPatternRenders()
 
     if (
@@ -94,7 +99,7 @@ export default class P_DesignCreation extends React.PureComponent {
       !this.state.templateCopy
     ) {
       console.log('copyTemplate')
-      this.copyTemplate(template)
+      this.copyTemplate(originalTemplate)
     }
 
     const editorState = {
@@ -112,7 +117,7 @@ export default class P_DesignCreation extends React.PureComponent {
         <div className="sectionNav">
           <M_Toolbar
             editorState={editorState}
-            template={template}
+            // template={this.state.templateCopy}
             actions={actions}
             updateTemplate={this.updateTemplate}
             removeElement={this.removeElement}
@@ -130,7 +135,7 @@ export default class P_DesignCreation extends React.PureComponent {
         <S_FixedActions
           primButtonText="Создать"
           primButtonHandleClick={() =>
-            createDesign(template, charityData, patternRenders)
+            createDesign(this.state.templateCopy, charityData, patternRenders)
           }
           noBorder={true}
         />

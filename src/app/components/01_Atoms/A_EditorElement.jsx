@@ -120,7 +120,6 @@ export default class A_EditorElement extends React.PureComponent {
         break
 
       case 'img':
-        console.log('element', element)
         styleDeclaration = {
           position: 'absolute',
           left: x * 100 + '%',

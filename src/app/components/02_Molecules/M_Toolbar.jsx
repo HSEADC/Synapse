@@ -13,16 +13,6 @@ export default class M_Toolbar extends React.PureComponent {
     super(props)
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   // console.log('prevProps, prevState', prevProps, prevState);
-  //   const { editorState } = this.props
-  //   const { activeElement } = editorState
-  //   if ( prevProps.editorState.activeElement !== activeElement) {
-  //     this.forceUpdate()
-  //     // console.log('force!!!!!');
-  //   }
-  // }
-
   removeElement = () => {
     const { editorState, removeElement } = this.props
     const { activeElement } = editorState
@@ -48,7 +38,7 @@ export default class M_Toolbar extends React.PureComponent {
       activeElement !== null &&
       activeElement !== undefined
     ) {
-      type = template.elements[editorState.activeElement].type
+      type = editorState.templateCopy.elements[editorState.activeElement].type
     }
 
     switch (type) {
@@ -81,7 +71,7 @@ export default class M_Toolbar extends React.PureComponent {
               <A_TextInput
                 placeholder="Введите текст"
                 handleChange={handleChange}
-                value={template.elements[activeElement].text}
+                value={editorState.templateCopy.elements[activeElement].text}
                 param="text"
                 updateTemplate={updateTemplate}
                 elementToChange={activeElement}
