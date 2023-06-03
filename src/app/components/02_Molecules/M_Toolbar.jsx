@@ -24,7 +24,6 @@ export default class M_Toolbar extends React.PureComponent {
   // }
 
   removeElement = () => {
-    console.log('removeeeee')
     const { editorState, removeElement } = this.props
     const { activeElement } = editorState
     removeElement(activeElement)
@@ -41,8 +40,6 @@ export default class M_Toolbar extends React.PureComponent {
     } = this.props
     const { activeElement } = editorState
     const { handleChange } = actions
-
-    console.log('activeElement', activeElement)
 
     let type
 

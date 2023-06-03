@@ -27,7 +27,7 @@ export default class A_TextInput extends React.PureComponent {
           name="name"
           placeholder={placeholder}
           value={value}
-          onInput={updateTemplate ? this.updateTemplate : this.handleChange}
+          onChange={updateTemplate ? this.updateTemplate : this.handleChange}
         />
       </div>
     )

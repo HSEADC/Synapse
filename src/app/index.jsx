@@ -94,20 +94,18 @@ window.onmessage = async event => {
     )
   } else if (event.data.pluginMessage.type === 'upload-image') {
     const u8bytes = event.data.pluginMessage.bytes
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-
-    console.log('u8bytes', event.data.pluginMessage.bytes)
+    // const canvas = document.createElement('canvas')
+    // const ctx = canvas.getContext('2d')
 
     const base64bytes = await encodeToBase64(u8bytes)
-    console.log('base64bytes', base64bytes)
 
     parent.postMessage(
       {
         pluginMessage: {
           type: 'image-in-base64',
           id: event.data.pluginMessage.id,
-          bytes: base64bytes
+          bytes: base64bytes,
+          activeElement: event.data.pluginMessage.activeElement
         }
       },
       '*'

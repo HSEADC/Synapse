@@ -20,26 +20,22 @@ export default class P_DesignCreation extends React.PureComponent {
 
   setActiveElement = element => {
     this.setState({ activeElement: element })
-    // console.log('setActiveElement', this.state.activeElement)
-    // this.forceUpdate()
   }
 
   copyTemplate = template => {
     this.setState({ templateCopy: template })
-    console.log('set copy', this.state.templateCopy)
   }
 
   updateTemplate = (element, param, value) => {
     let updatedTemplate = { ...this.state.templateCopy }
     updatedTemplate.elements[element][param] = value
+    console.log('upd', updatedTemplate.elements[element][param])
     this.setState({
       templateCopy: updatedTemplate
     })
-    console.log('new state', this.state)
   }
 
   removeElement = element => {
-    console.log('removeee')
     let updatedTemplate = { ...this.state.templateCopy }
     delete updatedTemplate.elements[element]
     this.setState({
@@ -48,14 +44,30 @@ export default class P_DesignCreation extends React.PureComponent {
     })
   }
 
+  componentDidMount() {
+    window.addEventListener('message', this.handleMessage.bind(this), false)
+  }
+
+  handleMessage(e) {
+    const msg = e.data.pluginMessage
+    // console.log('before', msg);
+    if (msg.type !== 'replace-image') return
+    if (msg.activeElement) {
+      const bytes = 'data:image/png;base64,' + msg.bytes
+      this.updateTemplate(msg.activeElement, 'cover', bytes)
+      this.uploadImage()
+    }
+  }
+
   componentDidUpdate() {
-    const { uploadImage } = this.props
+    const { activeElement } = this.state
     if (this.state.uploadImage === true) {
-      console.log('upload')
+      // console.log('activeElement to send', activeElement);
       parent.postMessage(
         {
           pluginMessage: {
-            type: 'upload-image'
+            type: 'upload-image',
+            activeElement: activeElement
           }
         },
         '*'
@@ -81,6 +93,7 @@ export default class P_DesignCreation extends React.PureComponent {
       this.state.templateCopy === undefined ||
       !this.state.templateCopy
     ) {
+      console.log('copyTemplate')
       this.copyTemplate(template)
     }
 

@@ -1,7 +1,6 @@
 import classnames from 'classnames'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import placeholder1 from '../../assets/images/placeholders/1.jpg'
 import { findOrRenderPattern } from '../../../plugin/pattern'
 
 export default class A_EditorElement extends React.PureComponent {
@@ -51,6 +50,7 @@ export default class A_EditorElement extends React.PureComponent {
       background,
       editorState,
       element,
+      cover,
       setActiveElement
     } = this.props
 
@@ -120,6 +120,7 @@ export default class A_EditorElement extends React.PureComponent {
         break
 
       case 'img':
+        console.log('element', element)
         styleDeclaration = {
           position: 'absolute',
           left: x * 100 + '%',
@@ -134,7 +135,7 @@ export default class A_EditorElement extends React.PureComponent {
           <img
             className={classes}
             style={styleDeclaration}
-            src={placeholder1}
+            src={cover}
             onClick={e => {
               this.handleChildClick(element, e)
             }}

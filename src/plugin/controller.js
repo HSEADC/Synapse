@@ -80,8 +80,12 @@ figma.ui.onmessage = async msg => {
               const u8bytes = await getSelectedImageBytes(
                 figma.currentPage.selection[0].fills[0]
               )
-              console.log('controller u8bytes', u8bytes)
-              figma.ui.postMessage({ type: 'upload-image', bytes: u8bytes })
+              console.log('activeElement in upload-image', msg.activeElement)
+              figma.ui.postMessage({
+                type: 'upload-image',
+                bytes: u8bytes,
+                activeElement: msg.activeElement
+              })
             }
             getSelectionBytes()
             break
@@ -94,6 +98,13 @@ figma.ui.onmessage = async msg => {
       }
     })
   } else if (msg.type === 'image-in-base64') {
+    const bytes = msg.bytes
+    console.log('activeElement in image-in-base64', msg.activeElement)
+    figma.ui.postMessage({
+      type: 'replace-image',
+      bytes: msg.bytes,
+      activeElement: msg.activeElement
+    })
   } else {
     console.log('unknown message')
   }
