@@ -115,6 +115,7 @@ export default class P_Templates extends React.PureComponent {
                     onClick={() => {
                       downloadFont(charityData.identityFonts)
                     }}
+                    style={{ cursor: 'pointer' }}
                   >
                     Установите
                   </a>,

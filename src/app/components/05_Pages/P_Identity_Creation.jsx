@@ -301,7 +301,7 @@ export default class P_Identity_Creation extends React.PureComponent {
               saveFont={saveFont}
               checked={identityFonts == identityFontsProgress[1]}
             />
-            {fontsList}
+            {/* {fontsList} */}
           </div>
 
           <S_FixedActions

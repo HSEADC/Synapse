@@ -105,7 +105,7 @@ function doesFontExist(fontName) {
   var baselineSize = context.measureText(text).width
 
   // specifying the font whose existence we want to check
-  context.font = "72px '" + fontName + "', monospace"
+  context.font = "72px '" + fontName
 
   // checking the size of the font we want to check
   var newSize = context.measureText(text).width

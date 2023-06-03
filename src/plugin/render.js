@@ -60,21 +60,39 @@ function renderFigmaFrame(imagesForExport) {
       case 'text':
         ;(async () => {
           const text = figma.createText()
-
-          console.log('font', charityData.identityFonts)
-
           text.x = element.x * template.width
           text.y = element.y * template.height
 
+          let fontStyle
+          switch (charityData.identityFonts) {
+            case 'Miedinger*':
+              fontStyle = 'Book'
+              break
+
+            case 'Soyuz Grotesk':
+              fontStyle = 'Bold'
+              break
+
+            case 'St. Sign':
+              fontStyle = 'Normal'
+              break
+
+            case 'St. Sign Cond':
+              fontStyle = 'Condensed'
+              break
+
+            default:
+              fontStyle = 'Regular'
+              break
+          }
+
           await figma.loadFontAsync({
-            // family: charityData.identityFonts,
-            family: 'Inter',
-            style: 'Regular'
+            family: charityData.identityFonts,
+            style: fontStyle
           })
           text.fontName = {
-            // family: charityData.identityFonts,
-            family: 'Inter',
-            style: 'Regular'
+            family: charityData.identityFonts,
+            style: fontStyle
           }
           text.characters = element.text
 

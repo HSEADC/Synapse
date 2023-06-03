@@ -29,10 +29,6 @@ export default class P_DesignCreation extends React.PureComponent {
   }
 
   updateTemplate = (element, param, value) => {
-    // const { templates } = this.props
-    // const format = Array.from(templates.templateID)[0]
-    // const originalTemplate = templatesList[format][templates.templateID]
-
     let updatedTemplate = { ...this.state.templateCopy }
     updatedTemplate.elements[element][param] = value
     this.setState({
@@ -98,7 +94,6 @@ export default class P_DesignCreation extends React.PureComponent {
       this.state.templateCopy === undefined ||
       !this.state.templateCopy
     ) {
-      console.log('copyTemplate')
       this.copyTemplate(originalTemplate)
     }
 

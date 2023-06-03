@@ -216,23 +216,6 @@ export default class App extends React.Component {
     })
   }
 
-  exportPageToFigma = () => {
-    const { pairs } = this.props
-    const { currentPairId, recommendedPairs } = this.state
-
-    parent.postMessage(
-      {
-        pluginMessage: {
-          type: 'font-pair-export',
-          pairs: pairs,
-          currentPairId: currentPairId,
-          recommendedPairs: recommendedPairs
-        }
-      },
-      '*'
-    )
-  }
-
   //palette////////////////////////////////////////////////////////////////////////////////////////////////////
   createPalettes = charityData => {
     for (let i = 0; i < 5; i++) {
