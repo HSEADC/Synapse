@@ -30,7 +30,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'feed',
+      view: 'identity-creation',
       onboardingStep: 1,
       identityCreationStep: 1,
       charityTitle: '',
@@ -564,7 +564,27 @@ export default class App extends React.Component {
   }
 
   saveIdentity = () => {
+    const charityData = {
+      charityTitle: this.state.charityTitle,
+      charityCategory: this.state.charityCategory,
+      friendliness: this.state.friendliness,
+      volume: this.state.volume,
+      rationality: this.state.rationality,
+      identityColors: this.state.identityColors,
+      identityFonts: this.state.identityFonts,
+      identityPatternParams: this.state.identityPatternParams
+    }
+
     this.setToStorage()
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'create-styles',
+          charityData: charityData
+        }
+      },
+      '*'
+    )
     this.setState({ view: 'feed' })
   }
 
@@ -632,7 +652,7 @@ export default class App extends React.Component {
       )
     } else if (view === 'onboarding') {
       return <P_Onboarding onboardingStep={onboardingStep} actions={actions} />
-    } else if (view === 'identity_creation') {
+    } else if (view === 'identity-creation') {
       return (
         <P_IdentityCreation
           identityCreationStep={identityCreationStep}
@@ -642,15 +662,6 @@ export default class App extends React.Component {
           identityColorsProgress={identityColorsProgress}
           identityPatternParamsProgress={identityPatternParamsProgress}
           identityFontsProgress={identityFontsProgress}
-        />
-      )
-    } else if (view === 'design_creation') {
-      return (
-        <P_DesignCreation
-          actions={actions}
-          charityData={charityData}
-          templates={templates}
-          // editorState={editorState}
         />
       )
     } else if (view === 'feed') {

@@ -103,6 +103,57 @@ figma.ui.onmessage = async msg => {
       bytes: msg.bytes,
       activeElement: msg.activeElement
     })
+  } else if (msg.type === 'create-styles') {
+    Object.keys(msg.charityData.identityColors).forEach(color => {
+      const style = figma.createPaintStyle()
+      let name
+      switch (color) {
+        case 'primary':
+          name = 'Основной цвет'
+          break
+
+        case 'text':
+          name = 'Текст'
+          break
+
+        case 'background':
+          name = 'Фон'
+          break
+
+        case 'adOne':
+          name = 'Дополнительный 1'
+          break
+
+        case 'adTwo':
+          name = 'Дополнительный 2'
+          break
+
+        default:
+          break
+      }
+
+      style.name = 'Брендбук/' + name
+
+      style.paints = [
+        {
+          type: 'SOLID',
+          color: {
+            r:
+              msg.charityData.identityColors[color].r > 1
+                ? 1
+                : Math.abs(msg.charityData.identityColors[color].r),
+            g:
+              msg.charityData.identityColors[color].g > 1
+                ? 1
+                : Math.abs(msg.charityData.identityColors[color].g),
+            b:
+              msg.charityData.identityColors[color].b > 1
+                ? 1
+                : Math.abs(msg.charityData.identityColors[color].b)
+          }
+        }
+      ]
+    })
   } else {
     console.log('unknown message')
   }
