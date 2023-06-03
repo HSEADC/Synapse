@@ -46,13 +46,26 @@
     top: auto !important;
     border-radius: 16px;
     background: $background;
-    padding: 16px;
+    padding: 24px 16px 16px 16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
     align-items: center;
     justify-content: space-between;
     height: 50vh;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+
+        .A_Text {
+            text-align: center;
+            width: 90%;
+        }
+    }
 
     button {
         width: 100%;

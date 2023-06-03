@@ -42,12 +42,18 @@ class M_MenuPopup extends React.PureComponent {
     ) {
       return (
         <div className="upload_image">
-          <A_Text text="Нажмите на нужное изображение" type="bigger_body" />
-          <A_Text
-            text="Для загрузки фотографии добавьте ее в пространство Figma и нажмите на нее."
-            type="footnote"
+          <div>
+            <A_Text text="Нажмите на нужное изображение" type="bigger_body" />
+            <A_Text
+              text="Для загрузки фотографии добавьте ее в пространство Figma и нажмите на нее."
+              type="footnote"
+            />
+          </div>
+          <A_Button
+            type="secondary"
+            text="Отменить"
+            handleClick={uploadImage}
           />
-          <A_Button type="tertiary" text="Отменить" handleClick={uploadImage} />
         </div>
       )
     } else {

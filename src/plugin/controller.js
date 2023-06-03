@@ -1,12 +1,11 @@
-import { saveImageDataOrExportToFigma } from './images'
+import { saveImageDataOrExportToFigma, getSelectedImageBytes } from './images'
 import { renderFigmaFrame } from './render'
 import { helloWorld } from './design'
 import {
   setStoreImagesForExport,
   setCharityData,
   setCurrentTemplate,
-  setAllPatternRenders,
-  getSelectedImage
+  setAllPatternRenders
 } from './store'
 
 figma.showUI(__html__)
@@ -74,8 +73,27 @@ figma.ui.onmessage = async msg => {
     }
   } else if (msg.type === 'upload-image') {
     figma.on('selectionchange', () => {
-      figma.currentPage.selection.fills[0]
+      if (figma.currentPage.selection[0]) {
+        switch (figma.currentPage.selection[0].fills[0].type) {
+          case 'IMAGE':
+            async function getSelectionBytes() {
+              const u8bytes = await getSelectedImageBytes(
+                figma.currentPage.selection[0].fills[0]
+              )
+              console.log('controller u8bytes', u8bytes)
+              figma.ui.postMessage({ type: 'upload-image', bytes: u8bytes })
+            }
+            getSelectionBytes()
+            break
+
+          default:
+            break
+        }
+      } else {
+        figma.notify('Выберите слой с изображением')
+      }
     })
+  } else if (msg.type === 'image-in-base64') {
   } else {
     console.log('unknown message')
   }

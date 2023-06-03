@@ -61,7 +61,7 @@ export default class M_Toolbar extends React.PureComponent {
             <A_Icon icon={image} />
             <div>
               <A_Button
-                type="toolbar"
+                type="default"
                 text="Загрузить изображение"
                 handleClick={uploadImage}
               />

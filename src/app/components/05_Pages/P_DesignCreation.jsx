@@ -48,14 +48,10 @@ export default class P_DesignCreation extends React.PureComponent {
     })
   }
 
-  uploadImage = () => {
-    console.log('upload')
-
-    this.setState(prevState => ({
-      uploadImage: !prevState.uploadImage
-    }))
-
+  componentDidUpdate() {
+    const { uploadImage } = this.props
     if (this.state.uploadImage === true) {
+      console.log('upload')
       parent.postMessage(
         {
           pluginMessage: {
@@ -65,6 +61,12 @@ export default class P_DesignCreation extends React.PureComponent {
         '*'
       )
     }
+  }
+
+  uploadImage = () => {
+    this.setState(prevState => ({
+      uploadImage: !prevState.uploadImage
+    }))
   }
 
   render() {

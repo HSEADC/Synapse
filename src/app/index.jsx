@@ -50,6 +50,18 @@ async function decode(canvas, ctx, bytes) {
   return imageData
 }
 
+async function encodeToBase64(u8bytes) {
+  const base64url = await new Promise(r => {
+    const reader = new FileReader()
+    reader.onload = () => r(reader.result)
+    reader.readAsDataURL(new Blob([u8bytes]))
+  })
+
+  const base64bytes = base64url.substring(base64url.indexOf(',') + 1)
+
+  return base64bytes
+}
+
 window.onmessage = async event => {
   if (event.data.pluginMessage.type === 'get-storage') {
     let charityData
@@ -76,6 +88,26 @@ window.onmessage = async event => {
           type: 'image-in-bytes',
           id: event.data.pluginMessage.id,
           bytes: newBytes
+        }
+      },
+      '*'
+    )
+  } else if (event.data.pluginMessage.type === 'upload-image') {
+    const u8bytes = event.data.pluginMessage.bytes
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+
+    console.log('u8bytes', event.data.pluginMessage.bytes)
+
+    const base64bytes = await encodeToBase64(u8bytes)
+    console.log('base64bytes', base64bytes)
+
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'image-in-base64',
+          id: event.data.pluginMessage.id,
+          bytes: base64bytes
         }
       },
       '*'
