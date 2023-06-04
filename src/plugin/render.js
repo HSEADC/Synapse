@@ -237,4 +237,6 @@ function createDesignFrame() {
   return frame
 }
 
+function renderBrandbookFrame(params) {}
+
 export { createDesignFrame, renderFigmaFrame }

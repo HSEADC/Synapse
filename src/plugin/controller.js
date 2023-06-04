@@ -104,6 +104,7 @@ figma.ui.onmessage = async msg => {
       activeElement: msg.activeElement
     })
   } else if (msg.type === 'create-styles') {
+    //Color style
     Object.keys(msg.charityData.identityColors).forEach(color => {
       const style = figma.createPaintStyle()
       let name
@@ -131,9 +132,7 @@ figma.ui.onmessage = async msg => {
         default:
           break
       }
-
       style.name = 'Брендбук/' + name
-
       style.paints = [
         {
           type: 'SOLID',
@@ -154,6 +153,168 @@ figma.ui.onmessage = async msg => {
         }
       ]
     })
+
+    //Text style
+    let bodyFontName = { family: 'Inter', style: 'Regular' }
+    let headerFontName
+    let lineHeight = {
+      value: 80,
+      unit: 'PERCENT'
+    }
+    switch (msg.charityData.identityFonts) {
+      case 'Arial':
+        headerFontName = { family: 'Arial', style: 'Regular' }
+        bodyFontName = headerFontName
+        break
+
+      case 'Arial Narrow':
+        headerFontName = { family: 'Arial Narrow', style: 'Regular' }
+        bodyFontName = { family: 'Arial', style: 'Regular' }
+        break
+
+      case 'Alegreya':
+        headerFontName = { family: 'Alegreya', style: 'Regular' }
+        break
+
+      case 'Felidae':
+        headerFontName = { family: 'Felidae', style: 'Regular' }
+        break
+
+      case 'Forum':
+        headerFontName = { family: 'Forum', style: 'Regular' }
+        break
+
+      case 'Kharkiv Tone':
+        headerFontName = { family: 'Kharkiv Tone', style: 'Regular' }
+        break
+
+      case 'Le Murmure':
+        headerFontName = { family: 'Le Murmure', style: 'Regular' }
+        lineHeight = {
+          value: 90,
+          unit: 'PERCENT'
+        }
+        break
+
+      case 'Lora':
+        headerFontName = { family: 'Lora', style: 'Regular' }
+        bodyFontName = headerFontName
+        break
+
+      case 'Manrope':
+        headerFontName = { family: 'Manrope', style: 'Regular' }
+        bodyFontName = headerFontName
+        break
+
+      case 'Miedinger*':
+        headerFontName = { family: 'Miedinger*', style: 'Regular' }
+        bodyFontName = headerFontName
+        lineHeight = {
+          value: 90,
+          unit: 'PERCENT'
+        }
+        break
+
+      case 'Soyuz Grotesk':
+        headerFontName = { family: 'Soyuz Grotesk', style: 'Bold' }
+        break
+
+      case 'St.Sign':
+        headerFontName = { family: 'St.Sign', style: 'Normal' }
+        bodyFontName = headerFontName
+        break
+
+      case 'St.Sign Cond':
+        headerFontName = { family: 'St.Sign', style: 'Condensed' }
+        bodyFontName = { family: 'St.Sign', style: 'Normal' }
+        break
+
+      case 'Old Standard TT':
+        headerFontName = { family: 'Old Standard TT', style: 'Regular' }
+        break
+
+      case 'Neutral Face':
+        headerFontName = { family: 'Neutral Face', style: 'Regular' }
+        lineHeight = {
+          value: 90,
+          unit: 'PERCENT'
+        }
+        break
+
+      case 'Playfair Display':
+        headerFontName = { family: 'Playfair Display', style: 'Regular' }
+        break
+
+      case 'Plup':
+        headerFontName = { family: 'Plup', style: 'Regular' }
+        break
+
+      case 'Ramona':
+        headerFontName = { family: 'Ramona', style: 'Regular' }
+        break
+
+      case 'Truin':
+        headerFontName = { family: 'Truin', style: 'Regular' }
+        break
+
+      case 'Unlimited Pie':
+        headerFontName = { family: 'Unlimited Pie', style: 'Regular' }
+        break
+
+      default:
+        break
+    }
+    const bodyStyle = figma.createTextStyle()
+    bodyStyle.name = 'Брендбук/Основной текст'
+    await figma.loadFontAsync({
+      family: bodyFontName.family,
+      style: bodyFontName.style
+    })
+    bodyStyle.fontName = {
+      family: bodyFontName.family,
+      style: bodyFontName.style
+    }
+    bodyStyle.fontSize = 16
+
+    const headerStyle = figma.createTextStyle()
+    headerStyle.name = 'Брендбук/Заголовки'
+    await figma.loadFontAsync({
+      family: headerFontName.family,
+      style: headerFontName.style
+    })
+    headerStyle.fontName = {
+      family: headerFontName.family,
+      style: headerFontName.style
+    }
+    headerStyle.fontSize = 32
+    headerStyle.lineHeight = lineHeight
+
+    //Logo
+    const logoComponent = figma.createComponent()
+    logoComponent.resize(500, 500)
+    logoComponent.name = 'Логотип'
+    const logoType = figma.createText()
+
+    logoType.fontName = {
+      family: headerFontName.family,
+      style: headerFontName.style
+    }
+    logoType.lineHeight = lineHeight
+    logoType.characters = msg.charityData.charityTitle.replace(' ', '\n')
+    const flattenLogo = figma.flatten([logoType], logoComponent)
+
+    let s = Math.min(
+      500 / (flattenLogo.width + flattenLogo.height),
+      (500 / flattenLogo.height) * 2
+    )
+    let new_width = s * flattenLogo.width
+    let new_height = s * flattenLogo.height
+    flattenLogo.resize(new_width, new_height)
+
+    flattenLogo.x = (500 - new_width) / 2
+    flattenLogo.y = (500 - new_height) / 2
+
+    logoComponent.appendChild(flattenLogo)
   } else {
     console.log('unknown message')
   }
