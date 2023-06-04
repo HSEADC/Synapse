@@ -295,37 +295,10 @@ figma.ui.onmessage = async msg => {
     headerStyle.fontSize = 32
     headerStyle.lineHeight = lineHeight
 
-    //Logo
-    const logoComponent = figma.createComponent()
-    logoComponent.resize(500, 500)
-    logoComponent.name = 'Логотип'
-    const logoType = figma.createText()
-
-    logoType.fontName = {
-      family: headerFontName.family,
-      style: headerFontName.style
-    }
-    logoType.lineHeight = lineHeight
-    logoType.characters = msg.charityData.charityTitle.replace(' ', '\n')
-    const flattenLogo = figma.flatten([logoType], logoComponent)
-
-    let s = Math.min(
-      500 / (flattenLogo.width + flattenLogo.height),
-      (500 / flattenLogo.height) * 2
-    )
-    let new_width = s * flattenLogo.width
-    let new_height = s * flattenLogo.height
-    flattenLogo.fillStyleId = styleIDs.text
-    flattenLogo.resize(new_width, new_height)
-
-    flattenLogo.x = (500 - new_width) / 2
-    flattenLogo.y = (500 - new_height) / 2
-
-    logoComponent.appendChild(flattenLogo)
-
     //Create brandbook
     const brandbook = figma.createFrame()
     brandbook.resize(1000, 2169)
+    brandbook.name = ' Брендбук'
 
     const coverRect = figma.createRectangle()
     brandbook.appendChild(coverRect)
@@ -466,7 +439,6 @@ figma.ui.onmessage = async msg => {
       }
 
       const colorValue = msg.charityData.identityColors[colorToDisplay]
-      console.log('colorValue', colorValue)
 
       paletteNode.fillStyleId = styleIDs[colorToDisplay]
 
@@ -529,7 +501,7 @@ figma.ui.onmessage = async msg => {
     fontPreviewHeader.x = 263
     fontPreviewHeader.y = 963
 
-    const lineOne = figma.figma.createLine()
+    const lineOne = figma.createLine()
     brandbook.appendChild(lineOne)
     lineOne.resize(712, 0)
     lineOne.x = 263
@@ -543,43 +515,119 @@ figma.ui.onmessage = async msg => {
     brandbook.appendChild(fontHeader)
     fontHeader.fontSize = 80
     fontHeader.lineHeight = textStyles.header.lineHeight
-    let fontStyle
-    switch (msg.charityData.identityFonts) {
-      case 'Miedinger*':
-        fontStyle = 'Book'
-        break
-
-      case 'Soyuz Grotesk':
-        fontStyle = 'Bold'
-        break
-
-      case 'St. Sign':
-        fontStyle = 'Normal'
-        break
-
-      case 'St. Sign Cond':
-        fontStyle = 'Condensed'
-        break
-
-      default:
-        fontStyle = 'Regular'
-        break
-    }
     await figma.loadFontAsync({
-      family: msg.charityData.identityFonts,
-      style: fontStyle
+      family: headerFontName.family,
+      style: headerFontName.style
     })
     fontHeader.fontName = {
-      family: msg.charityData.identityFonts,
-      style: fontStyle
+      family: headerFontName.family,
+      style: headerFontName.style
     }
-    fontHeader.fontName = textStyles.body.fontName
     fontHeader.textCase = textStyles.body.textCase
     fontHeader.letterSpacing = textStyles.body.letterSpacing
     fontHeader.fills = textStyles.body.fills
-    fontHeader.characters = 'Заголовки'
+    fontHeader.characters = headerFontName.family
     fontHeader.x = 263
-    fontHeader.y = 963
+    fontHeader.y = 1027
+
+    const fontPreviewBody = figma.createText()
+    brandbook.appendChild(fontPreviewBody)
+    fontPreviewBody.fontSize = textStyles.body.fontSize
+    fontPreviewBody.lineHeight = textStyles.body.lineHeight
+    fontPreviewBody.fontName = textStyles.body.fontName
+    fontPreviewBody.textCase = textStyles.body.textCase
+    fontPreviewBody.letterSpacing = textStyles.body.letterSpacing
+    fontPreviewBody.fills = textStyles.body.fills
+    fontPreviewBody.characters = 'Основной текст'
+    fontPreviewBody.x = 263
+    fontPreviewBody.y = 1141
+
+    const lineTwo = figma.createLine()
+    brandbook.appendChild(lineTwo)
+    lineTwo.resize(712, 0)
+    lineTwo.x = 263
+    lineTwo.y = 1185
+    lineTwo.strokeWeight = 2
+    lineTwo.strokes = [
+      { type: 'SOLID', color: { r: 0.074, g: 0.113, b: 0.152 } }
+    ]
+
+    const fontBody = figma.createText()
+    brandbook.appendChild(fontBody)
+    fontBody.fontSize = 80
+    fontBody.lineHeight = textStyles.header.lineHeight
+    await figma.loadFontAsync({
+      family: bodyFontName.family,
+      style: bodyFontName.style
+    })
+    fontBody.fontName = {
+      family: bodyFontName.family,
+      style: bodyFontName.style
+    }
+    fontBody.textCase = textStyles.body.textCase
+    fontBody.letterSpacing = textStyles.body.letterSpacing
+    fontBody.fills = textStyles.body.fills
+    fontBody.characters = bodyFontName.family
+    fontBody.x = 263
+    fontBody.y = 1205
+
+    //Logo
+    const logoBackground = figma.createRectangle()
+    brandbook.appendChild(logoBackground)
+    logoBackground.resize(1000, 750)
+    logoBackground.x = 0
+    logoBackground.y = 1419
+    logoBackground.fillStyleId = styleIDs.primary
+
+    const logoSemiHeader = figma.createText()
+    brandbook.appendChild(logoSemiHeader)
+    logoSemiHeader.fontSize = textStyles.semiHeader.fontSize
+    logoSemiHeader.lineHeight = textStyles.semiHeader.lineHeight
+    logoSemiHeader.fontName = textStyles.semiHeader.fontName
+    logoSemiHeader.textCase = textStyles.semiHeader.textCase
+    logoSemiHeader.letterSpacing = textStyles.semiHeader.letterSpacing
+    logoSemiHeader.fills = textStyles.semiHeader.fills
+    logoSemiHeader.characters = 'Логотип'
+    logoSemiHeader.x = 25
+    logoSemiHeader.y = 1444
+
+    const logoComponent = figma.createComponent()
+    brandbook.appendChild(logoComponent)
+    logoComponent.resize(500, 500)
+    logoComponent.x = 269
+    logoComponent.y = 1544
+    logoComponent.name = 'Логотип'
+    const logoType = figma.createText()
+    logoType.fontName = {
+      family: headerFontName.family,
+      style: headerFontName.style
+    }
+    logoType.lineHeight = lineHeight
+    logoType.characters = msg.charityData.charityTitle.replace(' ', '\n')
+    const flattenLogo = figma.flatten([logoType], logoComponent)
+    let s = Math.min(
+      500 / (flattenLogo.width + flattenLogo.height),
+      (500 / flattenLogo.height) * 2
+    )
+    let new_width = s * flattenLogo.width
+    let new_height = s * flattenLogo.height
+    flattenLogo.fillStyleId = styleIDs.text
+    flattenLogo.resize(new_width, new_height)
+    logoComponent.appendChild(flattenLogo)
+    flattenLogo.x = (500 - new_width) / 2
+    flattenLogo.y = (500 - new_height) / 2
+
+    const logoArea = figma.createText()
+    brandbook.appendChild(logoArea)
+    logoArea.fontSize = textStyles.body.fontSize
+    logoArea.lineHeight = textStyles.body.lineHeight
+    logoArea.fontName = textStyles.body.fontName
+    logoArea.textCase = textStyles.body.textCase
+    logoArea.letterSpacing = textStyles.body.letterSpacing
+    logoArea.fills = textStyles.body.fills
+    logoArea.characters = 'Охранное поле равно половине высоты'
+    logoArea.x = 25
+    logoArea.y = 2125
   } else {
     console.log('unknown message')
   }
