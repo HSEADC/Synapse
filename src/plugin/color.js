@@ -363,4 +363,18 @@ function createScientificPalette(primaryColor, charityData) {
   return palette
 }
 
-export { createBaseColor, convertHSLtoRGB, createScientificPalette }
+function convertRGBtoHEX(r, g, b) {
+  return (
+    '#' +
+    ((1 << 24) | ((r * 255) << 16) | ((g * 255) << 8) | (b * 255))
+      .toString(16)
+      .slice(1)
+  )
+}
+
+export {
+  createBaseColor,
+  convertHSLtoRGB,
+  createScientificPalette,
+  convertRGBtoHEX
+}

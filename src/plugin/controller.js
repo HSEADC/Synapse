@@ -7,6 +7,7 @@ import {
   setCurrentTemplate,
   setAllPatternRenders
 } from './store'
+import { convertRGBtoHEX } from './color'
 
 figma.showUI(__html__)
 figma.ui.resize(400, 680)
@@ -105,6 +106,7 @@ figma.ui.onmessage = async msg => {
     })
   } else if (msg.type === 'create-styles') {
     //Color style
+    let styleIDs = {}
     Object.keys(msg.charityData.identityColors).forEach(color => {
       const style = figma.createPaintStyle()
       let name
@@ -152,6 +154,10 @@ figma.ui.onmessage = async msg => {
           }
         }
       ]
+      styleIDs = {
+        ...styleIDs,
+        [color]: style.id
+      }
     })
 
     //Text style
@@ -309,12 +315,271 @@ figma.ui.onmessage = async msg => {
     )
     let new_width = s * flattenLogo.width
     let new_height = s * flattenLogo.height
+    flattenLogo.fillStyleId = styleIDs.text
     flattenLogo.resize(new_width, new_height)
 
     flattenLogo.x = (500 - new_width) / 2
     flattenLogo.y = (500 - new_height) / 2
 
     logoComponent.appendChild(flattenLogo)
+
+    //Create brandbook
+    const brandbook = figma.createFrame()
+    brandbook.resize(1000, 2169)
+
+    const coverRect = figma.createRectangle()
+    brandbook.appendChild(coverRect)
+    coverRect.resize(1000, 250)
+    coverRect.fillStyleId = styleIDs.primary
+
+    const textStyles = {
+      header: {
+        fontSize: 56,
+        lineHeight: {
+          value: 60,
+          unit: 'PIXELS'
+        },
+        fontName: {
+          family: 'Inter',
+          style: 'Medium'
+        },
+        textCase: 'UPPER',
+        letterSpacing: {
+          value: -5,
+          unit: 'PERCENT'
+        },
+        fills: [{ type: 'SOLID', color: { r: 0.074, g: 0.113, b: 0.152 } }]
+      },
+      semiHeader: {
+        fontSize: 24,
+        lineHeight: {
+          value: 80,
+          unit: 'PERCENT'
+        },
+        fontName: {
+          family: 'Inter',
+          style: 'Medium'
+        },
+        textCase: 'UPPER',
+        letterSpacing: {
+          value: -3,
+          unit: 'PERCENT'
+        },
+        fills: [{ type: 'SOLID', color: { r: 0.074, g: 0.113, b: 0.152 } }]
+      },
+      body: {
+        fontSize: 24,
+        lineHeight: {
+          value: 100,
+          unit: 'PERCENT'
+        },
+        fontName: {
+          family: 'Inter',
+          style: 'Medium'
+        },
+        textCase: 'ORIGINAL',
+        letterSpacing: {
+          value: -3,
+          unit: 'PERCENT'
+        },
+        fills: [{ type: 'SOLID', color: { r: 0.074, g: 0.113, b: 0.152 } }]
+      }
+    }
+
+    //Title
+    const charityName = figma.createText()
+    brandbook.appendChild(charityName)
+    charityName.fontSize = textStyles.header.fontSize
+    charityName.lineHeight = textStyles.header.lineHeight
+    await figma.loadFontAsync({
+      family: 'Inter',
+      style: 'Medium'
+    })
+    charityName.fontName = textStyles.header.fontName
+    charityName.textCase = textStyles.header.textCase
+    charityName.fills = textStyles.header.fills
+    charityName.letterSpacing = textStyles.header.letterSpacing
+    charityName.characters = msg.charityData.charityTitle.replace(' ', '\n')
+    charityName.x = 25
+    charityName.y = 25
+
+    const brandbookTitle = figma.createText()
+    brandbook.appendChild(brandbookTitle)
+    brandbookTitle.fontSize = textStyles.header.fontSize
+    brandbookTitle.lineHeight = textStyles.header.lineHeight
+    brandbookTitle.fontName = textStyles.header.fontName
+    brandbookTitle.textCase = textStyles.header.textCase
+    brandbookTitle.letterSpacing = textStyles.header.letterSpacing
+    brandbookTitle.fills = textStyles.header.fills
+    brandbookTitle.characters = 'БРЕНДБУК'
+    brandbookTitle.x = 500
+    brandbookTitle.y = 25
+
+    //Palette
+    const paletteSemiHeader = figma.createText()
+    brandbook.appendChild(paletteSemiHeader)
+    paletteSemiHeader.fontSize = textStyles.semiHeader.fontSize
+    paletteSemiHeader.lineHeight = textStyles.semiHeader.lineHeight
+    paletteSemiHeader.fontName = textStyles.semiHeader.fontName
+    paletteSemiHeader.textCase = textStyles.semiHeader.textCase
+    paletteSemiHeader.letterSpacing = textStyles.semiHeader.letterSpacing
+    paletteSemiHeader.fills = textStyles.semiHeader.fills
+    paletteSemiHeader.characters = 'Палитра'
+    paletteSemiHeader.x = 25
+    paletteSemiHeader.y = 400
+
+    for (let i = 0; i < 5; i++) {
+      const paletteNode = figma.createRectangle()
+      brandbook.appendChild(paletteNode)
+      paletteNode.resize(200, 300)
+      paletteNode.x = i * 200
+      paletteNode.y = 444
+      let colorToDisplay
+      let colorName
+      switch (i) {
+        case 0:
+          colorToDisplay = 'primary'
+          colorName = 'Основной\nцвет'
+          break
+
+        case 1:
+          colorToDisplay = 'background'
+          colorName = 'Фон'
+          break
+
+        case 2:
+          colorToDisplay = 'text'
+          colorName = 'Текст'
+          break
+
+        case 3:
+          colorToDisplay = 'adOne'
+          colorName = 'Добавочный\n№1'
+          break
+
+        case 4:
+          colorToDisplay = 'adTwo'
+          colorName = 'Добавочный\n№2'
+          break
+        default:
+          break
+      }
+
+      const colorValue = msg.charityData.identityColors[colorToDisplay]
+      console.log('colorValue', colorValue)
+
+      paletteNode.fillStyleId = styleIDs[colorToDisplay]
+
+      const colorCaption = figma.createText()
+      brandbook.appendChild(colorCaption)
+      colorCaption.fontSize = textStyles.body.fontSize
+      colorCaption.lineHeight = textStyles.body.lineHeight
+      colorCaption.fontName = textStyles.body.fontName
+      colorCaption.textCase = textStyles.body.textCase
+      colorCaption.letterSpacing = textStyles.body.letterSpacing
+      colorCaption.fills = textStyles.body.fills
+      colorCaption.characters = colorName
+      colorCaption.x = i * 200 + 25
+      colorCaption.y = 594
+
+      const colorHEX = figma.createText()
+      brandbook.appendChild(colorHEX)
+      colorHEX.fontSize = textStyles.body.fontSize
+      colorHEX.lineHeight = textStyles.body.lineHeight
+      colorHEX.fontName = textStyles.body.fontName
+      colorHEX.textCase = textStyles.body.textCase
+      colorHEX.letterSpacing = textStyles.body.letterSpacing
+      colorHEX.fills = textStyles.body.fills
+      colorHEX.characters = convertRGBtoHEX(
+        colorValue.r,
+        colorValue.g,
+        colorValue.b
+      )
+      colorHEX.x = i * 200 + 25
+      colorHEX.y = 700
+
+      if (colorToDisplay === 'text') {
+        colorCaption.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }]
+        colorHEX.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }]
+      }
+    }
+
+    //Fonts
+    const fontsSemiHeader = figma.createText()
+    brandbook.appendChild(fontsSemiHeader)
+    fontsSemiHeader.fontSize = textStyles.semiHeader.fontSize
+    fontsSemiHeader.lineHeight = textStyles.semiHeader.lineHeight
+    fontsSemiHeader.fontName = textStyles.semiHeader.fontName
+    fontsSemiHeader.textCase = textStyles.semiHeader.textCase
+    fontsSemiHeader.letterSpacing = textStyles.semiHeader.letterSpacing
+    fontsSemiHeader.fills = textStyles.semiHeader.fills
+    fontsSemiHeader.characters = 'Шрифты'
+    fontsSemiHeader.x = 25
+    fontsSemiHeader.y = 894
+
+    const fontPreviewHeader = figma.createText()
+    brandbook.appendChild(fontPreviewHeader)
+    fontPreviewHeader.fontSize = textStyles.body.fontSize
+    fontPreviewHeader.lineHeight = textStyles.body.lineHeight
+    fontPreviewHeader.fontName = textStyles.body.fontName
+    fontPreviewHeader.textCase = textStyles.body.textCase
+    fontPreviewHeader.letterSpacing = textStyles.body.letterSpacing
+    fontPreviewHeader.fills = textStyles.body.fills
+    fontPreviewHeader.characters = 'Заголовки'
+    fontPreviewHeader.x = 263
+    fontPreviewHeader.y = 963
+
+    const lineOne = figma.figma.createLine()
+    brandbook.appendChild(lineOne)
+    lineOne.resize(712, 0)
+    lineOne.x = 263
+    lineOne.y = 1007
+    lineOne.strokeWeight = 2
+    lineOne.strokes = [
+      { type: 'SOLID', color: { r: 0.074, g: 0.113, b: 0.152 } }
+    ]
+
+    const fontHeader = figma.createText()
+    brandbook.appendChild(fontHeader)
+    fontHeader.fontSize = 80
+    fontHeader.lineHeight = textStyles.header.lineHeight
+    let fontStyle
+    switch (msg.charityData.identityFonts) {
+      case 'Miedinger*':
+        fontStyle = 'Book'
+        break
+
+      case 'Soyuz Grotesk':
+        fontStyle = 'Bold'
+        break
+
+      case 'St. Sign':
+        fontStyle = 'Normal'
+        break
+
+      case 'St. Sign Cond':
+        fontStyle = 'Condensed'
+        break
+
+      default:
+        fontStyle = 'Regular'
+        break
+    }
+    await figma.loadFontAsync({
+      family: msg.charityData.identityFonts,
+      style: fontStyle
+    })
+    fontHeader.fontName = {
+      family: msg.charityData.identityFonts,
+      style: fontStyle
+    }
+    fontHeader.fontName = textStyles.body.fontName
+    fontHeader.textCase = textStyles.body.textCase
+    fontHeader.letterSpacing = textStyles.body.letterSpacing
+    fontHeader.fills = textStyles.body.fills
+    fontHeader.characters = 'Заголовки'
+    fontHeader.x = 263
+    fontHeader.y = 963
   } else {
     console.log('unknown message')
   }
