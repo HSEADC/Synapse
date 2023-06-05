@@ -26,7 +26,7 @@ export default class P_Onboarding extends React.PureComponent {
           <div className="A_Text">
             Ally — это бесплатный сервис, который заменяет дизайнера в НКО. С
             помощью Ally вы можете легко создать логотип и фирменный стиль,
-            генерировать картинки для соцсетей, визитки, и&nbps;многое другое.{' '}
+            генерировать картинки для соцсетей, визитки, и&nbsp;многое другое.{' '}
             <a
               className="hyperlink"
               href="https://allydesign.org/"

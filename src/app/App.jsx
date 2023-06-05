@@ -30,7 +30,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'identity-creation',
+      view: 'onboarding',
       onboardingStep: 1,
       identityCreationStep: 1,
       charityTitle: '',
@@ -96,7 +96,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.setCharityData()
+    // this.setCharityData()
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -560,7 +560,7 @@ export default class App extends React.Component {
   }
 
   skipOnboarding = () => {
-    this.setState({ view: 'identity_creation' })
+    this.setState({ view: 'identity-creation' })
   }
 
   saveIdentity = () => {
@@ -590,7 +590,7 @@ export default class App extends React.Component {
 
   useTemplate = () => {
     this.setState({
-      view: 'design_creation'
+      view: 'design-creation'
     })
   }
 
@@ -662,6 +662,15 @@ export default class App extends React.Component {
           identityColorsProgress={identityColorsProgress}
           identityPatternParamsProgress={identityPatternParamsProgress}
           identityFontsProgress={identityFontsProgress}
+        />
+      )
+    } else if (view === 'design-creation') {
+      return (
+        <P_DesignCreation
+          actions={actions}
+          charityData={charityData}
+          templates={templates}
+          // editorState={editorState}
         />
       )
     } else if (view === 'feed') {

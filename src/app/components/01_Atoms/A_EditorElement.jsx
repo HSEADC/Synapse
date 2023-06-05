@@ -23,13 +23,17 @@ export default class A_EditorElement extends React.PureComponent {
       const { identityPatternParams } = charityData
       var component = this,
         node = ReactDOM.findDOMNode(component)
-      node.style.backgroundColor = `rgb(${charityData.identityColors[
-        template.elements[element].background
-      ].r * 255}, ${charityData.identityColors[
-        template.elements[element].background
-      ].g * 255}, ${charityData.identityColors[
-        template.elements[element].background
-      ].b * 255})`
+
+      if (template.elements[element].background !== 'none') {
+        node.style.backgroundColor = `rgb(${charityData.identityColors[
+          template.elements[element].background
+        ].r * 255}, ${charityData.identityColors[
+          template.elements[element].background
+        ].g * 255}, ${charityData.identityColors[
+          template.elements[element].background
+        ].b * 255})`
+      }
+
       findOrRenderPattern(identityPatternParams, node, template, element)
     }
   }

@@ -19,6 +19,7 @@ function pickIdentityFont(charityData) {
   }
   let key = rationality + friendliness + volume
   let identityFont = sample(fontList[key])
+  console.log(key, fontList[key])
   return identityFont
 }
 

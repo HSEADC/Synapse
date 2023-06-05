@@ -14,6 +14,10 @@ export default class A_PatternPreview extends React.PureComponent {
     var component = this,
       node = ReactDOM.findDOMNode(component)
 
+    node.style.backgroundColor = `rgb(${identityPatternParamsProgress.colors
+      .background.r * 255}, ${identityPatternParamsProgress.colors.background
+      .g * 255}, ${identityPatternParamsProgress.colors.background.b * 255})`
+
     findOrRenderPattern(identityPatternParamsProgress, node)
   }
 

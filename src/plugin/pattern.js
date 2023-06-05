@@ -69,8 +69,8 @@ function generatePatternParams(charityData) {
   }
   let size =
     100 -
-    (10 - friendlinessFactor * getRandomArbitrary(10, 30)) -
-    (10 - volumeFactor * getRandomArbitrary(10, 30))
+    (10 - friendlinessFactor * getRandomArbitrary(10, 40)) -
+    (10 - volumeFactor * getRandomArbitrary(10, 40))
 
   let patternParamsProgress = {
     gridModule: gridModule,

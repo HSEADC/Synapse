@@ -77,6 +77,10 @@ function renderFigmaFrame(imagesForExport) {
               fontStyle = 'Normal'
               break
 
+            case 'Ramona':
+              fontStyle = 'Light'
+              break
+
             case 'St. Sign Cond':
               fontStyle = 'Condensed'
               break

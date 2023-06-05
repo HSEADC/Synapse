@@ -105,6 +105,10 @@ figma.ui.onmessage = async msg => {
       activeElement: msg.activeElement
     })
   } else if (msg.type === 'create-styles') {
+    await figma.loadFontAsync({
+      family: 'Inter',
+      style: 'Regular'
+    })
     //Color style
     let styleIDs = {}
     Object.keys(msg.charityData.identityColors).forEach(color => {
@@ -256,7 +260,7 @@ figma.ui.onmessage = async msg => {
         break
 
       case 'Ramona':
-        headerFontName = { family: 'Ramona', style: 'Regular' }
+        headerFontName = { family: 'Ramona', style: 'Light' }
         break
 
       case 'Truin':
