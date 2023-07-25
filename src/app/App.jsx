@@ -30,7 +30,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      view: 'onboarding',
+      view: 'feed',
       onboardingStep: 1,
       identityCreationStep: 1,
       charityTitle: '',
@@ -96,7 +96,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    // this.setCharityData()
+    this.setCharityData()
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -670,7 +670,6 @@ export default class App extends React.Component {
           actions={actions}
           charityData={charityData}
           templates={templates}
-          // editorState={editorState}
         />
       )
     } else if (view === 'feed') {
@@ -680,7 +679,6 @@ export default class App extends React.Component {
             actions={actions}
             templates={templates}
             charityData={charityData}
-            // editorState={editorState}
           />
         </div>
       )

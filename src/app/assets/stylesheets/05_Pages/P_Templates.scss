@@ -37,4 +37,13 @@
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto;
     }
+
+    .sizeSettings {
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
 }

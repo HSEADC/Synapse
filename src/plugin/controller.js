@@ -10,7 +10,7 @@ import {
 import { convertRGBtoHEX } from './color'
 
 figma.showUI(__html__)
-figma.ui.resize(400, 680)
+figma.ui.resize(400, 640)
 
 figma.ui.onmessage = async msg => {
   if (msg.type === 'image-in-bytes') {

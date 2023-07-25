@@ -18,10 +18,19 @@ export default class A_TextInput extends React.PureComponent {
   }
 
   render() {
-    const { placeholder, value, updateTemplate } = this.props
+    const { placeholder, value, updateTemplate, akzident, icon } = this.props
+
+    const classes = classnames({
+      A_TextInput: true,
+      akzident: akzident,
+      icon: icon !== undefined,
+      [`${icon}`]: icon
+    })
+
+    console.log('akzident', akzident, 'icon', icon, 'classes', classes)
 
     return (
-      <div className="A_TextInput">
+      <div className={classes}>
         <input
           type="text"
           name="name"

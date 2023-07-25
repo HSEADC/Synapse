@@ -1,35 +1,74 @@
 @import "../vars.scss";
 
-.A_TextInput input {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 15px 16px;
-    width: 368px;
-    height: 40px;
-    border: 1px solid $dividers;
-    border-radius: 8px;
-    margin: 0 16px;
-    transition: $hover-transition;
+.A_TextInput {
 
-    /*Text */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
-    letter-spacing: -0.02em;
-    color: $identity-black;
+    input {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 15px 16px;
+        width: 368px;
+        height: 40px;
+        border: 1px solid $dividers;
+        border-radius: 8px;
+        margin: 0 16px;
+        transition: $hover-transition;
+        position: relative;
 
-    &::placeholder {
-        color: $secondary-text;
+        /*Text */
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        letter-spacing: -0.02em;
+        color: $identity-black;
+
+        &::placeholder {
+            color: $secondary-text;
+        }
+    
+        &:hover {
+            border: 1px solid $secondary-text;
+        }
+    
+        &:focus {
+            outline: 2px solid $link;
+        }
+    }
+    
+
+    &.akzident input{
+        height: 56px;
+        font-size: 20px;
+        font-weight: 450;
+        line-height: normal;
+        letter-spacing: -0.4px;
     }
 
-    &:hover {
-        border: 1px solid $secondary-text;
-    }
+    &.icon {
+        position: relative;
+        input {
+            padding-left: 44px;
+        }
+        
+        &::after {
+            content: '';
+            height: 20px;
+            width: 20px;
+            position: absolute;
+            top: 18px;
+            left: 34px;
+        }
 
-    &:focus {
-        outline: 2px solid $link;
+        &.height::after {
+            background-image: url('../../assets/images/icons/height.svg');
+            background-size: 20px;
+        }
+
+        &.width::after {
+            background-image: url('../../assets/images/icons/width.svg');
+            background-size: 20px;
+        }
     }
 }

@@ -183,7 +183,11 @@ export default class P_Templates extends React.PureComponent {
           <A_FooterLogo />
         </div>
       )
-    } else if (!templates.templateID && templates.section) {
+    } else if (
+      !templates.templateID &&
+      templates.section &&
+      templates.section !== 'flexible'
+    ) {
       return (
         <div className="P_Templates">
           <div className="sectionNav">
@@ -198,6 +202,36 @@ export default class P_Templates extends React.PureComponent {
             {this.renderTemplates(templates.section)}
           </div>
           <A_FooterLogo />
+        </div>
+      )
+    } else if (templates.section === 'flexible') {
+      return (
+        <div className="P_Templates">
+          <div className="sectionNav">
+            <A_Button
+              type="icon"
+              icon="backBig"
+              handleClick={backToTemplates}
+            />
+            <A_Text text="Гибкий фрейм" type="lead" />
+          </div>
+          <div className="sizeSettings">
+            <A_TextInput
+              akzident={true}
+              icon="width"
+              placeholder="Ширина картинки"
+            />
+            <A_TextInput
+              akzident={true}
+              icon="height"
+              placeholder="Высота картинки"
+            />
+          </div>
+          <S_FixedActions
+            primButtonText="Использовать шаблон"
+            primButtonHandleClick={useTemplate}
+            noBorder={true}
+          />
         </div>
       )
     } else {
