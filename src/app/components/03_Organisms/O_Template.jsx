@@ -60,7 +60,6 @@ export default class O_Template extends React.PureComponent {
         editorState.templateCopy !== '' &&
         editorState.templateCopy !== undefined
       ) {
-        console.log('replaced')
         template = templateCopy
       }
     } else {

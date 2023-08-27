@@ -1,6 +1,7 @@
 @import "../vars.scss";
 
 .A_TextInput {
+    position: relative;
 
     input {
         display: flex;
@@ -44,6 +45,19 @@
         font-weight: 450;
         line-height: normal;
         letter-spacing: -0.4px;
+    }
+
+    &.measurement p.measurement {
+        font-family: 'Inter';
+        font-style: normal;
+        font-size: 20px;
+        font-weight: 450;
+        line-height: normal;
+        letter-spacing: -0.4px;
+        color: $secondary-text;
+        position: absolute;
+        right: 32px;
+        top: 16px;
     }
 
     &.icon {

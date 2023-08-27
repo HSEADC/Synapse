@@ -642,7 +642,8 @@ export default class App extends React.Component {
       fonts,
       identityColorsProgress,
       identityPatternParamsProgress,
-      identityFontsProgress
+      identityFontsProgress,
+      flexibleCanvasSize
     } = this.state
     if (view === 'login') {
       return (

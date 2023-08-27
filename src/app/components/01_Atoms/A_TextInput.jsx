@@ -17,17 +17,29 @@ export default class A_TextInput extends React.PureComponent {
     updateTemplate(elementToChange, param, e.target.value)
   }
 
+  setFlexibleCanvasSize = e => {
+    const { param, setFlexibleCanvasSize } = this.props
+    setFlexibleCanvasSize(param, e.target.value)
+  }
+
   render() {
-    const { placeholder, value, updateTemplate, akzident, icon } = this.props
+    const {
+      placeholder,
+      value,
+      updateTemplate,
+      setFlexibleCanvasSize,
+      akzident,
+      icon,
+      measurement
+    } = this.props
 
     const classes = classnames({
       A_TextInput: true,
       akzident: akzident,
       icon: icon !== undefined,
-      [`${icon}`]: icon
+      [`${icon}`]: icon,
+      measurement: measurement
     })
-
-    console.log('akzident', akzident, 'icon', icon, 'classes', classes)
 
     return (
       <div className={classes}>
@@ -36,8 +48,15 @@ export default class A_TextInput extends React.PureComponent {
           name="name"
           placeholder={placeholder}
           value={value}
-          onChange={updateTemplate ? this.updateTemplate : this.handleChange}
+          onChange={
+            updateTemplate
+              ? this.updateTemplate
+              : setFlexibleCanvasSize
+              ? this.setFlexibleCanvasSize
+              : this.handleChange
+          }
         />
+        {measurement && <p className="measurement">{measurement}</p>}
       </div>
     )
   }

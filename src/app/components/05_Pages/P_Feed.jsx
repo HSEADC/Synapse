@@ -14,7 +14,7 @@ export default class P_Feed extends React.PureComponent {
   }
 
   render() {
-    const { actions, templates, charityData, editorState } = this.props
+    const { actions, templates, charityData } = this.props
     const { feedTab, handleChange } = actions
 
     return (
@@ -26,7 +26,6 @@ export default class P_Feed extends React.PureComponent {
             actions={actions}
             templates={templates}
             charityData={charityData}
-            editorState={editorState}
           />
         ) : (
           <P_Style charityData={charityData} actions={actions} />

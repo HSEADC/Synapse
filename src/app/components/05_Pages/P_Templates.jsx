@@ -16,6 +16,13 @@ import M_TemplateInfo from '../02_Molecules/M_TemplateInfo'
 export default class P_Templates extends React.PureComponent {
   constructor(props) {
     super(props)
+
+    this.state = {
+      flexibleCanvasSize: {
+        width: undefined,
+        height: undefined
+      }
+    }
   }
 
   renderTemplates(section) {
@@ -77,6 +84,17 @@ export default class P_Templates extends React.PureComponent {
       )
     })
     return templatesToRender
+  }
+
+  setFlexibleCanvasSize = (param, value) => {
+    this.setState({
+      flexibleCanvasSize: {
+        ...this.state.flexibleCanvasSize,
+        [`${param}`]: value
+      }
+    })
+
+    console.log(this.state.flexibleCanvasSize)
   }
 
   render() {
@@ -219,18 +237,28 @@ export default class P_Templates extends React.PureComponent {
             <A_TextInput
               akzident={true}
               icon="width"
+              param="width"
+              measurement="px"
               placeholder="Ширина картинки"
+              setFlexibleCanvasSize={this.setFlexibleCanvasSize}
+              value={this.state.flexibleCanvasSize.width}
             />
             <A_TextInput
               akzident={true}
               icon="height"
+              param="height"
+              measurement="px"
               placeholder="Высота картинки"
+              setFlexibleCanvasSize={this.setFlexibleCanvasSize}
+              value={this.state.flexibleCanvasSize.height}
             />
           </div>
           <S_FixedActions
             primButtonText="Использовать шаблон"
             primButtonHandleClick={useTemplate}
             noBorder={true}
+            primButtonDisable={true}
+            primButtonDisableParam={this.state.flexibleCanvasSize.height}
           />
         </div>
       )
