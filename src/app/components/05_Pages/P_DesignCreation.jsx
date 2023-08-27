@@ -36,6 +36,14 @@ export default class P_DesignCreation extends React.PureComponent {
     })
   }
 
+  updateBackground = color => {
+    let updatedTemplate = { ...this.state.templateCopy }
+    updatedTemplate.background = color
+    this.setState({
+      templateCopy: updatedTemplate
+    })
+  }
+
   removeElement = element => {
     let updatedTemplate = { ...this.state.templateCopy }
     delete updatedTemplate.elements[element]
@@ -118,6 +126,8 @@ export default class P_DesignCreation extends React.PureComponent {
             updateTemplate={this.updateTemplate}
             removeElement={this.removeElement}
             uploadImage={this.uploadImage}
+            charityData={charityData}
+            updateBackground={this.updateBackground}
           />
         </div>
         <O_Template

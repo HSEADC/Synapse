@@ -508,7 +508,7 @@ const X = {
   X1: {
     title: 'Гибкий шаблон',
     id: 'X1',
-    background: 'primary',
+    background: 'background',
     elements: {}
   }
 }

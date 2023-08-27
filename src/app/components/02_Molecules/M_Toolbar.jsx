@@ -7,10 +7,16 @@ import A_Icon from '../01_Atoms/A_Icon'
 import text from '../../assets/images/icons/text.svg'
 import image from '../../assets/images/icons/image.svg'
 import pattern from '../../assets/images/icons/pattern.svg'
+import settings from '../../assets/images/icons/settings.svg'
+import add from '../../assets/images/icons/add.svg'
 
 export default class M_Toolbar extends React.PureComponent {
   constructor(props) {
     super(props)
+
+    this.state = {
+      tab: undefined
+    }
   }
 
   removeElement = () => {
@@ -26,12 +32,15 @@ export default class M_Toolbar extends React.PureComponent {
       actions,
       updateTemplate,
       removeElement,
-      uploadImage
+      uploadImage,
+      charityData,
+      updateBackground
     } = this.props
     const { activeElement } = editorState
     const { handleChange } = actions
 
     let type
+    let flexible = false
 
     if (
       activeElement !== '' &&
@@ -98,17 +107,84 @@ export default class M_Toolbar extends React.PureComponent {
         break
 
       default:
-        return (
-          <div className="M_Toolbar">
-            <A_Button type="toolbar" icon="add" />
-            <div>
-              <A_Button type="toolbar" icon="image" />
-              <A_Button type="toolbar" icon="text" />
-              <A_Button type="toolbar" icon="logo" />
-              <A_Button type="toolbar" icon="pattern" />
-            </div>
-          </div>
-        )
+        switch (this.state.tab) {
+          case 'color':
+            console.log(
+              'charityData.identityColors.',
+              charityData.identityColors
+            )
+            return (
+              <div className="M_Toolbar">
+                <A_Button
+                  type="toolbar"
+                  icon="back"
+                  handleClick={() => this.setState({ tab: undefined })}
+                />
+                <div>
+                  <A_Button
+                    type="color"
+                    color={charityData.identityColors.primary}
+                    handleClick={() => {
+                      updateBackground('primary')
+                    }}
+                  />
+                  <A_Button
+                    type="color"
+                    color={charityData.identityColors.background}
+                    handleClick={() => {
+                      updateBackground('background')
+                    }}
+                  />
+                  <A_Button
+                    type="color"
+                    color={charityData.identityColors.adTwo}
+                    handleClick={() => {
+                      updateBackground('adTwo')
+                    }}
+                  />
+                  <A_Button
+                    type="color"
+                    color={charityData.identityColors.adOne}
+                    handleClick={() => {
+                      updateBackground('adOne')
+                    }}
+                  />
+                  <A_Button
+                    type="color"
+                    color={charityData.identityColors.text}
+                    handleClick={() => {
+                      updateBackground('text')
+                    }}
+                  />
+                </div>
+              </div>
+            )
+            break
+
+          default:
+            return (
+              <div className="M_Toolbar">
+                <div>
+                  <A_Icon icon={add} />
+                  <A_Button type="toolbar" icon="image" />
+                  <A_Button type="toolbar" icon="text" />
+                  <A_Button type="toolbar" icon="logo" />
+                  <A_Button type="toolbar" icon="pattern" />
+                </div>
+                <div>
+                  <A_Icon icon={settings} />
+                  <A_Button
+                    type="toolbar"
+                    icon="color"
+                    handleClick={() => this.setState({ tab: 'color' })}
+                  />
+                  {flexible && <A_Button type="toolbar" icon="resize" />}
+                </div>
+              </div>
+            )
+
+            break
+        }
         break
     }
   }
