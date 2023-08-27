@@ -8,7 +8,10 @@ import M_FeedSection from '../02_Molecules/M_FeedSection'
 import A_FooterLogo from '../01_Atoms/A_FooterLogo'
 import O_Template from '../03_Organisms/O_Template'
 import A_Error from '../01_Atoms/A_Error'
-import { templatesList } from '../../../libraries/templates'
+import {
+  templatesList,
+  setFlexibleCanvasSize
+} from '../../../libraries/templates'
 import { doesFontExist } from '../../../plugin/utilities'
 import S_FixedActions from '../04_Superorganisms/S_FixedActions'
 import M_TemplateInfo from '../02_Molecules/M_TemplateInfo'
@@ -93,6 +96,7 @@ export default class P_Templates extends React.PureComponent {
         [`${param}`]: value
       }
     })
+    setFlexibleCanvasSize(param, value)
 
     console.log(this.state.flexibleCanvasSize)
   }
@@ -106,7 +110,8 @@ export default class P_Templates extends React.PureComponent {
       backToTemplates,
       backToSection,
       downloadFont,
-      useTemplate
+      useTemplate,
+      useFlexibleTemplate
     } = actions
 
     if (templates.section === '') {
@@ -255,7 +260,12 @@ export default class P_Templates extends React.PureComponent {
           </div>
           <S_FixedActions
             primButtonText="Использовать шаблон"
-            primButtonHandleClick={useTemplate}
+            primButtonHandleClick={() => {
+              useFlexibleTemplate(
+                this.state.flexibleCanvasSize.width,
+                this.state.flexibleCanvasSize.height
+              )
+            }}
             noBorder={true}
             primButtonDisable={true}
             primButtonDisableParam={this.state.flexibleCanvasSize.height}

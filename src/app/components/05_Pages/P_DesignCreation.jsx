@@ -86,6 +86,7 @@ export default class P_DesignCreation extends React.PureComponent {
     const { actions, charityData, templates } = this.props
     const { handleChange, chooseSection, backToSection, createDesign } = actions
     const format = Array.from(templates.templateID)[0]
+    console.log('templates.templateID', templates.templateID, 'format', format)
     const originalTemplate = templatesList[format][templates.templateID]
     const patternRenders = getAllPatternRenders()
 

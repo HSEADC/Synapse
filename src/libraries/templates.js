@@ -504,6 +504,21 @@ const J = {
   }
 }
 
+const X = {
+  X1: {
+    title: 'Гибкий шаблон',
+    id: 'X1',
+    background: 'primary',
+    elements: {}
+  }
+}
+
+function setFlexibleCanvasSize(param, value) {
+  X.X1 = { ...X.X1, [`${param}`]: value }
+
+  console.log(X.X1)
+}
+
 const templatesList = {
   A: A,
   B: B,
@@ -514,7 +529,8 @@ const templatesList = {
   G: G,
   H: H,
   I: I,
-  J: J
+  J: J,
+  X
 }
 
-export { templatesList }
+export { templatesList, setFlexibleCanvasSize }

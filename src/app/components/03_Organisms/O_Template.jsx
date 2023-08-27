@@ -40,7 +40,8 @@ export default class O_Template extends React.PureComponent {
       templateID,
       fullsize,
       editorState,
-      setActiveElement
+      setActiveElement,
+      flexibleCanvas
     } = this.props
 
     const { openTemplate } = actions
@@ -98,6 +99,21 @@ export default class O_Template extends React.PureComponent {
     }
 
     if (fullsize) {
+      let height = template.height
+      let width = template.width
+      if (height > width) {
+        height = 368
+        width = (368 / template.height) * template.width
+        console.log('vert', height, width)
+      } else if (height < width) {
+        width = 368
+        height = (368 / template.width) * template.height
+        console.log('hor', height, width)
+      } else {
+        height = 368
+        width = 368
+      }
+
       return (
         <div
           className="template_wrapper"
@@ -109,7 +125,9 @@ export default class O_Template extends React.PureComponent {
             className={classes}
             style={{
               backgroundColor: `rgba(${background.r * 255}, ${background.g *
-                255}, ${background.b * 255}, 1)`
+                255}, ${background.b * 255}, 1)`,
+              height: height + 'px',
+              width: width + 'px'
             }}
           >
             {this.renderElements(template, charityData)}

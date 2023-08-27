@@ -594,6 +594,19 @@ export default class App extends React.Component {
     })
   }
 
+  useFlexibleTemplate = (width, height) => {
+    this.setState({
+      templates: {
+        tab: 'Шаблоны',
+        section: this.state.templates.section,
+        sectionTitle: this.state.templates.sectionTitle,
+        templateID: 'X1',
+        templateTitle: 'Гибкий шаблон'
+      },
+      view: 'design-creation'
+    })
+  }
+
   //RENDER/////////////////////////////////////////////////////////////////////////
 
   render() {
@@ -619,7 +632,8 @@ export default class App extends React.Component {
       openTemplate: this.openTemplate,
       backToSection: this.backToSection,
       downloadFont: this.downloadFont,
-      useTemplate: this.useTemplate
+      useTemplate: this.useTemplate,
+      useFlexibleTemplate: this.useFlexibleTemplate
     }
 
     const charityData = {
