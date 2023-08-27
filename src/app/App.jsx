@@ -191,11 +191,6 @@ export default class App extends React.Component {
 
   useToolbar = (template, element) => {}
 
-  // setActiveElement = element => {
-  //   console.log('setttt')
-  //   this.setState({ activeElement: element })
-  // }
-
   createDesign = (template, charityData, patternRenders) => {
     parent.postMessage(
       {

@@ -37,8 +37,9 @@ function renderFigmaFrame(imagesForExport) {
   const template = getCurrentTemplate()
 
   const frame = figma.createFrame()
-  frame.resize(template.height, template.width)
-  frame.x = figma.viewport.center.x + template.width
+
+  frame.resize(template.width * 1, template.height * 1)
+  frame.x = figma.viewport.center.x + template.width * 1
   frame.y = figma.viewport.center.y
 
   const colors = charityData.identityColors

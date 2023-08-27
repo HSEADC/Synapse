@@ -515,8 +515,6 @@ const X = {
 
 function setFlexibleCanvasSize(param, value) {
   X.X1 = { ...X.X1, [`${param}`]: value }
-
-  console.log(X.X1)
 }
 
 const templatesList = {

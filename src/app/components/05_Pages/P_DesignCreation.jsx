@@ -7,6 +7,7 @@ import { templatesList } from '../../../libraries/templates'
 import { getAllPatternRenders } from '../../../plugin/store'
 import M_MenuPopup from '../02_Molecules/M_MenuPopup'
 import { compareObjects } from '../../../plugin/utilities'
+import placeholder1 from '../../assets/images/placeholders/1.jpg'
 
 export default class P_DesignCreation extends React.PureComponent {
   constructor(props) {
@@ -15,7 +16,8 @@ export default class P_DesignCreation extends React.PureComponent {
     this.state = {
       activeElement: '',
       templateCopy: '',
-      uploadImage: false
+      uploadImage: false,
+      elements: []
     }
   }
 
@@ -53,13 +55,45 @@ export default class P_DesignCreation extends React.PureComponent {
     })
   }
 
+  addElement = (element, value) => {
+    let key = Object.keys(this.state.templateCopy.elements).length + 1
+    let id = 'e' + key
+    let newElement = {
+      id: id,
+      type: element
+    }
+    switch (element) {
+      case 'text':
+        newElement = { ...newElement, text: 'Текст', color: 'text' }
+        break
+
+      case 'img':
+        newElement = {
+          ...newElement,
+          cover: placeholder1,
+          height: 0.1,
+          width: 0.1
+        }
+        break
+
+      default:
+        break
+    }
+
+    let elements = { ...this.state.templateCopy.elements, newElement }
+    let updatedTemplate = { ...this.state.templateCopy, elements: elements }
+
+    this.setState({
+      templateCopy: updatedTemplate
+    })
+  }
+
   componentDidMount() {
     window.addEventListener('message', this.handleMessage.bind(this), false)
   }
 
   handleMessage(e) {
     const msg = e.data.pluginMessage
-    // console.log('before', msg);
     if (msg.type !== 'replace-image') return
     if (msg.activeElement) {
       const bytes = 'data:image/png;base64,' + msg.bytes
@@ -71,7 +105,6 @@ export default class P_DesignCreation extends React.PureComponent {
   componentDidUpdate() {
     const { activeElement } = this.state
     if (this.state.uploadImage === true) {
-      // console.log('activeElement to send', activeElement);
       parent.postMessage(
         {
           pluginMessage: {
@@ -94,7 +127,6 @@ export default class P_DesignCreation extends React.PureComponent {
     const { actions, charityData, templates } = this.props
     const { handleChange, chooseSection, backToSection, createDesign } = actions
     const format = Array.from(templates.templateID)[0]
-    console.log('templates.templateID', templates.templateID, 'format', format)
     const originalTemplate = templatesList[format][templates.templateID]
     const patternRenders = getAllPatternRenders()
 
@@ -110,6 +142,8 @@ export default class P_DesignCreation extends React.PureComponent {
       activeElement: this.state.activeElement,
       templateCopy: this.state.templateCopy
     }
+
+    console.log('copy', this.state.templateCopy)
 
     return (
       <div className="P_DesignCreation">
@@ -128,6 +162,7 @@ export default class P_DesignCreation extends React.PureComponent {
             uploadImage={this.uploadImage}
             charityData={charityData}
             updateBackground={this.updateBackground}
+            addElement={this.addElement}
           />
         </div>
         <O_Template

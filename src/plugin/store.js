@@ -18,12 +18,9 @@ function getAllPatternRenders() {
 
 function setAllPatternRenders(newPatternRenders) {
   patternRenders = newPatternRenders
-  // console.log('patternRenders', patternRenders);
 }
 
 function getPatternRenders(key) {
-  // console.log('get pattern', key, patternRenders[key]);
-  // console.log('patternRenders', patternRenders)
   return patternRenders[key]
 }
 

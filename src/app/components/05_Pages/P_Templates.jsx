@@ -97,8 +97,6 @@ export default class P_Templates extends React.PureComponent {
       }
     })
     setFlexibleCanvasSize(param, value)
-
-    console.log(this.state.flexibleCanvasSize)
   }
 
   render() {

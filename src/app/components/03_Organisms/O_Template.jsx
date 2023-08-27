@@ -67,8 +67,6 @@ export default class O_Template extends React.PureComponent {
       template = templatesList[format][templateID]
     }
 
-    // console.log('editorState', editorState);
-
     const classes = classnames({
       O_Template: true,
       [`${format}`]: true,
@@ -104,11 +102,9 @@ export default class O_Template extends React.PureComponent {
       if (height > width) {
         height = 368
         width = (368 / template.height) * template.width
-        console.log('vert', height, width)
       } else if (height < width) {
         width = 368
         height = (368 / template.width) * template.height
-        console.log('hor', height, width)
       } else {
         height = 368
         width = 368

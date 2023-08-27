@@ -34,7 +34,8 @@ export default class M_Toolbar extends React.PureComponent {
       removeElement,
       uploadImage,
       charityData,
-      updateBackground
+      updateBackground,
+      addElement
     } = this.props
     const { activeElement } = editorState
     const { handleChange } = actions
@@ -109,10 +110,6 @@ export default class M_Toolbar extends React.PureComponent {
       default:
         switch (this.state.tab) {
           case 'color':
-            console.log(
-              'charityData.identityColors.',
-              charityData.identityColors
-            )
             return (
               <div className="M_Toolbar">
                 <A_Button
@@ -167,7 +164,11 @@ export default class M_Toolbar extends React.PureComponent {
                 <div>
                   <A_Icon icon={add} />
                   <A_Button type="toolbar" icon="image" />
-                  <A_Button type="toolbar" icon="text" />
+                  <A_Button
+                    type="toolbar"
+                    icon="text"
+                    handleClick={() => addElement('text')}
+                  />
                   <A_Button type="toolbar" icon="logo" />
                   <A_Button type="toolbar" icon="pattern" />
                 </div>
