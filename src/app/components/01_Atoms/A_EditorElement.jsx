@@ -74,7 +74,6 @@ export default class A_EditorElement extends React.PureComponent {
     })
 
     let styleDeclaration
-    console.log('type', type)
 
     switch (type) {
       case 'text':

@@ -151,8 +151,6 @@ export default class P_DesignCreation extends React.PureComponent {
       templateCopy: this.state.templateCopy
     }
 
-    console.log('copy', this.state.templateCopy)
-
     return (
       <div className="P_DesignCreation">
         <S_Navbar

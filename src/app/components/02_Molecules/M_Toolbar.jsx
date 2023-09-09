@@ -42,7 +42,7 @@ export default class M_Toolbar extends React.PureComponent {
     const { handleChange } = actions
 
     let type
-    let flexible = false
+    let flexible = true
 
     if (
       activeElement !== '' &&
@@ -175,9 +175,8 @@ export default class M_Toolbar extends React.PureComponent {
                       handleClick={() => addElement('img')}
                     />
                   </div>
-                  <Tooltip id="img" className="A_Tooltip" clickable />
                   <div
-                    data-tooltip-id="img"
+                    data-tooltip-id="text"
                     data-tooltip-content="Добавить текст"
                     data-tooltip-place="top"
                   >
@@ -188,7 +187,7 @@ export default class M_Toolbar extends React.PureComponent {
                     />
                   </div>
                   <div
-                    data-tooltip-id="img"
+                    data-tooltip-id="logo"
                     data-tooltip-content="Добавить логотип"
                     data-tooltip-place="top"
                   >
@@ -199,7 +198,7 @@ export default class M_Toolbar extends React.PureComponent {
                     />
                   </div>
                   <div
-                    data-tooltip-id="img"
+                    data-tooltip-id="pattern"
                     data-tooltip-content="Добавить паттерн"
                     data-tooltip-place="top"
                   >
@@ -213,7 +212,7 @@ export default class M_Toolbar extends React.PureComponent {
                 <div>
                   <A_Icon icon={settings} />
                   <div
-                    data-tooltip-id="img"
+                    data-tooltip-id="color"
                     data-tooltip-content="Изменить цвет"
                     data-tooltip-place="top"
                   >
@@ -225,13 +224,19 @@ export default class M_Toolbar extends React.PureComponent {
                   </div>
                   {flexible && (
                     <div
-                      data-tooltip-id="img"
+                      data-tooltip-id="resize"
                       data-tooltip-content="Изменить размер холста"
                       data-tooltip-place="top"
                     >
                       <A_Button type="toolbar" icon="resize" />
                     </div>
                   )}
+                  <Tooltip id="img" className="A_Tooltip" />
+                  <Tooltip id="text" className="A_Tooltip" />
+                  <Tooltip id="pattern" className="A_Tooltip" />
+                  <Tooltip id="logo" className="A_Tooltip" />
+                  <Tooltip id="color" className="A_Tooltip" />
+                  <Tooltip id="resize" className="A_Tooltip" />
                 </div>
               </div>
             )
