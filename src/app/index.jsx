@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
 import * as styles from './assets/stylesheets/App.scss'
+// import * as styless from 'react-tooltip/dist/react-tooltip.css'
 import App from './App'
 
 const props = {
@@ -25,7 +26,7 @@ async function encode(canvas, ctx, imageData) {
   ctx.putImageData(imageData, 0, 0)
 
   return await new Promise((resolve, reject) => {
-    canvas.toBlob(blob => {
+    canvas.toBlob((blob) => {
       const reader = new FileReader()
       reader.onload = () => resolve(new Uint8Array(reader.result))
       reader.onerror = () => reject(new Error('Could not read from blob'))
@@ -51,7 +52,7 @@ async function decode(canvas, ctx, bytes) {
 }
 
 async function encodeToBase64(u8bytes) {
-  const base64url = await new Promise(r => {
+  const base64url = await new Promise((r) => {
     const reader = new FileReader()
     reader.onload = () => r(reader.result)
     reader.readAsDataURL(new Blob([u8bytes]))
@@ -62,7 +63,7 @@ async function encodeToBase64(u8bytes) {
   return base64bytes
 }
 
-window.onmessage = async event => {
+window.onmessage = async (event) => {
   if (event.data.pluginMessage.type === 'get-storage') {
     let charityData
 

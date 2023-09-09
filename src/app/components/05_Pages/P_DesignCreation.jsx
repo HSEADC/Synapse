@@ -21,11 +21,11 @@ export default class P_DesignCreation extends React.PureComponent {
     }
   }
 
-  setActiveElement = element => {
+  setActiveElement = (element) => {
     this.setState({ activeElement: element })
   }
 
-  copyTemplate = originalTemplate => {
+  copyTemplate = (originalTemplate) => {
     const copy = JSON.parse(JSON.stringify(originalTemplate))
     this.setState({ templateCopy: { ...copy, copied: true } })
   }
@@ -38,7 +38,7 @@ export default class P_DesignCreation extends React.PureComponent {
     })
   }
 
-  updateBackground = color => {
+  updateBackground = (color) => {
     let updatedTemplate = { ...this.state.templateCopy }
     updatedTemplate.background = color
     this.setState({
@@ -46,7 +46,7 @@ export default class P_DesignCreation extends React.PureComponent {
     })
   }
 
-  removeElement = element => {
+  removeElement = (element) => {
     let updatedTemplate = { ...this.state.templateCopy }
     delete updatedTemplate.elements[element]
     this.setState({
@@ -71,10 +71,18 @@ export default class P_DesignCreation extends React.PureComponent {
         newElement = {
           ...newElement,
           cover: placeholder1,
-          height: 0.1,
-          width: 0.1
+          height: 0.25,
+          width: 0.25
         }
         break
+
+      case 'pattern':
+        newElement = {
+          ...newElement,
+          height: 0.25,
+          width: 1,
+          background: 'background'
+        }
 
       default:
         break
@@ -118,7 +126,7 @@ export default class P_DesignCreation extends React.PureComponent {
   }
 
   uploadImage = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       uploadImage: !prevState.uploadImage
     }))
   }

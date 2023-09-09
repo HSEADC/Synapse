@@ -9,6 +9,7 @@ import image from '../../assets/images/icons/image.svg'
 import pattern from '../../assets/images/icons/pattern.svg'
 import settings from '../../assets/images/icons/settings.svg'
 import add from '../../assets/images/icons/add.svg'
+import { Tooltip } from 'react-tooltip'
 
 export default class M_Toolbar extends React.PureComponent {
   constructor(props) {
@@ -163,23 +164,74 @@ export default class M_Toolbar extends React.PureComponent {
               <div className="M_Toolbar">
                 <div>
                   <A_Icon icon={add} />
-                  <A_Button type="toolbar" icon="image" />
-                  <A_Button
-                    type="toolbar"
-                    icon="text"
-                    handleClick={() => addElement('text')}
-                  />
-                  <A_Button type="toolbar" icon="logo" />
-                  <A_Button type="toolbar" icon="pattern" />
+                  <div
+                    data-tooltip-id="img"
+                    data-tooltip-content="Добавить изображение"
+                    data-tooltip-place="top"
+                  >
+                    <A_Button
+                      type="toolbar"
+                      icon="image"
+                      handleClick={() => addElement('img')}
+                    />
+                  </div>
+                  <Tooltip id="img" className="A_Tooltip" clickable />
+                  <div
+                    data-tooltip-id="img"
+                    data-tooltip-content="Добавить текст"
+                    data-tooltip-place="top"
+                  >
+                    <A_Button
+                      type="toolbar"
+                      icon="text"
+                      handleClick={() => addElement('text')}
+                    />
+                  </div>
+                  <div
+                    data-tooltip-id="img"
+                    data-tooltip-content="Добавить логотип"
+                    data-tooltip-place="top"
+                  >
+                    <A_Button
+                      type="toolbar"
+                      icon="logo"
+                      handleClick={() => addElement('logo')}
+                    />
+                  </div>
+                  <div
+                    data-tooltip-id="img"
+                    data-tooltip-content="Добавить паттерн"
+                    data-tooltip-place="top"
+                  >
+                    <A_Button
+                      type="toolbar"
+                      icon="pattern"
+                      handleClick={() => addElement('pattern')}
+                    />
+                  </div>
                 </div>
                 <div>
                   <A_Icon icon={settings} />
-                  <A_Button
-                    type="toolbar"
-                    icon="color"
-                    handleClick={() => this.setState({ tab: 'color' })}
-                  />
-                  {flexible && <A_Button type="toolbar" icon="resize" />}
+                  <div
+                    data-tooltip-id="img"
+                    data-tooltip-content="Изменить цвет"
+                    data-tooltip-place="top"
+                  >
+                    <A_Button
+                      type="toolbar"
+                      icon="color"
+                      handleClick={() => this.setState({ tab: 'color' })}
+                    />
+                  </div>
+                  {flexible && (
+                    <div
+                      data-tooltip-id="img"
+                      data-tooltip-content="Изменить размер холста"
+                      data-tooltip-place="top"
+                    >
+                      <A_Button type="toolbar" icon="resize" />
+                    </div>
+                  )}
                 </div>
               </div>
             )

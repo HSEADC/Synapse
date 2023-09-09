@@ -1,0 +1,15 @@
+@import "../vars.scss";
+
+.react-tooltip {
+    background-color: $identity-black !important; 
+    color: $background !important;
+    font-family: "Inter" !important;
+    font-style: normal !important;
+    font-weight: 425 !important;
+    letter-spacing: -0.02em !important;
+    border-radius: 8px !important;
+    z-index: 900 !important;
+    font-size: 12px !important;
+    padding: 10px 12px !important;
+    opacity: 1 !important;
+}

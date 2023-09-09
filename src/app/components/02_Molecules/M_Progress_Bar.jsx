@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { ProgressBar, Step } from 'react-step-progress-bar'
 
 export default class M_ProgressBar extends React.PureComponent {
   constructor(props) {

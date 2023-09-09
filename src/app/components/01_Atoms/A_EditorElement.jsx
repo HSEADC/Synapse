@@ -8,7 +8,7 @@ export default class A_EditorElement extends React.PureComponent {
     super(props)
   }
 
-  handleChildClick = function(element, e) {
+  handleChildClick = function (element, e) {
     const { setActiveElement } = this.props
     setActiveElement(element)
     if (e && e.stopPropagation) {
@@ -25,13 +25,16 @@ export default class A_EditorElement extends React.PureComponent {
         node = ReactDOM.findDOMNode(component)
 
       if (template.elements[element].background !== 'none') {
-        node.style.backgroundColor = `rgb(${charityData.identityColors[
-          template.elements[element].background
-        ].r * 255}, ${charityData.identityColors[
-          template.elements[element].background
-        ].g * 255}, ${charityData.identityColors[
-          template.elements[element].background
-        ].b * 255})`
+        node.style.backgroundColor = `rgb(${
+          charityData.identityColors[template.elements[element].background].r *
+          255
+        }, ${
+          charityData.identityColors[template.elements[element].background].g *
+          255
+        }, ${
+          charityData.identityColors[template.elements[element].background].b *
+          255
+        })`
       }
 
       findOrRenderPattern(identityPatternParams, node, template, element)
@@ -71,6 +74,7 @@ export default class A_EditorElement extends React.PureComponent {
     })
 
     let styleDeclaration
+    console.log('type', type)
 
     switch (type) {
       case 'text':
@@ -103,8 +107,9 @@ export default class A_EditorElement extends React.PureComponent {
           top: y * 100 + '%',
           // height: height * 100 + '%',
           width: width * 100 + '%',
-          color: `rgba(${textColor.r * 255}, ${textColor.g *
-            255}, ${textColor.b * 255}, 1)`,
+          color: `rgba(${textColor.r * 255}, ${textColor.g * 255}, ${
+            textColor.b * 255
+          }, 1)`,
           fontSize: size,
           fontFamily: charityData.identityFonts,
           lineHeight: lineHeight
@@ -114,7 +119,7 @@ export default class A_EditorElement extends React.PureComponent {
           <p
             className={classes}
             style={styleDeclaration}
-            onClick={e => {
+            onClick={(e) => {
               this.handleChildClick(element, e)
             }}
           >
@@ -139,7 +144,7 @@ export default class A_EditorElement extends React.PureComponent {
             className={classes}
             style={styleDeclaration}
             src={cover}
-            onClick={e => {
+            onClick={(e) => {
               this.handleChildClick(element, e)
             }}
           />
@@ -151,37 +156,37 @@ export default class A_EditorElement extends React.PureComponent {
         switch (background) {
           case 'primary':
             patternBackground = charityData.identityColors.primary
-            patternBackground = `rgba(${patternBackground.r *
-              255}, ${patternBackground.g * 255}, ${patternBackground.b *
-              255}, 1)`
+            patternBackground = `rgba(${patternBackground.r * 255}, ${
+              patternBackground.g * 255
+            }, ${patternBackground.b * 255}, 1)`
             break
 
           case 'background':
             patternBackground = charityData.identityColors.background
-            patternBackground = `rgba(${patternBackground.r *
-              255}, ${patternBackground.g * 255}, ${patternBackground.b *
-              255}, 1)`
+            patternBackground = `rgba(${patternBackground.r * 255}, ${
+              patternBackground.g * 255
+            }, ${patternBackground.b * 255}, 1)`
             break
 
           case 'adOne':
             patternBackground = charityData.identityColors.adOne
-            patternBackground = `rgba(${patternBackground.r *
-              255}, ${patternBackground.g * 255}, ${patternBackground.b *
-              255}, 1)`
+            patternBackground = `rgba(${patternBackground.r * 255}, ${
+              patternBackground.g * 255
+            }, ${patternBackground.b * 255}, 1)`
             break
 
           case 'adTwo':
             patternBackground = charityData.identityColors.adTwo
-            patternBackground = `rgba(${patternBackground.r *
-              255}, ${patternBackground.g * 255}, ${patternBackground.b *
-              255}, 1)`
+            patternBackground = `rgba(${patternBackground.r * 255}, ${
+              patternBackground.g * 255
+            }, ${patternBackground.b * 255}, 1)`
             break
 
           case 'text':
             patternBackground = charityData.identityColors.text
-            patternBackground = `rgba(${patternBackground.r *
-              255}, ${patternBackground.g * 255}, ${patternBackground.b *
-              255}, 1)`
+            patternBackground = `rgba(${patternBackground.r * 255}, ${
+              patternBackground.g * 255
+            }, ${patternBackground.b * 255}, 1)`
             break
 
           case 'none':
@@ -200,7 +205,7 @@ export default class A_EditorElement extends React.PureComponent {
           <div
             className={classes}
             style={styleDeclaration}
-            onClick={e => {
+            onClick={(e) => {
               this.handleChildClick(element, e)
             }}
           ></div>

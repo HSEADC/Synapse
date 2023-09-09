@@ -9,7 +9,6 @@ import S_Navbar from '../04_Superorganisms/S_Navbar'
 import A_PalettePreview from '../01_Atoms/A_PalettePreview'
 import A_PatternPreview from '../01_Atoms/A_PatternPreview'
 import A_FontPreview from '../01_Atoms/A_FontPreview'
-import { log } from 'prettierr/parser-postcss'
 import M_PalettePreviews from '../02_Molecules/M_PalettePreviews'
 import { compareObjects, doesFontExist } from '../../../plugin/utilities'
 
@@ -23,9 +22,9 @@ export default class P_Identity_Creation extends React.PureComponent {
   render() {
     const fontsList = []
 
-    Object.keys(fontList).forEach(function(key) {
+    Object.keys(fontList).forEach(function (key) {
       fontsList.push(
-        fontList[key].map(font => (
+        fontList[key].map((font) => (
           <A_FontPreview identityFontsProgress={font} />
         ))
       )
