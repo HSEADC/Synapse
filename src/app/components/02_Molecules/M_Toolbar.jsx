@@ -6,6 +6,7 @@ import A_TextInput from '../01_Atoms/A_TextInput'
 import A_Icon from '../01_Atoms/A_Icon'
 import text from '../../assets/images/icons/text.svg'
 import image from '../../assets/images/icons/image.svg'
+import resize from '../../assets/images/icons/resize.svg'
 import pattern from '../../assets/images/icons/pattern.svg'
 import settings from '../../assets/images/icons/settings.svg'
 import add from '../../assets/images/icons/add.svg'
@@ -42,6 +43,7 @@ export default class M_Toolbar extends React.PureComponent {
     const { handleChange } = actions
 
     let type
+    // let flexible = editorState.templateCopy.id == 'X1'
     let flexible = true
 
     if (
@@ -159,6 +161,36 @@ export default class M_Toolbar extends React.PureComponent {
             )
             break
 
+          case 'resize':
+            return (
+              <div className="M_Toolbar active">
+                <A_Button
+                  type="toolbar"
+                  icon="back"
+                  handleClick={() => this.setState({ tab: undefined })}
+                />
+                <div>
+                  <A_TextInput
+                    placeholder="Ширина"
+                    handleChange={handleChange}
+                    value={editorState.templateCopy.width}
+                    param="text"
+                    updateTemplate={updateTemplate}
+                    measurement="px"
+                  />
+                  <A_TextInput
+                    placeholder="Высота"
+                    handleChange={handleChange}
+                    value={editorState.templateCopy.height}
+                    param="text"
+                    updateTemplate={updateTemplate}
+                    measurement="px"
+                  />
+                </div>
+              </div>
+            )
+            break
+
           default:
             return (
               <div className="M_Toolbar">
@@ -228,7 +260,11 @@ export default class M_Toolbar extends React.PureComponent {
                       data-tooltip-content="Изменить размер холста"
                       data-tooltip-place="top"
                     >
-                      <A_Button type="toolbar" icon="resize" />
+                      <A_Button
+                        type="toolbar"
+                        icon="resize"
+                        handleClick={() => this.setState({ tab: 'resize' })}
+                      />
                     </div>
                   )}
                   <Tooltip id="img" className="A_Tooltip" />

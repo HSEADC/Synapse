@@ -9,6 +9,7 @@
     border-radius: 12px;
     width: 100%;
     margin: 2px 16px;
+    gap: 4px;
 
     div {
         display: flex;
@@ -24,9 +25,10 @@
     }
 
     .A_TextInput {
+        width: 100%;
         input {
             margin: 0;
-            width: 264px;
+            width: 100%;
             height: 40px;
             border: 1px solid transparent;
         }

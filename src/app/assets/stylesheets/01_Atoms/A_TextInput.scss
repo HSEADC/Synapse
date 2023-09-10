@@ -39,27 +39,49 @@
     }
     
 
-    &.akzident input{
-        height: 56px;
+    &.akzident {
+
+        input {
+            height: 56px;
         font-size: 20px;
         font-weight: 450;
         line-height: normal;
         letter-spacing: -0.4px;
+        }
+        
+
+        &.measurement p.measurement {
+            font-family: 'Inter';
+            font-style: normal;
+            font-size: 20px;
+            font-weight: 450;
+            line-height: normal;
+            letter-spacing: -0.4px;
+            color: $secondary-text;
+            position: absolute;
+            right: 32px;
+            top: 16px;
+            text-align: right;
+        }
     }
 
     &.measurement p.measurement {
+        /*Text */
         font-family: 'Inter';
         font-style: normal;
-        font-size: 20px;
-        font-weight: 450;
-        line-height: normal;
-        letter-spacing: -0.4px;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        letter-spacing: -0.02em;
         color: $secondary-text;
+
         position: absolute;
-        right: 32px;
-        top: 16px;
+        right: 11px;
+        top: 11px;
         text-align: right;
     }
+
+    
 
     &.icon {
         position: relative;
@@ -79,11 +101,13 @@
         &.height::after {
             background-image: url('../../assets/images/icons/height.svg');
             background-size: 20px;
+            background-position: 0;
         }
 
         &.width::after {
             background-image: url('../../assets/images/icons/width.svg');
             background-size: 20px;
+            background-position: 0 0;
         }
     }
 }

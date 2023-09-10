@@ -138,6 +138,8 @@ export default class P_DesignCreation extends React.PureComponent {
     const originalTemplate = templatesList[format][templates.templateID]
     const patternRenders = getAllPatternRenders()
 
+    console.log(format, 'format')
+
     if (
       this.state.templateCopy === '' ||
       this.state.templateCopy === undefined ||
