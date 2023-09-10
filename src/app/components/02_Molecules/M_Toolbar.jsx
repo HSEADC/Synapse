@@ -48,8 +48,7 @@ export default class M_Toolbar extends React.PureComponent {
     const { handleChange } = actions
 
     let type
-    // let flexible = editorState.templateCopy.id == 'X1'
-    let flexible = true
+    let flexible = editorState.templateCopy.id == 'X1'
 
     if (
       activeElement !== '' &&
@@ -107,9 +106,15 @@ export default class M_Toolbar extends React.PureComponent {
       case 'pattern':
         return (
           <div className="M_Toolbar active">
-            <A_Icon icon={pattern} />
+            <div style={{ borderRadius: '8px', overflow: 'hidden' }}>
+              <A_Icon icon={pattern} />
+            </div>
             <div>
-              <A_Button type="toolbar" icon="delete" />
+              <A_Button
+                type="toolbar"
+                icon="delete"
+                handleClick={this.removeElement}
+              />
             </div>
           </div>
         )

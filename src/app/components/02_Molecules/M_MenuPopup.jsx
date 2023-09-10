@@ -45,7 +45,7 @@ class M_MenuPopup extends React.PureComponent {
           <div>
             <A_Text text="Нажмите на нужное изображение" type="bigger_body" />
             <A_Text
-              text="Для загрузки фотографии добавьте ее в пространство Figma и нажмите на нее."
+              text="Для загрузки фотографии добавьте ее в&nbsp;пространство Figma и&nbsp;нажмите на&nbsp;нее."
               type="footnote"
             />
           </div>

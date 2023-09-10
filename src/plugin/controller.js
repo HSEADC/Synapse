@@ -12,7 +12,7 @@ import { convertRGBtoHEX } from './color'
 figma.showUI(__html__)
 figma.ui.resize(400, 640)
 
-figma.ui.onmessage = async msg => {
+figma.ui.onmessage = async (msg) => {
   if (msg.type === 'image-in-bytes') {
     saveImageDataOrExportToFigma(msg.id, msg.bytes)
   } else if (msg.type === 'set-storage') {
@@ -35,7 +35,7 @@ figma.ui.onmessage = async msg => {
   } else if (msg.type === 'create-frame') {
     let noImageCheck = true
 
-    Object.values(msg.template.elements).forEach(element => {
+    Object.values(msg.template.elements).forEach((element) => {
       if (element.type === 'img') {
         noImageCheck = false
       }
@@ -49,7 +49,7 @@ figma.ui.onmessage = async msg => {
     } else {
       let newCurrentImages = []
 
-      Object.keys(msg.template.elements).forEach(element => {
+      Object.keys(msg.template.elements).forEach((element) => {
         if (msg.template.elements[element].type === 'img') {
           newCurrentImages.push({
             id: [msg.template.id, element].join(),
@@ -59,12 +59,18 @@ figma.ui.onmessage = async msg => {
         }
       })
 
+      console.log(
+        'controller patterns',
+        msg.patternRenders,
+        setAllPatternRenders(msg.patternRenders)
+      )
+
       setCharityData(msg.charityData)
       setCurrentTemplate(msg.template)
       setAllPatternRenders(msg.patternRenders)
       setStoreImagesForExport(newCurrentImages)
 
-      newCurrentImages.forEach(image => {
+      newCurrentImages.forEach((image) => {
         figma.ui.postMessage({
           type: 'image',
           id: image.id,
@@ -111,7 +117,7 @@ figma.ui.onmessage = async msg => {
     })
     //Color style
     let styleIDs = {}
-    Object.keys(msg.charityData.identityColors).forEach(color => {
+    Object.keys(msg.charityData.identityColors).forEach((color) => {
       const style = figma.createPaintStyle()
       let name
       switch (color) {

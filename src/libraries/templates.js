@@ -511,7 +511,6 @@ const X = {
 
 function setFlexibleCanvasSize(param, value) {
   X.X1 = { ...X.X1, [`${param}`]: value * 1 }
-  console.log('X.X1.width', X.X1.width, 'X.X1.height', X.X1.height)
 }
 
 const templatesList = {
@@ -528,4 +527,4 @@ const templatesList = {
   X
 }
 
-export { templatesList, setFlexibleCanvasSize }
+export { templatesList, setFlexibleCanvasSize, fontSizes }

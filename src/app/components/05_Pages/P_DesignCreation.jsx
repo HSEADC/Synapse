@@ -8,7 +8,7 @@ import { getAllPatternRenders } from '../../../plugin/store'
 import M_MenuPopup from '../02_Molecules/M_MenuPopup'
 import { compareObjects } from '../../../plugin/utilities'
 import placeholder1 from '../../assets/images/placeholders/1.jpg'
-import { setFlexibleCanvasSize } from '../../../libraries/templates'
+import { setFlexibleCanvasSize, fontSizes } from '../../../libraries/templates'
 
 export default class P_DesignCreation extends React.PureComponent {
   constructor(props) {
@@ -58,6 +58,19 @@ export default class P_DesignCreation extends React.PureComponent {
   removeElement = (element) => {
     let updatedTemplate = { ...this.state.templateCopy }
     delete updatedTemplate.elements[element]
+
+    //CHANGE ORDER
+    let i = 1
+    let elements = {}
+    Object.keys(updatedTemplate.elements).forEach((key) => {
+      let id = 'e' + i
+      i++
+      window[id] = updatedTemplate.elements[key]
+      const newElement = Object.assign(elements, {})
+      elements[id] = window[id]
+    })
+    updatedTemplate.elements = elements
+
     this.setState({
       templateCopy: updatedTemplate,
       activeElement: undefined
@@ -67,27 +80,39 @@ export default class P_DesignCreation extends React.PureComponent {
   addElement = (element, value) => {
     let key = Object.keys(this.state.templateCopy.elements).length + 1
     let id = 'e' + key
-    let newElement = {
+    window[id] = {
       id: id,
       type: element
     }
+
     switch (element) {
       case 'text':
-        newElement = { ...newElement, text: 'Текст', color: 'text' }
+        window[id] = {
+          ...window[id],
+          text: 'Текст',
+          color: 'text',
+          size: fontSizes.headline,
+          lineHeight: '80%',
+          x: 0.1,
+          y: 0.1,
+          width: 'auto'
+        }
         break
 
       case 'img':
-        newElement = {
-          ...newElement,
+        window[id] = {
+          ...window[id],
           cover: placeholder1,
           height: 0.25,
-          width: 0.25
+          width: 0.25,
+          x: 0,
+          y: 0
         }
         break
 
       case 'pattern':
-        newElement = {
-          ...newElement,
+        window[id] = {
+          ...window[id],
           height: 0.25,
           width: 1,
           background: 'background'
@@ -97,7 +122,10 @@ export default class P_DesignCreation extends React.PureComponent {
         break
     }
 
-    let elements = { ...this.state.templateCopy.elements, newElement }
+    let elements = { ...this.state.templateCopy.elements }
+    const newElement = Object.assign(elements, {})
+    elements[id] = window[id]
+
     let updatedTemplate = { ...this.state.templateCopy, elements: elements }
 
     this.setState({
@@ -146,6 +174,7 @@ export default class P_DesignCreation extends React.PureComponent {
     const format = Array.from(templates.templateID)[0]
     const originalTemplate = templatesList[format][templates.templateID]
     const patternRenders = getAllPatternRenders()
+    console.log(patternRenders, 'patternRenders')
 
     if (
       this.state.templateCopy === '' ||
