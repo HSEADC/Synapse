@@ -7,19 +7,24 @@ export default class A_TextInput extends React.PureComponent {
     super(props)
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { param, handleChange } = this.props
     handleChange(param, e.target.value)
   }
 
-  updateTemplate = e => {
+  updateTemplate = (e) => {
     const { elementToChange, param, updateTemplate } = this.props
     updateTemplate(elementToChange, param, e.target.value)
   }
 
-  setFlexibleCanvasSize = e => {
+  setFlexibleCanvasSize = (e) => {
     const { param, setFlexibleCanvasSize } = this.props
     setFlexibleCanvasSize(param, e.target.value)
+  }
+
+  updateFlexibleCanvasSize = (e) => {
+    const { param, updateFlexibleCanvasSize } = this.props
+    updateFlexibleCanvasSize(param, e.target.value)
   }
 
   render() {
@@ -30,7 +35,8 @@ export default class A_TextInput extends React.PureComponent {
       setFlexibleCanvasSize,
       akzident,
       icon,
-      measurement
+      measurement,
+      updateFlexibleCanvasSize
     } = this.props
 
     const classes = classnames({
@@ -53,6 +59,8 @@ export default class A_TextInput extends React.PureComponent {
               ? this.updateTemplate
               : setFlexibleCanvasSize
               ? this.setFlexibleCanvasSize
+              : updateFlexibleCanvasSize
+              ? this.updateFlexibleCanvasSize
               : this.handleChange
           }
         />

@@ -27,6 +27,10 @@ export default class M_Toolbar extends React.PureComponent {
     removeElement(activeElement)
   }
 
+  // setFlexibleCanvasSize = (param, value) => {
+  //   setFlexibleCanvasSize(param, value)
+  // }
+
   render() {
     const {
       editorState,
@@ -37,7 +41,8 @@ export default class M_Toolbar extends React.PureComponent {
       uploadImage,
       charityData,
       updateBackground,
-      addElement
+      addElement,
+      updateFlexibleCanvasSize
     } = this.props
     const { activeElement } = editorState
     const { handleChange } = actions
@@ -172,19 +177,19 @@ export default class M_Toolbar extends React.PureComponent {
                 <div>
                   <A_TextInput
                     placeholder="Ширина"
-                    handleChange={handleChange}
                     value={editorState.templateCopy.width}
-                    param="text"
-                    updateTemplate={updateTemplate}
+                    param="width"
+                    updateFlexibleCanvasSize={updateFlexibleCanvasSize}
                     measurement="px"
+                    icon="width"
                   />
                   <A_TextInput
                     placeholder="Высота"
-                    handleChange={handleChange}
                     value={editorState.templateCopy.height}
-                    param="text"
-                    updateTemplate={updateTemplate}
+                    param="height"
+                    updateFlexibleCanvasSize={updateFlexibleCanvasSize}
                     measurement="px"
+                    icon="height"
                   />
                 </div>
               </div>

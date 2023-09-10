@@ -8,6 +8,7 @@ import { getAllPatternRenders } from '../../../plugin/store'
 import M_MenuPopup from '../02_Molecules/M_MenuPopup'
 import { compareObjects } from '../../../plugin/utilities'
 import placeholder1 from '../../assets/images/placeholders/1.jpg'
+import { setFlexibleCanvasSize } from '../../../libraries/templates'
 
 export default class P_DesignCreation extends React.PureComponent {
   constructor(props) {
@@ -33,6 +34,14 @@ export default class P_DesignCreation extends React.PureComponent {
   updateTemplate = (element, param, value) => {
     let updatedTemplate = { ...this.state.templateCopy }
     updatedTemplate.elements[element][param] = value
+    this.setState({
+      templateCopy: updatedTemplate
+    })
+  }
+
+  updateFlexibleCanvasSize = (param, value) => {
+    let updatedTemplate = { ...this.state.templateCopy }
+    updatedTemplate[param] = value
     this.setState({
       templateCopy: updatedTemplate
     })
@@ -138,8 +147,6 @@ export default class P_DesignCreation extends React.PureComponent {
     const originalTemplate = templatesList[format][templates.templateID]
     const patternRenders = getAllPatternRenders()
 
-    console.log(format, 'format')
-
     if (
       this.state.templateCopy === '' ||
       this.state.templateCopy === undefined ||
@@ -171,6 +178,7 @@ export default class P_DesignCreation extends React.PureComponent {
             charityData={charityData}
             updateBackground={this.updateBackground}
             addElement={this.addElement}
+            updateFlexibleCanvasSize={this.updateFlexibleCanvasSize}
           />
         </div>
         <O_Template

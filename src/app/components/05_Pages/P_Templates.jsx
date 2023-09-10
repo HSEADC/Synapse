@@ -75,7 +75,7 @@ export default class P_Templates extends React.PureComponent {
 
     let templatesListForSection = templatesList[section]
     let templatesToRender = []
-    Object.keys(templatesListForSection).forEach(function(key, index) {
+    Object.keys(templatesListForSection).forEach(function (key, index) {
       templatesToRender.push(
         <O_Template
           templateID={key}
@@ -90,12 +90,14 @@ export default class P_Templates extends React.PureComponent {
   }
 
   setFlexibleCanvasSize = (param, value) => {
+    //BUTTON ACTIVATION
     this.setState({
       flexibleCanvasSize: {
         ...this.state.flexibleCanvasSize,
         [`${param}`]: value
       }
     })
+    //SIZE UPDATE
     setFlexibleCanvasSize(param, value)
   }
 
